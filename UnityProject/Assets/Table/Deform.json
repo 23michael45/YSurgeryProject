@@ -1,0 +1,64 @@
+﻿[
+{
+"AvatarId": 101,
+"Shape":{
+"ForeheadSwitch":{"x":0,"y":0,"z":0,"w":0},
+"TempleSwitch" :{"x":0,"y":0,"z":0,"w":0},
+"BISjawSwitch" :{"x":0,"y":0,"z":0,"w":0},
+"ChinSwitch" :{"x":0,"y":0,"z":0,"w":0}
+},
+"Face":{
+"ApplemuscleSwitch ": {"x":0,"y":0,"z":0,"w":0},
+"CheekbonesSwitch " : {"x":0,"y":0,"z":0,"w":0},
+"FacialpartSwitch " : {"x":0,"y":0,"z":0,"w":0}
+},
+"Eyebrow":{
+"BrowbowSwitch " :{"x":0,"y":0,"z":0,"w":0},
+"BrowHeadSwitch " :{"x":0,"y":0,"z":0,"w":0},
+"BrowMiddleSwitch ":{"x":0,"y":0,"z":0,"w":0},
+"BrowTailSwitch" :{"x":0,"y":0,"z":0,"w":0}
+},
+"Eye":{
+"EyecornerSwitch " :{"x":0,"y":0,"z":0,"w":0},
+"UppereyelidSwitch " :{"x":0,"y":0,"z":0,"w":0},
+"DoublefoldEyelidsSwitch " :{"x":0,"y":0,"z":0,"w":0},
+"lowereyelidSwitch " :{"x":0,"y":0,"z":0,"w":0},
+"EyebagSwitch " :{"x":0,"y":0,"z":0,"w":0},
+"EyetailSwitch " :{"x":0,"y":0,"z":0,"w":0},
+"BlackeyeSwitch " :{"x":0,"y":0,"z":0,"w":0}
+},
+"Nose":{
+"UpperbridgeSwitch " :{"x":0,"y":0,"z":0,"w":0},
+"InferiorbridgeSwitch " :{"x":0,"y":0,"z":0,"w":0},
+"NoseheadSwitch " :{"x":0,"y":0,"z":0,"w":0},
+"ColumellaNasiSwitch " :{"x":0,"y":0,"z":0,"w":0},
+"NasalBaseSwitch " :{"x":0,"y":0,"z":0,"w":0},
+"NoseWingSwitch " :{"x":0,"y":0,"z":0,"w":0},
+"NostrilSwitch " :{"x":0,"y":0,"z":0,"w":0}
+},
+"Mouth":{
+"UplipSwitch " :{"x":0,"y":0,"z":0,"w":0},
+"UpjawSwitch " :{"x":0,"y":0,"z":0,"w":0},
+"DownLipSwitch " :{"x":0,"y":0,"z":0,"w":0},
+"DownJawSwitch " :{"x":0,"y":0,"z":0,"w":0},
+"PhiltrumSwitch " :{"x":0,"y":0,"z":0,"w":0},
+"CornerSwitch " :{"x":0,"y":0,"z":0,"w":0}
+},
+"Chest":{
+"upperItemSwitch " :{"x":0,"y":0,"z":0,"w":0},
+"topItemSwitch " :{"x":0,"y":0,"z":0,"w":0},
+"downItemSwitch " :{"x":0,"y":0,"z":0,"w":0}
+},
+"Body":{
+"NeckSwitch " :{"x":0,"y":0,"z":0,"w":0},
+"ChestSwitch " :{"x":0,"y":0,"z":0,"w":0},
+"WristSwitch " :{"x":0,"y":0,"z":0,"w":0},
+"HipSwitch " :{"x":0,"y":0,"z":0,"w":0},
+"LegSwitch " :{"x":0,"y":0,"z":0,"w":0},
+"ArmSwitch " :{"x":0,"y":0,"z":0,"w":0},
+"ForeheadSwitch " :{"x":0,"y":0,"z":0,"w":0},
+"BISjawSwitch " :{"x":0,"y":0,"z":0,"w":0},
+"ChinSwitch " :{"x":0,"y":0,"z":0,"w":0}
+}
+}
+]
