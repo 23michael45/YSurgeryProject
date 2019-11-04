@@ -263,9 +263,6 @@ public class FreeView : MonoBehaviour
                     mX = ClampAngle(mX, MinLimitY, MaxLimitY);
     
                  }
-                
-
-                else { }
 
 
 	        }  
