@@ -4,9 +4,15 @@ using UnityEngine;
 using UnityEditor;
 using System.Collections.Generic;
 using System.Linq;
+using System.IO;
 
 namespace MeshTools
 {
+    public class SaveData
+    {
+        [SerializeField]
+        public List<int> Vertices;
+    }
 	/**
 	 * Editor vindow implementation.  Responsible for GUI and selection management.
 	 */
@@ -20,11 +26,13 @@ namespace MeshTools
 		// The draggable bit of the sceneview window.
 		readonly Rect MTWINDOW_DRAG_RECT = new Rect(0,0,128,20);
 
+        string sFileName =  "";
+
 #if DO_THE_DEBUG_DANCE
 		Rect windowRect = new Rect(24, 24, 200, 260);
 #else
-		// Size of the GUI window.
-		Rect windowRect = new Rect(24, 24, 105, 80);
+        // Size of the GUI window.
+        Rect windowRect = new Rect(24, 24, 105, 110);
 #endif
 
 		// Automatically set - used to clamp the GUI window to the sceneview window rect.
@@ -239,11 +247,12 @@ namespace MeshTools
         void DoSaveVerticesIndices()
         {
             Debug.Log("DoSaveVerticesIndices");
-
-            foreach(int index in selection.indices)
-            {
-
-            }
+            
+            SaveData data = new SaveData();
+            data.Vertices = selection.indices;
+            string jstr = JsonUtility.ToJson(data);
+            string path = Path.Combine(Application.dataPath, sFileName);
+            File.WriteAllText(path, jstr);
         }
 #endregion
 
@@ -433,61 +442,61 @@ namespace MeshTools
 
 			GUILayout.Space(24);
 
-			//GUILayout.BeginHorizontal();
-			//	if( GUILayout.Button(gc_RebuildNormals, EditorStyles.miniButtonLeft) )
-			//	{
-			//		qeUtil.RecordMeshUndo(selection.mesh, "Rebuild Normals");
-			//		MTMesh_Utility.RebuildNormals(selection.mesh);
-			//	}
+            //GUILayout.BeginHorizontal();
+            //	if( GUILayout.Button(gc_RebuildNormals, EditorStyles.miniButtonLeft) )
+            //	{
+            //		qeUtil.RecordMeshUndo(selection.mesh, "Rebuild Normals");
+            //		MTMesh_Utility.RebuildNormals(selection.mesh);
+            //	}
 
-			//	if( GUILayout.Button(gc_RebuildUV2, EditorStyles.miniButtonRight))	
-			//	{
-			//		qeUtil.RecordMeshUndo(selection.mesh, "Rebuild UV2");
-			//		MTMesh_Utility.RebuildUV2(selection.mesh);
-			//	}
-			//GUILayout.EndHorizontal();
+            //	if( GUILayout.Button(gc_RebuildUV2, EditorStyles.miniButtonRight))	
+            //	{
+            //		qeUtil.RecordMeshUndo(selection.mesh, "Rebuild UV2");
+            //		MTMesh_Utility.RebuildUV2(selection.mesh);
+            //	}
+            //GUILayout.EndHorizontal();
 
-			//GUILayout.BeginHorizontal();
-			//	if( GUILayout.Button(gc_Facetize, EditorStyles.miniButtonLeft) )
-			//	{
-			//		qeUtil.RecordMeshUndo(selection.mesh, "Facetize" );
+            //GUILayout.BeginHorizontal();
+            //	if( GUILayout.Button(gc_Facetize, EditorStyles.miniButtonLeft) )
+            //	{
+            //		qeUtil.RecordMeshUndo(selection.mesh, "Facetize" );
 
-			//		MTMesh_Utility.Facetize(selection.mesh);
-			//		selection.CacheMeshValues();
-			//	}
+            //		MTMesh_Utility.Facetize(selection.mesh);
+            //		selection.CacheMeshValues();
+            //	}
 
-			//	if( GUILayout.Button(gc_RebuildColliders, EditorStyles.miniButtonRight))	
-			//	{
-			//		qeUtil.RecordMeshUndo(selection.mesh, "Rebuild Collision Mesh");
-			//		MTMesh_Utility.RebuildColliders(selection.mesh);
-			//	}
-			//GUILayout.EndHorizontal();
+            //	if( GUILayout.Button(gc_RebuildColliders, EditorStyles.miniButtonRight))	
+            //	{
+            //		qeUtil.RecordMeshUndo(selection.mesh, "Rebuild Collision Mesh");
+            //		MTMesh_Utility.RebuildColliders(selection.mesh);
+            //	}
+            //GUILayout.EndHorizontal();
 
-			//if(GUILayout.Button(gc_CenterPivot, EditorStyles.miniButton))
-			//{
-			//	qeUtil.RecordMeshUndo(selection.mesh, "Center Pivot");
-			//	Vector3 offset = MTMesh_Utility.CenterPivot(selection.mesh.cloneMesh);
-			//	Undo.RecordObject(selection.transform, "Center Pivot");
-			//	selection.transform.position += offset;
-			//	selection.CacheMeshValues();
-			//}
+            //if(GUILayout.Button(gc_CenterPivot, EditorStyles.miniButton))
+            //{
+            //	qeUtil.RecordMeshUndo(selection.mesh, "Center Pivot");
+            //	Vector3 offset = MTMesh_Utility.CenterPivot(selection.mesh.cloneMesh);
+            //	Undo.RecordObject(selection.transform, "Center Pivot");
+            //	selection.transform.position += offset;
+            //	selection.CacheMeshValues();
+            //}
 
-			//if(GUILayout.Button(gc_DeleteFaces, EditorStyles.miniButton) && selection.faces.Count > 0)
-			//{
-			//	qeUtil.RecordMeshUndo(selection.mesh, "Delete Faces");
+            //if(GUILayout.Button(gc_DeleteFaces, EditorStyles.miniButton) && selection.faces.Count > 0)
+            //{
+            //	qeUtil.RecordMeshUndo(selection.mesh, "Delete Faces");
 
-			//	if( MTMesh_Utility.DeleteTriangles( selection.mesh, selection.faces ) )
-			//	{
-			//		selection.Clear();
-			//		selection.CacheMeshValues();
-			//		CacheIndicesForGraphics();
-			//		UpdateGraphics();
-			//	}
-			//}
+            //	if( MTMesh_Utility.DeleteTriangles( selection.mesh, selection.faces ) )
+            //	{
+            //		selection.Clear();
+            //		selection.CacheMeshValues();
+            //		CacheIndicesForGraphics();
+            //		UpdateGraphics();
+            //	}
+            //}
 
+            sFileName = GUILayout.TextField(sFileName, 25);
 
-
-			if(GUILayout.Button("Save Vertices", EditorStyles.miniButton))
+            if (GUILayout.Button("Save Vertices", EditorStyles.miniButton))
             {
                 DoSaveVerticesIndices();
             }
