@@ -5,7 +5,7 @@ using UnityEngine;
 
 public interface IYSurgeryUnityListener
 {
-    void onMessage(string sValue, int iValue);
+    void onMessage(string sValue, string  iValue);
 }
 public class ListenerAdapter : AndroidJavaProxy
 {
@@ -14,7 +14,7 @@ public class ListenerAdapter : AndroidJavaProxy
     {
         this.listener = listener;
     }
-    void onMessage(string sValue, int iValue)
+    void onMessage(string sValue, string iValue)
     {
         listener.onMessage(sValue, iValue);
     }
@@ -60,16 +60,19 @@ public class AndroidNative : IYSurgeryUnityListener
     }
 
     //call Android Function
-    public bool CallFromUnity(string sValue,int iValue)
+    public bool CallFromUnity(string sValue,string iValue)
     {
         return CallJavaFunc<bool>("CallFromUnity",sValue,iValue);
 
     }
 
     //Listen call From Android Java
-    public void onMessage(string sValue,int iValue)
+    public void onMessage(string sValue,string iValue)
     {
         Debug.Log("Call From Android:" + sValue);
+
+
+
     }
 }
 
