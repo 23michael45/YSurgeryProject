@@ -79,6 +79,39 @@ public class User_Deform
 }// 每个角色的变形属性
 
 
+[Serializable]
+public class User_Ornaments
+{
+    public int ModelID;
+
+    [Serializable]
+    public class Makeup
+    {
+        public int EyeBrow, EyeShadow, EyeLash, Pupil, Foundation, Shadow, Lip, FaceTatoo, BodyTatoo;
+
+    }
+
+    [Serializable]
+    public class Cloth
+    {
+        public int UpWear, DownWear, Coat, Suit, UnderWear, Shoe, Ornament;
+    }
+
+    [Serializable]
+    public class Ornament
+    {
+        public int Hair, Glass, Hats, Jewellery;
+    }
+
+    public int Act;
+    public Makeup makeup;
+    public Cloth cloth;
+    public Ornament ornament;
+
+}
+
+
+
 
 [Serializable]
 public class User_Model
@@ -96,252 +129,87 @@ public class User_Model
 
     public User_Face face;
     public User_Deform deform;
-}//多模特定义
+    public User_Ornaments Ornament;
+
+
+}
+
 
 
 
 [Serializable]
 public class User_Profile
 {
-    public User_Model[] models;
+    public User_Model model;   
 
 }
 
-
+[Serializable]
 public class User
 {
-    User_Profile profile;
-    User_Model  currentModel;
-    User_Deform currentDeform;
-    User_Face   currentFace;
-    
+    public  User_Profile currentProfile = new User_Profile();
+    public  User_Model currentModel = new User_Model();
+
     public bool crrrentEditable;
 
     public string currentmodelID, currentFaceID, currentmodelName;
 
-    private int modnumb = 3;
-    private int facenumb = 3;
-    private int model;
+  
 
 
-    private float ST_CURhigh, ST_CURWeight, ST_CURChestline, ST_CURCup, ST_CURWaistline, ST_CURHipline, ST_CURArmline,
-                  ST_CURThigh, ST_CUR_SkincolorSecai, ST_CUR_SkincolorXianyan, ST_CUR_SkincolorMingan, ST_CUR_EyeballScale;
+    //private float ST_CURhigh, ST_CURWeight, ST_CURChestline, ST_CURCup, ST_CURWaistline, ST_CURHipline, ST_CURArmline,
+    //              ST_CURThigh, ST_CUR_SkincolorSecai, ST_CUR_SkincolorXianyan, ST_CUR_SkincolorMingan, ST_CUR_EyeballScale;
 
-    private float ST_CUR_Shuanghe, ST_CUR_Xiaba, ST_CUR_Lianxia, ST_CUR_Quangu, ST_CUR_Pingguo, ST_CUR_Yaoji,
-    ST_CUR_Xiabachang, ST_CUR_HeadKuan, ST_CUR_HeadBaoman, ST_CUR_HeadQianhou, ST_CUR_HeadFaji, ST_CUR_HeadTouding,
-    ST_CUR_HeadTaiyangxue, ST_CUR_EyeScale, ST_CUR_EyeZuoyou, ST_CUR_EyeGaodi, ST_CUR_EyeShenqian, ST_CUR_EyeYanjiao,
-    ST_CUR_EyeYanwei, ST_CUR_EyebrowScale, ST_CUR_EyebrowZuoyou, ST_CUR_EyebrowGaodi, ST_CUR_EyebrowShenqian,
-    ST_CUR_EyebrowMeitou, ST_CUR_EyebrowMeiwei, ST_CUR_NoseKuan, ST_CUR_NoseShangxia, ST_CUR_NoseTingba,
-    ST_CUR_NoseBitou, ST_CUR_NoseBiliang, ST_CUR_MouthGaodi, ST_CUR_MouthShenqian, ST_CUR_MouthKuandu,
-    ST_CUR_MouthHoudu, ST_CUR_MouthShangchun, ST_CUR_MouthXiachun, ST_CUR_MouthZuijiao;
+    //private float ST_CUR_Shuanghe, ST_CUR_Xiaba, ST_CUR_Lianxia, ST_CUR_Quangu, ST_CUR_Pingguo, ST_CUR_Yaoji,
+    //ST_CUR_Xiabachang, ST_CUR_HeadKuan, ST_CUR_HeadBaoman, ST_CUR_HeadQianhou, ST_CUR_HeadFaji, ST_CUR_HeadTouding,
+    //ST_CUR_HeadTaiyangxue, ST_CUR_EyeScale, ST_CUR_EyeZuoyou, ST_CUR_EyeGaodi, ST_CUR_EyeShenqian, ST_CUR_EyeYanjiao,
+    //ST_CUR_EyeYanwei, ST_CUR_EyebrowScale, ST_CUR_EyebrowZuoyou, ST_CUR_EyebrowGaodi, ST_CUR_EyebrowShenqian,
+    //ST_CUR_EyebrowMeitou, ST_CUR_EyebrowMeiwei, ST_CUR_NoseKuan, ST_CUR_NoseShangxia, ST_CUR_NoseTingba,
+    //ST_CUR_NoseBitou, ST_CUR_NoseBiliang, ST_CUR_MouthGaodi, ST_CUR_MouthShenqian, ST_CUR_MouthKuandu,
+    //ST_CUR_MouthHoudu, ST_CUR_MouthShangchun, ST_CUR_MouthXiachun, ST_CUR_MouthZuijiao;
 
-    private int ST_coat, ST_top, ST_trouser, ST_underwear, ST_shoe, ST_hair, ST_hat;
+    //private int ST_coat, ST_top, ST_trouser, ST_underwear, ST_shoe, ST_hair, ST_hat;
 
 
 
 
     public void Init(string modelList )
     {
+     
 
-        profile = new User_Profile();
-        profile.models = new User_Model[3];
+        currentProfile = new User_Profile();
+        //currentModel = currentProfile.model;
 
+      //  Debug.Log(currentModel);
 
-        currentModel = profile.models[0];
-        //profile.models[0].face = new User_Face();
-        profile.models[0].deform = new User_Deform();
+        currentModel.face= new User_Face();
 
+        currentModel.deform = new User_Deform();
 
-        //crrrentEditable = profile.models[0].Editable;       
-
-        //currentmodelID = profile.models[0].ModelID;
-        //currentFaceID = profile.models[0].face.faceID;
-        //currentModel = profile.models[0];
-
-        //currentmodelName = profile.models[0].Modelname;       
-        //currentModel.RoleTableID = profile.models[0].RoleTableID;
-
-    }
-
+        currentModel.deform.shape = new User_Deform.Shape();
+        currentModel.deform.face = new User_Deform.Face ();
+        currentModel.deform.eyebrow = new User_Deform.Eyebrow ();
+        currentModel.deform.eye = new User_Deform.Eye ();
+        currentModel.deform.nose = new User_Deform.Nose ();
+        currentModel.deform.mouth = new User_Deform.Mouth ();
+        currentModel.deform.chest = new User_Deform.Chest();
+        currentModel.deform.body = new User_Deform.Body();
 
 
 
-    /// <summary>
-    //切换模特。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。
-    /// </summary>
-    /// <param name="modelId"></param>
-    public void SaveModel(string modelId)
-    {
+        currentModel.Ornament = new User_Ornaments();
+        currentModel.Ornament.makeup= new User_Ornaments.Makeup();
+        currentModel.Ornament.cloth = new User_Ornaments.Cloth();
+        currentModel.Ornament.ornament = new User_Ornaments.Ornament();
 
-        /* 
-          int.TryParse(modelId.Substring(1, 1), out  model);
-          int.TryParse(modelId.Substring(3, 1), out face);
+         
+       // Debug.Log(currentModel.deform.shape);
 
-          profile.models[model]  = currentModel;
-          profile.models[model].face[face] = currentFace;
-          profile.models[model].body=  currentBody ;
-          */
+
+
+        loadDefeatJson();
 
     }
-    public void SaveFace(string faceID)
-    {
-        /*     
-        int.TryParse(faceID.Substring(1, 1), out model);
-        int.TryParse(faceID.Substring(3, 1), out face);
-        profile.models[model].face[face] = currentFace;     
-        */
-    }
-    public void LoadRoleTable()
-    {
-
-
-
-
-    }
-    //public void LoadModel(string modelID  ) {
-
-
-
-    //    int.TryParse(modelID.Substring(1, 1), out model);
-    //    int.TryParse(modelID.Substring(3, 1), out face);
-
-    //    currentModel = profile.models[model];
-    //    currentFace = profile.models[model].face[defaultface];
-    //    currentBody = profile.models[model].body;
-    //    currentModel.RoleTableID  =profile.models[model].RoleTableID ;
-
-    ////加载角色表
-
-
-    //    //如果没有，重建模特
-    //    if (profile.models[model].body._high == 0)
-    //    {
-    //        setdefaultbody();
-    //        ResetBody();
-    //        ResetFace();
-    //        //GameObject.Find("UI").GetComponent<UIcontrol>().ReModelUI();
-    //        //GameObject.Find("UI").GetComponent<ModelMgr>().Remodelbool = true;
-    //    }
-
-    //    else {
-    //        Debug.Log(currentModel.RoleTableID);
-    //        //AppRoot.MainScene.loadmainRole(currentModel.RoleTableID);          
-    //        loadModelvalue(model, defaultface);
-    //        loadCloth(model, defaultface);
-    //    }
-
-
-
-    //  }
-
-
-
-    //public void LoadFace(string faceID) {
-
-    //    int.TryParse(faceID.Substring(1, 1), out model);
-    //    int.TryParse(faceID.Substring(3, 1), out face);
-    //    currentFace = profile.models[model].face[face];
-    //    currentFaceID= profile.models[model].face[face].faceID;
-
-    //    defaultface = face;
-
-    //    Debug.Log(faceID);
-    //    if (profile.models[model].face[face]._faceImgUrl == null)
-    //    {
-    //        GameObject.Find("UI").GetComponent<ModelMgr>().RePhoto();
-    //    }
-    //    else {
-
-    //        AppRoot.MainScene.MainRole.LoadFace();
-    //    }
-
-    //}
-    //public void SetModelName(string modelID,string name) {
-
-    //    int.TryParse(modelID.Substring(1, 1), out model);   
-    //    profile.models[model].Modelname = name;
-
-    //}
-    /// <summary>
-    //切换模特。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。
-    /// </summary>
-
-
-
-
-    //重置基础身材。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。
-    //public void setdefaultbody() {
-
-
-    //    if (isman)
-    //    {
-    //        _highbase = 185.0f;
-    //        _Weightbase = 70.0f;
-    //        _Chestlinebase = 95.0f;
-    //        _Cupbase = 2.0f;
-    //        _Waistlinebase = 70.0f;
-    //        _Hiplinebase = 90.0f;
-    //        _Armlinebase = 35.0f;
-    //        _Thighbase = 45.0f;
-    //    }
-    //    else {
-    //        _highbase = 173.0f;
-    //        _Weightbase = 55.0f;
-    //        _Chestlinebase = 82.0f;
-    //        _Cupbase = 10.0f;
-    //        _Waistlinebase = 50.0f;
-    //        _Hiplinebase = 90.0f;
-    //        _Armlinebase = 26.0f;
-    //        _Thighbase = 34.0f;
-    //        }
-
-    //}
-
-    //当前角色身体参数。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。
-
-    //public void loadModelvalue(int model,int face) {
-
-    //    CURhigh =                 profile.models[model].body.slidervalue_High  ;
-    //    CURWeight =               profile.models[model].body.slidervalue_weight ;
-    //    CURChestline =            profile.models[model].body.slidervalue_Chestline ;
-    //    CURCup =                  profile.models[model].body.slidervalue_Cup   ;
-    //    CURWaistline =            profile.models[model].body.slidervalue_Waitline   ;
-    //    CURHipline =              profile.models[model].body.slidervalue_Hipline   ;
-    //    CURArmline =              profile.models[model].body.slidervalue_Armline  ;
-    //    CURThigh =                profile.models[model].body.slidervalue_Thigh    ;
-    //    CUR_SkincolorSecai =      profile.models[model].body.slidervalue_skin_h  ;
-    //    CUR_SkincolorXianyan =    profile.models[model].body.slidervalue_skin_s   ;
-    //    CUR_SkincolorMingan =     profile.models[model].body.slidervalue_skin_v ;
-    //}
-
-
-    //当前角色服装参数。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。
-    //public void loadCloth(int model, int face) {
-    //    AppRoot.MainUser.CUR_coat = profile.models [model ].body.c_coat ;
-    //    AppRoot.MainUser.CUR_top = profile.models[model].body.c_top ; 
-    //    AppRoot.MainUser.CUR_trouser = profile.models[model].body.c_trousers ; 
-    //    AppRoot.MainUser.CUR_underwear = profile.models[model].body.c_underwear ; 
-    //    AppRoot.MainUser.CUR_shoe = profile.models[model].body.c_shoe ; 
-    //    AppRoot.MainUser.CUR_hair = profile.models[model].body.c_hair ; 
-    //    AppRoot.MainUser.CUR_hat = profile.models[model].body.c_hat ; 
-
-
-    //}
-    ////.................................................................需要储存数据
-
-
-
-
-
-
-    // 
-
-    //
-
-
-
-
-
 
 
 
@@ -416,10 +284,9 @@ public class User
         get { return currentModel.deform.shape.ForeheadSwitch; }
         set
         {
-          currentModel.deform.shape.ForeheadSwitch = value;
-           Vector4 var = currentModel.deform.shape.ForeheadSwitch;
-
-          AppRoot.MainDeform.SetForeheadSwitch(var);
+            currentModel.deform.shape.ForeheadSwitch = value;
+            Vector4 var = currentModel.deform.shape.ForeheadSwitch;
+           AppRoot.MainDeform.SetForeheadSwitch(var);
         }
     }
     public Vector4 CURTempleSwitch
@@ -498,8 +365,8 @@ public class User
         set
         {
             currentModel.deform.eyebrow .BrowbowSwitch = value;
-            Vector4 var = currentModel.deform.shape.ForeheadSwitch;
-            AppRoot.MainDeform.SetForeheadSwitch(var);
+            Vector4 var = currentModel.deform.eyebrow.BrowbowSwitch;
+            AppRoot.MainDeform.SetBrowbowSwitch(var);
         }
     }
     public Vector4 cur_BrowHeadSwitch
@@ -508,8 +375,8 @@ public class User
         set
         {
             currentModel.deform.eyebrow.BrowHeadSwitch = value;
-            Vector4 var = currentModel.deform.shape.ForeheadSwitch;
-            AppRoot.MainDeform.SetForeheadSwitch(var);
+            Vector4 var = currentModel.deform.eyebrow.BrowHeadSwitch;
+            AppRoot.MainDeform.SetBrowHeadSwitch(var);
         }
     }
     public Vector4 cur_BrowMiddleSwitch
@@ -518,8 +385,8 @@ public class User
         set
         {
             currentModel.deform.eyebrow.BrowMiddleSwitch = value;
-            Vector4 var = currentModel.deform.shape.ForeheadSwitch;
-            AppRoot.MainDeform.SetForeheadSwitch(var);
+            Vector4 var = currentModel.deform.eyebrow.BrowMiddleSwitch;
+            AppRoot.MainDeform.SetBrowMiddleSwitch(var);
         }
     }
     public Vector4 cur_BrowTailSwitch
@@ -528,8 +395,8 @@ public class User
         set
         {
             currentModel.deform.eyebrow.BrowTailSwitch = value;
-            Vector4 var = currentModel.deform.shape.ForeheadSwitch;
-            AppRoot.MainDeform.SetForeheadSwitch(var);
+            Vector4 var = currentModel.deform.eyebrow.BrowTailSwitch;
+            AppRoot.MainDeform.SetBrowTailSwitch(var);
         }
     }
 
@@ -854,7 +721,252 @@ public class User
             AppRoot.MainDeform.SetArmSwitch (var);
         }
     }
-  
+
+
+    ///.............loadjsondata................
+    ///
+
+    public void loadDefeatJson() {
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /// <summary>
+    //切换模特。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。
+    /// </summary>
+    /// <param name="modelId"></param>
+    public void SaveModel(string modelId)
+    {
+
+
+    }
+    public void SaveFace(string faceID)
+    {
+        /*     
+        int.TryParse(faceID.Substring(1, 1), out model);
+        int.TryParse(faceID.Substring(3, 1), out face);
+        profile.models[model].face[face] = currentFace;     
+        */
+    }
+    public void LoadRoleTable()
+    {
+
+
+
+
+    }
+    //public void LoadModel(string modelID  ) {
+
+
+
+    //    int.TryParse(modelID.Substring(1, 1), out model);
+    //    int.TryParse(modelID.Substring(3, 1), out face);
+
+    //    currentModel = profile.models[model];
+    //    currentFace = profile.models[model].face[defaultface];
+    //    currentBody = profile.models[model].body;
+    //    currentModel.RoleTableID  =profile.models[model].RoleTableID ;
+
+    ////加载角色表
+
+
+    //    //如果没有，重建模特
+    //    if (profile.models[model].body._high == 0)
+    //    {
+    //        setdefaultbody();
+    //        ResetBody();
+    //        ResetFace();
+    //        //GameObject.Find("UI").GetComponent<UIcontrol>().ReModelUI();
+    //        //GameObject.Find("UI").GetComponent<ModelMgr>().Remodelbool = true;
+    //    }
+
+    //    else {
+    //        Debug.Log(currentModel.RoleTableID);
+    //        //AppRoot.MainScene.loadmainRole(currentModel.RoleTableID);          
+    //        loadModelvalue(model, defaultface);
+    //        loadCloth(model, defaultface);
+    //    }
+
+
+
+    //  }
+
+
+
+    //public void LoadFace(string faceID) {
+
+    //    int.TryParse(faceID.Substring(1, 1), out model);
+    //    int.TryParse(faceID.Substring(3, 1), out face);
+    //    currentFace = profile.models[model].face[face];
+    //    currentFaceID= profile.models[model].face[face].faceID;
+
+    //    defaultface = face;
+
+    //    Debug.Log(faceID);
+    //    if (profile.models[model].face[face]._faceImgUrl == null)
+    //    {
+    //        GameObject.Find("UI").GetComponent<ModelMgr>().RePhoto();
+    //    }
+    //    else {
+
+    //        AppRoot.MainScene.MainRole.LoadFace();
+    //    }
+
+    //}
+    //public void SetModelName(string modelID,string name) {
+
+    //    int.TryParse(modelID.Substring(1, 1), out model);   
+    //    profile.models[model].Modelname = name;
+
+    //}
+    /// <summary>
+    //切换模特。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。
+    /// </summary>
+
+
+
+
+    //重置基础身材。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。
+    //public void setdefaultbody() {
+
+
+    //    if (isman)
+    //    {
+    //        _highbase = 185.0f;
+    //        _Weightbase = 70.0f;
+    //        _Chestlinebase = 95.0f;
+    //        _Cupbase = 2.0f;
+    //        _Waistlinebase = 70.0f;
+    //        _Hiplinebase = 90.0f;
+    //        _Armlinebase = 35.0f;
+    //        _Thighbase = 45.0f;
+    //    }
+    //    else {
+    //        _highbase = 173.0f;
+    //        _Weightbase = 55.0f;
+    //        _Chestlinebase = 82.0f;
+    //        _Cupbase = 10.0f;
+    //        _Waistlinebase = 50.0f;
+    //        _Hiplinebase = 90.0f;
+    //        _Armlinebase = 26.0f;
+    //        _Thighbase = 34.0f;
+    //        }
+
+    //}
+
+    //当前角色身体参数。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。
+
+    //public void loadModelvalue(int model,int face) {
+
+    //    CURhigh =                 profile.models[model].body.slidervalue_High  ;
+    //    CURWeight =               profile.models[model].body.slidervalue_weight ;
+    //    CURChestline =            profile.models[model].body.slidervalue_Chestline ;
+    //    CURCup =                  profile.models[model].body.slidervalue_Cup   ;
+    //    CURWaistline =            profile.models[model].body.slidervalue_Waitline   ;
+    //    CURHipline =              profile.models[model].body.slidervalue_Hipline   ;
+    //    CURArmline =              profile.models[model].body.slidervalue_Armline  ;
+    //    CURThigh =                profile.models[model].body.slidervalue_Thigh    ;
+    //    CUR_SkincolorSecai =      profile.models[model].body.slidervalue_skin_h  ;
+    //    CUR_SkincolorXianyan =    profile.models[model].body.slidervalue_skin_s   ;
+    //    CUR_SkincolorMingan =     profile.models[model].body.slidervalue_skin_v ;
+    //}
+
+
+    //当前角色服装参数。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。
+    //public void loadCloth(int model, int face) {
+    //    AppRoot.MainUser.CUR_coat = profile.models [model ].body.c_coat ;
+    //    AppRoot.MainUser.CUR_top = profile.models[model].body.c_top ; 
+    //    AppRoot.MainUser.CUR_trouser = profile.models[model].body.c_trousers ; 
+    //    AppRoot.MainUser.CUR_underwear = profile.models[model].body.c_underwear ; 
+    //    AppRoot.MainUser.CUR_shoe = profile.models[model].body.c_shoe ; 
+    //    AppRoot.MainUser.CUR_hair = profile.models[model].body.c_hair ; 
+    //    AppRoot.MainUser.CUR_hat = profile.models[model].body.c_hat ; 
+
+
+    //}
+    ////.................................................................需要储存数据
+
+
+
+
+
+
+    // 
+
+    //
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     ////。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。储存数据。。。。。。。。
@@ -1090,7 +1202,7 @@ public class User
     //    return jsonstring;
     //}
 
-   
+
 
     //string GetVector3Json(Vector3 v)
     //{

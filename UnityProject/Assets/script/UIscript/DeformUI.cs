@@ -310,9 +310,6 @@ private static string Deformjson = "{\"AvatarId\": 101,\"Shape\":{\"ForeheadSwit
         
     }
 
-
-
-
     public void DeformDataLoad()
     {
         var deformdata = JsonUtility.FromJson<User_Deform>(Deformjson);
@@ -372,9 +369,6 @@ private static string Deformjson = "{\"AvatarId\": 101,\"Shape\":{\"ForeheadSwit
        // Debug.Log(ForeheadSwitch_data);
 
     }
-
-
-
 
     public void SliderLoad()
     {
@@ -552,14 +546,10 @@ private static string Deformjson = "{\"AvatarId\": 101,\"Shape\":{\"ForeheadSwit
     }
 
 
-    
-
-
     public void foreheadItem_x_chg( float val){       
 
      ForeheadSwitch_data.x = val;
-     Debug.Log(ForeheadSwitch_data);
-
+   
         AppRoot.MainUser.CURForeheadSwitch = ForeheadSwitch_data; 
 
 
@@ -569,13 +559,13 @@ private static string Deformjson = "{\"AvatarId\": 101,\"Shape\":{\"ForeheadSwit
     {
         ForeheadSwitch_data.y = val;
         AppRoot.MainUser.CURForeheadSwitch = ForeheadSwitch_data;
-        Debug.Log(val);
+        //Debug.Log(val);
     }
     public void foreheadItem_z_chg(float val)
     {
-        ForeheadSwitch_data.w = val;
+        ForeheadSwitch_data.z = val;
         AppRoot.MainUser.CURForeheadSwitch = ForeheadSwitch_data;
-        Debug.Log(val);
+        //Debug.Log(val);
     }
     
 
@@ -591,7 +581,7 @@ private static string Deformjson = "{\"AvatarId\": 101,\"Shape\":{\"ForeheadSwit
     }
     public void TempleItem_w_chg(float val)
     {
-        TempleSwitch_data.w = val;
+        TempleSwitch_data.z = val;
         AppRoot.MainUser.CURTempleSwitch = TempleSwitch_data;
     }
 
@@ -608,7 +598,7 @@ private static string Deformjson = "{\"AvatarId\": 101,\"Shape\":{\"ForeheadSwit
     }
     public void BISjawItem_w_chg(float val)
     {
-        BISjawSwitch_data.w = val;
+        BISjawSwitch_data.z = val;
         AppRoot.MainUser.CURBISjawSwitch = BISjawSwitch_data;
     }
 
@@ -626,7 +616,7 @@ private static string Deformjson = "{\"AvatarId\": 101,\"Shape\":{\"ForeheadSwit
     }
     public void ChinItem_w_chg(float val)
     {
-        ChinSwitch_data.w = val;
+        ChinSwitch_data.z = val;
         AppRoot.MainUser.CURChinSwitch = ChinSwitch_data;
     }
 
@@ -649,7 +639,7 @@ private static string Deformjson = "{\"AvatarId\": 101,\"Shape\":{\"ForeheadSwit
     }
     public void ApplemuscleItem_w_chg(float val)
     {
-        ApplemuscleSwitch_data.w = val;
+        ApplemuscleSwitch_data.z = val;
         AppRoot.MainUser.cur_ApplemuscleSwitch = ApplemuscleSwitch_data;
     }
 
@@ -666,7 +656,7 @@ private static string Deformjson = "{\"AvatarId\": 101,\"Shape\":{\"ForeheadSwit
     }
     public void CheekbonesItem_w_chg(float val)
     {
-        CheekbonesSwitch_data.w = val;
+        CheekbonesSwitch_data.z= val;
         AppRoot.MainUser.cur_CheekbonesSwitch = CheekbonesSwitch_data;
     }
 
@@ -684,7 +674,7 @@ private static string Deformjson = "{\"AvatarId\": 101,\"Shape\":{\"ForeheadSwit
     }
     public void FacialpartItem_w_chg(float val)
     {
-        FacialpartSwitch_data.w = val;
+        FacialpartSwitch_data.z = val;
         AppRoot.MainUser.cur_FacialpartSwitch = FacialpartSwitch_data;
     }
 
@@ -700,6 +690,7 @@ private static string Deformjson = "{\"AvatarId\": 101,\"Shape\":{\"ForeheadSwit
     {
         BrowbowSwitch_data.x = val;
         AppRoot.MainUser.cur_BrowbowSwitch = BrowbowSwitch_data;
+        //Debug.Log(val);
     }
     public void BrowbowItem_y_chg(float val)
     {
@@ -708,7 +699,7 @@ private static string Deformjson = "{\"AvatarId\": 101,\"Shape\":{\"ForeheadSwit
     }
     public void BrowbowItem_w_chg(float val)
     {
-        BrowbowSwitch_data.w = val;
+        BrowbowSwitch_data.z = val;
         AppRoot.MainUser.cur_BrowbowSwitch = BrowbowSwitch_data;
     }
 
@@ -717,6 +708,7 @@ private static string Deformjson = "{\"AvatarId\": 101,\"Shape\":{\"ForeheadSwit
     {
         BrowHeadSwitch_data.x = val;
         AppRoot.MainUser.cur_BrowHeadSwitch = BrowHeadSwitch_data;
+        //Debug.Log(val);
     }
     public void BrowHeadItem_y_chg(float val)
     {
@@ -725,7 +717,7 @@ private static string Deformjson = "{\"AvatarId\": 101,\"Shape\":{\"ForeheadSwit
     }
     public void BrowHeadItem_w_chg(float val)
     {
-        BrowHeadSwitch_data.w = val;
+        BrowHeadSwitch_data.z  = val;
         AppRoot.MainUser.cur_BrowHeadSwitch = BrowHeadSwitch_data;
     }
 
@@ -735,6 +727,7 @@ private static string Deformjson = "{\"AvatarId\": 101,\"Shape\":{\"ForeheadSwit
     {
         BrowMiddleSwitch_data.x = val;
         AppRoot.MainUser.cur_BrowMiddleSwitch = BrowMiddleSwitch_data;
+        //Debug.Log(val);
     }
     public void BrowMiddleItem_y_chg(float val)
     {
@@ -743,7 +736,7 @@ private static string Deformjson = "{\"AvatarId\": 101,\"Shape\":{\"ForeheadSwit
     }
     public void BrowMiddleItem_w_chg(float val)
     {
-        BrowMiddleSwitch_data.w = val;
+        BrowMiddleSwitch_data.z = val;
         AppRoot.MainUser.cur_BrowMiddleSwitch = BrowMiddleSwitch_data;
     }
 
@@ -751,17 +744,17 @@ private static string Deformjson = "{\"AvatarId\": 101,\"Shape\":{\"ForeheadSwit
     public void BrowTailItem_x_chg(float val)
     {
         BrowTailSwitch_data.x = val;
-        AppRoot.MainUser.cur_BrowMiddleSwitch = BrowTailSwitch_data;
+        AppRoot.MainUser.cur_BrowTailSwitch = BrowTailSwitch_data;
     }
     public void BrowTailItem_y_chg(float val)
     {
         BrowTailSwitch_data.y = val;
-        AppRoot.MainUser.cur_BrowMiddleSwitch = BrowTailSwitch_data;
+        AppRoot.MainUser.cur_BrowTailSwitch = BrowTailSwitch_data;
     }
     public void BrowTailItem_w_chg(float val)
     {
-        BrowTailSwitch_data.w = val;
-        AppRoot.MainUser.cur_BrowMiddleSwitch = BrowTailSwitch_data;
+        BrowTailSwitch_data.z = val;
+        AppRoot.MainUser.cur_BrowTailSwitch = BrowTailSwitch_data;
     }
 
 
@@ -783,7 +776,7 @@ private static string Deformjson = "{\"AvatarId\": 101,\"Shape\":{\"ForeheadSwit
     }
     public void EyecornerItem_w_chg(float val)
     {
-        EyecornerSwitch_data.w = val;
+        EyecornerSwitch_data.z = val;
         AppRoot.MainUser.cur_EyecornerSwitch = EyecornerSwitch_data;
     }
 
@@ -791,17 +784,17 @@ private static string Deformjson = "{\"AvatarId\": 101,\"Shape\":{\"ForeheadSwit
     public void UppereyelidItem_x_chg(float val)
     {
         UppereyelidSwitch_data.x = val;
-        AppRoot.MainUser.cur_BrowHeadSwitch = UppereyelidSwitch_data;
+        AppRoot.MainUser.cur_UppereyelidSwitch = UppereyelidSwitch_data;
     }
     public void UppereyelidItem_y_chg(float val)
     {
         UppereyelidSwitch_data.y = val;
-        AppRoot.MainUser.cur_BrowHeadSwitch = UppereyelidSwitch_data;
+        AppRoot.MainUser.cur_UppereyelidSwitch = UppereyelidSwitch_data;
     }
     public void UppereyelidItem_w_chg(float val)
     {
-        UppereyelidSwitch_data.w = val;
-        AppRoot.MainUser.cur_BrowHeadSwitch = UppereyelidSwitch_data;
+        UppereyelidSwitch_data.z = val;
+        AppRoot.MainUser.cur_UppereyelidSwitch = UppereyelidSwitch_data;
     }
 
 
@@ -818,7 +811,7 @@ private static string Deformjson = "{\"AvatarId\": 101,\"Shape\":{\"ForeheadSwit
     }
     public void DoublefoldEyelidsItem_w_chg(float val)
     {
-        DoublefoldEyelidsSwitch_data.w = val;
+        DoublefoldEyelidsSwitch_data.z = val;
         AppRoot.MainUser.cur_DoublefoldEyelidsSwitch = DoublefoldEyelidsSwitch_data;
     }
 
@@ -835,7 +828,7 @@ private static string Deformjson = "{\"AvatarId\": 101,\"Shape\":{\"ForeheadSwit
     }
     public void lowereyelidItem_w_chg(float val)
     {
-        lowereyelidSwitch_data.w = val;
+        lowereyelidSwitch_data.z = val;
         AppRoot.MainUser.cur_lowereyelidSwitch = lowereyelidSwitch_data;
     }
 
@@ -849,7 +842,7 @@ private static string Deformjson = "{\"AvatarId\": 101,\"Shape\":{\"ForeheadSwit
     }
     public void EyebagItem_w_chg(float val)
     {
-        EyebagSwitch_data.w = val;
+        EyebagSwitch_data.z = val;
         AppRoot.MainUser.cur_EyebagSwitch = EyebagSwitch_data;
     }
 
@@ -867,7 +860,7 @@ private static string Deformjson = "{\"AvatarId\": 101,\"Shape\":{\"ForeheadSwit
     }
     public void EyetailItem_w_chg(float val)
     {
-        EyetailSwitch_data.w = val;
+        EyetailSwitch_data.z = val;
         AppRoot.MainUser.cur_EyetailSwitch = EyetailSwitch_data;
     }
 
@@ -884,7 +877,7 @@ private static string Deformjson = "{\"AvatarId\": 101,\"Shape\":{\"ForeheadSwit
     }
     public void BlackeyeItem_w_chg(float val)
     {
-        BlackeyeSwitch_data.w = val;
+        BlackeyeSwitch_data.z = val;
         AppRoot.MainUser.cur_BlackeyeSwitch = BlackeyeSwitch_data;
     }
 
@@ -904,7 +897,7 @@ private static string Deformjson = "{\"AvatarId\": 101,\"Shape\":{\"ForeheadSwit
     }
     public void UpperbridgeItem_w_chg(float val)
     {
-        UpperbridgeSwitch_data.w = val;
+        UpperbridgeSwitch_data.z = val;
         AppRoot.MainUser.cur_UpperbridgeSwitch = UpperbridgeSwitch_data;
     }
 
@@ -921,7 +914,7 @@ private static string Deformjson = "{\"AvatarId\": 101,\"Shape\":{\"ForeheadSwit
     }
     public void InferiorbridgeItem_w_chg(float val)
     {
-        InferiorbridgeSwitch_data.w = val;
+        InferiorbridgeSwitch_data.z = val;
         AppRoot.MainUser.cur_InferiorbridgeSwitch = InferiorbridgeSwitch_data;
     }
 
@@ -946,6 +939,7 @@ private static string Deformjson = "{\"AvatarId\": 101,\"Shape\":{\"ForeheadSwit
     {
         NoseheadSwitch_data.w = val;
         AppRoot.MainUser.cur_NoseheadSwitch = NoseheadSwitch_data;
+        //Debug.Log(val);
     }
 
 
@@ -961,7 +955,7 @@ private static string Deformjson = "{\"AvatarId\": 101,\"Shape\":{\"ForeheadSwit
     }
     public void ColumellaNasiItem_w_chg(float val)
     {
-        ColumellaNasiSwitch_data.w = val;
+        ColumellaNasiSwitch_data.z = val;
         AppRoot.MainUser.cur_ColumellaNasiSwitch = ColumellaNasiSwitch_data;
     }
 
@@ -980,7 +974,7 @@ private static string Deformjson = "{\"AvatarId\": 101,\"Shape\":{\"ForeheadSwit
     }
     public void NasalBaseItem_w_chg(float val)
     {
-        NasalBaseSwitch_data.w = val;
+        NasalBaseSwitch_data.z = val;
         AppRoot.MainUser.cur_NasalBaseSwitch = NasalBaseSwitch_data;
     }
 
@@ -998,7 +992,7 @@ private static string Deformjson = "{\"AvatarId\": 101,\"Shape\":{\"ForeheadSwit
     }
     public void NoseWingItem_w_chg(float val)
     {
-        NoseWingSwitch_data.w = val;
+        NoseWingSwitch_data.z = val;
         AppRoot.MainUser.cur_NoseWingSwitch = NoseWingSwitch_data;
     }
 
@@ -1015,7 +1009,7 @@ private static string Deformjson = "{\"AvatarId\": 101,\"Shape\":{\"ForeheadSwit
     }
     public void NostrilItem_w_chg(float val)
     {
-        NostrilSwitch_data.w = val;
+        NostrilSwitch_data.z = val;
         AppRoot.MainUser.cur_NostrilSwitch = NostrilSwitch_data;
     }
 
@@ -1042,7 +1036,7 @@ private static string Deformjson = "{\"AvatarId\": 101,\"Shape\":{\"ForeheadSwit
     }
     public void upperlipItem_w_chg(float val)
     {
-        UplipSwitch_data.w = val;
+        UplipSwitch_data.z = val;
         AppRoot.MainUser.cur_UplipSwitch = UplipSwitch_data;
     }
 
@@ -1059,7 +1053,7 @@ private static string Deformjson = "{\"AvatarId\": 101,\"Shape\":{\"ForeheadSwit
     }
     public void upperboneItem_w_chg(float val)
     {
-        UpjawSwitch_data.w = val;
+        UpjawSwitch_data.z = val;
         AppRoot.MainUser.cur_UpjawSwitch = UpjawSwitch_data;
     }
 
@@ -1077,7 +1071,7 @@ private static string Deformjson = "{\"AvatarId\": 101,\"Shape\":{\"ForeheadSwit
     }
     public void downlipItem_w_chg(float val)
     {
-        DownLipSwitch_data.w = val;
+        DownLipSwitch_data.z = val;
         AppRoot.MainUser.cur_DownLipSwitch = DownLipSwitch_data;
     }
 
@@ -1094,7 +1088,7 @@ private static string Deformjson = "{\"AvatarId\": 101,\"Shape\":{\"ForeheadSwit
     }
     public void downBoneItem_w_chg(float val)
     {
-        DownJawSwitch_data.w = val;
+        DownJawSwitch_data.z = val;
         AppRoot.MainUser.cur_DownJawSwitch = DownJawSwitch_data;
     }
     
@@ -1111,7 +1105,7 @@ private static string Deformjson = "{\"AvatarId\": 101,\"Shape\":{\"ForeheadSwit
     }
     public void MiddleItem_w_chg(float val)
     {
-        PhiltrumSwitch_data.w = val;
+        PhiltrumSwitch_data.z = val;
         AppRoot.MainUser.cur_PhiltrumSwitch = PhiltrumSwitch_data;
     }
 
@@ -1129,7 +1123,7 @@ private static string Deformjson = "{\"AvatarId\": 101,\"Shape\":{\"ForeheadSwit
     }
     public void cornerItem_w_chg(float val)
     {
-        CornerSwitch_data.w = val;
+        CornerSwitch_data.z = val;
         AppRoot.MainUser.cur_CornerSwitch = CornerSwitch_data;
     }
 

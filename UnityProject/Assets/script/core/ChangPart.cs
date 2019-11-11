@@ -6,7 +6,7 @@ public class ChangPart : MonoBehaviour
 {
 
 
-
+    Role mainRole;
 
 
 

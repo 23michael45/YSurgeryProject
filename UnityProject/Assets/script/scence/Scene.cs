@@ -5,13 +5,13 @@ using UnityEngine;
 
 public class Scene : MonoBehaviour
 {
-    [HideInInspector]
-    public Role MainRole;
-
+  
     [HideInInspector]
     public Stage MainStage;
 	public buttom Mainbuttom;
 	public background Mainbackground;
+
+
 
     void Awake()
     {
@@ -20,59 +20,7 @@ public class Scene : MonoBehaviour
         Shader.EnableKeyword("UNITY_SPECCUBE_BOX_PROJECTION");
     }
 
-    public void loadmainRole( int id ) {
-
-        StartCoroutine(SetMainRole(id));
-      
-    }
-
-
-
-    public IEnumerator SetMainRole(int id)
-    {
-        yield return 0;
-        if (this.MainRole != null && this.MainRole.RoleID == id)
-           yield  return 0;
-
-        RoleDef role;
-        if (TableMgr.Instance.RoleDic.TryGetValue(id, out role))        {
-
-            //GameObject prefab = ResourceMgr.Instance.LoadFromAssetBundle<GameObject>(role.assetbundle);
-           // BaseAssetLoader.Instance.StartLoadAsset(role.assetbundle, OnLoaded_SetMainRole, id, AssetBundleLoadManager.m_FromHttp);
-            yield return 0;
-
-        }
-        else
-        {
-            Debug.LogError("Role id: " + id + " doesn't exist!");
-        }
-        yield return 0;
-    }
-    public void OnLoaded_SetMainRole(object obj,object param)
-    {
-        int id = (int)param;
-        GameObject prefab = obj as GameObject;
-        if (prefab == null)
-        {
-            Debug.LogError("Can't load asset : " + id);
-            return;
-        }
-        GameObject go = Instantiate(prefab);
-        SetMainRole(go.GetComponent<Role>(), id);
-
-     StartCoroutine(LoadScene.Instance.OnLoadedRole(id));
-    }
-    public void SetMainRole(Role role, int id)
-    {
-        if (role == null)
-            Debug.LogError("Set Role failed!");
-        if (MainRole != null)
-            GameObject.DestroyImmediate(MainRole.gameObject);
-        MainRole = role;
-        MainRole.RoleID = id;
-        MainRole.transform.parent = this.transform;
-    }
-
+  
     public void SetStage(int stageID)
     {
         if (this.MainStage != null && this.MainStage.StageID == stageID)

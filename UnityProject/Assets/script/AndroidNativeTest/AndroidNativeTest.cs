@@ -9,7 +9,7 @@ public class AndroidNativeTest : MonoBehaviour
     void Start()
     {
         mAndroidNativeUtils = new AndroidNative();
-        mAndroidNativeUtils.CallFromUnity("AndroidNativeTest",1234);
+        mAndroidNativeUtils.CallFromUnity("AndroidNativeTest","1234");
     }
     
 }

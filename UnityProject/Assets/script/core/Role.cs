@@ -44,78 +44,25 @@ public class Role : MonoBehaviour
     public Texture2D[] Makeupparts;
 
     public Transform rootBoneParent;
-    //public NumberRollView _HeightScrollView;
-    //public NumberRollView _WeightScrollView;
-    public GameObject _head, _body,_arm, _eyes, _eyelash, _finger, Rolein;
+    
+    public GameObject _head, _body, _eyes, _eyelash, _finger, Rolein;
 
-    public GameObject _faceplan;
+   
 
     [HideInInspector]
     public int RoleID = 0;
 
     Animator animator = null;
 
+    public Deform Deform;
 
 
-
-    // 面部骨骼点
-    private Vector3 _face_eyeBall_Lf_joint1,_EyeEnd_L,_face_eyeBall_Rt_joint1,_EyeEnd_R,_face_bridge_joint1,_face_bridge_joint2,_face_bridge_Lf_joint1,
-_face_bridge_Rt_joint1,_face_brow_Lf_joint1,_face_brow_Lf_joint2,_face_brow_Lf_joint3,_face_brow_Rt_joint1,_face_brow_Rt_joint2,_face_brow_Rt_joint3,
-_face_calvaria_joint1,_face_cheek_Lf_joint1,_face_cheek_Lf_joint2,_face_cheek_Rt_joint1,_face_cheek_RT_joint2,_face_chin_Lf_joint07,_face_chin_Lf_joint7,
-_face_chin_Lf_joint08,_face_chin_Lf_joint09,_face_chin_Rt_joint07,_face_chin_Rt_joint7,_face_chin_Rt_joint08,_face_chin_Rt_joint09,_face_eyeLids_Lf_joint1,
-_face_eyeLids_Lf_joint2,_face_eyeLidsdown_Lf_joint1,_face_eyeLidsdown_Lf_joint2,_face_eyeLidsdown_Lf_joint3,_face_eyeLidsUp_Lf_joint1,
-_face_eyeLidsUp_Lf_joint2,_face_eyeLidsUp_Lf_joint3,_face_eyeLids_Rt_joint1,_face_eyeLids_Rt_joint2,_face_eyeLidsdown_Rt_joint1,
-_face_eyeLidsdown_Rt_joint2,_face_eyeLidsdown_Rt_joint3,_face_eyeLidsUp_Rt_joint1,_face_eyeLidsUp_Rt_joint2,_face_eyeLidsUp_Rt_joint3,
-_face_forehead_joint1,_face_forehead_joint2,_face_forehead_Lf_joint1,_face_forehead_Lf_joint2,_face_forehead_Lf_joint3,_face_forehead_Lf_joint4,
-_face_forehead_Lf_joint5,_face_forehead_Lf_joint6,_face_forehead_Rt_joint1,_face_forehead_Rt_joint2,_face_chin_joint1,_face_chin_joint2,
-_face_chin_joint3,_face_chin_Lf_joint02,_face_chin_Lf_joint03,_face_chin_Lf_joint04,_face_chin_Lf_joint05,_face_chin_Lf_joint06,_face_chin_Rt_joint02,
-_face_chin_Rt_joint03,_face_chin_Rt_joint04,_face_chin_Rt_joint05,_face_chin_Rt_joint06,_face_tooth_down_joint1,_face_tooth_down_joint2,
-_face_tooth_down_joint3,_face_mouthLip_dn_joint1,_face_mouthLip_dn_joint2,_face_mouthLip_Lf_joint6,_face_mouthLip_Lf_joint7,_face_mouthLip_Rt_joint6,
-_face_mouthLip_Rt_joint7,_face_mouthLip_Lf_joint1,_face_mouthLip_Lf_joint2,_face_mouthLip_Lf_joint3,_face_mouthLip_Rt_joint1,_face_mouthLip_Rt_joint2,
-_face_mouthLip_Rt_joint3,_face_mouthLip_Lf_joint4,_face_mouthLip_Lf_joint5,_face_mouthLip_Rt_joint4,_face_mouthLip_Rt_joint5,_face_mouthLip_up_joint1,
-_face_mouthLip_up_joint2,_face_nose_joint1,_face_nose_joint2,_face_nosewing_Lf_joint1,_face_nosewing_Lf_joint2,_face_nosewing_Lf_joint003,
-_face_nosewing_Rt_joint1,_face_nosewing_Rt_joint2,_face_nosewing_Rt_joint003,_face_temple_Lf_joint1,_face_temple_Lf_joint2,_face_temple_Lf_joint3,
-_face_temple_Rt_joint1,_face_temple_Rt_joint2,_face_temple_Rt_joint3,_face_tooth_up_joint1,_face_tooth_up_joint2,_face_tooth_up_joint3;
-
-
-    private float pinguo_x = 0.000f;                   
-    private float pinguo_y = 0.000f;                  
-    private float pinguo_scal = 0.000f;                 
-                                                       
-
-    private float eye_zuoyou = 0.000f;
-    private float eye_gaodi = 0.000f;
-    private float eye_shenqian = 0.000f;
-
-    private float eyebrow_zuoyou = 0.000f;
-    private float eyebrow_gaodi = 0.000f;
-    private float eyebrow_shenqian = 0.000f;
-
-
-    private float mouth_gaodi = 0.000f;
-    private float mouth_shenqian = 0.000f;
-    private float mouth_sclKUan = 1.000f;
-    private float mouth_sckHou = 1.000f;
-
-    private float face_xiabaKUan = 0.000f;
-    private float face_xiabachang = 0.000f;
-
-
-    private float nose_kuandu = 1.00f;
-    private float nose_Tingba = 1.00f;
-    
-
-  private float  SH_joint1,LJ_joint1;
-  private float  SH_joint2,LJ_joint2;
-  private float  SH_joint3,LJ_joint3;
-  private float  SH_joint4,LJ_joint4;
-  private float  QG_joint2;
-
+   
 
 
     //定义皮肤色卡
 
-    public   Vector3[] _skincolors = new Vector3[]{
+    private   Vector3[] _skincolors = new Vector3[]{
        (new Vector3(31f, 0.38f, 0.82f)),       (new Vector3(28f, 0.39f, 0.84f)),       (new Vector3(28f, 0.39f, 0.83f)),
        (new Vector3(30f, 0.40f, 0.84f )),      (new Vector3(31f, 0.40f, 0.83f)),       (new Vector3(29f, 0.39f, 0.82f)),
        (new Vector3(28f, 0.39f ,0.83f)),       (new Vector3(28f, 0.40f, 0.82f)),       (new Vector3(30f, 0.40f, 0.82f)),
@@ -161,34 +108,74 @@ _face_temple_Rt_joint1,_face_temple_Rt_joint2,_face_temple_Rt_joint3,_face_tooth
 
 
 
-
-
     public Dictionary<string, Transform> _bones;
-    public Dictionary<string, Transform> bones
+    //public Dictionary<string, Transform> bones
+    //{
+    //    get
+    //    {
+    //        if (_bones == null)
+    //        {
+    //            _bones = new Dictionary<string, Transform>();
+    //            Transform[] boneArray = rootBoneParent.GetComponentsInChildren<Transform>();
+    //            for (int i = 0; i < boneArray.Length; ++i)
+    //            {
+    //                _bones.Add(boneArray[i].name, boneArray[i]);
+    //            }
+    //        }
+    //        return _bones;
+    //    }
+    //}
+
+    public Dictionary<string, Vector3> bonesPostion;
+    
+
+
+
+  public  void Start()
     {
-        get
+        //parts = new GameObject[(int)ClothPart.Count];
+
+        //Makeupparts = new Texture2D[(int)MakeupPart.Count];
+
+        GetBaseBonePostion();
+
+        //Debug.Log(bonesPostion);
+
+        //Debug.Log(_bones);
+
+        Deform = new Deform();
+        Deform.init();
+       
+    }
+
+
+    public void GetBaseBonePostion() {
+
+        
+        if (_bones == null)
         {
-            if (_bones == null)
+            bonesPostion = new Dictionary<string, Vector3>();
+            _bones = new Dictionary<string, Transform>();
+            Transform[] boneArray = rootBoneParent.GetComponentsInChildren<Transform>();
+
+            for (int i = 0; i < boneArray.Length; ++i)
             {
-                _bones = new Dictionary<string, Transform>();
-                Transform[] boneArray = rootBoneParent.GetComponentsInChildren<Transform>();
-                for (int i = 0; i < boneArray.Length; ++i)
-                {
-                    _bones.Add(boneArray[i].name, boneArray[i]);
-                }
+
+                bonesPostion.Add(boneArray[i].name, boneArray[i].localPosition );
+                _bones.Add(boneArray[i].name, boneArray[i]);
+
+
+
             }
-            return _bones;
+
         }
-    }
 
-    void Awake()
-    {
-        parts = new GameObject[(int)ClothPart.Count];
+        //Debug.Log(bonesPostion["face_forehead_joint1"]);
 
-        Makeupparts = new Texture2D[(int)MakeupPart.Count];
+        //Debug.Log(_bones["face_forehead_joint1"]);
+
 
     }
-
 
 
     //    public animatorDef GetanimatorDef(int id)
@@ -323,6 +310,13 @@ _face_temple_Rt_joint1,_face_temple_Rt_joint2,_face_temple_Rt_joint3,_face_tooth
 
 
 
+
+
+
+
+
+
+
     //    void RepalceBones(SkinFBX s1)
     //    {
     //        if (s1 == null || s1.Meshes == null)
@@ -347,7 +341,7 @@ _face_temple_Rt_joint1,_face_temple_Rt_joint2,_face_temple_Rt_joint3,_face_tooth
 
 
 
-    //  
+    //  ..........................................................................................................................................
     //  
     //    public string GetCurrentFaceImagePath()
     //    {
@@ -494,6 +488,7 @@ _face_temple_Rt_joint1,_face_temple_Rt_joint2,_face_temple_Rt_joint3,_face_tooth
     //        LoadBone("face_tooth_up_joint3");
 
   
+
     //        OnPhotoGetClick();
 
     //        GameObject.Find("UI").GetComponent<LoadScene>()._sussface = true;
