@@ -8,7 +8,9 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/3Dface.unity
     guid: 9dcee298d49f49348b079802a35e53af
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/NativeAndroid.unity
     guid: c77d4c6bc44c6b848b93cfbe2237eee3
-  m_configObjects: {}
+  m_configObjects:
+    com.unity.addressableassets: {fileID: 11400000, guid: 4b989961e8d27e34883f5df003089270,
+      type: 2}
