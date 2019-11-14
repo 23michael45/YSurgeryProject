@@ -10,6 +10,8 @@ public class MeshCorresponding : MonoBehaviour
     public Mesh mRegionMesh;
     public Mesh mTargetMesh;
 
+    public MeshFilter mDebugMeshFilter;
+
     public class SaveData
     {
         [SerializeField]
@@ -41,11 +43,25 @@ public class MeshCorresponding : MonoBehaviour
         Vector3[] targetVertices = mTargetMesh.vertices;
 
 
+        Dictionary<int, Vector3> regionVertexDict = new Dictionary<int, Vector3>();
+        Dictionary<Vector3, int> regionVertexDictReverse = new Dictionary<Vector3,int>();
 
         for (int j = 0; j < mRegionMesh.vertexCount; j++)
         {
-
             Vector3 vertexRegion = mRegionMesh.vertices[j];
+
+            if (regionVertexDict.ContainsValue(vertexRegion))
+            {
+                Debug.LogError(string.Format("Region Mesh Vertex Duplicate : {0} {1}", j, regionVertexDictReverse[vertexRegion]));
+            }
+            else
+            {
+                regionVertexDict[j] = vertexRegion;
+                regionVertexDictReverse[vertexRegion] = j;
+
+            }
+
+
 
             int index = Array.IndexOf(targetVertices, vertexRegion);
             correspondIndices.Add(index);
@@ -74,5 +90,63 @@ public class MeshCorresponding : MonoBehaviour
         data = JsonUtility.FromJson<SaveData>(jstr);
 
         return data.Vertices;
+    }
+
+
+    public void DrawTopology()
+    {
+
+        Vector3[] targetVertices = mTargetMesh.vertices;
+
+
+        Dictionary<int, Vector3> regionVertexDict = new Dictionary<int, Vector3>();
+        Dictionary<Vector3, int> regionVertexDictReverse = new Dictionary<Vector3, int>();
+
+        List<int> DuplicateVetices = new List<int>();
+
+        for (int j = 0; j < mRegionMesh.vertexCount; j++)
+        {
+            Vector3 vertexRegion = mRegionMesh.vertices[j];
+
+            if (regionVertexDict.ContainsValue(vertexRegion))
+            {
+                Debug.LogError(string.Format("Region Mesh Vertex Duplicate : {0} {1}", j, regionVertexDictReverse[vertexRegion]));
+
+                DuplicateVetices.Add(j);
+            }
+            else
+            {
+                regionVertexDict[j] = vertexRegion;
+                regionVertexDictReverse[vertexRegion] = j;
+
+            }
+        }
+        
+
+        Mesh m = new Mesh();
+
+        Vector3[] verticesRegionPos = mRegionMesh.vertices;
+        Vector3[] verticesDuplicatePos = new Vector3[DuplicateVetices.Count];
+
+        for (int i = 0; i < verticesDuplicatePos.Length; i++)
+        {
+
+            verticesDuplicatePos[i] = verticesRegionPos[DuplicateVetices[i]];
+
+        }
+        m.vertices = verticesDuplicatePos;
+
+        int[] indices = new int[verticesDuplicatePos.Length];
+        for (int i = 0; i < indices.Length; i++)
+        {
+
+            indices[i] = i;
+
+        }
+
+        m.SetIndices(indices, MeshTopology.Points, 0);
+
+        mDebugMeshFilter.sharedMesh = m;
+
     }
 }

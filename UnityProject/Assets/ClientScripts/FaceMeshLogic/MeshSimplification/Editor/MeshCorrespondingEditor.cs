@@ -29,6 +29,9 @@ public class MeshCorrespondingEditor : Editor
             parentObj.Corresponding(mJsonPath);
         }
 
-
+        if (GUILayout.Button("Draw Topology", EditorStyles.miniButtonRight))
+        {
+            parentObj.DrawTopology();
+        }
     }
 }

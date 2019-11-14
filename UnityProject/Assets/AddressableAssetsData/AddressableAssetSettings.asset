@@ -23,6 +23,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: fe9aa316ac7252d43a6c4136723d8ed9, type: 2}
   - {fileID: 11400000, guid: c98b6cc7743a4e644822535e87211805, type: 2}
   - {fileID: 11400000, guid: 9156ef04d0531e945bad254fed97c49d, type: 2}
+  - {fileID: 11400000, guid: 7b79e4056600e7b4b93ed4d045e69e58, type: 2}
   m_BuildSettings:
     m_CompileScriptsInVirtualMode: 0
     m_CleanupStreamingAssetsAfterBuilds: 1
@@ -93,6 +94,7 @@ MonoBehaviour:
     m_LabelNames:
     - default
     - example
+    - template
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: 4dfc58214bc70274bad5468fff8c2f47, type: 2}
@@ -119,7 +121,7 @@ MonoBehaviour:
           m_Key: HostingServicePort
         - m_AssemblyName: mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
           m_ClassName: System.String
-          m_Data: HostedData/Android
+          m_Data: Library/com.unity.addressables/StreamingAssetsCopy/aa/Android/Android
           m_Key: ContentRoot
         - m_AssemblyName: mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
           m_ClassName: System.Boolean

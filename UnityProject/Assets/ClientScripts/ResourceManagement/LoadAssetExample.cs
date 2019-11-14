@@ -15,6 +15,8 @@ public class LoadAssetExample : MonoBehaviour
     GameObject mAssetLoaded;
     GameObject mAssetRefLoaded;
 
+    public MeshFilter mShowLDMesh;
+
     void Start()
     {
         var op = Addressables.LoadAssetAsync<GameObject>(mAssetaddress);
@@ -23,7 +25,6 @@ public class LoadAssetExample : MonoBehaviour
         var refOp = mAssetRef.InstantiateAsync();
         refOp.Completed += OnInstantiateDone;
 
-        LoadFromFile(Application.dataPath + "/../Model/obamaMesh.obj", Application.dataPath + "/../Model/obamaTexture.jpg");
     }
 
     private void OnLoadDone(AsyncOperationHandle<GameObject> obj)
@@ -33,10 +34,14 @@ public class LoadAssetExample : MonoBehaviour
     private void OnInstantiateDone(AsyncOperationHandle<GameObject> obj)
     {
         mAssetRefLoaded = obj.Result;
+
+        Mesh ldMesh = mAssetRefLoaded.GetComponent<MeshFilter>().sharedMesh;
+
+        LoadHDMeshDefromedAndGenLowMesh(Application.dataPath + "/../Model/obamaMesh.obj", Application.dataPath + "/../Model/obamaTexture.jpg", ldMesh, mAssetRefLoaded.transform);
     }
 
 
-    void LoadFromFile(string modelPath,string texturePath)
+    void LoadHDMeshDefromedAndGenLowMesh(string modelPath,string texturePath,Mesh ldMesh,Transform ldTransform)
     {
 
         GameObject gomesh = new OBJLoader().Load(modelPath);
@@ -47,6 +52,15 @@ public class LoadAssetExample : MonoBehaviour
 
         gomesh.transform.GetChild(0).GetComponent<Renderer>().material.SetTexture("_MainTex", tex);
 
+
+
+        SimplifyFaceModel sf = new SimplifyFaceModel();
+        string jsonL2HPath = Path.Combine(Application.dataPath, "../correspondingHDLDIndices.json");
+
+        Mesh hdDeformedMesh = gomesh.GetComponentInChildren<MeshFilter>().sharedMesh;
+        Mesh lowDeformedMesh = sf.CalculateDeformedMesh(jsonL2HPath, hdDeformedMesh, ldMesh, ldTransform);
+
+        mShowLDMesh.sharedMesh = lowDeformedMesh;
 
     }
 }

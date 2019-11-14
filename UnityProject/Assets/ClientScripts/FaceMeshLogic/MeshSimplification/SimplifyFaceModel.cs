@@ -36,42 +36,44 @@ public class SimplifyFaceModel : MonoBehaviour
     
 
     public bool m_bUseRaycast = false;
-    
+
     public void CalculateDeformedMeshLD(string loadPath)
+    {
+        Mesh hdDeformed = m_LDDeformedFaceMesh.GetComponent<MeshFilter>().sharedMesh;
+        Mesh ldMean = m_LDMeanFaceMesh.GetComponent<MeshFilter>().sharedMesh;
+        Mesh m = CalculateDeformedMesh(loadPath, hdDeformed, ldMean,m_LDMeanFaceMesh);
+
+        m_LDDeformedFaceMesh.GetComponent<MeshFilter>().sharedMesh = m;
+    }
+    public Mesh CalculateDeformedMesh(string loadPath, Mesh hdDeformedMesh, Mesh ldMeanMesh,Transform ldMeanTransform)
     {
         Dictionary<int, int> l2hDict;
         LoadJson(loadPath,out l2hDict);
-
-        Vector3[] DeformedVertices = m_HDDeformedFaceMesh.gameObject.GetComponent<MeshFilter>().mesh.vertices;
-        Vector2[] DeformedUVs = m_HDDeformedFaceMesh.gameObject.GetComponent<MeshFilter>().mesh.uv;
-        //Vector3[] TargetSizeVertices = m_HighMeshTransform.gameObject.GetComponent<MeshFilter>().sharedMesh.vertices;
-        Vector3[] lowVertices = m_LDMeanFaceMesh.gameObject.GetComponent<MeshFilter>().mesh.vertices;
-        Vector2[] lowUVs = new Vector2[lowVertices.Length];
+        
+        Vector3[] DeformedVertices = hdDeformedMesh.vertices;
+        Vector2[] DeformedUVs = hdDeformedMesh.uv;
 
 
-        float lowMeshScale = m_LDMeanFaceMesh.lossyScale.x;
-        for (int i = 0; i < lowVertices.Length; i++)
+        Mesh ldDeformedMesh = (Mesh)Instantiate(ldMeanMesh);
+
+        Vector3[] ldVertices = ldDeformedMesh.vertices;
+        Vector2[] ldUVs = ldDeformedMesh.uv;
+
+        foreach (KeyValuePair<int, int> pair in l2hDict)
         {
-
-            if(l2hDict.ContainsKey(i))
-            {
-                int indexFromHigh = l2hDict[i];
-
-                Vector3 pos = m_HDDeformedFaceMesh.localToWorldMatrix.MultiplyPoint(DeformedVertices[indexFromHigh]);
-                //pos = pos + m_HighMeshTransform.position / lowMeshScale;
-
-
-                lowVertices[i] = pos;
-                lowUVs[i] = DeformedUVs[indexFromHigh];
-            }
+            int lowIndex = pair.Key;
+            int highIndex = pair.Value;
             
+
+            Vector3 pos = ldMeanTransform.worldToLocalMatrix.MultiplyPoint(DeformedVertices[highIndex]);
+
+            ldVertices[lowIndex] = Vector3.zero;
+            ldUVs[lowIndex] = DeformedUVs[highIndex];
         }
+        ldDeformedMesh.vertices = ldVertices;
+        ldDeformedMesh.uv = ldUVs;
 
-        m_LDDeformedFaceMesh.gameObject.GetComponent<MeshFilter>().mesh.vertices = lowVertices;
-        m_LDDeformedFaceMesh.gameObject.GetComponent<MeshFilter>().mesh.uv2 = lowUVs;
-        m_LDDeformedFaceMesh.gameObject.GetComponent<MeshFilter>().mesh.uv = lowUVs;
-        m_LDDeformedFaceMesh.gameObject.GetComponent<MeshFilter>().mesh.triangles = m_LDMeanFaceMesh.gameObject.GetComponent<MeshFilter>().mesh.triangles;
-
+        return ldDeformedMesh;
         //Debug.Log(string.Format("org: {0} {1} {2} tar: {3} {4} {5}", ov.x, ov.y, ov.z, tv.x, tv.y, tv.z));
     }
 
@@ -275,8 +277,25 @@ public class SimplifyFaceModel : MonoBehaviour
                 }
 
             }
+            if (minHDIndex != -1)
+            {
 
-            LD2HDIndicesDict[lowIndex] = minHDIndex;
+                
+                if (LD2HDIndicesDict.ContainsKey(lowIndex))
+                {
+                    Debug.LogError("Error Duplicate Low Index : " + lowIndex);
+                }
+                else
+                {
+                    LD2HDIndicesDict[lowIndex] = minHDIndex;
+
+                }
+            }
+            else
+            {
+                Debug.LogError("Error High Index -1");
+
+            }
         }
 
         SaveJson(savePath, LD2HDIndicesDict);
