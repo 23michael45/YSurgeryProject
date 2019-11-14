@@ -17,8 +17,8 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: 588afe95ac4ff6e4681070e9cb84d611
   m_SerializeEntries:
-  - m_GUID: 412b5e90bca236d4b956abc4b0509162
-    m_Address: LowTemplate
+  - m_GUID: 6e9f7c550f03c734896e302cb0491c50
+    m_Address: MeshTemplate
     m_ReadOnly: 0
     m_SerializedLabels:
     - template

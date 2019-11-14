@@ -19,8 +19,8 @@ public class LoadAssetExample : MonoBehaviour
 
     void Start()
     {
-        var op = Addressables.LoadAssetAsync<GameObject>(mAssetaddress);
-        op.Completed += OnLoadDone;
+        //var op = Addressables.LoadAssetAsync<GameObject>(mAssetaddress);
+        //op.Completed += OnLoadDone;
 
         var refOp = mAssetRef.InstantiateAsync();
         refOp.Completed += OnInstantiateDone;
@@ -37,27 +37,33 @@ public class LoadAssetExample : MonoBehaviour
 
         Mesh ldMesh = mAssetRefLoaded.GetComponent<MeshFilter>().sharedMesh;
 
-        LoadHDMeshDefromedAndGenLowMesh(Application.dataPath + "/../Model/obamaMesh.obj", Application.dataPath + "/../Model/obamaTexture.jpg", ldMesh, mAssetRefLoaded.transform);
+        LoadHDMeshDefromedAndGenLowMesh(Application.dataPath + "/../Model/obama53149.obj", Application.dataPath + "/../Model/obamaTexture.jpg", ldMesh, mAssetRefLoaded.transform);
     }
 
 
     void LoadHDMeshDefromedAndGenLowMesh(string modelPath,string texturePath,Mesh ldMesh,Transform ldTransform)
     {
 
-        GameObject gomesh = new OBJLoader().Load(modelPath);
+        GameObject deformedMeshObject = new OBJLoader().Load(modelPath);
 
         byte[] byteArray = File.ReadAllBytes(texturePath);
         Texture2D tex = new Texture2D(2, 2);
         bool isLoaded = tex.LoadImage(byteArray);
 
-        gomesh.transform.GetChild(0).GetComponent<Renderer>().material.SetTexture("_MainTex", tex);
+        deformedMeshObject.transform.GetChild(0).GetComponent<Renderer>().material.SetTexture("_MainTex", tex);
 
 
 
         SimplifyFaceModel sf = new SimplifyFaceModel();
         string jsonL2HPath = Path.Combine(Application.dataPath, "../correspondingHDLDIndices.json");
 
-        Mesh hdDeformedMesh = gomesh.GetComponentInChildren<MeshFilter>().sharedMesh;
+        Mesh hdDeformedMesh = deformedMeshObject.GetComponentInChildren<MeshFilter>().sharedMesh;
+
+        Vector3 testPos = hdDeformedMesh.vertices[0];
+        var p1 = deformedMeshObject.transform.TransformPoint(testPos);
+        var p2 = deformedMeshObject.transform.localToWorldMatrix.MultiplyPoint(testPos);
+
+
         Mesh lowDeformedMesh = sf.CalculateDeformedMesh(jsonL2HPath, hdDeformedMesh, ldMesh, ldTransform);
 
         mShowLDMesh.sharedMesh = lowDeformedMesh;

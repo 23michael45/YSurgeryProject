@@ -27,12 +27,13 @@ namespace MeshTools
 		readonly Rect MTWINDOW_DRAG_RECT = new Rect(0,0,128,20);
 
         string sFileName =  "";
+        int iSelectIndex = 0;
 
 #if DO_THE_DEBUG_DANCE
 		Rect windowRect = new Rect(24, 24, 200, 260);
 #else
         // Size of the GUI window.
-        Rect windowRect = new Rect(24, 24, 105, 110);
+        Rect windowRect = new Rect(24, 24, 105, 200);
 #endif
 
 		// Automatically set - used to clamp the GUI window to the sceneview window rect.
@@ -503,6 +504,21 @@ namespace MeshTools
 
             if (GUILayout.Button("Quit", EditorStyles.miniButton))
                 Finish(ExitStatus.NullValue);
+
+
+            GUILayout.Label("Set Select Vertices");
+            iSelectIndex = EditorGUILayout.IntField(iSelectIndex);
+            if (iSelectIndex != -1)
+            {
+                selectedIndices.Clear();
+                selectedIndices.Add(iSelectIndex);
+            }
+
+            if (selectedIndices.Count>0)
+            {
+                EditorGUILayout.IntField(selectedIndices[0]);
+
+            }
 
             GUI.DragWindow( MTWINDOW_DRAG_RECT );
 

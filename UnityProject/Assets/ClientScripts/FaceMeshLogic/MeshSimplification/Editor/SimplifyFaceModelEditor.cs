@@ -47,11 +47,14 @@ public class MeshSimplificationEditor : Editor
         {
             parentObj.CalculateDeformedMeshLD(mLoadLD2HDJsonPath);
         }
-        if (GUILayout.Button("Draw Topology", EditorStyles.miniButtonRight))
+        if (GUILayout.Button("Draw Low Topology", EditorStyles.miniButtonRight))
         {
-            parentObj.DrawTopology(mLoadLD2HDJsonPath);
+            parentObj.DrawLowTopology(mLoadLD2HDJsonPath);
         }
-
+        if (GUILayout.Button("Draw High Topology", EditorStyles.miniButtonRight))
+        {
+            parentObj.DrawHighTopology(mLoadLD2HDJsonPath);
+        }
         EditorGUILayout.Separator();
 
 

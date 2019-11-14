@@ -92,13 +92,17 @@ namespace Dummiesman {
 		
 		public Vector3 ReadVector() {
 			this.SkipWhitespaces();
-			float x = this.ReadFloat();
+
+            //by michael , unity load obj file,x is flip
+			float x = this.ReadFloat() * -1;
 			this.SkipWhitespaces();
 			float y = this.ReadFloat();
 			this.SkipWhitespaces(out var newLinePassed);
 			float z = 0f;
 			if (newLinePassed == false) {
-				z = this.ReadFloat();
+
+                //by michael , unity load obj file,z is flip to fit camera look direction
+                z = this.ReadFloat() * -1;
 			}
 			return new Vector3(x, y, z);
 		}

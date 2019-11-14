@@ -29,9 +29,21 @@ public class MeshCorrespondingEditor : Editor
             parentObj.Corresponding(mJsonPath);
         }
 
-        if (GUILayout.Button("Draw Topology", EditorStyles.miniButtonRight))
+        if (GUILayout.Button("Draw Duplicate Topology", EditorStyles.miniButtonRight))
         {
-            parentObj.DrawTopology();
+            parentObj.DrawDuplicateTopology();
+
+        }
+        if (GUILayout.Button("Draw Lost Topology", EditorStyles.miniButtonRight))
+        {
+            parentObj.DrawLostInFullTopology();
+
+        }
+
+        if (GUILayout.Button("Show Mesh", EditorStyles.miniButtonRight))
+        {
+            parentObj.ShowRegionMesh();
+
         }
     }
 }

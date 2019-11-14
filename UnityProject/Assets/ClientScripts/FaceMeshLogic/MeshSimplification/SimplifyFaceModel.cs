@@ -53,25 +53,57 @@ public class SimplifyFaceModel : MonoBehaviour
         Vector3[] DeformedVertices = hdDeformedMesh.vertices;
         Vector2[] DeformedUVs = hdDeformedMesh.uv;
 
+        Vector3[] ldVertices = new Vector3[ldMeanMesh.vertices.Length];
+        Vector2[] ldUVs = new Vector2[ldMeanMesh.vertices.Length];
 
-        Mesh ldDeformedMesh = (Mesh)Instantiate(ldMeanMesh);
-
-        Vector3[] ldVertices = ldDeformedMesh.vertices;
-        Vector2[] ldUVs = ldDeformedMesh.uv;
-
-        foreach (KeyValuePair<int, int> pair in l2hDict)
+        for (int i = 0; i<ldVertices.Length;i++)
         {
-            int lowIndex = pair.Key;
-            int highIndex = pair.Value;
-            
+            if(l2hDict.ContainsKey(i))
+            {
 
-            Vector3 pos = ldMeanTransform.worldToLocalMatrix.MultiplyPoint(DeformedVertices[highIndex]);
+                int lowIndex = i;
+                int highIndex = l2hDict[i];
 
-            ldVertices[lowIndex] = Vector3.zero;
-            ldUVs[lowIndex] = DeformedUVs[highIndex];
+
+                Vector3 wpos = DeformedVertices[highIndex];
+                Vector3 lpos = ldMeanTransform.worldToLocalMatrix.MultiplyPoint(wpos);
+
+
+                ldVertices[lowIndex] = lpos;
+                //ldVertices[lowIndex] = wpos;
+                ldUVs[lowIndex] = DeformedUVs[highIndex];
+            }
+            else
+            {
+                ldVertices[i] = ldMeanMesh.vertices[i];
+                //ldVertices[i] = Vector3.zero;
+                ldUVs[i] = ldMeanMesh.uv[i];
+            }
+
         }
+
+
+        //foreach (KeyValuePair<int, int> pair in l2hDict)
+        //{
+        //    int lowIndex = pair.Key;
+        //    int highIndex = pair.Value;
+
+
+        //    Vector3 wpos = DeformedVertices[highIndex];
+        //    Vector3 lpos = ldMeanTransform.worldToLocalMatrix.MultiplyPoint(wpos);
+
+        //    ldVertices[lowIndex] = lpos;
+        //    ldUVs[lowIndex] = DeformedUVs[highIndex];
+        //}
+
+
+
+        Mesh ldDeformedMesh = new Mesh();
+
+
         ldDeformedMesh.vertices = ldVertices;
         ldDeformedMesh.uv = ldUVs;
+        ldDeformedMesh.triangles = ldMeanMesh.triangles;
 
         return ldDeformedMesh;
         //Debug.Log(string.Format("org: {0} {1} {2} tar: {3} {4} {5}", ov.x, ov.y, ov.z, tv.x, tv.y, tv.z));
@@ -231,8 +263,8 @@ public class SimplifyFaceModel : MonoBehaviour
         MeshCorresponding mc = new MeshCorresponding();
         List<int> indicesInLDMesh = mc.Load(loadPath);
 
-        Mesh LDMeanMesh = m_LDMeanFaceMesh.GetComponent<MeshFilter>().mesh;
-        Mesh HDMeanMesh = m_HDMeanFaceMesh.GetComponent<MeshFilter>().mesh;
+        Mesh LDMeanMesh = m_LDMeanFaceMesh.GetComponent<MeshFilter>().sharedMesh;
+        Mesh HDMeanMesh = m_HDMeanFaceMesh.GetComponent<MeshFilter>().sharedMesh;
 
         List<Vector3> hdVertices = HDMeanMesh.vertices.OfType<Vector3>().ToList();
         for(int lowCorrespondIndex = 0;lowCorrespondIndex< hdVertices.Count;lowCorrespondIndex++)
@@ -247,6 +279,13 @@ public class SimplifyFaceModel : MonoBehaviour
         for (int lowCorrespondIndex = 0; lowCorrespondIndex< indicesInLDMesh.Count;lowCorrespondIndex++)
         {
             int lowIndex = indicesInLDMesh[lowCorrespondIndex];
+
+            if (LDMeanMesh.vertices.Length <= lowIndex || lowIndex < 0)
+            {
+                Debug.LogError("LowIndex Out of Range : " + lowIndex);
+                return;
+            }
+
             Vector3 ldVertex = LDMeanMesh.vertices[lowIndex];
             Vector3 ldPosition = m_LDMeanFaceMesh.localToWorldMatrix.MultiplyPoint(ldVertex);
 
@@ -262,11 +301,8 @@ public class SimplifyFaceModel : MonoBehaviour
             for (int highIndex = 0; highIndex < hdVertices.Count; highIndex++)
             {
                 Vector3 hdPos = hdVertices[highIndex];
-
-                Vector3 whv = hdPos;
-                Vector3 wlv = ldVertex;
-
-                float dist = Vector3.Distance(whv, wlv);
+                
+                float dist = Vector3.Distance(hdPos, ldPosition);
                 
 
                 
@@ -301,7 +337,7 @@ public class SimplifyFaceModel : MonoBehaviour
         SaveJson(savePath, LD2HDIndicesDict);
     }
 
-    public void DrawTopology(string loadPath)
+    public void DrawLowTopology(string loadPath)
     {
 
         Dictionary<int, int> l2hDict;
@@ -314,8 +350,7 @@ public class SimplifyFaceModel : MonoBehaviour
             indices[lowIndex] = pair.Key;
             lowIndex++;
         }
-
-        m_TargetMesh = new Mesh();
+        
 
         Vector3[] verticesLocalPos = m_LDMeanFaceMesh.gameObject.GetComponent<MeshFilter>().sharedMesh.vertices;
         Vector3[] verticesWorldPos = new Vector3[verticesLocalPos.Length];
@@ -325,11 +360,42 @@ public class SimplifyFaceModel : MonoBehaviour
             verticesWorldPos[i] = m_LDMeanFaceMesh.localToWorldMatrix.MultiplyPoint(verticesLocalPos[i]);
 
         }
-        m_TargetMesh.vertices = verticesWorldPos;
-        m_TargetMesh.SetIndices(indices, MeshTopology.Points, 0);
 
-        gameObject.GetComponent<MeshFilter>().sharedMesh = m_TargetMesh;
+        DrawTopologyByIndices(verticesWorldPos, indices);
+    }
 
+    public void DrawHighTopology(string loadPath)
+    {
+
+        Dictionary<int, int> l2hDict;
+        LoadJson(loadPath, out l2hDict);
+
+        var indices = new int[l2hDict.Count];
+        int lowIndex = 0;
+        foreach (var pair in l2hDict)
+        {
+            indices[lowIndex] = pair.Value;
+            lowIndex++;
+        }
+
+
+        Vector3[] verticesLocalPos = m_HDMeanFaceMesh.gameObject.GetComponent<MeshFilter>().sharedMesh.vertices;
+        Vector3[] verticesWorldPos = new Vector3[verticesLocalPos.Length];
+        for (int i = 0; i < verticesWorldPos.Length; i++)
+        {
+
+            verticesWorldPos[i] = m_HDMeanFaceMesh.localToWorldMatrix.MultiplyPoint(verticesLocalPos[i]);
+        }
+
+        DrawTopologyByIndices(verticesWorldPos, indices);
+    }
+
+    public void DrawTopologyByIndices(Vector3[] vertices, int[] indices)
+    {
+        var mesh = new Mesh();
+        mesh.vertices = vertices;
+        mesh.SetIndices(indices, MeshTopology.Points, 0);
+        gameObject.GetComponent<MeshFilter>().sharedMesh = mesh;
     }
 
     public void SaveJson(string savePath,Dictionary<int ,int> l2hDict)

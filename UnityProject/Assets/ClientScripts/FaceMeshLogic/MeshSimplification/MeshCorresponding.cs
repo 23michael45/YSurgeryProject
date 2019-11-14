@@ -11,6 +11,8 @@ public class MeshCorresponding : MonoBehaviour
     public Mesh mTargetMesh;
 
     public MeshFilter mDebugMeshFilter;
+    public Transform mDuplicateContainer;
+    public GameObject mPointPrefab;
 
     public class SaveData
     {
@@ -22,24 +24,6 @@ public class MeshCorresponding : MonoBehaviour
     {
         List<int> correspondIndices = new List<int>();
 
-        //for (int i = 0; i < mTargetMesh.vertexCount; i++)
-        //{
-        //    Vector3 vertexTarget = mTargetMesh.vertices[i];
-
-        //    for (int j = 0; j < mRegionMesh.vertexCount; j++)
-        //    {
-
-        //        Vector3 vertexRegion = mRegionMesh.vertices[j];
-
-
-        //        if (vertexRegion == vertexTarget)
-        //        {
-        //            correspondIndices.Add(i);
-        //            break;
-        //        }
-        //    }
-        //}
-
         Vector3[] targetVertices = mTargetMesh.vertices;
 
 
@@ -50,6 +34,8 @@ public class MeshCorresponding : MonoBehaviour
         {
             Vector3 vertexRegion = mRegionMesh.vertices[j];
 
+
+            //处理点位置重复的情况
             if (regionVertexDict.ContainsValue(vertexRegion))
             {
                 Debug.LogError(string.Format("Region Mesh Vertex Duplicate : {0} {1}", j, regionVertexDictReverse[vertexRegion]));
@@ -60,13 +46,32 @@ public class MeshCorresponding : MonoBehaviour
                 regionVertexDictReverse[vertexRegion] = j;
 
             }
-
-
-
+            
             int index = Array.IndexOf(targetVertices, vertexRegion);
-            correspondIndices.Add(index);
 
-            Debug.Log(j);
+            if(index == -1)
+            {
+                float minDist = float.MaxValue;
+                int minFullIndex = -1;
+                for (int highIndex = 0; highIndex < targetVertices.Length; highIndex++)
+                {
+                    Vector3 fullPos = targetVertices[highIndex];
+                    
+                    float dist = Vector3.Distance(fullPos, vertexRegion);
+                    
+                    if (minDist > dist)
+                    {
+                        minDist = dist;
+                        minFullIndex = highIndex;
+                    }
+
+                }
+
+                index = minFullIndex;
+            }
+
+
+            correspondIndices.Add(index);
         }
 
         //List<Vector3> targetList = mTargetMesh.vertices.OfType<Vector3>().ToList();
@@ -92,9 +97,56 @@ public class MeshCorresponding : MonoBehaviour
         return data.Vertices;
     }
 
-
-    public void DrawTopology()
+    public void DrawLostInFullTopology()
     {
+        Mesh srcMesh = mRegionMesh;
+
+        List<int> LostVetices = new List<int>();
+
+        Vector3[] targetVertices = mTargetMesh.vertices;
+
+        for (int j = 0; j < mRegionMesh.vertexCount; j++)
+        {
+            Vector3 vertexRegion = mRegionMesh.vertices[j];
+
+            int index = Array.IndexOf(targetVertices, vertexRegion);
+
+            if (index == -1)
+            {
+                LostVetices.Add(j);
+            }
+        }
+
+        Mesh m = new Mesh();
+
+        Vector3[] verticesRegionPos = srcMesh.vertices;
+        Vector3[] verticesLostPos = new Vector3[LostVetices.Count];
+
+        for (int i = 0; i < verticesLostPos.Length; i++)
+        {
+            verticesLostPos[i] = verticesRegionPos[LostVetices[i]];
+        }
+        m.vertices = verticesLostPos;
+
+        int[] indices = new int[verticesLostPos.Length];
+        for (int i = 0; i < indices.Length; i++)
+        {
+            indices[i] = i;
+        }
+
+        m.SetIndices(indices, MeshTopology.Points, 0);
+
+        mDebugMeshFilter.sharedMesh = m;
+
+    }
+    public void DrawDuplicateTopology()
+    {
+
+
+        ClearContainer();
+
+        //Mesh srcMesh = mTargetMesh;
+        Mesh srcMesh = mRegionMesh;
 
         Vector3[] targetVertices = mTargetMesh.vertices;
 
@@ -104,15 +156,17 @@ public class MeshCorresponding : MonoBehaviour
 
         List<int> DuplicateVetices = new List<int>();
 
-        for (int j = 0; j < mRegionMesh.vertexCount; j++)
+        for (int j = 0; j < srcMesh.vertexCount; j++)
         {
-            Vector3 vertexRegion = mRegionMesh.vertices[j];
+            Vector3 vertexRegion = srcMesh.vertices[j];
 
             if (regionVertexDict.ContainsValue(vertexRegion))
             {
                 Debug.LogError(string.Format("Region Mesh Vertex Duplicate : {0} {1}", j, regionVertexDictReverse[vertexRegion]));
 
                 DuplicateVetices.Add(j);
+
+                CreatePoint(j, vertexRegion);
             }
             else
             {
@@ -125,13 +179,14 @@ public class MeshCorresponding : MonoBehaviour
 
         Mesh m = new Mesh();
 
-        Vector3[] verticesRegionPos = mRegionMesh.vertices;
+        Vector3[] verticesRegionPos = srcMesh.vertices;
         Vector3[] verticesDuplicatePos = new Vector3[DuplicateVetices.Count];
 
         for (int i = 0; i < verticesDuplicatePos.Length; i++)
         {
 
             verticesDuplicatePos[i] = verticesRegionPos[DuplicateVetices[i]];
+         
 
         }
         m.vertices = verticesDuplicatePos;
@@ -148,5 +203,38 @@ public class MeshCorresponding : MonoBehaviour
 
         mDebugMeshFilter.sharedMesh = m;
 
+    }
+
+
+    void CreatePoint(int index,Vector3 pos)
+    {
+        GameObject gonew = Instantiate(mPointPrefab);
+        gonew.transform.parent = mDuplicateContainer;
+        gonew.name = index.ToString();
+        gonew.transform.localPosition = pos;
+        gonew.SetActive(true);
+    }
+
+    public void ClearContainer()
+    {
+        var components = mDuplicateContainer.GetComponentsInChildren<Transform>();
+        for(int i  = 0; i < components.Length;i++)
+        {
+            if(components[i].gameObject != mDuplicateContainer.gameObject)
+            {
+                GameObject.DestroyImmediate(components[i].gameObject);
+
+            }
+        }
+    }
+
+    public void ShowRegionMesh()
+    {
+        ClearContainer();
+        for (int j = 0; j < mRegionMesh.vertexCount; j++)
+        {
+            Vector3 vertexRegion = mRegionMesh.vertices[j];
+            CreatePoint(j,vertexRegion);
+        }
     }
 }
