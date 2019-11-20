@@ -9,7 +9,11 @@ public class MeshSimplificationEditor : Editor
     string mRegionJsonPath = "../correspondingRegionIndices.json";
     string mSaveLD2HDJsonPath = "../correspondingHDLDIndices.json";
 
+    string mSaveBoneIndexJsonPath = "../boneIndexMap.json";
+
     string mLoadLD2HDJsonPath = "../correspondingHDLDIndices.json";
+    string mLoadBoneIndexJsonPath = "../boneIndexMap.json";
+
 
     public override void OnInspectorGUI()
     {
@@ -40,6 +44,17 @@ public class MeshSimplificationEditor : Editor
 
         EditorGUILayout.Separator();
 
+        EditorGUILayout.LabelField("Save Corresponding Bone Index Path");
+        mSaveBoneIndexJsonPath = EditorGUILayout.TextField(mSaveBoneIndexJsonPath);
+        if (GUILayout.Button("Corresponding Bone 2 HD IndexJson", EditorStyles.miniButtonRight))
+        {
+            parentObj.CalculateBoneCorresponding(mSaveBoneIndexJsonPath);
+        }
+
+
+        EditorGUILayout.Separator();
+
+
 
         EditorGUILayout.LabelField("Load Corresponding Json Path");
         mLoadLD2HDJsonPath = EditorGUILayout.TextField(mLoadLD2HDJsonPath);
@@ -54,6 +69,10 @@ public class MeshSimplificationEditor : Editor
         if (GUILayout.Button("Draw High Topology", EditorStyles.miniButtonRight))
         {
             parentObj.DrawHighTopology(mLoadLD2HDJsonPath);
+        }
+        if (GUILayout.Button("Draw Bones In FaceRegion Topology", EditorStyles.miniButtonRight))
+        {
+            parentObj.DrawFaceRegionBones(mLoadBoneIndexJsonPath);
         }
         EditorGUILayout.Separator();
 

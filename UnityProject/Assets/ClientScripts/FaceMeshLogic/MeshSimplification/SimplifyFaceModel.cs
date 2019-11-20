@@ -8,32 +8,47 @@ using UnityEngine;
 [ExecuteInEditMode]
 public class SimplifyFaceModel : MonoBehaviour
 {
-    [Serializable]
-    public class item
-    {
-        public int index;
-        public int highIndex;
-        public int lowIndex;
-    }
+
     [Serializable]
     public class HLVertexMap
     {
+        [Serializable]
+        public class item
+        {
+            public int index;
+            public int highIndex;
+            public int lowIndex;
+        }
         public item[] items;
     }
 
 
+    [Serializable]
+    public class BoneIndexMap
+    {
+        [Serializable]
+        public class item
+        {
+            public string boneName;
+            public int highIndex;
+        }
+        public item[] items;
+    }
     public float m_Scale = 0.001f;
 
     //Used to calculate Vertices Relation
     public Transform m_HDMeanFaceMesh;
     public Transform m_LDMeanFaceMesh;
+    public Transform m_HeadBoneRoot;
+    public SkinnedMeshRenderer m_SkinMesh;
 
     //Used to calculate Deformed Low Mesh from High Deformed Mesh Vertices Position
     public Transform m_HDDeformedFaceMesh;
     public Transform m_LDDeformedFaceMesh;
 
+
     Mesh m_TargetMesh;
-    
+
 
     public bool m_bUseRaycast = false;
 
@@ -41,24 +56,34 @@ public class SimplifyFaceModel : MonoBehaviour
     {
         Mesh hdDeformed = m_LDDeformedFaceMesh.GetComponent<MeshFilter>().sharedMesh;
         Mesh ldMean = m_LDMeanFaceMesh.GetComponent<MeshFilter>().sharedMesh;
-        Mesh m = CalculateDeformedMesh(loadPath, hdDeformed, ldMean,m_LDMeanFaceMesh);
 
-        m_LDDeformedFaceMesh.GetComponent<MeshFilter>().sharedMesh = m;
+        Vector3[] vertices;
+        Vector2[] uvs;
+        int[] indices;
+        CalculateDeformedMesh(loadPath, hdDeformed, ldMean, m_LDMeanFaceMesh, out vertices, out uvs, out indices);
+
+
+
+        Mesh ldDeformedMesh = new Mesh();
+        ldDeformedMesh.vertices = vertices;
+        ldDeformedMesh.uv = uvs;
+        ldDeformedMesh.triangles = indices;
+        m_LDDeformedFaceMesh.GetComponent<MeshFilter>().sharedMesh = ldDeformedMesh;
     }
-    public Mesh CalculateDeformedMesh(string loadPath, Mesh hdDeformedMesh, Mesh ldMeanMesh,Transform ldMeanTransform)
+    public void CalculateDeformedMesh(string loadPath, Mesh hdDeformedMesh, Mesh ldMeanMesh, Transform ldMeanTransform, out Vector3[] vertices, out Vector2[] uvs, out int[] indices)
     {
         Dictionary<int, int> l2hDict;
-        LoadJson(loadPath,out l2hDict);
-        
+        LoadHLMapJson(loadPath, out l2hDict);
+
         Vector3[] DeformedVertices = hdDeformedMesh.vertices;
         Vector2[] DeformedUVs = hdDeformedMesh.uv;
 
         Vector3[] ldVertices = new Vector3[ldMeanMesh.vertices.Length];
         Vector2[] ldUVs = new Vector2[ldMeanMesh.vertices.Length];
 
-        for (int i = 0; i<ldVertices.Length;i++)
+        for (int i = 0; i < ldVertices.Length; i++)
         {
-            if(l2hDict.ContainsKey(i))
+            if (l2hDict.ContainsKey(i))
             {
 
                 int lowIndex = i;
@@ -81,35 +106,13 @@ public class SimplifyFaceModel : MonoBehaviour
             }
 
         }
+        vertices = ldVertices;
+        uvs = ldUVs;
+        indices = ldMeanMesh.triangles;
 
-
-        //foreach (KeyValuePair<int, int> pair in l2hDict)
-        //{
-        //    int lowIndex = pair.Key;
-        //    int highIndex = pair.Value;
-
-
-        //    Vector3 wpos = DeformedVertices[highIndex];
-        //    Vector3 lpos = ldMeanTransform.worldToLocalMatrix.MultiplyPoint(wpos);
-
-        //    ldVertices[lowIndex] = lpos;
-        //    ldUVs[lowIndex] = DeformedUVs[highIndex];
-        //}
-
-
-
-        Mesh ldDeformedMesh = new Mesh();
-
-
-        ldDeformedMesh.vertices = ldVertices;
-        ldDeformedMesh.uv = ldUVs;
-        ldDeformedMesh.triangles = ldMeanMesh.triangles;
-
-        return ldDeformedMesh;
-        //Debug.Log(string.Format("org: {0} {1} {2} tar: {3} {4} {5}", ov.x, ov.y, ov.z, tv.x, tv.y, tv.z));
     }
 
-    public void CalculateVerticesCorrespondingRelation(string jsonPath,bool raycast = false)
+    public void CalculateVerticesCorrespondingRelation(string jsonPath, bool raycast = false)
     {
 
         Vector3[] highVertices = m_HDMeanFaceMesh.gameObject.GetComponent<MeshFilter>().sharedMesh.vertices;
@@ -197,7 +200,7 @@ public class SimplifyFaceModel : MonoBehaviour
                         }
                     }
                 }
-                
+
                 foreach (var pair in high2lowDistDict)
                 {
                     int h = pair.Key;
@@ -218,7 +221,7 @@ public class SimplifyFaceModel : MonoBehaviour
                         low2highDict[l] = h;
                     }
                 }
-                
+
             }
             else
             {
@@ -250,15 +253,15 @@ public class SimplifyFaceModel : MonoBehaviour
                         }
                     }
                 }
-                
+
             }
         }
 
-        SaveJson(jsonPath, low2highDict);
+        SaveHLMapJson(jsonPath, low2highDict);
 
     }
 
-    public void CalculateHDLDCorresponding(string savePath,string loadPath)
+    public void CalculateHDLDCorresponding(string savePath, string loadPath)
     {
         MeshCorresponding mc = new MeshCorresponding();
         List<int> indicesInLDMesh = mc.Load(loadPath);
@@ -267,16 +270,16 @@ public class SimplifyFaceModel : MonoBehaviour
         Mesh HDMeanMesh = m_HDMeanFaceMesh.GetComponent<MeshFilter>().sharedMesh;
 
         List<Vector3> hdVertices = HDMeanMesh.vertices.OfType<Vector3>().ToList();
-        for(int lowCorrespondIndex = 0;lowCorrespondIndex< hdVertices.Count;lowCorrespondIndex++)
+        for (int i = 0; i < hdVertices.Count; i++)
         {
-            Vector3 pos = m_HDMeanFaceMesh.localToWorldMatrix.MultiplyPoint(hdVertices[lowCorrespondIndex]);
-            hdVertices[lowCorrespondIndex] = pos;
+            Vector3 pos = m_HDMeanFaceMesh.localToWorldMatrix.MultiplyPoint(hdVertices[i]);
+            hdVertices[i] = pos;
         }
 
         Dictionary<int, int> LD2HDIndicesDict = new Dictionary<int, int>();
 
 
-        for (int lowCorrespondIndex = 0; lowCorrespondIndex< indicesInLDMesh.Count;lowCorrespondIndex++)
+        for (int lowCorrespondIndex = 0; lowCorrespondIndex < indicesInLDMesh.Count; lowCorrespondIndex++)
         {
             int lowIndex = indicesInLDMesh[lowCorrespondIndex];
 
@@ -301,11 +304,11 @@ public class SimplifyFaceModel : MonoBehaviour
             for (int highIndex = 0; highIndex < hdVertices.Count; highIndex++)
             {
                 Vector3 hdPos = hdVertices[highIndex];
-                
-                float dist = Vector3.Distance(hdPos, ldPosition);
-                
 
-                
+                float dist = Vector3.Distance(hdPos, ldPosition);
+
+
+
                 if (minDist > dist)
                 {
                     minDist = dist;
@@ -316,7 +319,7 @@ public class SimplifyFaceModel : MonoBehaviour
             if (minHDIndex != -1)
             {
 
-                
+
                 if (LD2HDIndicesDict.ContainsKey(lowIndex))
                 {
                     Debug.LogError("Error Duplicate Low Index : " + lowIndex);
@@ -334,27 +337,127 @@ public class SimplifyFaceModel : MonoBehaviour
             }
         }
 
-        SaveJson(savePath, LD2HDIndicesDict);
+        SaveHLMapJson(savePath, LD2HDIndicesDict);
+    }
+
+    public void CalculateBoneCorresponding(string savePath)
+    {
+        Dictionary<string, int> boneName2HDIndexDict = new Dictionary<string, int>();
+
+        Mesh HDMeanMesh = m_HDMeanFaceMesh.GetComponent<MeshFilter>().sharedMesh;
+
+        List<Vector3> hdVertices = HDMeanMesh.vertices.OfType<Vector3>().ToList();
+        for (int i = 0; i < hdVertices.Count; i++)
+        {
+            Vector3 pos = m_HDMeanFaceMesh.localToWorldMatrix.MultiplyPoint(hdVertices[i]);
+            hdVertices[i] = pos;
+        }
+
+
+        Transform[] tranformBones = m_HeadBoneRoot.GetComponentsInChildren<Transform>();
+        for (int i = 0; i < tranformBones.Length; i++)
+        {
+            string name = tranformBones[i].name;
+            Vector3 bonePosition = tranformBones[i].position;
+
+
+            float minDist = float.MaxValue;
+
+            int minHDIndex = -1;
+            for (int highIndex = 0; highIndex < hdVertices.Count; highIndex++)
+            {
+                Vector3 hdPos = hdVertices[highIndex];
+
+                float dist = Vector3.Distance(hdPos, bonePosition);
+
+                if (minDist > dist)
+                {
+                    minDist = dist;
+                    minHDIndex = highIndex;
+                }
+            }
+
+            if (minDist < 2.0f)
+            {
+                boneName2HDIndexDict[name] = minHDIndex;
+            }
+            else
+            {
+                boneName2HDIndexDict[name] = -1;
+            }
+        }
+        SaveBoneIndexMap(savePath, boneName2HDIndexDict);
+
+    }
+
+
+    public void RebindDeformedBone(string loadPath)
+    {
+        Mesh hdDeformed = m_LDDeformedFaceMesh.GetComponent<MeshFilter>().sharedMesh;
+
+        SkinnedMeshRenderer skinMesh = m_LDMeanFaceMesh.GetComponent<SkinnedMeshRenderer>();
+        Matrix4x4[] bindposes;
+        BoneWeight[] weights;
+        RebindBones(loadPath, hdDeformed,skinMesh, out bindposes, out weights);
+    }
+    public void RebindBones(string loadPath, Mesh hdDeformedMesh, SkinnedMeshRenderer ldSkinMeanMesh, out Matrix4x4[] bindposes, out BoneWeight[] weights)
+    {
+        Dictionary<string, Transform> bonesMap = new Dictionary<string, Transform>();
+        foreach (Transform t in ldSkinMeanMesh.bones)
+        {
+            bonesMap[t.name] = t;
+        }
+
+
+        Dictionary<string, int> biMap;
+        LoadBoneIndexMap(loadPath, out biMap);
+
+
+        Vector3[] DeformedVertices = hdDeformedMesh.vertices;
+
+
+        bindposes = ldSkinMeanMesh.sharedMesh.bindposes;
+        weights = ldSkinMeanMesh.sharedMesh.boneWeights;
+
+
+        foreach (KeyValuePair<string, int> kv in biMap)
+        {
+            if (kv.Value != -1)
+            {
+                if (bonesMap.ContainsKey(kv.Key))
+                {
+                    bonesMap[kv.Key].position = DeformedVertices[kv.Value];
+                }
+
+            }
+
+        }
+
+
+        for(int i = 0;i<ldSkinMeanMesh.bones.Length;i++)
+        {
+            bindposes[i] = ldSkinMeanMesh.bones[i].worldToLocalMatrix * ldSkinMeanMesh.transform.localToWorldMatrix;
+        }
     }
 
     public void DrawLowTopology(string loadPath)
     {
 
         Dictionary<int, int> l2hDict;
-        LoadJson(loadPath, out l2hDict);
+        LoadHLMapJson(loadPath, out l2hDict);
 
         var indices = new int[l2hDict.Count];
         int lowIndex = 0;
         foreach (var pair in l2hDict)
-        { 
+        {
             indices[lowIndex] = pair.Key;
             lowIndex++;
         }
-        
+
 
         Vector3[] verticesLocalPos = m_LDMeanFaceMesh.gameObject.GetComponent<MeshFilter>().sharedMesh.vertices;
         Vector3[] verticesWorldPos = new Vector3[verticesLocalPos.Length];
-        for(int i = 0; i< verticesWorldPos.Length;i++)
+        for (int i = 0; i < verticesWorldPos.Length; i++)
         {
 
             verticesWorldPos[i] = m_LDMeanFaceMesh.localToWorldMatrix.MultiplyPoint(verticesLocalPos[i]);
@@ -368,7 +471,7 @@ public class SimplifyFaceModel : MonoBehaviour
     {
 
         Dictionary<int, int> l2hDict;
-        LoadJson(loadPath, out l2hDict);
+        LoadHLMapJson(loadPath, out l2hDict);
 
         var indices = new int[l2hDict.Count];
         int lowIndex = 0;
@@ -383,13 +486,46 @@ public class SimplifyFaceModel : MonoBehaviour
         Vector3[] verticesWorldPos = new Vector3[verticesLocalPos.Length];
         for (int i = 0; i < verticesWorldPos.Length; i++)
         {
-
             verticesWorldPos[i] = m_HDMeanFaceMesh.localToWorldMatrix.MultiplyPoint(verticesLocalPos[i]);
         }
 
         DrawTopologyByIndices(verticesWorldPos, indices);
     }
 
+    public void DrawFaceRegionBones(string loadPath)
+    {
+        Dictionary<string, int> biMap;
+        LoadBoneIndexMap(loadPath, out biMap);
+
+
+        List<int> indices = new List<int>();
+
+        Transform[] tranformBones = m_HeadBoneRoot.GetComponentsInChildren<Transform>();
+        for (int i = 0; i < tranformBones.Length; i++)
+        {
+            Transform bone = tranformBones[i];
+            if (biMap.ContainsKey(bone.name))
+            {
+                if (biMap[bone.name] != -1)
+                {
+                    indices.Add(biMap[bone.name]);
+                }
+
+            }
+            else
+            {
+                Debug.Log("Bone not Exist in Json Map");
+            }
+        }
+
+        Vector3[] verticesLocalPos = m_HDMeanFaceMesh.gameObject.GetComponent<MeshFilter>().sharedMesh.vertices;
+        Vector3[] verticesWorldPos = new Vector3[verticesLocalPos.Length];
+        for (int i = 0; i < verticesWorldPos.Length; i++)
+        {
+            verticesWorldPos[i] = m_HDMeanFaceMesh.localToWorldMatrix.MultiplyPoint(verticesLocalPos[i]);
+        }
+        DrawTopologyByIndices(verticesWorldPos, indices.ToArray());
+    }
     public void DrawTopologyByIndices(Vector3[] vertices, int[] indices)
     {
         var mesh = new Mesh();
@@ -398,34 +534,71 @@ public class SimplifyFaceModel : MonoBehaviour
         gameObject.GetComponent<MeshFilter>().sharedMesh = mesh;
     }
 
-    public void SaveJson(string savePath,Dictionary<int ,int> l2hDict)
+
+    void SaveHLMapJson(string savePath, Dictionary<int, int> l2hDict)
     {
 
         HLVertexMap hlMap = new HLVertexMap();
-        hlMap.items = new item[l2hDict.Count];
+        hlMap.items = new HLVertexMap.item[l2hDict.Count];
 
         int i = 0;
         foreach (var kv in l2hDict)
         {
-            hlMap.items[i] = new item();
+            hlMap.items[i] = new HLVertexMap.item();
             hlMap.items[i].lowIndex = kv.Key;
             hlMap.items[i].highIndex = kv.Value;
             hlMap.items[i].index = i;
             i++;
         }
-
-        string jstr = JsonUtility.ToJson(hlMap);
-        File.WriteAllText(Path.Combine(Application.dataPath , savePath), jstr);
+        SaveJson(savePath, hlMap);
     }
-    public void LoadJson(string loadPath,out Dictionary<int, int> l2hDict)
+    void LoadHLMapJson(string loadPath, out Dictionary<int, int> l2hDict)
     {
-        string jstr = File.ReadAllText(Path.Combine(Application.dataPath , loadPath));
-        HLVertexMap hlMap  = JsonUtility.FromJson<HLVertexMap>(jstr);
-
+        HLVertexMap hlMap = LoadJson<HLVertexMap>(loadPath);
         l2hDict = new Dictionary<int, int>();
         foreach (var item in hlMap.items)
         {
             l2hDict[item.lowIndex] = item.highIndex;
         }
+    }
+
+    void SaveBoneIndexMap(string savePath, Dictionary<string, int> biMap)
+    {
+        BoneIndexMap biMapObj = new BoneIndexMap();
+        biMapObj.items = new BoneIndexMap.item[biMap.Count];
+
+        int i = 0;
+        foreach (var kv in biMap)
+        {
+            biMapObj.items[i] = new BoneIndexMap.item();
+            biMapObj.items[i].boneName = kv.Key;
+            biMapObj.items[i].highIndex = kv.Value;
+            i++;
+        }
+        SaveJson(savePath, biMapObj);
+    }
+    void LoadBoneIndexMap(string loadPath, out Dictionary<string, int> biMap)
+    {
+        BoneIndexMap obj = LoadJson<BoneIndexMap>(loadPath);
+        biMap = new Dictionary<string, int>();
+        foreach (var item in obj.items)
+        {
+            biMap[item.boneName] = item.highIndex;
+        }
+    }
+
+
+
+
+    void SaveJson<T>(string savePath, T obj)
+    {
+        string jstr = JsonUtility.ToJson(obj);
+        File.WriteAllText(Path.Combine(Application.dataPath, savePath), jstr);
+    }
+    T LoadJson<T>(string loadPath)
+    {
+        string jstr = File.ReadAllText(Path.Combine(Application.dataPath, loadPath));
+        return JsonUtility.FromJson<T>(jstr);
+
     }
 }
