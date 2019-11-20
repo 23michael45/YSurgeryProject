@@ -5,6 +5,11 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
 
+/// <summary>
+/// 管理外部加载资源，如化妆列表，服装列表
+/// </summary>
+
+
 [Serializable]
 public class TableDef
 {
@@ -40,63 +45,6 @@ public class RoleDef : TableDef
 }
 
 // 变形 //
-[Serializable]
-public class DeformDef : TableDef
-{
-    public string AvatarId;
-    [Serializable]
-    public class Shape {
-        public Vector4 ForeheadSwitch,TempleSwitch,BISjawSwitch, ChinSwitch;
-    }
-
-    [Serializable]
-    public class Face
-    {
-        public Vector4 ApplemuscleSwitch, CheekbonesSwitch, FacialpartSwitch;
-    }
-
-    [Serializable]
-    public class Eyebrow
-    {
-        public Vector4 BrowbowSwitch, BrowHeadSwitch, BrowMiddleSwitch, BrowTailSwitch;
-    }
-
-
-    [Serializable]
-    public class Eye
-    {
-        public Vector4 EyecornerSwitch, UppereyelidSwitch, DoublefoldEyelidsSwitch, 
-                        lowereyelidSwitch,EyebagSwitch,EyetailSwitch,BlackeyeSwitch;
-    }
-
-    [Serializable]
-    public class Nose
-    {
-        public Vector4 UpperbridgeSwitch,InferiorbridgeSwitch,NoseheadSwitch,ColumellaNasiSwitch,
-                        NasalBaseSwitch,NoseWingSwitch,NostrilSwitch;          
-    }
-
-
-    [Serializable]
-    public class Mouth
-    {
-        public Vector4  UplipSwitch, UpjawSwitch,DownLipSwitch,DownJawSwitch,PhiltrumSwitch,CornerSwitch;
-    }
-
-    [Serializable]
-    public class Chest
-    {
-        public Vector4 upperItemSwitch, topItemSwitch,downItemSwitch;
-    }
-
-    [Serializable]
-    public class Body
-    {
-        public Vector4 NeckSwitch,ChestSwitch,WristSwitch,HipSwitch,LegSwitch,ArmSwitch,
-                        ForeheadSwitch,BISjawSwitch,ChinSwitch;
-    }
-
-}
 
 
 
@@ -126,9 +74,9 @@ public class TableMgr : MonoSingleton<TableMgr>
     public RoleDef[] Roles;
     public Dictionary<int, RoleDef> RoleDic;
 
-    // 变形 //
-    public DeformDef[] Deforms;
-    public Dictionary<int, DeformDef> DeformsDic;
+    //// 变形 //
+    //public DeformDef[] Deforms;
+    //public Dictionary<int, DeformDef> DeformsDic;
 
 
     // 环境 //
@@ -174,7 +122,7 @@ public class TableMgr : MonoSingleton<TableMgr>
         Load<ScenceDef>(out Scences, out ScencesDic, "Scence");
 
         // 场景 //
-        Load<DeformDef>(out Deforms, out DeformsDic, "Scence");
+       
 
 
         //AssetBundleLoadManager.Instance.UnloadAssetBundle(bundlename,true);

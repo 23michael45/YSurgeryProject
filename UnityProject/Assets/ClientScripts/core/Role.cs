@@ -4,32 +4,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Collections;
 
-public enum ClothPart
-{
-    Coat = 0,
-    Tops=1,
-    Trousers = 2,
-    Underwear=3,
-    Shoe=4,
-    Hair = 5,
-    Hat =6,
-    Count
-}
-
-public enum MakeupPart
-{
-    Eye = 1,
-    BaseColor = 2,
-    EyeBrow = 3,
-    EyeLash = 4,
-    Eyeshadow = 5,
-    FaceRed = 6,
-    Mouth = 7,
-    FaceTatoo = 8,
-    BodyTatoo = 9,
-    Finger = 10,
-    Count
-}
 
 
 public enum Actpart {
@@ -130,8 +104,7 @@ public class Role : MonoBehaviour
     
 
 
-
-  public  void Start()
+  public void Init()
     {
         //parts = new GameObject[(int)ClothPart.Count];
 
@@ -139,19 +112,16 @@ public class Role : MonoBehaviour
 
         GetBaseBonePostion();
 
-        //Debug.Log(bonesPostion);
+       // Debug.Log(bonesPostion);
 
-        //Debug.Log(_bones);
+      //  Debug.Log(_bones);
 
         Deform = new Deform();
         Deform.init();
        
     }
-
-
-    public void GetBaseBonePostion() {
-
-        
+    
+    public void GetBaseBonePostion() {        
         if (_bones == null)
         {
             bonesPostion = new Dictionary<string, Vector3>();
@@ -160,21 +130,14 @@ public class Role : MonoBehaviour
 
             for (int i = 0; i < boneArray.Length; ++i)
             {
-
                 bonesPostion.Add(boneArray[i].name, boneArray[i].localPosition );
                 _bones.Add(boneArray[i].name, boneArray[i]);
-
-
-
             }
 
         }
 
         //Debug.Log(bonesPostion["face_forehead_joint1"]);
-
-        //Debug.Log(_bones["face_forehead_joint1"]);
-
-
+        //Debug.Log(_bones["face_forehead_joint1"]);        
     }
 
 

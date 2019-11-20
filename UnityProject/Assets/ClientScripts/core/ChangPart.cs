@@ -2,16 +2,39 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum ClothPart
+{
+    Coat = 0,
+    Tops = 1,
+    Trousers = 2,
+    Underwear = 3,
+    Shoe = 4,
+    Hair = 5,
+    Hat = 6,
+    Count
+}
+
+public enum MakeupPart
+{
+    Eye = 1,
+    BaseColor = 2,
+    EyeBrow = 3,
+    EyeLash = 4,
+    Eyeshadow = 5,
+    FaceRed = 6,
+    Mouth = 7,
+    FaceTatoo = 8,
+    BodyTatoo = 9,
+    Finger = 10,
+    Count
+}
+
+
 public class ChangPart : MonoBehaviour
 {
 
 
     Role mainRole;
-
-
-
-
-
 
 
     //public ClothDef GetPartDef(ClothPart part, int id)

@@ -797,73 +797,7 @@ public class User
 
 
     }
-    //public void LoadModel(string modelID  ) {
-
-
-
-    //    int.TryParse(modelID.Substring(1, 1), out model);
-    //    int.TryParse(modelID.Substring(3, 1), out face);
-
-    //    currentModel = profile.models[model];
-    //    currentFace = profile.models[model].face[defaultface];
-    //    currentBody = profile.models[model].body;
-    //    currentModel.RoleTableID  =profile.models[model].RoleTableID ;
-
-    ////加载角色表
-
-
-    //    //如果没有，重建模特
-    //    if (profile.models[model].body._high == 0)
-    //    {
-    //        setdefaultbody();
-    //        ResetBody();
-    //        ResetFace();
-    //        //GameObject.Find("UI").GetComponent<UIcontrol>().ReModelUI();
-    //        //GameObject.Find("UI").GetComponent<ModelMgr>().Remodelbool = true;
-    //    }
-
-    //    else {
-    //        Debug.Log(currentModel.RoleTableID);
-    //        //AppRoot.MainScene.loadmainRole(currentModel.RoleTableID);          
-    //        loadModelvalue(model, defaultface);
-    //        loadCloth(model, defaultface);
-    //    }
-
-
-
-    //  }
-
-
-
-    //public void LoadFace(string faceID) {
-
-    //    int.TryParse(faceID.Substring(1, 1), out model);
-    //    int.TryParse(faceID.Substring(3, 1), out face);
-    //    currentFace = profile.models[model].face[face];
-    //    currentFaceID= profile.models[model].face[face].faceID;
-
-    //    defaultface = face;
-
-    //    Debug.Log(faceID);
-    //    if (profile.models[model].face[face]._faceImgUrl == null)
-    //    {
-    //        GameObject.Find("UI").GetComponent<ModelMgr>().RePhoto();
-    //    }
-    //    else {
-
-    //        AppRoot.MainScene.MainRole.LoadFace();
-    //    }
-
-    //}
-    //public void SetModelName(string modelID,string name) {
-
-    //    int.TryParse(modelID.Substring(1, 1), out model);   
-    //    profile.models[model].Modelname = name;
-
-    //}
-    /// <summary>
-    //切换模特。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。
-    /// </summary>
+   
 
 
 
@@ -984,50 +918,7 @@ public class User
     //    }
     //}
 
-
-
-    //public void StoreFaceValue()
-    //{
-    //    ST_CUR_Shuanghe = AppRoot.MainUser.CUR_Shuanghe;
-    //    ST_CUR_Xiaba = AppRoot.MainUser.CUR_Xiaba;
-    //    ST_CUR_Lianxia = AppRoot.MainUser.CUR_Lianxia;
-    //    ST_CUR_Quangu = AppRoot.MainUser.CUR_Quangu;
-    //    ST_CUR_Pingguo = AppRoot.MainUser.CUR_Pingguo;
-    //    ST_CUR_Yaoji = AppRoot.MainUser.CUR_Yaoji;
-    //    ST_CUR_Xiabachang = AppRoot.MainUser.CUR_Xiabachang;
-    //    ST_CUR_HeadKuan = AppRoot.MainUser.CUR_HeadKuan;
-    //    ST_CUR_HeadBaoman = AppRoot.MainUser.CUR_HeadBaoman;
-    //    ST_CUR_HeadQianhou = AppRoot.MainUser.CUR_HeadQianhou;
-    //    ST_CUR_HeadFaji = AppRoot.MainUser.CUR_HeadFaji;
-    //    ST_CUR_HeadTouding = AppRoot.MainUser.CUR_HeadTouding;
-    //    ST_CUR_HeadTaiyangxue = AppRoot.MainUser.CUR_HeadTaiyangxue;
-    //    ST_CUR_EyeScale = AppRoot.MainUser.CUR_EyeScale;
-    //    ST_CUR_EyeZuoyou = AppRoot.MainUser.CUR_EyeZuoyou;
-    //    ST_CUR_EyeGaodi = AppRoot.MainUser.CUR_EyeGaodi;
-    //    ST_CUR_EyeShenqian = AppRoot.MainUser.CUR_EyeShenqian;
-    //    ST_CUR_EyeYanjiao = AppRoot.MainUser.CUR_EyeYanjiao;
-    //    ST_CUR_EyeYanwei = AppRoot.MainUser.CUR_EyeYanwei;
-    //    ST_CUR_EyebrowScale = AppRoot.MainUser.CUR_EyebrowScale;
-    //    ST_CUR_EyebrowZuoyou = AppRoot.MainUser.CUR_EyebrowZuoyou;
-    //    ST_CUR_EyebrowGaodi = AppRoot.MainUser.CUR_EyebrowGaodi;
-    //    ST_CUR_EyebrowShenqian = AppRoot.MainUser.CUR_EyebrowShenqian;
-    //    ST_CUR_EyebrowMeitou = AppRoot.MainUser.CUR_EyebrowMeitou;
-    //    ST_CUR_EyebrowMeiwei = AppRoot.MainUser.CUR_EyebrowMeiwei;
-    //    ST_CUR_NoseKuan = AppRoot.MainUser.CUR_NoseKuan;
-    //    ST_CUR_NoseShangxia = AppRoot.MainUser.CUR_NoseShangxia;
-    //    ST_CUR_NoseTingba = AppRoot.MainUser.CUR_NoseTingba;
-    //    ST_CUR_NoseBitou = AppRoot.MainUser.CUR_NoseBitou;
-    //    ST_CUR_NoseBiliang = AppRoot.MainUser.CUR_NoseBiliang;
-    //    ST_CUR_MouthGaodi = AppRoot.MainUser.CUR_MouthGaodi;
-    //    ST_CUR_MouthShenqian = AppRoot.MainUser.CUR_MouthShenqian;
-    //    ST_CUR_MouthKuandu = AppRoot.MainUser.CUR_MouthKuandu;
-    //    ST_CUR_MouthHoudu = AppRoot.MainUser.CUR_MouthHoudu;
-    //    ST_CUR_MouthShangchun = AppRoot.MainUser.CUR_MouthShangchun;
-    //    ST_CUR_MouthXiachun = AppRoot.MainUser.CUR_MouthXiachun;
-    //    ST_CUR_MouthZuijiao = AppRoot.MainUser.CUR_MouthZuijiao;
-    //    ST_CUR_EyeballScale = AppRoot.MainUser.CUR_EyeballScale;
-
-    //}
+   
 
     //public void ReloadCloth()
     //{
@@ -1040,62 +931,8 @@ public class User
     //    AppRoot.MainUser.CUR_hat = ST_hat;
 
     //}
-    //public void ResetBody()
-    //{
-    //   CURhigh = 0.0f;
-    //   CURWeight = 0.0f;
-    //   CURChestline = 0.0f;
-    //   CURCup = 0.0f;
-    //   CURWaistline = 0.0f;
-    //   CURHipline = 0.0f;
-    //   CURArmline = 0.0f;
-    //   CURThigh = 0.0f;
-    //   CUR_SkincolorSecai = 0.0f;
-    //   CUR_SkincolorXianyan = 0.0f;
-    //   CUR_SkincolorMingan = 0.0f;
 
-    //}
-    //public void ResetFace()
-    //{
-    //   CUR_Shuanghe = 0.0f;
-    //   CUR_Xiaba = 0.0f;
-    //   CUR_Lianxia = 0.0f;
-    //   CUR_Quangu = 0.0f;
-    //   CUR_Pingguo = 0.0f;
-    //   CUR_Yaoji = 0.0f;
-    //   CUR_Xiabachang = 0.0f;
-    //   CUR_HeadKuan = 0.0f;
-    //   CUR_HeadBaoman = 0.0f;
-    //   CUR_HeadQianhou = 0.0f;
-    //   CUR_HeadFaji = 0.0f;
-    //   CUR_HeadTouding = 0.0f;
-    //   CUR_HeadTaiyangxue = 0.0f;
-    //   CUR_EyeScale = 0.0f;
-    //   CUR_EyeZuoyou = 0.0f;
-    //   CUR_EyeGaodi = 0.0f;
-    //   CUR_EyeShenqian = 0.0f;
-    //   CUR_EyeYanjiao = 0.0f;
-    //   CUR_EyeYanwei = 0.0f;
-    //   CUR_EyebrowScale = 0.0f;
-    //   CUR_EyebrowZuoyou = 0.0f;
-    //   CUR_EyebrowGaodi = 0.0f;
-    //   CUR_EyebrowShenqian = 0.0f;
-    //   CUR_EyebrowMeitou = 0.0f;
-    //   CUR_EyebrowMeiwei = 0.0f;
-    //   CUR_NoseKuan = 0.0f;
-    //   CUR_NoseShangxia = 0.0f;
-    //   CUR_NoseTingba = 0.0f;
-    //   CUR_NoseBitou = 0.0f;
-    //   CUR_NoseBiliang = 0.0f;
-    //   CUR_MouthGaodi = 0.0f;
-    //   CUR_MouthShenqian = 0.0f;
-    //   CUR_MouthKuandu = 0.0f;
-    //   CUR_MouthHoudu = 0.0f;
-    //   CUR_MouthShangchun = 0.0f;
-    //   CUR_MouthXiachun = 0.0f;
-    //   CUR_MouthZuijiao = 0.0f;
 
-    //}
 
     //public string GetShapeJsonValue()
     //{
