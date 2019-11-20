@@ -106,6 +106,8 @@ public class SimplifyFaceModel : MonoBehaviour
             }
 
         }
+
+
         vertices = ldVertices;
         uvs = ldUVs;
         indices = ldMeanMesh.triangles;
@@ -398,7 +400,7 @@ public class SimplifyFaceModel : MonoBehaviour
         SkinnedMeshRenderer skinMesh = m_LDMeanFaceMesh.GetComponent<SkinnedMeshRenderer>();
         Matrix4x4[] bindposes;
         BoneWeight[] weights;
-        RebindBones(loadPath, hdDeformed,skinMesh, out bindposes, out weights);
+        RebindBones(loadPath, hdDeformed, skinMesh, out bindposes, out weights);
     }
     public void RebindBones(string loadPath, Mesh hdDeformedMesh, SkinnedMeshRenderer ldSkinMeanMesh, out Matrix4x4[] bindposes, out BoneWeight[] weights)
     {
@@ -434,7 +436,7 @@ public class SimplifyFaceModel : MonoBehaviour
         }
 
 
-        for(int i = 0;i<ldSkinMeanMesh.bones.Length;i++)
+        for (int i = 0; i < ldSkinMeanMesh.bones.Length; i++)
         {
             bindposes[i] = ldSkinMeanMesh.bones[i].worldToLocalMatrix * ldSkinMeanMesh.transform.localToWorldMatrix;
         }

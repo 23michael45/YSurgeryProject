@@ -41,7 +41,7 @@ public class LoadAssetExample : MonoBehaviour
         if (skinTransform)
         {
             SkinnedMeshRenderer ldSkinMesh = skinTransform.gameObject.GetComponent<SkinnedMeshRenderer>();
-            LoadHDMeshDefromedAndGenLowMesh(Application.dataPath + "/../Model/obama53149.obj", Application.dataPath + "/../Model/obamaTexture.jpg", ldSkinMesh, mAssetRefLoaded.transform);
+            LoadHDMeshDefromedAndGenLowMesh(Application.dataPath + "/../Model/obama53149.obj", Application.dataPath + "/../Model/obamaTexture.jpg", ldSkinMesh, skinTransform);
 
         }
         else
@@ -91,20 +91,13 @@ public class LoadAssetExample : MonoBehaviour
 
 
         Mesh lowDeformedSkinMesh = new Mesh();
-        // lowDeformedSkinMesh.vertices = vertices;
-        // lowDeformedSkinMesh.uv = uvs;
-        // lowDeformedSkinMesh.triangles = indices;
+        lowDeformedSkinMesh.vertices = vertices;
+        lowDeformedSkinMesh.uv = uvs;
+        lowDeformedSkinMesh.triangles = indices;
 
-        // lowDeformedSkinMesh.bindposes = bindposes;
-        // lowDeformedSkinMesh.boneWeights = weights;
+        lowDeformedSkinMesh.bindposes = bindposes;
+        lowDeformedSkinMesh.boneWeights = weights;
 
-
-        lowDeformedSkinMesh.vertices = ldSkinMesh.sharedMesh.vertices;
-        lowDeformedSkinMesh.uv = ldSkinMesh.sharedMesh.uv;
-        lowDeformedSkinMesh.triangles = ldSkinMesh.sharedMesh.triangles;
-
-        lowDeformedSkinMesh.bindposes = ldSkinMesh.sharedMesh.bindposes;
-        lowDeformedSkinMesh.boneWeights = ldSkinMesh.sharedMesh.boneWeights;
 
         // Mesh tempmesh = lowDeformedSkinMesh;
         // for (int i = 0; i < tempmesh.boneWeights.Length; i++)
