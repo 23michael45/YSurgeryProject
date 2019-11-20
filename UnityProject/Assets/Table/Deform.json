@@ -1,6 +1,7 @@
 ﻿[
 {
-"AvatarId": 101,
+"AvatarId": 10001,
+"DeformNumber":0,
 "Shape":{
 "ForeheadSwitch":{"x":0,"y":0,"z":0,"w":0},
 "TempleSwitch" :{"x":0,"y":0,"z":0,"w":0},
