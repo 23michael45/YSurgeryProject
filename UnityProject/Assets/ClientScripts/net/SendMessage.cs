@@ -15,6 +15,7 @@ public class SendMessage : MonoBehaviour
     public string ModelPath;
     public string TexturePath;
 
+    public LoadManager loadManager;
 
     public User_Deform DeformNewst;
 
@@ -24,19 +25,32 @@ public class SendMessage : MonoBehaviour
     /// </summary>
     /// <param name="loadjson"></param>
 
-    //加载场景。。。。。。。。必须
-    public void LoadScencejson(string Scenejson)
-    {
 
-        Debug.Log(Scenejson);
+    public void Start()
+    {
+        loadManager = new LoadManager();
+        mAndroidNativeUtils = new AndroidNative();
     }
 
 
 
 
-    public void LoadModel(string modelstring)
-    {
 
+    //加载场景。。。。。。。。必须
+    public void LoadEnvironment(string Environmentjson)
+    {
+        loadManager = new LoadManager();
+        loadManager.LoadEnvironment(Environmentjson);
+        Debug.Log(Environmentjson);
+    }
+
+
+       
+
+    public void LoadViewModel(string modelstring)
+    {
+        loadManager = new LoadManager();
+        loadManager.LoadModel(modelstring);
         Debug.Log(modelstring);
 
     }
@@ -45,24 +59,22 @@ public class SendMessage : MonoBehaviour
 
 
 
-
-
     //进入编辑。。。。。。。。。
 
-    //加载初始模型信息
+    //加载可编辑模型
+    public void LoadEditMode(string modelstring) {
 
-    public void LoadRolejson(string Rolejson)
-    {
+        loadManager = new LoadManager();
+        loadManager.LoadEditMode(modelstring);
+        Debug.Log(modelstring);
 
-
-        Debug.Log(Rolejson);
     }
 
 
-    //加载最新一次编辑信息
-    public void LoadDeformJson(string Deformjson)
-    {
 
+    //加载编辑信息
+    public void LoadDeformJson(string Deformjson)
+    {        
 
         Debug.Log(Deformjson);
     }
@@ -73,8 +85,6 @@ public class SendMessage : MonoBehaviour
     //加载当前配饰信息   包含发型、服装、化妆
     public void LoadOrnamentjson(string Ornamentjson)
     {
-
-
         Debug.Log(Ornamentjson);
     }
 
@@ -120,10 +130,7 @@ public class SendMessage : MonoBehaviour
     //保存当前场景。。。。。。。
     public void SaveScencejson(string Scenejson)
     {
-
-        mAndroidNativeUtils = new AndroidNative();
         mAndroidNativeUtils.CallFromUnity("SaveScencejson", Scenejson);
-
     }
 
 
@@ -131,8 +138,6 @@ public class SendMessage : MonoBehaviour
     //保存模型信息。。。。。。。。。   
     public void SaveRolejson(string Rolejson)
     {
-
-        mAndroidNativeUtils = new AndroidNative();
         mAndroidNativeUtils.CallFromUnity("SaveRolejson", Rolejson);
     }
 
@@ -141,20 +146,14 @@ public class SendMessage : MonoBehaviour
     //保存当前编辑信息
     public void SaveDeformJson(string Deformjson)
     {
-
-        mAndroidNativeUtils = new AndroidNative();
         mAndroidNativeUtils.CallFromUnity("SaveDeformJson", Deformjson);
-
     }
 
 
 
     //编辑另存为。。。。。。。
     public void SaveDeformAs(string Deformjson)
-
     {
-
-        mAndroidNativeUtils = new AndroidNative();
         mAndroidNativeUtils.CallFromUnity("SaveDeformAs", Deformjson);
     }
 
@@ -163,11 +162,8 @@ public class SendMessage : MonoBehaviour
 
     //保存当前配饰信息  包含发型、服装、化妆
     public void SaveOrnamentjson(string Ornamentjson)
-    {
-        mAndroidNativeUtils = new AndroidNative();
+    {       
         mAndroidNativeUtils.CallFromUnity("SaveOrnamentjson", Ornamentjson);
-
-
     }
 
 

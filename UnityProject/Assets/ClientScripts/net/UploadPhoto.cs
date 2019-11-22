@@ -60,7 +60,7 @@ public class UploadPhoto : MonoBehaviour
 
         StartCoroutine(UploadPNG());
         print(jstr);
-
+        
         loadText.text = "开始上传照片";
     }
 
@@ -117,9 +117,8 @@ public class UploadPhoto : MonoBehaviour
                 jstr = jstr.Replace("\"{\"", "{\"");
                 jstr = jstr.Replace("\"}\"", "\"}");
                 print(jstr);
-                                                          
-                getjsoninfo(jstr);
 
+                getjsoninfo(jstr);
             }
 
 
@@ -138,7 +137,10 @@ public class UploadPhoto : MonoBehaviour
         MeshUrl = jsondata.info.meshFile;
         Debug.Log(MeshUrl);
 
-        string meshname = "face";       
+
+        //随机生成模型名称
+       string meshname = "10001";
+       // string meshname = AppRoot.MainUser.currentModel.ModelID.ToString();
         StartCoroutine(LoadAndSaveAsset(meshname, MeshUrl, ".obj"));
         
 
@@ -146,7 +148,9 @@ public class UploadPhoto : MonoBehaviour
         TextureUrl = jsondata.info.TextureFile;
         Debug.Log(TextureUrl);
 
-        string Texname = "facetex";      
+        //生成模型文件匹配的贴图名称
+        string Texname = "10001tex";
+        // string Texname = AppRoot.MainUser.currentModel.ModelID.ToString()+"tex";
         StartCoroutine(LoadAndSaveAsset(Texname, TextureUrl, ".jpg"));  
       
         
@@ -165,6 +169,10 @@ public class UploadPhoto : MonoBehaviour
 
         Debug.Log(url);
         Debug.Log("开始下载模型。");
+
+        
+
+
         WWW w = new WWW(url);
         while (!w.isDone)
         {
@@ -186,30 +194,30 @@ public class UploadPhoto : MonoBehaviour
             int length = model.Length;
 
             //文件流信息  
-            Stream sw;
+               Stream sw;
 
-            DirectoryInfo t = new DirectoryInfo(localpath);
-            if (!t.Exists)
-            {
-                //如果此文件夹不存在则创建  
-                t.Create();
-            }
-            FileInfo j = new FileInfo(localpath + name + filetype);
-            if (!j.Exists)
-            {
-                //如果此文件不存在则创建  
-                sw = j.Create();
-            }
-            else
-            {
-                //如果此文件存在则打开  
-                sw = j.OpenWrite();
-            }
-            sw.Write(model, 0, length);
-            //关闭流  
-            sw.Close();
-            //销毁流  
-            sw.Dispose();
+                DirectoryInfo t = new DirectoryInfo(localpath);
+                if (!t.Exists)
+                    {
+                    //如果此文件夹不存在则创建  
+                    t.Create();
+                     }
+                FileInfo j = new FileInfo(localpath + name + filetype);
+                if (!j.Exists)
+                {
+                    //如果此文件不存在则创建  
+                    sw = j.Create();
+                }
+                else
+                {
+                    //如果此文件存在则打开  
+                    sw = j.OpenWrite();
+                }
+                sw.Write(model, 0, length);
+                //关闭流  
+                sw.Close();
+                //销毁流  
+                sw.Dispose();
 
 
             //写文件后加载模型      
@@ -235,10 +243,7 @@ public class UploadPhoto : MonoBehaviour
             }
             else {
 
-
-            }
-
-
+            }            
 
         }
 
@@ -258,19 +263,13 @@ public class UploadPhoto : MonoBehaviour
             {
 
 
-            }
-
-           
+            }           
 
 
         }
 
 
-
-
-
     }
-
 
 
 }

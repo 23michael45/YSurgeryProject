@@ -19,11 +19,7 @@ MonoBehaviour:
   m_RemoteCatalogLoadPath:
     m_Id: 
   m_overridePlayerVersion: 
-  m_GroupAssets:
-  - {fileID: 11400000, guid: fe9aa316ac7252d43a6c4136723d8ed9, type: 2}
-  - {fileID: 11400000, guid: c98b6cc7743a4e644822535e87211805, type: 2}
-  - {fileID: 11400000, guid: 9156ef04d0531e945bad254fed97c49d, type: 2}
-  - {fileID: 11400000, guid: 7b79e4056600e7b4b93ed4d045e69e58, type: 2}
+  m_GroupAssets: []
   m_BuildSettings:
     m_CompileScriptsInVirtualMode: 0
     m_CleanupStreamingAssetsAfterBuilds: 1

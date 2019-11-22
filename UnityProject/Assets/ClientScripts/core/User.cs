@@ -3,25 +3,43 @@ using System.Collections.Generic;
 using System.Collections;
 using System;
 
+
+
+
 [Serializable]
-public class User_Face
+public class User_Environment
 {
-    public string faceID;
+    public int Background;
+    public int Stage;
+    public int Light;   
+
+}// 环境设置
+
+
+
+
+[Serializable]
+public class User_Role
+{
+    public int AvatarId;
+    public int DeformCount;
     public string name;
-    public bool male;
-
     public string shortCutImage;
-    public string Facemodel, Facetexture;   
+    public string Facemodel;
+    public string Facetexture;
+    public int sex;
+    public Dictionary<string, Vector3> Bones;
+    public Dictionary<int, Vector3> MeshPoint;
 
-    public Dictionary<string ,Vector3> _facelandmark; 
-    
 }// 每个角色的基础属性
+
 
 
 [Serializable]
 public class User_Deform
 {
     public string AvatarId;
+    public int DeformNumber;
     [Serializable]
     public class Shape
     {
@@ -116,73 +134,52 @@ public class User_Ornaments
 [Serializable]
 public class User_Model
 {   
-    public string ModelID;
-    public int RoleTableID;
+    public string ModelID; 
+    public string shotcutImage;
 
-    public string ModelShortcutImg;
-    public string Modelname;
+    public string TexturePath;
+    public string ModelPath;
+    public int  Editable;
 
-    public bool Editable;
-
-    public bool  isman;
-    public int defaultface;  
-
-    public User_Face face;
+    public User_Role role;
     public User_Deform deform;
     public User_Ornaments Ornament;
 
-
 }
-
-
 
 
 [Serializable]
 public class User_Profile
 {
-    public User_Model model;   
+    public User_Model model;
+    public User_Environment environment;
 
 }
 
 [Serializable]
 public class User
 {
-    public  User_Profile currentProfile = new User_Profile();
-    public  User_Model currentModel = new User_Model();
+    public User_Profile currentProfile= new User_Profile();
+    public User_Model currentModel= new User_Model();
 
     public bool crrrentEditable;
 
     public string currentmodelID, currentFaceID, currentmodelName;
 
-  
+    
 
 
-    //private float ST_CURhigh, ST_CURWeight, ST_CURChestline, ST_CURCup, ST_CURWaistline, ST_CURHipline, ST_CURArmline,
-    //              ST_CURThigh, ST_CUR_SkincolorSecai, ST_CUR_SkincolorXianyan, ST_CUR_SkincolorMingan, ST_CUR_EyeballScale;
-
-    //private float ST_CUR_Shuanghe, ST_CUR_Xiaba, ST_CUR_Lianxia, ST_CUR_Quangu, ST_CUR_Pingguo, ST_CUR_Yaoji,
-    //ST_CUR_Xiabachang, ST_CUR_HeadKuan, ST_CUR_HeadBaoman, ST_CUR_HeadQianhou, ST_CUR_HeadFaji, ST_CUR_HeadTouding,
-    //ST_CUR_HeadTaiyangxue, ST_CUR_EyeScale, ST_CUR_EyeZuoyou, ST_CUR_EyeGaodi, ST_CUR_EyeShenqian, ST_CUR_EyeYanjiao,
-    //ST_CUR_EyeYanwei, ST_CUR_EyebrowScale, ST_CUR_EyebrowZuoyou, ST_CUR_EyebrowGaodi, ST_CUR_EyebrowShenqian,
-    //ST_CUR_EyebrowMeitou, ST_CUR_EyebrowMeiwei, ST_CUR_NoseKuan, ST_CUR_NoseShangxia, ST_CUR_NoseTingba,
-    //ST_CUR_NoseBitou, ST_CUR_NoseBiliang, ST_CUR_MouthGaodi, ST_CUR_MouthShenqian, ST_CUR_MouthKuandu,
-    //ST_CUR_MouthHoudu, ST_CUR_MouthShangchun, ST_CUR_MouthXiachun, ST_CUR_MouthZuijiao;
-
-    //private int ST_coat, ST_top, ST_trouser, ST_underwear, ST_shoe, ST_hair, ST_hat;
-
-
-
-
-    public void Init(string modelList )
+    public void Init( )
     {
      
 
         currentProfile = new User_Profile();
+        currentModel = new User_Model();
         //currentModel = currentProfile.model;
 
-      //  Debug.Log(currentModel);
+        Debug.Log(currentModel);
 
-        currentModel.face= new User_Face();
+        currentModel.role= new User_Role();
 
         currentModel.deform = new User_Deform();
 
@@ -194,21 +191,15 @@ public class User
         currentModel.deform.mouth = new User_Deform.Mouth ();
         currentModel.deform.chest = new User_Deform.Chest();
         currentModel.deform.body = new User_Deform.Body();
-
-
+        
 
         currentModel.Ornament = new User_Ornaments();
         currentModel.Ornament.makeup= new User_Ornaments.Makeup();
         currentModel.Ornament.cloth = new User_Ornaments.Cloth();
         currentModel.Ornament.ornament = new User_Ornaments.Ornament();
-
          
        // Debug.Log(currentModel.deform.shape);
-
-
-
-        loadDefeatJson();
-
+             
     }
 
 
@@ -217,23 +208,28 @@ public class User
     //face。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。
     /// </summary>
 
-
-    public int RoletableID
+    public string shotcutImage
     {
-        get { return currentModel.RoleTableID; }
-        set { currentModel.RoleTableID = value; }
+        get { return currentModel.shotcutImage; }
+        set { currentModel.shotcutImage = value; }
+     }
+    
+    public string  TexturePath
+    {
+        get { return currentModel.TexturePath; }
+        set { currentModel.TexturePath = value; }
     }
 
-
-    public int defaultface
+    public string ModelPath
     {
-        get { return currentModel.defaultface; }
-        set { currentModel.defaultface = value; }
+        get { return currentModel.ModelPath; }
+        set { currentModel.ModelPath = value; }
     }
-    public bool isman
+    
+    public int Editable
     {
-        get { return currentModel.isman; }
-        set { currentModel.isman = value; }
+        get { return currentModel.Editable; }
+        set { currentModel.Editable = value; }
     }
 
 
@@ -243,37 +239,55 @@ public class User
 
     public string faceshotImg
     {
-        get { return currentModel.face.shortCutImage; }
-        set { currentModel.face.shortCutImage = value; }
+        get { return currentModel.role.shortCutImage; }
+        set { currentModel.role.shortCutImage = value; }
     }
 
     public string faceModel
     {
-        get { return currentModel.face.Facemodel; }
-        set { currentModel.face.Facemodel = value; }
+        get { return currentModel.role.Facemodel; }
+        set { currentModel.role.Facemodel = value; }
     }
 
     public string facetexture
     {
-        get { return currentModel.face.Facetexture; }
-        set { currentModel.face.Facetexture = value; }
+        get { return currentModel.role.Facetexture; }
+        set { currentModel.role.Facetexture = value; }
     }
 
-    public Dictionary<string, Vector3> facelandmark
+    public Dictionary<string, Vector3> bones
     {
         get
         {
-            if (currentModel.face._facelandmark == null)
+            if (currentModel.role.Bones == null)
             {
-                currentModel.face._facelandmark = new Dictionary<string, Vector3>();
+                currentModel.role.Bones = new Dictionary<string, Vector3>();
             }
-            return currentModel.face._facelandmark;
+            return currentModel.role.Bones;
         }
         set
         {
-            currentModel.face._facelandmark = value;
+            currentModel.role.Bones = value;
         }
     }
+
+    public Dictionary<int , Vector3> MeshPoint
+    {
+        get
+        {
+            if (currentModel.role.MeshPoint == null)
+            {
+                currentModel.role.MeshPoint = new Dictionary<int , Vector3>();
+            }
+            return currentModel.role.MeshPoint;
+        }
+        set
+        {
+            currentModel.role.MeshPoint = value;
+        }
+    }
+
+
 
 
     /// <summary>
@@ -723,346 +737,6 @@ public class User
     }
 
 
-    ///.............loadjsondata................
-    ///
-
-    public void loadDefeatJson() {
-
-
-
-
-
-
-
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    /// <summary>
-    //切换模特。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。
-    /// </summary>
-    /// <param name="modelId"></param>
-    public void SaveModel(string modelId)
-    {
-
-
-    }
-    public void SaveFace(string faceID)
-    {
-        /*     
-        int.TryParse(faceID.Substring(1, 1), out model);
-        int.TryParse(faceID.Substring(3, 1), out face);
-        profile.models[model].face[face] = currentFace;     
-        */
-    }
-    public void LoadRoleTable()
-    {
-
-
-
-
-    }
-   
-
-
-
-
-    //重置基础身材。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。
-    //public void setdefaultbody() {
-
-
-    //    if (isman)
-    //    {
-    //        _highbase = 185.0f;
-    //        _Weightbase = 70.0f;
-    //        _Chestlinebase = 95.0f;
-    //        _Cupbase = 2.0f;
-    //        _Waistlinebase = 70.0f;
-    //        _Hiplinebase = 90.0f;
-    //        _Armlinebase = 35.0f;
-    //        _Thighbase = 45.0f;
-    //    }
-    //    else {
-    //        _highbase = 173.0f;
-    //        _Weightbase = 55.0f;
-    //        _Chestlinebase = 82.0f;
-    //        _Cupbase = 10.0f;
-    //        _Waistlinebase = 50.0f;
-    //        _Hiplinebase = 90.0f;
-    //        _Armlinebase = 26.0f;
-    //        _Thighbase = 34.0f;
-    //        }
-
-    //}
-
-    //当前角色身体参数。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。
-
-    //public void loadModelvalue(int model,int face) {
-
-    //    CURhigh =                 profile.models[model].body.slidervalue_High  ;
-    //    CURWeight =               profile.models[model].body.slidervalue_weight ;
-    //    CURChestline =            profile.models[model].body.slidervalue_Chestline ;
-    //    CURCup =                  profile.models[model].body.slidervalue_Cup   ;
-    //    CURWaistline =            profile.models[model].body.slidervalue_Waitline   ;
-    //    CURHipline =              profile.models[model].body.slidervalue_Hipline   ;
-    //    CURArmline =              profile.models[model].body.slidervalue_Armline  ;
-    //    CURThigh =                profile.models[model].body.slidervalue_Thigh    ;
-    //    CUR_SkincolorSecai =      profile.models[model].body.slidervalue_skin_h  ;
-    //    CUR_SkincolorXianyan =    profile.models[model].body.slidervalue_skin_s   ;
-    //    CUR_SkincolorMingan =     profile.models[model].body.slidervalue_skin_v ;
-    //}
-
-
-    //当前角色服装参数。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。
-    //public void loadCloth(int model, int face) {
-    //    AppRoot.MainUser.CUR_coat = profile.models [model ].body.c_coat ;
-    //    AppRoot.MainUser.CUR_top = profile.models[model].body.c_top ; 
-    //    AppRoot.MainUser.CUR_trouser = profile.models[model].body.c_trousers ; 
-    //    AppRoot.MainUser.CUR_underwear = profile.models[model].body.c_underwear ; 
-    //    AppRoot.MainUser.CUR_shoe = profile.models[model].body.c_shoe ; 
-    //    AppRoot.MainUser.CUR_hair = profile.models[model].body.c_hair ; 
-    //    AppRoot.MainUser.CUR_hat = profile.models[model].body.c_hat ; 
-
-
-    //}
-    ////.................................................................需要储存数据
-
-
-
-
-
-
-    // 
-
-    //
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    ////。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。储存数据。。。。。。。。
-
-
-    //public float animatorslider
-    //{
-    //    get { return currentBody. animatorpecent; }
-    //    set
-    //    {
-    //        currentBody. animatorpecent = value;
-
-    //        AppRoot.MainScene.MainRole.animatorpercent(currentBody.animatorpecent);
-
-    //    }
-    //}
-
-   
-
-    //public void ReloadCloth()
-    //{
-    //    AppRoot.MainUser.CUR_coat = ST_coat;
-    //    AppRoot.MainUser.CUR_top = ST_top;
-    //    AppRoot.MainUser.CUR_trouser = ST_trouser;
-    //    AppRoot.MainUser.CUR_underwear = ST_underwear;
-    //    AppRoot.MainUser.CUR_shoe = ST_shoe;
-    //    AppRoot.MainUser.CUR_hair = ST_hair;
-    //    AppRoot.MainUser.CUR_hat = ST_hat;
-
-    //}
-
-
-
-    //public string GetShapeJsonValue()
-    //{
-    //    LitJson.JsonData jsondata = new LitJson.JsonData();
-    //    jsondata["CURhigh"] = CURhigh;
-    //    jsondata["CURWeight"] = CURWeight;
-    //    jsondata["CURChestline"] = CURChestline;
-    //    jsondata["CURCup"] = CURCup;
-    //    jsondata["CURWaistline"] = CURWaistline;
-    //    jsondata["CURHipline"] = CURHipline;
-    //    jsondata["CURArmline"] = CURArmline;
-    //    jsondata["CURThigh"] = CURThigh;
-
-
-    //    string jsonstring = jsondata.ToJson();
-
-    //    return jsonstring;
-    //}
-    //public void SetShapeJsonValue(string jsonstring)
-    //{
-    //    LitJson.JsonData jsondata = LitJson.JsonMapper.ToObject(jsonstring);
-    //    CURhigh = (float)jsondata["CURhigh"];
-    //    CURWeight = (float)jsondata["CURWeight"];
-    //    CURChestline = (float)jsondata["CURChestline"];
-    //    CURCup = (float)jsondata["CURCup"];
-    //    CURWaistline = (float)jsondata["CURWaistline"];
-    //    CURHipline = (float)jsondata["CURHipline"];
-    //    CURArmline = (float)jsondata["CURArmline"];
-    //    CURThigh = (float)jsondata["CURThigh"];
-    //}
-
-
-    //public string GetSkinJsonValue()
-    //{
-
-    //    LitJson.JsonData jsondata = new LitJson.JsonData();
-    //    jsondata["CUR_SkincolorBase"] = CUR_SkincolorBase;
-    //    jsondata["CUR_SkincolorSecai"] = CUR_SkincolorSecai;
-    //    jsondata["CUR_SkincolorXianyan"] = CUR_SkincolorXianyan;
-    //    jsondata["CUR_SkincolorMingan"] = CUR_SkincolorMingan;
-
-    //    string jsonstring = jsondata.ToJson();
-
-    //    return jsonstring;
-    //}
-
-    //public void SetSkinJsonValue(string jsonstring)
-    //{
-    //    LitJson.JsonData jsondata = LitJson.JsonMapper.ToObject(jsonstring);
-    //    CUR_SkincolorBase = (float)jsondata["CUR_SkincolorBase"];
-    //    CUR_SkincolorSecai = (float)jsondata["CUR_SkincolorSecai"];
-    //    CUR_SkincolorXianyan = (float)jsondata["CUR_SkincolorXianyan"];
-    //    CUR_SkincolorMingan = (float)jsondata["CUR_SkincolorMingan"];
-
-    //}
-
-
-    //public string GetLandmarkJsonValue()
-    //{
-    //    LitJson.JsonData jsondata = new LitJson.JsonData();
-
-    //    foreach(KeyValuePair<string,Vector3> kv in facelandmark)
-    //    {
-    //        jsondata[kv.Key] = GetVector3Json(kv.Value);
-    //    }
-
-    //    string jsonstring = jsondata.ToJson();
-    //    return jsonstring;
-
-    //}
-
-    //public void SetLandmarkJsonValue(string jsonstring)
-    //{
-    //    LitJson.JsonData jsondata = LitJson.JsonMapper.ToObject(jsonstring);
-    //    facelandmark.Clear();
-    //    foreach (KeyValuePair<string, LitJson.JsonData> kv in jsondata.inst_object)
-    //    {
-
-    //        string key = (string)kv.Key;
-    //        string value = (string)kv.Value;
-
-    //        Vector3 v = SetVector3Json(value);
-    //        facelandmark[key] = v;
-
-
-    //    }
-
-
-    //}
-
-    //public string GetForHeadJsonValue()
-    //{
-
-    //    LitJson.JsonData jsondata = new LitJson.JsonData();
-    //    jsondata["CUR_HeadKuan"] = CUR_HeadKuan;
-    //    jsondata["CUR_HeadBaoman"] = CUR_HeadBaoman;
-    //    jsondata["CUR_HeadQianhou"] = CUR_HeadQianhou;
-    //    jsondata["CUR_HeadFaji"] = CUR_HeadFaji;
-    //    jsondata["CUR_HeadTouding"] = CUR_HeadTouding;
-    //    jsondata["CUR_HeadTaiyangxue"] = CUR_HeadTaiyangxue;
-
-    //    string jsonstring = jsondata.ToJson();
-
-    //    return jsonstring;
-    //}
-
-
-
-    //string GetVector3Json(Vector3 v)
-    //{
-    //    LitJson.JsonData jsondata = new LitJson.JsonData();
-    //    jsondata["x"] = v.x;
-    //    jsondata["y"] = v.y;
-    //    jsondata["z"] = v.z;
-
-    //    string jsonstring = jsondata.ToJson();
-
-    //    return jsonstring;
-    //}
-
-    //Vector3 SetVector3Json(string jsonstring)
-    //{ 
-
-    //    Vector3 v = new Vector3();
-    //    LitJson.JsonData jsondata = LitJson.JsonMapper.ToObject(jsonstring);
-    //    v.x = (float)jsondata["x"];
-    //    v.y = (float)jsondata["y"];
-    //    v.z = (float)jsondata["z"];
-    //    return v;
-    //    //}
 }
 
 

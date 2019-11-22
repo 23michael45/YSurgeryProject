@@ -15,7 +15,15 @@ public class ViewUI : MonoBehaviour
     public GameObject View_UI;
     public GameObject EnterButtonUI;
 
+
+    public Button okbutton;
+
+
+
     public SendMessage SendMessage;
+
+
+
 
 
     public string Scencejson = "Scencejson";
@@ -28,12 +36,25 @@ public class ViewUI : MonoBehaviour
     public void Start()
     {
 
-        BoardButton.onClick.AddListener(delegate () { this.BoardButton_CLK(); });
-        EditButton.onClick.AddListener(delegate () { this.EditButton_clk(); });
-        CreatButton.onClick.AddListener(delegate () { this.CreatButton_CLK(); });
+        BoardButton.onClick.AddListener(BoardButton_CLK);
+        EditButton.onClick.AddListener(EditButton_clk);
+        CreatButton.onClick.AddListener(CreatButton_CLK);
 
         SendMessage = new SendMessage();
+
+        okbutton.onClick.AddListener(okbutton_clk);
+
+
     }
+
+
+    public void okbutton_clk() {
+
+        okbutton.interactable = false;
+
+    }
+
+
 
 
 
@@ -42,12 +63,9 @@ public class ViewUI : MonoBehaviour
 
         Edit_UI.SetActive(true);
         View_UI.SetActive(false);
-
-
-        SendMessage.LoadRolejson(Rolejson);
-        SendMessage.LoadScencejson(Scencejson);
-        SendMessage.LoadDeformJson(Deformjson);
-        SendMessage.LoadOrnamentjson(Ornamentjson);
+        
+        SendMessage.LoadEditMode(modelstring);
+      
 
     }
 
@@ -56,7 +74,7 @@ public class ViewUI : MonoBehaviour
     public void BoardButton_CLK()
     {
 
-        SendMessage.LoadOrnamentjson(modelstring);
+        SendMessage.LoadViewModel(modelstring);
     }
 
 

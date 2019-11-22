@@ -87,7 +87,7 @@ public class Deform : MonoBehaviour
         
 
         xx = xx / ratio;
-        //Debug.Log(xx);
+        Debug.Log(xx);
 
         Vector3  offset = new Vector3(0, xx.x, xx.z);
         Vector3 offset_l = new Vector3(xx.y,-xx.x, xx.z);
