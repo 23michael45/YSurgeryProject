@@ -38,10 +38,11 @@ public class LoadAssetExample : MonoBehaviour
 
         mAssetRefLoaded.name = "LoadedAssetTemplateModel";
         Transform skinTransform = mAssetRefLoaded.transform.Find("head001");
+        Transform rootBoneTransform = mAssetRefLoaded.transform.Find("Reference");
         if (skinTransform)
         {
             SkinnedMeshRenderer ldSkinMesh = skinTransform.gameObject.GetComponent<SkinnedMeshRenderer>();
-            LoadHDMeshDefromedAndGenLowMesh(Application.dataPath + "/../Model/obama53149.obj", Application.dataPath + "/../Model/obamaTexture.jpg", ldSkinMesh, skinTransform);
+            LoadHDMeshDefromedAndGenLowMesh(Application.dataPath + "/../Model/obama53149.obj", Application.dataPath + "/../Model/obamaTexture.jpg", ldSkinMesh, skinTransform, rootBoneTransform);
 
         }
         else
@@ -53,7 +54,7 @@ public class LoadAssetExample : MonoBehaviour
     }
 
 
-    void LoadHDMeshDefromedAndGenLowMesh(string modelPath, string texturePath, SkinnedMeshRenderer ldSkinMesh, Transform ldTransform)
+    void LoadHDMeshDefromedAndGenLowMesh(string modelPath, string texturePath, SkinnedMeshRenderer ldSkinMesh, Transform ldTransform,Transform rootBoneTransform)
     {
 
         GameObject deformedMeshObject = new OBJLoader().Load(modelPath);
@@ -99,50 +100,58 @@ public class LoadAssetExample : MonoBehaviour
         lowDeformedSkinMesh.boneWeights = weights;
 
 
-        // Mesh tempmesh = lowDeformedSkinMesh;
-        // for (int i = 0; i < tempmesh.boneWeights.Length; i++)
-        // {
-        //     Debug.Log("boneWeights:" + tempmesh.boneWeights[i].weight0);
-        //     Debug.Log("boneIndex:" + tempmesh.boneWeights[i].boneIndex0);
+        
+        Transform[] ldBonesHierarchy = rootBoneTransform.GetComponentsInChildren<Transform>();
 
-        //     if (i > 100) break;
-        // }
+        Dictionary<string, Transform> SrcBoneDict = new Dictionary<string, Transform>();
+        Dictionary<string, Transform> DstBoneDict = new Dictionary<string, Transform>();
 
+        for (int i = 0; i < ldBonesHierarchy.Length; i++)
+        {
+            var srcBone = ldBonesHierarchy[i];
+            Transform bone = new GameObject(srcBone.name).transform;
 
-        // Dictionary<string, Transform> tempDict = new Dictionary<string, Transform>();
+            SrcBoneDict[srcBone.name] = srcBone;
+            DstBoneDict[srcBone.name] = bone;
 
-        // Transform[] newBones = new Transform[ldSkinMesh.bones.Length];
-        // for (int i = 0; i < ldSkinMesh.bones.Length; i++)
-        // {
-
-        //     var srcBone = ldSkinMesh.bones[i];
-
-        //     Transform bone = new GameObject(srcBone.name).transform;
-        //     tempDict[srcBone.name] = bone;
-
-        //     newBones[i] = bone;
-        // }
-        // for (int i = 0; i < newBones.Length; i++)
-        // {
-        //     var srcBone = ldSkinMesh.bones[i];
-
-        //     if (tempDict.ContainsKey(srcBone.parent.name))
-        //     {
-
-        //         newBones[i].parent = tempDict[srcBone.parent.name];
-        //     }
-        //     else
-        //     {
-        //         newBones[i].parent = mShowLDSkinMesh.transform;
-        //     }
+        }
 
 
-        //     newBones[i].position = srcBone.position;
-        //     newBones[i].rotation = srcBone.rotation;
-        // }
+        foreach (var kv in DstBoneDict)
+        {
+
+            string parentName = SrcBoneDict[kv.Key].parent.name;
+            if (DstBoneDict.ContainsKey(parentName))
+            {
+                DstBoneDict[kv.Key].parent = DstBoneDict[parentName];
+            }
+            else
+            {
+                DstBoneDict[kv.Key].parent = mShowLDSkinMesh.transform;
+            }
+            DstBoneDict[kv.Key].position = SrcBoneDict[kv.Key].position;
+            DstBoneDict[kv.Key].rotation = SrcBoneDict[kv.Key].rotation;
+            DstBoneDict[kv.Key].localScale = SrcBoneDict[kv.Key].localScale;
+        }
+
+        Transform[] newBones = new Transform[ldSkinMesh.bones.Length];
+        for (int i = 0; i < ldSkinMesh.bones.Length; i++)
+        {
+            string boneName = ldSkinMesh.bones[i].name;
+            if (DstBoneDict.ContainsKey(boneName))
+            {
+                newBones[i] = DstBoneDict[boneName];
+
+            }
+            else
+            {
+                Debug.Log("Bone Not Exist In DstDoneDict : " + boneName);
+            }
 
 
-        mShowLDSkinMesh.bones = ldSkinMesh.bones;
+        }
+
+        mShowLDSkinMesh.bones = newBones;
         mShowLDSkinMesh.sharedMesh = lowDeformedSkinMesh;
 
 
