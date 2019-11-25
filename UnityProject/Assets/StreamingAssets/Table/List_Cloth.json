@@ -1,0 +1,14 @@
+﻿[
+{
+"ClothID": 1,
+"Sex":1,
+"shotcutImage":url,
+"ClothAsset":path,
+},
+{
+"ClothID": 2,
+"Sex":0,
+"shotcutImage":url,
+"ClothAsset":path,
+}
+]
