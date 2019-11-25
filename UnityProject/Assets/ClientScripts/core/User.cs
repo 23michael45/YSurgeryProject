@@ -198,7 +198,10 @@ public class User
         currentModel.Ornament.cloth = new User_Ornaments.Cloth();
         currentModel.Ornament.ornament = new User_Ornaments.Ornament();
          
-       // Debug.Log(currentModel.deform.shape);
+        Debug.Log(Application.streamingAssetsPath);
+
+
+
              
     }
 

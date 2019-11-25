@@ -18,31 +18,39 @@ public class ViewUI : MonoBehaviour
 
     public Button okbutton;
 
-
-
+    
     public SendMessage SendMessage;
+    public ReadTable readTable;
 
 
-
-
-
-    public string Scencejson = "Scencejson";
-    public string Rolejson = "Rolejson";
-    public string Deformjson = "Deformjson";
-    public string Ornamentjson = "Ornamentjson";
-    public string modelstring = "modelstring";
+    public string Scencejson;
+    public string Rolejson ;
+    public string Deformjson;
+    public string Ornamentjson;
+    public string modelstring;
+    public string user;
 
 
     public void Start()
     {
+        readTable = new ReadTable();
+    Scencejson = readTable.ReadEnvironmentJson();
+    Rolejson = readTable.ReadRoleJson();
+    Deformjson = readTable.ReadDeformJson();
+    Ornamentjson = readTable.ReadOrnamentJson();
 
-        BoardButton.onClick.AddListener(BoardButton_CLK);
-        EditButton.onClick.AddListener(EditButton_clk);
-        CreatButton.onClick.AddListener(CreatButton_CLK);
+    modelstring = readTable.ReadModelJson();
+  
 
-        SendMessage = new SendMessage();
+    Debug.Log(modelstring.ToString());
 
-        okbutton.onClick.AddListener(okbutton_clk);
+    BoardButton.onClick.AddListener(BoardButton_CLK);
+    EditButton.onClick.AddListener(EditButton_clk);
+    CreatButton.onClick.AddListener(CreatButton_CLK);
+
+    SendMessage = new SendMessage();
+
+    okbutton.onClick.AddListener(okbutton_clk);
 
 
     }
@@ -64,7 +72,7 @@ public class ViewUI : MonoBehaviour
         Edit_UI.SetActive(true);
         View_UI.SetActive(false);
         
-        SendMessage.LoadEditMode(modelstring);
+        SendMessage.LoadEditMode(modelstring.ToString());
       
 
     }
@@ -74,7 +82,7 @@ public class ViewUI : MonoBehaviour
     public void BoardButton_CLK()
     {
 
-        SendMessage.LoadViewModel(modelstring);
+        SendMessage.LoadViewModel(modelstring.ToString());
     }
 
 

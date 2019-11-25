@@ -310,8 +310,6 @@ public class DeformUI : MonoBehaviour
     {
         var deformdata = JsonUtility.FromJson<User_Deform>(Deformjson);
         
-
-
         ForeheadSwitch_data = deformdata.shape.ForeheadSwitch;
         TempleSwitch_data = deformdata.shape.TempleSwitch;
         BISjawSwitch_data = deformdata.shape.BISjawSwitch;
