@@ -33,16 +33,14 @@ public class ViewUI : MonoBehaviour
 
     public void Start()
     {
-        readTable = new ReadTable();
+    readTable = new ReadTable();
     Scencejson = readTable.ReadEnvironmentJson();
     Rolejson = readTable.ReadRoleJson();
     Deformjson = readTable.ReadDeformJson();
     Ornamentjson = readTable.ReadOrnamentJson();
+    modelstring = readTable.ReadModelJson();  
 
-    modelstring = readTable.ReadModelJson();
-  
-
-    Debug.Log(modelstring.ToString());
+   // Debug.Log(modelstring.ToString());
 
     BoardButton.onClick.AddListener(BoardButton_CLK);
     EditButton.onClick.AddListener(EditButton_clk);
@@ -72,7 +70,7 @@ public class ViewUI : MonoBehaviour
         Edit_UI.SetActive(true);
         View_UI.SetActive(false);
         
-        SendMessage.LoadEditMode(modelstring.ToString());
+        SendMessage.LoadEditMode(modelstring);
       
 
     }
@@ -82,7 +80,7 @@ public class ViewUI : MonoBehaviour
     public void BoardButton_CLK()
     {
 
-        SendMessage.LoadViewModel(modelstring.ToString());
+        SendMessage.LoadViewModel(modelstring);
     }
 
 

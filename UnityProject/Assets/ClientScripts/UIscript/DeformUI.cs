@@ -129,8 +129,14 @@ public class DeformUI : MonoBehaviour
 
 
 
+    public User_Deform deformdata;
+
+
     public void Start()
     {
+
+        deformdata = AppRoot.MainUser.currentModel.deform;
+
         foreheadItem_x.onValueChanged.AddListener(foreheadItem_x_chg);       
         foreheadItem_y.onValueChanged.AddListener(foreheadItem_y_chg);
         foreheadItem_w.onValueChanged.AddListener(foreheadItem_z_chg);
@@ -307,8 +313,7 @@ public class DeformUI : MonoBehaviour
     }
 
     public void DeformDataLoad()
-    {
-        var deformdata = JsonUtility.FromJson<User_Deform>(Deformjson);
+    {        
         
         ForeheadSwitch_data = deformdata.shape.ForeheadSwitch;
         TempleSwitch_data = deformdata.shape.TempleSwitch;

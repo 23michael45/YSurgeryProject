@@ -12,8 +12,8 @@ public class ReadTable : MonoBehaviour
     public string ReadRoleJson()
     {
         string  JsonPath = "Table/Role.json";       
-        string  RoleTexJson = LoadJson<User_Role>(JsonPath).ToString();
-        Debug.Log(RoleTexJson);
+        string  RoleTexJson = LoadJson(JsonPath);
+      //  Debug.Log("RoleTexJson:" + RoleTexJson);
         return RoleTexJson;
     }
 
@@ -23,8 +23,8 @@ public class ReadTable : MonoBehaviour
     {
         string JsonPath = "Table/Model.json";
         //User_Model ModelTexJson = new User_Model();
-        string ModelTexJson = LoadJson<User_Model>(JsonPath).ToString(); ;
-        Debug.Log(ModelTexJson);
+        string ModelTexJson = LoadJson(JsonPath);
+      Debug.Log("ModelTexJson:" + ModelTexJson);
         return ModelTexJson;
     }
 
@@ -33,8 +33,8 @@ public class ReadTable : MonoBehaviour
     {
         string JsonPath = "Table/Deform.json";
         //User_Deform DeformTexJson = new User_Deform();
-        string DeformTexJson = LoadJson<User_Deform>(JsonPath).ToString(); ;
-        Debug.Log(DeformTexJson);
+        string DeformTexJson = LoadJson(JsonPath) ;
+     //   Debug.Log("DeformTexJson:" + DeformTexJson);
         return DeformTexJson;
     }
 
@@ -43,8 +43,8 @@ public class ReadTable : MonoBehaviour
     {
         string JsonPath = "Table/Ornament.json";
         //User_Ornaments OrnamentTexJson = new User_Ornaments();
-        string OrnamentTexJson = LoadJson<User_Ornaments>(JsonPath).ToString(); ;
-        Debug.Log(OrnamentTexJson);
+        string OrnamentTexJson = LoadJson(JsonPath) ;
+     //   Debug.Log("OrnamentTexJson:" + OrnamentTexJson);
         return OrnamentTexJson;
     }
 
@@ -52,39 +52,28 @@ public class ReadTable : MonoBehaviour
 
     public string  ReadEnvironmentJson()
     {
-        string JsonPath = "Table/Environment.json";
-      //  User_Environment EnvironmentTexJson = new User_Environment();
-      string   EnvironmentTexJson = LoadJson<User_Environment>(JsonPath).ToString(); ;
-        Debug.Log(EnvironmentTexJson);
+        string JsonPath = "Table/Environment.json";      
+      string   EnvironmentTexJson = LoadJson(JsonPath) ;
+     //   Debug.Log("EnvironmentTexJson:"+EnvironmentTexJson);
         return EnvironmentTexJson;
     }
 
 
 
 
-    public void WriteJsonFile(string JsonPath) {
-
-
-
-       // string jstr = StreamReader
-
-    }
-
-
-    T LoadJson<T>(string loadPath)
+    string LoadJson(string loadPath)
     {
         string path = Path.Combine(Application.streamingAssetsPath, loadPath);
         if (File.Exists(path))
         {
-            string jstr = File.ReadAllText(path);
-
-            Debug.Log(jstr);
-            return JsonUtility.FromJson<T>(jstr);
+            string jstr = File.ReadAllText(path);           
+            return jstr;
+            //return JsonUtility.FromJson<T>(jstr);
 
         }
         else {
             Debug.LogError("读取的文件不存在！");
-            return default(T);
+            return null;
         }        
     }
 

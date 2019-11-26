@@ -151,9 +151,9 @@ namespace MeshTools
 		 */
 		void LoadIcons()
 		{
-			Texture2D VertexIcon = (Texture2D)(AssetDatabase.LoadAssetAtPath(EditorGUIUtility.isProSkin ? "Assets/ProCore/MeshTools/Gizmos/VertexIcon_Pro.png" : "Assets/ProCore/MeshTools/Gizmos/VertexIcon.png", typeof(Texture2D)));
-			Texture2D EdgeIcon = (Texture2D)(AssetDatabase.LoadAssetAtPath(EditorGUIUtility.isProSkin ? "Assets/ProCore/MeshTools/Gizmos/EdgeIcon_Pro.png" : "Assets/ProCore/MeshTools/Gizmos/EdgeIcon.png", typeof(Texture2D)));
-			Texture2D FaceIcon = (Texture2D)(AssetDatabase.LoadAssetAtPath(EditorGUIUtility.isProSkin ? "Assets/ProCore/MeshTools/Gizmos/FaceIcon_Pro.png" : "Assets/ProCore/MeshTools/Gizmos/FaceIcon.png", typeof(Texture2D)));
+			Texture2D VertexIcon = (Texture2D)(AssetDatabase.LoadAssetAtPath(EditorGUIUtility.isProSkin ? "Assets/ProCore/MeshTools/Gizmos/VertexIcon_Pro" : "Assets/ProCore/MeshTools/Gizmos/VertexIcon", typeof(Texture2D)));
+			Texture2D EdgeIcon = (Texture2D)(AssetDatabase.LoadAssetAtPath(EditorGUIUtility.isProSkin ? "Assets/ProCore/MeshTools/Gizmos/EdgeIcon_Pro" : "Assets/ProCore/MeshTools/Gizmos/EdgeIcon", typeof(Texture2D)));
+			Texture2D FaceIcon = (Texture2D)(AssetDatabase.LoadAssetAtPath(EditorGUIUtility.isProSkin ? "Assets/ProCore/MeshTools/Gizmos/FaceIcon_Pro" : "Assets/ProCore/MeshTools/Gizmos/FaceIcon", typeof(Texture2D)));
 
 			if( VertexIcon != null && EdgeIcon != null && FaceIcon != null)
 			{

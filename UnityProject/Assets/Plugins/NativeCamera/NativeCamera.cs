@@ -135,7 +135,7 @@ public static class NativeCamera
 		{
 			if( m_iOSSelectedImagePath == null )
 			{
-				m_iOSSelectedImagePath = Path.Combine( Application.temporaryCachePath, "tmp.png" );
+				m_iOSSelectedImagePath = Path.Combine( Application.temporaryCachePath, "tmp" );
 				Directory.CreateDirectory( Application.temporaryCachePath );
 			}
 
@@ -357,7 +357,7 @@ public static class NativeCamera
 				if( mimeType.Length == 0 )
 				{
 					String extension = Path.GetExtension( imagePath ).ToLowerInvariant();
-					if( extension == ".png" )
+					if( extension == "" )
 						mimeType = "image/png";
 					else if( extension == ".jpg" || extension == ".jpeg" )
 						mimeType = "image/jpeg";

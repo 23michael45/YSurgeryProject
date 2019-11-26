@@ -177,7 +177,7 @@ public class User
         currentModel = new User_Model();
         //currentModel = currentProfile.model;
 
-        Debug.Log(currentModel);
+       // Debug.Log(currentModel);
 
         currentModel.role= new User_Role();
 
@@ -198,10 +198,7 @@ public class User
         currentModel.Ornament.cloth = new User_Ornaments.Cloth();
         currentModel.Ornament.ornament = new User_Ornaments.Ornament();
          
-        Debug.Log(Application.streamingAssetsPath);
-
-
-
+      
              
     }
 

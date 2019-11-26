@@ -19,7 +19,7 @@ public class CanvasSampleOpenFileImage : MonoBehaviour, IPointerDownHandler {
     private static extern void UploadFile(string gameObjectName, string methodName, string filter, bool multiple);
 
     public void OnPointerDown(PointerEventData eventData) {
-        UploadFile(gameObject.name, "OnFileUpload", ".png, .jpg", false);
+        UploadFile(gameObject.name, "OnFileUpload", ", .jpg", false);
     }
 
     // Called from browser
@@ -38,7 +38,7 @@ public class CanvasSampleOpenFileImage : MonoBehaviour, IPointerDownHandler {
     }
 
     private void OnClick() {
-        var paths = StandaloneFileBrowser.OpenFilePanel("Title", "", ".png", false);
+        var paths = StandaloneFileBrowser.OpenFilePanel("Title", "", "", false);
         if (paths.Length > 0) {
             StartCoroutine(OutputRoutine(new System.Uri(paths[0]).AbsoluteUri));
         }

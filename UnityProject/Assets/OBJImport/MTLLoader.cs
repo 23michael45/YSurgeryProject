@@ -57,7 +57,7 @@ public class MTLLoader {
     private Texture2D TryLoadTexture(string texturePath, bool normalMap = false)
     {
         //swap directory seperator char
-        texturePath = texturePath.Replace('\\', Path.DirectorySeparatorChar);
+        texturePath = texturePath.Replace('/', Path.DirectorySeparatorChar);
         texturePath = texturePath.Replace('/', Path.DirectorySeparatorChar);
 
         return TextureLoadFunction(texturePath, normalMap);

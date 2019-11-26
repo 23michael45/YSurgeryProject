@@ -69,6 +69,8 @@ public class FouseFacePart : MonoBehaviour
 
     public void Start()
     {
+
+        faceAreaTextureChange = new FaceAreaTextureChange();
         foreheadItem.onValueChanged.AddListener(ison =>foreheadItem_chg());
         TempleItem.onValueChanged.AddListener(ison => TempleItem_chg());       
         BISjawItem.onValueChanged.AddListener(ison => BISjawItem_chg());
@@ -123,24 +125,24 @@ public class FouseFacePart : MonoBehaviour
 
 
     public void foreheadItem_chg( ){
-        string TexturePath = "FaceAreaPNG/01Shape/forehead.png";
+        string TexturePath = "FaceAreaPNG/01Shape/forehead";
         faceAreaTextureChange.ChangeFaceArea(TexturePath);       
     }
     
 
     public void TempleItem_chg()
     {
-        string TexturePath = "FaceAreaPNG/01Shape/Temple.png";
+        string TexturePath = "FaceAreaPNG/01Shape/Temple";
         faceAreaTextureChange.ChangeFaceArea(TexturePath);
     }    
     public void BISjawItem_chg()
     {
-        string TexturePath = "FaceAreaPNG/01Shape/BISjaw.png";
+        string TexturePath = "FaceAreaPNG/01Shape/BISjaw";
         faceAreaTextureChange.ChangeFaceArea(TexturePath);
     }
     public void ChinItem_chg()
     {
-        string TexturePath = "FaceAreaPNG/01Shape/Chin.png";
+        string TexturePath = "FaceAreaPNG/01Shape/Chin";
         faceAreaTextureChange.ChangeFaceArea(TexturePath);
     }
 
@@ -148,17 +150,17 @@ public class FouseFacePart : MonoBehaviour
 
     public void ApplemuscleItem_chg()
     {
-        string TexturePath = "FaceAreaPNG/02Face/Applemuscle.png";
+        string TexturePath = "FaceAreaPNG/02Face/Applemuscle";
         faceAreaTextureChange.ChangeFaceArea(TexturePath);
     }
     public void CheekbonesItem_chg()
     {
-        string TexturePath = "FaceAreaPNG/02Face/Cheekbones.png";
+        string TexturePath = "FaceAreaPNG/02Face/Cheekbones";
         faceAreaTextureChange.ChangeFaceArea(TexturePath);
     }
     public void FacialpartItem_chg()
     {
-        string TexturePath = "FaceAreaPNG/02Face/Facialpart.png";
+        string TexturePath = "FaceAreaPNG/02Face/Facialpart";
         faceAreaTextureChange.ChangeFaceArea(TexturePath);
     }
 
@@ -166,23 +168,23 @@ public class FouseFacePart : MonoBehaviour
 
     public void BrowbowItem_chg()
     {
-        string TexturePath = "FaceAreaPNG/03Eyebrow/Browbow.png";
+        string TexturePath = "FaceAreaPNG/03Eyebrow/Browbow";
         faceAreaTextureChange.ChangeFaceArea(TexturePath);       
         //Debug.Log(val);
     }
     public void BrowHeadItem_chg()
     {
-        string TexturePath = "FaceAreaPNG/03Eyebrow/BrowHead.png";
+        string TexturePath = "FaceAreaPNG/03Eyebrow/BrowHead";
         faceAreaTextureChange.ChangeFaceArea(TexturePath);               //Debug.Log(val);
     }
     public void BrowMiddleItem_chg( )
     {
-        string TexturePath = "FaceAreaPNG/03Eyebrow/BrowMiddle.png";
+        string TexturePath = "FaceAreaPNG/03Eyebrow/BrowMiddle";
         faceAreaTextureChange.ChangeFaceArea(TexturePath);               //Debug.Log(val);
     }
     public void BrowTailItem_chg( )
     {
-        string TexturePath = "FaceAreaPNG/03Eyebrow/BrowTail.png";
+        string TexturePath = "FaceAreaPNG/03Eyebrow/BrowTail";
         faceAreaTextureChange.ChangeFaceArea(TexturePath);
     }
 
@@ -192,37 +194,37 @@ public class FouseFacePart : MonoBehaviour
 
     public void EyecornerItem_chg( )
     {
-        string TexturePath = "FaceAreaPNG/04Eye/Eyecorner.png";
+        string TexturePath = "FaceAreaPNG/04Eye/Eyecorner";
         faceAreaTextureChange.ChangeFaceArea(TexturePath);
     }
     public void UppereyelidItem_chg( )
     {
-        string TexturePath = "FaceAreaPNG/04Eye/Uppereyelid.png";
+        string TexturePath = "FaceAreaPNG/04Eye/Uppereyelid";
         faceAreaTextureChange.ChangeFaceArea(TexturePath);
     }
     public void DoublefoldEyelidsItem_chg()
     {
-        string TexturePath = "FaceAreaPNG/04Eye/DoublefoldEyelids.png";
+        string TexturePath = "FaceAreaPNG/04Eye/DoublefoldEyelids";
         faceAreaTextureChange.ChangeFaceArea(TexturePath);
     }
     public void lowereyelidItem_chg()
     {
-        string TexturePath = "FaceAreaPNG/04Eye/lowereyelid.png";
+        string TexturePath = "FaceAreaPNG/04Eye/lowereyelid";
         faceAreaTextureChange.ChangeFaceArea(TexturePath);
     }    
     public void EyebagItem_chg()
     {
-        string TexturePath = "FaceAreaPNG/04Eye/Eyebag.png";
+        string TexturePath = "FaceAreaPNG/04Eye/Eyebag";
         faceAreaTextureChange.ChangeFaceArea(TexturePath);
     }
     public void EyetailItem_chg()
     {
-        string TexturePath = "FaceAreaPNG/04Eye/Eyetail.png";
+        string TexturePath = "FaceAreaPNG/04Eye/Eyetail";
         faceAreaTextureChange.ChangeFaceArea(TexturePath);
     }
     public void BlackeyeItem_chg()
     {
-        string TexturePath = "FaceAreaPNG/04Eye/Blackeye.png";
+        string TexturePath = "FaceAreaPNG/04Eye/Blackeye";
         faceAreaTextureChange.ChangeFaceArea(TexturePath);
     }
 
@@ -232,37 +234,37 @@ public class FouseFacePart : MonoBehaviour
 
     public void UpperbridgeItem_chg()
     {
-        string TexturePath = "FaceAreaPNG/05nose/Upperbridge.png";
+        string TexturePath = "FaceAreaPNG/05nose/Upperbridge";
         faceAreaTextureChange.ChangeFaceArea(TexturePath);
     }
     public void InferiorbridgeItem_chg()
     {
-        string TexturePath = "FaceAreaPNG/05nose/Inferiorbridge.png";
+        string TexturePath = "FaceAreaPNG/05nose/Inferiorbridge";
         faceAreaTextureChange.ChangeFaceArea(TexturePath);
     }
     public void NoseheadItem_chg()
     {
-        string TexturePath = "FaceAreaPNG/05nose/Nosehead.png";
+        string TexturePath = "FaceAreaPNG/05nose/Nosehead";
         faceAreaTextureChange.ChangeFaceArea(TexturePath);
     }
     public void ColumellaNasiItem_chg()
     {
-        string TexturePath = "FaceAreaPNG/05nose/ColumellaNasi.png";
+        string TexturePath = "FaceAreaPNG/05nose/ColumellaNasi";
         faceAreaTextureChange.ChangeFaceArea(TexturePath);
     }
     public void NasalBaseItem_chg()
     {
-        string TexturePath = "FaceAreaPNG/05nose/NasalBase.png";
+        string TexturePath = "FaceAreaPNG/05nose/NasalBase";
         faceAreaTextureChange.ChangeFaceArea(TexturePath);
     }
     public void NoseWingItem_chg()
     {
-        string TexturePath = "FaceAreaPNG/05nose/NoseWing.png";
+        string TexturePath = "FaceAreaPNG/05nose/NoseWing";
         faceAreaTextureChange.ChangeFaceArea(TexturePath);
     }
     public void NostrilItem_chg()
     {
-        string TexturePath = "FaceAreaPNG/05nose/Nostril.png";
+        string TexturePath = "FaceAreaPNG/05nose/Nostril";
         faceAreaTextureChange.ChangeFaceArea(TexturePath);
     }
 
@@ -272,32 +274,32 @@ public class FouseFacePart : MonoBehaviour
 
     public void upperlipItem_chg()
     {
-        string TexturePath = "FaceAreaPNG/06Mouth/upperlip.png";
+        string TexturePath = "FaceAreaPNG/06Mouth/upperlip";
         faceAreaTextureChange.ChangeFaceArea(TexturePath);
     }
     public void upperboneItem_chg()
     {
-        string TexturePath = "FaceAreaPNG/06Mouth/upperbone.png";
+        string TexturePath = "FaceAreaPNG/06Mouth/upperbone";
         faceAreaTextureChange.ChangeFaceArea(TexturePath);
     }
     public void downlipItem_chg()
     {
-        string TexturePath = "FaceAreaPNG/06Mouth/downlip.png";
+        string TexturePath = "FaceAreaPNG/06Mouth/downlip";
         faceAreaTextureChange.ChangeFaceArea(TexturePath);
     }
     public void downBoneItem_chg()
     {
-        string TexturePath = "FaceAreaPNG/06Mouth/downBone.png";
+        string TexturePath = "FaceAreaPNG/06Mouth/downBone";
         faceAreaTextureChange.ChangeFaceArea(TexturePath);
     }  
     public void MiddleItem_chg()
     {
-        string TexturePath = "FaceAreaPNG/06Mouth/Middle.png";
+        string TexturePath = "FaceAreaPNG/06Mouth/Middle";
         faceAreaTextureChange.ChangeFaceArea(TexturePath);
     }
     public void cornerItem_chg()
     {
-        string TexturePath = "FaceAreaPNG/06Mouth/corner.png";
+        string TexturePath = "FaceAreaPNG/06Mouth/corner";
         faceAreaTextureChange.ChangeFaceArea(TexturePath);
     }
 
@@ -306,17 +308,17 @@ public class FouseFacePart : MonoBehaviour
 
     //public void chestupperItem_chg()
     //{
-    //    string TexturePath = "FaceAreaPNG/01Shape/BISjaw.png";
+    //    string TexturePath = "FaceAreaPNG/01Shape/BISjaw";
     //    faceAreaTextureChange.ChangeFaceArea(TexturePath);
     //}
     //public void chesttopItem_chg()
     //{
-    //    string TexturePath = "FaceAreaPNG/01Shape/BISjaw.png";
+    //    string TexturePath = "FaceAreaPNG/01Shape/BISjaw";
     //    faceAreaTextureChange.ChangeFaceArea(TexturePath);
     //}
     //public void chestdownItem_chg()
     //{
-    //    string TexturePath = "FaceAreaPNG/01Shape/BISjaw.png";
+    //    string TexturePath = "FaceAreaPNG/01Shape/BISjaw";
     //    faceAreaTextureChange.ChangeFaceArea(TexturePath);
     //}
 
@@ -329,32 +331,32 @@ public class FouseFacePart : MonoBehaviour
 
     //public void neckItem_chg()
     //{
-    //    string TexturePath = "FaceAreaPNG/01Shape/BISjaw.png";
+    //    string TexturePath = "FaceAreaPNG/01Shape/BISjaw";
     //    faceAreaTextureChange.ChangeFaceArea(TexturePath);
     //}  
     //public void chestItem_chg()
     //{
-    //    string TexturePath = "FaceAreaPNG/01Shape/BISjaw.png";
+    //    string TexturePath = "FaceAreaPNG/01Shape/BISjaw";
     //    faceAreaTextureChange.ChangeFaceArea(TexturePath);
     //}
     //public void wristItem_chg()
     //{
-    //    string TexturePath = "FaceAreaPNG/01Shape/BISjaw.png";
+    //    string TexturePath = "FaceAreaPNG/01Shape/BISjaw";
     //    faceAreaTextureChange.ChangeFaceArea(TexturePath);
     //}    
     //public void hipItem_chg()
     //{
-    //    string TexturePath = "FaceAreaPNG/01Shape/BISjaw.png";
+    //    string TexturePath = "FaceAreaPNG/01Shape/BISjaw";
     //    faceAreaTextureChange.ChangeFaceArea(TexturePath);
     //}
     //public void LegItem_chg()
     //{
-    //    string TexturePath = "FaceAreaPNG/01Shape/BISjaw.png";
+    //    string TexturePath = "FaceAreaPNG/01Shape/BISjaw";
     //    faceAreaTextureChange.ChangeFaceArea(TexturePath);
     //}    
     //public void ArmItem_chg()
     //{
-    //    string TexturePath = "FaceAreaPNG/01Shape/BISjaw.png";
+    //    string TexturePath = "FaceAreaPNG/01Shape/BISjaw";
     //    faceAreaTextureChange.ChangeFaceArea(TexturePath);
     //}
 

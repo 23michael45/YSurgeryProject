@@ -36,7 +36,7 @@ public class CanvasSampleSaveFileImage : MonoBehaviour, IPointerDownHandler {
 
     // Broser plugin should be called in OnPointerDown.
     public void OnPointerDown(PointerEventData eventData) {
-        DownloadFile(gameObject.name, "OnFileDownload", "sample.png", _textureBytes, _textureBytes.Length);
+        DownloadFile(gameObject.name, "OnFileDownload", "sample", _textureBytes, _textureBytes.Length);
     }
 
     // Called from browser

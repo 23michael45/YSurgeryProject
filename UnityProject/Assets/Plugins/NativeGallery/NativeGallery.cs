@@ -139,7 +139,7 @@ public static class NativeGallery
 		{
 			if( m_iOSSelectedImagePath == null )
 			{
-				m_iOSSelectedImagePath = Path.Combine( Application.temporaryCachePath, "tmp.png" );
+				m_iOSSelectedImagePath = Path.Combine( Application.temporaryCachePath, "tmp" );
 				Directory.CreateDirectory( Application.temporaryCachePath );
 			}
 
@@ -230,10 +230,10 @@ public static class NativeGallery
 
 		if( filenameFormatted.EndsWith( ".jpeg" ) || filenameFormatted.EndsWith( ".jpg" ) )
 			return SaveToGallery( GetTextureBytes( image, true ), album, filenameFormatted, true, callback );
-		else if( filenameFormatted.EndsWith( ".png" ) )
+		else if( filenameFormatted.EndsWith( "" ) )
 			return SaveToGallery( GetTextureBytes( image, false ), album, filenameFormatted, true, callback );
 		else
-			return SaveToGallery( GetTextureBytes( image, false ), album, filenameFormatted + ".png", true, callback );
+			return SaveToGallery( GetTextureBytes( image, false ), album, filenameFormatted + "", true, callback );
 	}
 
 	public static Permission SaveVideoToGallery( byte[] mediaBytes, string album, string filenameFormatted, MediaSaveCallback callback = null )
@@ -598,7 +598,7 @@ public static class NativeGallery
 				if( mimeType.Length == 0 )
 				{
 					String extension = Path.GetExtension( imagePath ).ToLowerInvariant();
-					if( extension == ".png" )
+					if( extension == "" )
 						mimeType = "image/png";
 					else if( extension == ".jpg" || extension == ".jpeg" )
 						mimeType = "image/jpeg";

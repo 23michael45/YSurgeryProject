@@ -96,7 +96,7 @@ namespace Dummiesman
 
             switch (ext)
             {
-                case ".png":
+                case "":
                 case ".jpg":
                 case ".jpeg":
                     returnTex = new Texture2D(1, 1);

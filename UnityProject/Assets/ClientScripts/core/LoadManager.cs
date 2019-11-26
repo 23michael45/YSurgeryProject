@@ -33,12 +33,24 @@ public class LoadManager : MonoSingleton<LoadManager>
     public bool bButtomLoaded = false;
 
 
+    public bool isdemo = true;
+
+    public ReadTable readTable;
+
+    public string Scencejson;
+    public string Rolejson;
+    public string Deformjson;
+    public string Ornamentjson;
+    public string modelstring;
+    public string user;
+
+
+
 
     public void Start()
     {
         newUser();
-
-
+        Debug.Log(Application.persistentDataPath);
     }
 
 
@@ -52,12 +64,14 @@ public class LoadManager : MonoSingleton<LoadManager>
     public void LoadModel(string ModelString) {//加载模型
 
         DelData();//尝试删除场景中已有Face
+        Debug.Log(ModelString);
 
-
-        try {
-            modeldata = JsonUtility.FromJson<User_Model>(ModelString);
+        //  try {
+        modeldata = JsonUtility.FromJson<User_Model>(ModelString);
             TexturePath = modeldata.TexturePath.ToString();
+            Debug.Log(TexturePath);
             ModelPath = modeldata.ModelPath.ToString();
+            Debug.Log(ModelPath);
             Editable = (int)float.Parse(modeldata.ModelPath.ToString());
 
             try
@@ -88,9 +102,9 @@ public class LoadManager : MonoSingleton<LoadManager>
             {
                 print("路径中无模型");
             }
-        } catch {
+        //} catch {
 
-        }
+        //}
 
         Debug.Log("无法加载模型");
     }
@@ -104,7 +118,6 @@ public class LoadManager : MonoSingleton<LoadManager>
             modeldata = JsonUtility.FromJson<User_Model>(ModelString);
             Editable = (int)float.Parse(modeldata.ModelPath.ToString());
 
-
             if (modeldata.Editable == 0)
             {
 
@@ -116,16 +129,12 @@ public class LoadManager : MonoSingleton<LoadManager>
                 CalculateFullHead(face);//计算高模到低模
 
                 AppRoot.MainUser.currentModel.Editable = 2; //最好在保存full模型的时候改变
-
             }
-
             else
             {
                 
                 LoadEditableRoleInfo(modeldata); //加载可编辑模型信息
             }
-
-
 
         } catch {
 
@@ -134,9 +143,6 @@ public class LoadManager : MonoSingleton<LoadManager>
         }
 
         //newUser();//最终不需要此
-
-
-
     }
 
 
@@ -146,11 +152,28 @@ public class LoadManager : MonoSingleton<LoadManager>
         AppRoot.MainUser.Init();
 
         AppRoot.MainDeform = new Deform();
-        Debug.Log(cur_role);
+       // Debug.Log(cur_role);
         AppRoot.MainRole = cur_role;
         Debug.Log(AppRoot.MainRole);
         AppRoot.MainRole.Init();
+
+
+        ReadJsonTable();
     }
+
+
+
+    public void ReadJsonTable() {
+
+        readTable = new ReadTable();
+        Scencejson = readTable.ReadEnvironmentJson();
+        Rolejson = readTable.ReadRoleJson();
+        Deformjson = readTable.ReadDeformJson();
+        Ornamentjson = readTable.ReadOrnamentJson();
+        modelstring = readTable.ReadModelJson();
+
+    }
+
 
 
 
@@ -160,9 +183,9 @@ public class LoadManager : MonoSingleton<LoadManager>
     public void LoadEditableRoleInfo(User_Model modeldata)
     {
 
-        AppRoot.MainUser = new User();
-        AppRoot.MainUser.Init();
-        AppRoot.MainDeform = new Deform();
+        //AppRoot.MainUser = new User();
+        //AppRoot.MainUser.Init();
+        //AppRoot.MainDeform = new Deform();
 
 
         try
@@ -281,6 +304,7 @@ public class LoadManager : MonoSingleton<LoadManager>
             string Scenejson = JsonUtility.ToJson(AppRoot.MainUser.currentProfile.environment);
 
             sendMessage.SaveScencejson(Scenejson);
+
             Debug.Log(Scenejson);
         }
         catch {
@@ -304,6 +328,12 @@ public class LoadManager : MonoSingleton<LoadManager>
 
             Debug.Log(Rolejson);
             sendMessage.SaveRolejson(Rolejson);
+
+            if (isdemo == true)
+            {
+                string savepath = "Table/Role.json";
+                SaveJson(savepath, Rolejson);
+            }
         }
         catch
         {
@@ -325,7 +355,13 @@ public class LoadManager : MonoSingleton<LoadManager>
             sendMessage.SaveDeformAs(Deformjson);
 
             Debug.Log(Deformjson);
-            
+
+            if (isdemo == true)
+            {
+                string savepath = "Table/Deform.json";
+                SaveJson(savepath, Deformjson);
+            }
+
         }
         catch
         {
@@ -350,6 +386,12 @@ public class LoadManager : MonoSingleton<LoadManager>
             sendMessage.SaveDeformAs(Deformjson);           
 
             Debug.Log(Deformjson);
+
+            if (isdemo == true)
+            {
+                string savepath = "Table/Deform.json";
+                SaveJson(savepath, Deformjson);
+            }
 
         }
         catch
@@ -376,6 +418,13 @@ public class LoadManager : MonoSingleton<LoadManager>
             string Ornamentjson = JsonUtility.ToJson(AppRoot.MainUser.currentModel.Ornament);
             sendMessage.SaveOrnamentjson(Ornamentjson);
             Debug.Log(Ornamentjson);
+
+            if (isdemo == true) {
+                string savepath = "Table/Ornament.json";
+                SaveJson(savepath, Ornamentjson);
+            } 
+
+
         }
         catch
         {
@@ -385,16 +434,15 @@ public class LoadManager : MonoSingleton<LoadManager>
     }
 
 
-    void SaveJson<T>(string savePath, T obj)
-    {
-        string jstr = JsonUtility.ToJson(obj);
-        File.WriteAllText(Path.Combine(Application.dataPath, savePath), jstr);
+    void SaveJson(string savePath, string obj)    {
+       
+        File.WriteAllText(Path.Combine(Application.streamingAssetsPath, savePath), obj);
     }
 
 
     T LoadJson<T>(string loadPath)
     {
-        string jstr = File.ReadAllText(Path.Combine(Application.dataPath, loadPath));
+        string jstr = File.ReadAllText(Path.Combine(Application.streamingAssetsPath , loadPath));
         return JsonUtility.FromJson<T>(jstr);
 
     }

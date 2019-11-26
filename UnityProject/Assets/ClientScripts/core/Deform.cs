@@ -460,7 +460,7 @@ public class Deform : MonoBehaviour
 
         DeformBoneScale("face_brow_Lf_joint3", Sacle);
         DeformBoneScale("face_brow_Rt_joint3", Sacle);
-        Debug.Log(xx);
+       // Debug.Log(xx);
 
     }
     public void SetBrowTailSwitch(Vector4  xx)   //
@@ -486,7 +486,7 @@ public class Deform : MonoBehaviour
         DeformBoneScale("face_brow_Rt_joint4", Sacle);
         DeformBoneScale("face_brow_Rt_joint5", Sacle);
 
-        Debug.Log(xx);
+       // Debug.Log(xx);
     }
 
 

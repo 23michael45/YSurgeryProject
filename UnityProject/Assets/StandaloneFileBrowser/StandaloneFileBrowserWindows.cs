@@ -123,8 +123,8 @@ namespace SFB {
 
         private static string GetDirectoryPath(string directory) {
             var directoryPath = Path.GetFullPath(directory);
-            if (!directoryPath.EndsWith("\\")) {
-                directoryPath += "\\";
+            if (!directoryPath.EndsWith("/")) {
+                directoryPath += "/";
             }
             if (Path.GetPathRoot(directoryPath) == directoryPath) {
                 return directory;

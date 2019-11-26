@@ -113,7 +113,7 @@ public class UploadPhoto : MonoBehaviour
                 jstr = data;
 
                 print(jstr);
-                jstr = jstr.Replace("\\\"", "\"");
+                jstr = jstr.Replace("/\"", "\"");
                 jstr = jstr.Replace("\"{\"", "{\"");
                 jstr = jstr.Replace("\"}\"", "\"}");
                 print(jstr);
