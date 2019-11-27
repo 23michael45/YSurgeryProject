@@ -16,7 +16,12 @@ MonoBehaviour:
   m_Data:
     m_SerializedData: []
   m_GUID: b003319caf9b67e4e821839604095281
-  m_SerializeEntries: []
+  m_SerializeEntries:
+  - m_GUID: 85b1f6e5a23c4974fb1d862293d89a0c
+    m_Address: Assets/Art/Models/LowMesh/stanardmodelfull_skin_zero.FBX
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - template
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: d00d0109c0ab0f249b9ecb2dc6fe9966, type: 2}
   m_SchemaSet:
