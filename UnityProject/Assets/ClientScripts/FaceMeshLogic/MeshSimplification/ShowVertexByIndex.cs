@@ -10,6 +10,8 @@ public class ShowVertexByIndex : MonoBehaviour
     public GameObject mPrefab;
 
     List<GameObject> mHandlers = new List<GameObject>();
+
+    public int mVertexIndex = -1;
     private void Start()
     {
         Clear();
@@ -46,8 +48,34 @@ public class ShowVertexByIndex : MonoBehaviour
             int index = mSelectIndices[i];
             mHandlers[i].name = index.ToString();
 
-            Vector3 lpos = GetComponent<MeshFilter>().sharedMesh.vertices[index];
-            mHandlers[i].transform.position = transform.localToWorldMatrix.MultiplyPoint(lpos);
+            MeshFilter mf = GetComponent<MeshFilter>();
+            if(mf)
+            {
+
+                Vector3 lpos = mf.sharedMesh.vertices[index];
+                mHandlers[i].transform.position = transform.localToWorldMatrix.MultiplyPoint(lpos);
+            }
+
+            SkinnedMeshRenderer smr = GetComponent<SkinnedMeshRenderer>();
+            if (smr)
+            {
+                Vector3 lpos = smr.sharedMesh.vertices[index];
+                mHandlers[i].transform.position = transform.localToWorldMatrix.MultiplyPoint(lpos);
+
+
+            }
+        }
+
+        
+        if(mVertexIndex >= 0)
+        {
+            SkinnedMeshRenderer smr = GetComponent<SkinnedMeshRenderer>();
+            if(smr)
+            {
+                Vector2 uv = smr.sharedMesh.uv[mVertexIndex];
+                Debug.Log(string.Format("u: {0}  v:{1}", uv.x, uv.y));
+
+            }
         }
     }
 

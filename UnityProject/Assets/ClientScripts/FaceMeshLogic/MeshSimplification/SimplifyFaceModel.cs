@@ -59,18 +59,20 @@ public class SimplifyFaceModel : MonoBehaviour
 
         Vector3[] vertices;
         Vector2[] uvs;
+        Vector2[] uvInRegion;
         int[] indices;
-        CalculateDeformedMesh(loadPath, hdDeformed, ldMean, m_LDMeanFaceMesh, out vertices, out uvs, out indices);
+        CalculateDeformedMesh(loadPath, hdDeformed, ldMean, m_LDMeanFaceMesh, out vertices, out uvs, out uvInRegion, out indices);
 
 
 
         Mesh ldDeformedMesh = new Mesh();
         ldDeformedMesh.vertices = vertices;
         ldDeformedMesh.uv = uvs;
+        ldDeformedMesh.uv2 = uvInRegion;
         ldDeformedMesh.triangles = indices;
         m_LDDeformedFaceMesh.GetComponent<MeshFilter>().sharedMesh = ldDeformedMesh;
     }
-    public void CalculateDeformedMesh(string loadPath, Mesh hdDeformedMesh, Mesh ldMeanMesh, Transform ldMeanTransform, out Vector3[] vertices, out Vector2[] uvs, out int[] indices)
+    public void CalculateDeformedMesh(string loadPath, Mesh hdDeformedMesh, Mesh ldMeanMesh, Transform ldMeanTransform, out Vector3[] vertices, out Vector2[] uvs, out Vector2[] uvInRegion, out int[] indices)
     {
         Dictionary<int, int> l2hDict;
         LoadHLMapJson(loadPath, out l2hDict);
@@ -81,6 +83,10 @@ public class SimplifyFaceModel : MonoBehaviour
         Vector3[] ldVertices = new Vector3[ldMeanMesh.vertices.Length];
         Vector2[] ldUVs = new Vector2[ldMeanMesh.vertices.Length];
 
+
+        uvInRegion = new Vector2[ldMeanMesh.vertices.Length];
+
+        Debug.Log("Low Mesh Vertices Count:" + ldVertices.Length);
         for (int i = 0; i < ldVertices.Length; i++)
         {
             if (l2hDict.ContainsKey(i))
@@ -96,13 +102,39 @@ public class SimplifyFaceModel : MonoBehaviour
 
                 ldVertices[lowIndex] = lpos;
                 //ldVertices[lowIndex] = wpos;
-                ldUVs[lowIndex] = DeformedUVs[highIndex];
+                ldVertices[lowIndex] = ldMeanMesh.vertices[i];
+
+
+                Vector2 uv = DeformedUVs[highIndex];
+                if (uv.x < 0)
+                {
+                    uv.x = -uv.x;
+                }
+                //  if(uv.y < 0)
+                // {
+                //     uv.y +=1;
+                // }
+                ldUVs[lowIndex] = uv;
+
+                uvInRegion[lowIndex] = new Vector2(1, 1);
             }
             else
             {
                 ldVertices[i] = ldMeanMesh.vertices[i];
                 //ldVertices[i] = Vector3.zero;
-                ldUVs[i] = ldMeanMesh.uv[i];
+
+
+                Vector2 uv = ldMeanMesh.uv[i];
+                // if(uv.x < 0)
+                // {
+                //     uv.x +=1;
+                // }
+                //  if(uv.y < 0)
+                // {
+                //     uv.y +=1;
+                // }
+                ldUVs[i] = uv;
+                uvInRegion[i] = new Vector2(0, 0);
             }
 
         }
@@ -392,6 +424,97 @@ public class SimplifyFaceModel : MonoBehaviour
 
     }
 
+    public void CalculateCorrespondingLowMeshUVFromHighMesh(string savePath)
+    {
+        StartCoroutine(CalculateCorrespondingLowMeshUVFromHighMeshCoroutine(savePath));
+    }
+    public IEnumerator CalculateCorrespondingLowMeshUVFromHighMeshCoroutine(string savePath)
+    {
+        Mesh LDMeanMesh = new Mesh();
+        MeshFilter lmf = m_LDMeanFaceMesh.GetComponent<MeshFilter>();
+        if (lmf)
+        {
+            LDMeanMesh = lmf.sharedMesh;
+        }
+        SkinnedMeshRenderer lsmr = m_LDMeanFaceMesh.GetComponent<SkinnedMeshRenderer>();
+        if (lsmr)
+        {
+            LDMeanMesh = lsmr.sharedMesh;
+        }
+        Mesh HDMeanMesh = m_HDMeanFaceMesh.GetComponent<MeshFilter>().sharedMesh;
+
+        Mesh newLowMesh = Instantiate(LDMeanMesh);
+
+
+        Vector3[] lowVertices = LDMeanMesh.vertices;
+        Vector3[] highVertices = HDMeanMesh.vertices;
+        Vector2[] lowuv = LDMeanMesh.uv;
+        Vector2[] highuv = HDMeanMesh.uv;
+
+        for (int lowIndex = 0; lowIndex < lowVertices.Length; lowIndex++)
+        {
+            Vector3 lowVertex = lowVertices[lowIndex];
+            Vector3 wlowVertex = m_LDMeanFaceMesh.localToWorldMatrix.MultiplyPoint(lowVertex);
+
+            float minDist = float.MaxValue;
+            int minHighIndex = -1;
+            Vector3 minHighVertex = Vector3.zero;
+            Vector3 minWHighVertex = Vector3.zero;
+
+            //Debug.Log("Low Vertex" + lowVertex);
+
+            for (int highIndex = 0; highIndex < highVertices.Length; highIndex++)
+            {
+                Vector3 highVertex = highVertices[highIndex];
+                Vector3 whighVertex = m_HDMeanFaceMesh.localToWorldMatrix.MultiplyPoint(highVertex);
+
+                float dist = Vector3.Distance(whighVertex, wlowVertex);
+
+
+                if (dist < minDist)
+                {
+                    minDist = dist;
+                    minHighIndex = highIndex;
+                    minHighVertex = highVertex;
+                    minWHighVertex = whighVertex;
+                }
+            }
+
+
+            if (minDist < 10f)
+            {
+                //Debug.Log(string.Format("mindist {2} lowIndex {0} highIndex {1}", lowIndex, minHighIndex,minDist));
+                Vector2 uv = highuv[minHighIndex];
+                if (uv.x < 0)
+                {
+                    uv.x = -uv.x;
+                }
+                lowuv[lowIndex] = uv;
+            }
+
+            yield return new WaitForEndOfFrame();
+
+            Debug.Log(lowIndex);
+        }
+
+        newLowMesh.uv = lowuv;
+
+
+        MeshFilter mf = gameObject.GetComponent<MeshFilter>();
+        if (mf)
+        {
+            mf.sharedMesh = newLowMesh;
+
+        }
+        SkinnedMeshRenderer smr = gameObject.GetComponent<SkinnedMeshRenderer>();
+        if (smr)
+        {
+            smr.sharedMesh = newLowMesh;
+
+        }
+
+        UnityFBXExporter.FBXExporter.ExportGameObjToFBX(gameObject, Path.Combine(Application.dataPath, savePath));
+    }
 
     public void RebindDeformedBone(string loadPath)
     {

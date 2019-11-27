@@ -14,6 +14,7 @@ public class MeshSimplificationEditor : Editor
     string mLoadLD2HDJsonPath = "../correspondingHDLDIndices.json";
     string mLoadBoneIndexJsonPath = "../boneIndexMap.json";
 
+    string mSaveMeshPath = "../lowMeshWithUV.fbx";
 
     public override void OnInspectorGUI()
     {
@@ -51,6 +52,15 @@ public class MeshSimplificationEditor : Editor
             parentObj.CalculateBoneCorresponding(mSaveBoneIndexJsonPath);
         }
 
+
+        EditorGUILayout.Separator();
+
+        EditorGUILayout.LabelField("Save Corresponding Low Mesh with UV From High Mesh");
+        mSaveMeshPath = EditorGUILayout.TextField(mSaveMeshPath);
+        if (GUILayout.Button("Corresponding Low Mesh with UV From High Mesh", EditorStyles.miniButtonRight))
+        {
+            parentObj.CalculateCorrespondingLowMeshUVFromHighMesh(mSaveMeshPath);
+        }
 
         EditorGUILayout.Separator();
 

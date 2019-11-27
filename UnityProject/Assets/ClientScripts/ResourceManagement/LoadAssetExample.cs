@@ -18,6 +18,9 @@ public class LoadAssetExample : MonoBehaviour
     public MeshFilter mShowLDMesh;
     public SkinnedMeshRenderer mShowLDSkinMesh;
 
+    public string mModelName = "/../Model/obama53149.obj";
+
+    public string mTextureName = "/../Model/obamaTexture.jpg";
     void Start()
     {
         //var op = Addressables.LoadAssetAsync<GameObject>(mAssetaddress);
@@ -42,7 +45,7 @@ public class LoadAssetExample : MonoBehaviour
         if (skinTransform)
         {
             SkinnedMeshRenderer ldSkinMesh = skinTransform.gameObject.GetComponent<SkinnedMeshRenderer>();
-            LoadHDMeshDefromedAndGenLowMesh(Application.dataPath + "/../Model/obama53149.obj", Application.dataPath + "/../Model/obamaTexture.jpg", ldSkinMesh, skinTransform, rootBoneTransform);
+            LoadHDMeshDefromedAndGenLowMesh(Path.Combine(Application.dataPath,mModelName) , Path.Combine(Application.dataPath,mTextureName), ldSkinMesh, skinTransform, rootBoneTransform);
 
         }
         else
@@ -63,7 +66,6 @@ public class LoadAssetExample : MonoBehaviour
         Texture2D tex = new Texture2D(2, 2);
         bool isLoaded = tex.LoadImage(byteArray);
 
-        deformedMeshObject.transform.GetChild(0).GetComponent<Renderer>().material.SetTexture("_MainTex", tex);
         deformedMeshObject.SetActive(false);
 
 
@@ -81,8 +83,9 @@ public class LoadAssetExample : MonoBehaviour
 
         Vector3[] vertices;
         Vector2[] uvs;
+        Vector2[] uvInRegion;
         int[] indices;
-        sf.CalculateDeformedMesh(jsonL2HPath, hdDeformedMesh, ldSkinMesh.sharedMesh, ldTransform, out vertices, out uvs, out indices);
+        sf.CalculateDeformedMesh(jsonL2HPath, hdDeformedMesh, ldSkinMesh.sharedMesh, ldTransform, out vertices, out uvs, out uvInRegion,out indices);
 
         Matrix4x4[] bindposes;
         BoneWeight[] weights;
@@ -93,7 +96,11 @@ public class LoadAssetExample : MonoBehaviour
 
         Mesh lowDeformedSkinMesh = new Mesh();
         lowDeformedSkinMesh.vertices = vertices;
+
+        //uv分两通道 区域内用计算出的，区域外用低模自身的
         lowDeformedSkinMesh.uv = uvs;
+        lowDeformedSkinMesh.uv2 = uvInRegion;
+
         lowDeformedSkinMesh.triangles = indices;
 
         lowDeformedSkinMesh.bindposes = bindposes;
@@ -153,6 +160,9 @@ public class LoadAssetExample : MonoBehaviour
 
         mShowLDSkinMesh.bones = newBones;
         mShowLDSkinMesh.sharedMesh = lowDeformedSkinMesh;
+
+        
+        mShowLDSkinMesh.sharedMaterial.SetTexture("_MainTex", tex);
 
 
         mShowLDMesh.sharedMesh = lowDeformedSkinMesh;
