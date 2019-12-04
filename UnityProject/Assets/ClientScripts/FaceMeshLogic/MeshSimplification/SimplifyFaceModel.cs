@@ -102,7 +102,7 @@ public class SimplifyFaceModel : MonoBehaviour
 
                 ldVertices[lowIndex] = lpos;
                 //ldVertices[lowIndex] = wpos;
-                ldVertices[lowIndex] = ldMeanMesh.vertices[i];
+                //ldVertices[lowIndex] = ldMeanMesh.vertices[i];
 
 
                 Vector2 uv = DeformedUVs[highIndex];
@@ -558,7 +558,7 @@ public class SimplifyFaceModel : MonoBehaviour
 
         }
 
-
+        //bindpose  计算一个vertex,在bone的局部坐标系的位置
         for (int i = 0; i < ldSkinMeanMesh.bones.Length; i++)
         {
             bindposes[i] = ldSkinMeanMesh.bones[i].worldToLocalMatrix * ldSkinMeanMesh.transform.localToWorldMatrix;

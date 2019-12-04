@@ -30,6 +30,8 @@ public class AndroidNative : IYSurgeryUnityListener
 
     static ListenerAdapter listenerAdapter;
 
+    public delegate string NativeCallFunc(string value);
+    Dictionary<string,NativeCallFunc> functionDict = new Dictionary<string, NativeCallFunc>();
     public AndroidNative()
     {
 
@@ -60,19 +62,46 @@ public class AndroidNative : IYSurgeryUnityListener
     }
 
     //call Android Function
-    public bool CallFromUnity(string sValue,string iValue)
+    public bool CallFromUnity(string funcName,string value)
     {
-        return CallJavaFunc<bool>("CallFromUnity",sValue,iValue);
+        return CallJavaFunc<bool>("CallFromUnity",funcName,value);
 
     }
 
     //Listen call From Android Java
-    public void onMessage(string sValue,string iValue)
+    public void onMessage(string funcName,string value)
     {
-        Debug.Log("Call From Android:" + sValue);
+        Debug.Log(string.Format("Call From Android funcName : {0}" ,funcName));
+        if(functionDict.ContainsKey(funcName))
+        {
+            functionDict[funcName](value);
+        }
+    }
 
 
-
+    public bool RegisterFunction(string funcName,NativeCallFunc func)
+    {
+        if(functionDict.ContainsKey(funcName))
+        {
+            return false;
+        }
+        else
+        {
+            functionDict.Add(funcName,func);
+            return true;
+        }
+    }
+    public bool UnregisterFunction(string funcName)
+    {
+        if(functionDict.ContainsKey(funcName))
+        {
+            functionDict.Remove(funcName);
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }
 
