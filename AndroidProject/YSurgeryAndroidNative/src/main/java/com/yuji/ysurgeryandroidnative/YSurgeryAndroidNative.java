@@ -16,7 +16,7 @@ import android.util.Log;
 import java.io.File;
 
 interface IYSurgeryUnityListener {
-    void onMessage(String sValue, int iValue);
+    String onMessage(String funcName, String value);
 }
 
 
@@ -34,15 +34,16 @@ public class YSurgeryAndroidNative {
     }
 
 
-    public boolean CallFromUnity(String sValue, int iValue) {
-        unityListener.onMessage(sValue, 1234);
-        return true;
+    public String CallFromUnity(String funcName, String Value) {
+        return unityListener.onMessage(funcName, Value);
     }
 
 
-    public void TestCallUnityFunction(String sValue, int iValue) {
+    public String CallUnityFunction(String funcName, String value) {
 
-        unityListener.onMessage(sValue, 1234);
+        return unityListener.onMessage(funcName, value);
     }
+
+
 }
 
