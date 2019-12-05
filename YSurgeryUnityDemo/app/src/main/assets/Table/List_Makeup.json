@@ -1,0 +1,14 @@
+﻿[
+{
+"MakeupID": 1,
+"Sex":1,
+"shotcutImage":url,
+"MakeupAsset":path,
+},
+{
+"MakeupID": 2,
+"Sex":0,
+"shotcutImage":url,
+"MakeupAsset":path,
+}
+]

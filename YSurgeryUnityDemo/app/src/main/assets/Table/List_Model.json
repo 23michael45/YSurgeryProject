@@ -1,0 +1,20 @@
+﻿[
+{
+"ModelID": 1,
+"shotcutImage":url,
+"TexturePath":path,
+"ModelPath" :path,
+"Editable":1,
+"Sex":1,
+"BodyPath":path
+},
+{
+"ModelID": 2,
+"shotcutImage":url,
+"TexturePath":path,
+"ModelPath" :path,
+"Editable":0,
+"Sex":0,
+"BodyPath":path
+}
+]
