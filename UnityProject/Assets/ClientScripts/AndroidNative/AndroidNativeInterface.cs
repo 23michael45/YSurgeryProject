@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 [Serializable]
@@ -11,9 +12,14 @@ public class NativeToUnityParam
 
 public class AndroidNativeInterface : MonoBehaviour
 {
-    AndroidNative mAndroidNativeUtils = new AndroidNative();
-    void Awake()
+    public static AndroidNativeInterface Instance;
+    AndroidNative mAndroidNativeUtils;
+    void Start()
     {
+        BetterStreamingAssets.Initialize();
+        mAndroidNativeUtils = new AndroidNative();
+        Instance = this;
+
         mAndroidNativeUtils.RegisterFunction("CalculateLowPolyFace", CalculateLowPolyFace);
         mAndroidNativeUtils.RegisterFunction("LoadLowPolyFace", LoadLowPolyFace);
         mAndroidNativeUtils.RegisterFunction("SaveDeform", SaveDeform);
@@ -33,6 +39,12 @@ public class AndroidNativeInterface : MonoBehaviour
         mAndroidNativeUtils.UnregisterFunction("LoadAvatar");
     }
 
+    //call Android Function
+    public string CallFromUnity(string funcName, string value)
+    {
+        return mAndroidNativeUtils.CallFromUnity(funcName, value);
+
+    }
 
 
     /////////////////////////////////////////////////////////////////////////////////////////
@@ -65,10 +77,26 @@ public class AndroidNativeInterface : MonoBehaviour
     string LoadLowPolyFace(string value)
     {
         NativeToUnityParam param = JsonUtility.FromJson<NativeToUnityParam>(value);
-        string roleJson = param.paramlist[0];
+        string roleJsonPath = param.paramlist[0];
         string texturePath = param.paramlist[1];
 
-        bool ret = ModelDataManager.Instance.LoadLowPolyFace(roleJson, texturePath);
+        Debug.Log(string.Format("LoadLowPolyFace roleJsonPath：{0}   texturePath : {1}", roleJsonPath, texturePath));
+
+
+        //string roleJson = File.ReadAllText(roleJsonPath);
+        string roleJson = BetterStreamingAssets.ReadAllText(roleJsonPath);
+
+        //byte[] byteArray = File.ReadAllBytes(texturePath);
+        byte[] byteArray = BetterStreamingAssets.ReadAllBytes(texturePath);
+        Texture2D tex = new Texture2D(2, 2);
+        bool isLoaded = tex.LoadImage(byteArray);
+        if (!isLoaded)
+        {
+            return "False";
+        }
+
+
+        bool ret = ModelDataManager.Instance.LoadLowPolyFace(roleJson, tex);
 
         if (ret)
         {
@@ -94,7 +122,12 @@ public class AndroidNativeInterface : MonoBehaviour
     string LoadDeform(string value)
     {
         NativeToUnityParam param = JsonUtility.FromJson<NativeToUnityParam>(value);
-        string deformJson = param.paramlist[0];
+        string deformJsonPath = param.paramlist[0];
+
+        Debug.Log(string.Format("LoadDeform deformJsonPath：{0}", deformJsonPath));
+
+        //string deformJson = File.ReadAllText(deformJsonPath);
+        string deformJson = BetterStreamingAssets.ReadAllText(deformJsonPath);
 
         bool ret = ModelDataManager.Instance.LoadDeform(deformJson);
 

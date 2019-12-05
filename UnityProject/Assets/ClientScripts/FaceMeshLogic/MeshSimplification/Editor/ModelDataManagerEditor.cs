@@ -53,7 +53,16 @@ public class ModelDataManagerEditor : Editor
             string roleJsonPath = Path.Combine(Application.dataPath, mLoadRoleJsonFilePath);
 
             string roleJson = File.ReadAllText(roleJsonPath);
-            bool ret = parentObj.LoadLowPolyFace(roleJson, Path.Combine(Application.dataPath, mTextureFilePath));
+
+            string texPath = Path.Combine(Application.dataPath, mTextureFilePath);
+            byte[] byteArray = File.ReadAllBytes(texPath);
+            Texture2D tex = new Texture2D(2, 2);
+            bool isLoaded = tex.LoadImage(byteArray);
+            if(isLoaded)
+            {
+                bool ret = parentObj.LoadLowPolyFace(roleJson,tex);
+
+            }
 
 
         }

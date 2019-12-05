@@ -72,10 +72,12 @@ public class SimplifyFaceModel : MonoBehaviour
         ldDeformedMesh.triangles = indices;
         m_LDDeformedFaceMesh.GetComponent<MeshFilter>().sharedMesh = ldDeformedMesh;
     }
-    public void CalculateDeformedMesh(string loadPath, Mesh hdDeformedMesh, Mesh ldMeanMesh, Transform ldMeanTransform, out Vector3[] vertices, out Vector2[] uvs, out Vector2[] uvInRegion, out int[] indices)
+    public void CalculateDeformedMesh(string hlMapJson, Mesh hdDeformedMesh, Mesh ldMeanMesh, Transform ldMeanTransform, out Vector3[] vertices, out Vector2[] uvs, out Vector2[] uvInRegion, out int[] indices)
     {
         Dictionary<int, int> l2hDict;
-        LoadHLMapJson(loadPath, out l2hDict);
+
+        HLVertexMap hlMap = JsonUtility.FromJson<HLVertexMap>(hlMapJson);
+        LoadHLMapJson(hlMap, out l2hDict);
 
         Vector3[] DeformedVertices = hdDeformedMesh.vertices;
         Vector2[] DeformedUVs = hdDeformedMesh.uv;
@@ -524,7 +526,7 @@ public class SimplifyFaceModel : MonoBehaviour
         Matrix4x4[] bindposes;
         RebindBones(loadPath, hdDeformed, skinMesh.transform, skinMesh.bones, skinMesh.rootBone, out bindposes);
     }
-    public void RebindBones(string loadPath, Mesh hdDeformedMesh,Transform skinnedMeshRendererTransform, Transform[] bones, Transform parentBonesTransfrom, out Matrix4x4[] bindposes)
+    public void RebindBones(string boneIndexJson, Mesh hdDeformedMesh,Transform skinnedMeshRendererTransform, Transform[] bones, Transform parentBonesTransfrom, out Matrix4x4[] bindposes)
     {
         Transform[] dstBonesHierarchy = parentBonesTransfrom.GetComponentsInChildren<Transform>();
         Dictionary<string, Transform> bonesMap = new Dictionary<string, Transform>();
@@ -535,7 +537,9 @@ public class SimplifyFaceModel : MonoBehaviour
 
 
         Dictionary<string, int> biMap;
-        LoadBoneIndexMap(loadPath, out biMap);
+
+        BoneIndexMap obj = JsonUtility.FromJson<BoneIndexMap>(boneIndexJson);
+        LoadBoneIndexMap(obj, out biMap);
 
 
         Vector3[] DeformedVertices = hdDeformedMesh.vertices;
@@ -679,6 +683,10 @@ public class SimplifyFaceModel : MonoBehaviour
     void LoadHLMapJson(string loadPath, out Dictionary<int, int> l2hDict)
     {
         HLVertexMap hlMap = LoadJson<HLVertexMap>(loadPath);
+        LoadHLMapJson(hlMap,out l2hDict);
+    }
+    void LoadHLMapJson(HLVertexMap hlMap, out Dictionary<int, int> l2hDict)
+    {
         l2hDict = new Dictionary<int, int>();
         foreach (var item in hlMap.items)
         {
@@ -703,7 +711,11 @@ public class SimplifyFaceModel : MonoBehaviour
     }
     void LoadBoneIndexMap(string loadPath, out Dictionary<string, int> biMap)
     {
-        BoneIndexMap obj = LoadJson<BoneIndexMap>(loadPath);
+        BoneIndexMap hlMap = LoadJson<BoneIndexMap>(loadPath);
+        LoadBoneIndexMap(hlMap, out biMap);
+    }
+    void LoadBoneIndexMap(BoneIndexMap obj, out Dictionary<string, int> biMap)
+    {
         biMap = new Dictionary<string, int>();
         foreach (var item in obj.items)
         {

@@ -197,8 +197,8 @@ public class ModelDataManager : MonoBehaviour
     string lowMeshTempalteTextureName = "LowMeshTemplateTexture";
 
     GameObject mLowMeshTemplate;
-    string jsonL2HPath;
-    string jsonBoneMapPath;
+    string correspondingHDLDIndicesJson;
+    string boneIndexMapJson;
 
     SkinnedMeshRenderer mSkinnedMeshRenderer;
     public MeshFilter mDebugMeshFilter;
@@ -210,8 +210,8 @@ public class ModelDataManager : MonoBehaviour
     void Start()
     {
 
-        jsonL2HPath = Path.Combine(Application.streamingAssetsPath, "Json/correspondingHDLDIndices.json");
-        jsonBoneMapPath = Path.Combine(Application.streamingAssetsPath, "Json/boneIndexMap.json");
+        correspondingHDLDIndicesJson = BetterStreamingAssets.ReadAllText("Json/correspondingHDLDIndices.json");
+        boneIndexMapJson = BetterStreamingAssets.ReadAllText("Json/boneIndexMap.json");
 
         var opGo = Addressables.LoadAssetAsync<GameObject>(lowMeshTempalteModelName);
         opGo.Completed += OnLoadTemplateMeshDone;
@@ -237,7 +237,9 @@ public class ModelDataManager : MonoBehaviour
     }
     void OnLoadTemplateTextureDone(AsyncOperationHandle<Texture2D> obj)
     {
-        var tex = GameObject.Instantiate(obj.Result);
+        //Texture don't Instantiate
+        //var tex = GameObject.Instantiate(obj.Result);
+        var tex = obj.Result;
         Material mat = new Material(Shader.Find("Unlit/Texture"));
         mat.SetTexture("_MainTex", tex);
         mSkinnedMeshRenderer.sharedMaterial = mat;
@@ -368,7 +370,7 @@ public class ModelDataManager : MonoBehaviour
         Vector2[] uvs;
         Vector2[] uvInRegion;
         int[] indices;
-        sf.CalculateDeformedMesh(jsonL2HPath, hdDeformedMesh, mSkinnedMeshRenderer.sharedMesh, skinTransform, out vertices, out uvs, out uvInRegion, out indices);
+        sf.CalculateDeformedMesh(correspondingHDLDIndicesJson, hdDeformedMesh, mSkinnedMeshRenderer.sharedMesh, skinTransform, out vertices, out uvs, out uvInRegion, out indices);
 
         Transform[] newBones;
         Transform newParentBoneTransform;
@@ -379,7 +381,7 @@ public class ModelDataManager : MonoBehaviour
 
         Matrix4x4[] bindposes;
         BoneWeight[] weights;
-        sf.RebindBones(jsonBoneMapPath, hdDeformedMesh, mSkinnedMeshRenderer.transform, newBones, newParentBoneTransform, out bindposes);
+        sf.RebindBones(boneIndexMapJson, hdDeformedMesh, mSkinnedMeshRenderer.transform, newBones, newParentBoneTransform, out bindposes);
         
         Mesh lowDeformedSkinMesh = new Mesh();
         lowDeformedSkinMesh.vertices = vertices;
@@ -420,7 +422,7 @@ public class ModelDataManager : MonoBehaviour
     }
 
 
-    public bool LoadLowPolyFace(string roleJson, string texturePath)
+    public bool LoadLowPolyFace(string roleJson, Texture2D tex)
     {
         bool ret = RoleJson.Load(roleJson, ref mSkinnedMeshRenderer,ref mDebugMeshFilter);
         if (!ret)
@@ -428,13 +430,6 @@ public class ModelDataManager : MonoBehaviour
             return false;
         }
 
-        byte[] byteArray = File.ReadAllBytes(texturePath);
-        Texture2D tex = new Texture2D(2, 2);
-        bool isLoaded = tex.LoadImage(byteArray);
-        if (!isLoaded)
-        {
-            return false;
-        }
 
         Material material = new Material(Shader.Find("Unlit/Texture"));
         material.SetTexture("_MainTex", tex);
