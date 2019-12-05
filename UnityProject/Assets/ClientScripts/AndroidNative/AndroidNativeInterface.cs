@@ -84,7 +84,7 @@ public class AndroidNativeInterface : MonoBehaviour
     //return :  json字符串，deformJson数据
     string SaveDeform(string value)
     {
-        return "";
+        return ModelDataManager.Instance.SaveDeform();
     }
 
 
@@ -95,7 +95,17 @@ public class AndroidNativeInterface : MonoBehaviour
     {
         NativeToUnityParam param = JsonUtility.FromJson<NativeToUnityParam>(value);
         string deformJson = param.paramlist[0];
-        return "";
+
+        bool ret = ModelDataManager.Instance.LoadDeform(deformJson);
+
+        if (ret)
+        {
+            return "True";
+        }
+        else
+        {
+            return "False";
+        }
     }
 
 

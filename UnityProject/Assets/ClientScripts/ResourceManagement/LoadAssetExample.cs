@@ -90,7 +90,7 @@ public class LoadAssetExample : MonoBehaviour
         Matrix4x4[] bindposes;
         BoneWeight[] weights;
 
-        sf.RebindBones(jsonBoneMapPath, hdDeformedMesh, ldSkinMesh, out bindposes, out weights);
+        sf.RebindBones(jsonBoneMapPath, hdDeformedMesh, ldSkinMesh.transform, ldSkinMesh.bones, ldSkinMesh.rootBone,out bindposes);
 
 
 
@@ -104,7 +104,7 @@ public class LoadAssetExample : MonoBehaviour
         lowDeformedSkinMesh.triangles = indices;
 
         lowDeformedSkinMesh.bindposes = bindposes;
-        lowDeformedSkinMesh.boneWeights = weights;
+        lowDeformedSkinMesh.boneWeights = ldSkinMesh.sharedMesh.boneWeights;
 
 
         

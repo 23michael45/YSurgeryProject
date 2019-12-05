@@ -522,13 +522,13 @@ public class SimplifyFaceModel : MonoBehaviour
 
         SkinnedMeshRenderer skinMesh = m_LDMeanFaceMesh.GetComponent<SkinnedMeshRenderer>();
         Matrix4x4[] bindposes;
-        BoneWeight[] weights;
-        RebindBones(loadPath, hdDeformed, skinMesh, out bindposes, out weights);
+        RebindBones(loadPath, hdDeformed, skinMesh.transform, skinMesh.bones, skinMesh.rootBone, out bindposes);
     }
-    public void RebindBones(string loadPath, Mesh hdDeformedMesh, SkinnedMeshRenderer ldSkinMeanMesh, out Matrix4x4[] bindposes, out BoneWeight[] weights)
+    public void RebindBones(string loadPath, Mesh hdDeformedMesh,Transform skinnedMeshRendererTransform, Transform[] bones, Transform parentBonesTransfrom, out Matrix4x4[] bindposes)
     {
+        Transform[] dstBonesHierarchy = parentBonesTransfrom.GetComponentsInChildren<Transform>();
         Dictionary<string, Transform> bonesMap = new Dictionary<string, Transform>();
-        foreach (Transform t in ldSkinMeanMesh.bones)
+        foreach (Transform t in dstBonesHierarchy)
         {
             bonesMap[t.name] = t;
         }
@@ -540,11 +540,10 @@ public class SimplifyFaceModel : MonoBehaviour
 
         Vector3[] DeformedVertices = hdDeformedMesh.vertices;
 
-
-        bindposes = ldSkinMeanMesh.sharedMesh.bindposes;
-        weights = ldSkinMeanMesh.sharedMesh.boneWeights;
-
-
+        //不能直接用bindposes,要new 出一份，否则会改变ldSkinMeanMesh
+        //bindposes = ldSkinMeanMesh.sharedMesh.bindposes;
+        bindposes = new Matrix4x4[bones.Length];
+        
         foreach (KeyValuePair<string, int> kv in biMap)
         {
             if (kv.Value != -1)
@@ -559,9 +558,9 @@ public class SimplifyFaceModel : MonoBehaviour
         }
 
         //bindpose  计算一个vertex,在bone的局部坐标系的位置
-        for (int i = 0; i < ldSkinMeanMesh.bones.Length; i++)
+        for (int i = 0; i < bones.Length; i++)
         {
-            bindposes[i] = ldSkinMeanMesh.bones[i].worldToLocalMatrix * ldSkinMeanMesh.transform.localToWorldMatrix;
+            bindposes[i] = bones[i].worldToLocalMatrix * skinnedMeshRendererTransform.localToWorldMatrix;
         }
     }
 

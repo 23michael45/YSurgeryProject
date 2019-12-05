@@ -14,6 +14,10 @@ public class ModelDataManagerEditor : Editor
     string mLoadRoleJsonFilePath = "../Model/obama53149_role.json";
     string mTextureFilePath = "../Model/obamaTexture.jpg";
 
+
+    string mSaveDeformFilePath = "../Model/obama53149_deform.json";
+    string mLoadDeformFilePath = "../Model/obama53149_deform.json";
+
     public override void OnInspectorGUI()
     {
         base.OnInspectorGUI();
@@ -59,6 +63,30 @@ public class ModelDataManagerEditor : Editor
         EditorGUILayout.Separator();
 
 
+        EditorGUILayout.LabelField("Save Deform File Path");
+        mSaveDeformFilePath = EditorGUILayout.TextField(mSaveDeformFilePath);
+        if (GUILayout.Button("Save Deform", EditorStyles.miniButtonRight))
+        {
+            string deformJsonPath = Path.Combine(Application.dataPath, mSaveDeformFilePath);
+
+            string deformJson = parentObj.SaveDeform();
+
+
+            File.WriteAllText(deformJsonPath,deformJson);
+        }
+
+        EditorGUILayout.LabelField("Load Deform File Path");
+        mLoadDeformFilePath = EditorGUILayout.TextField(mLoadDeformFilePath);
+        if (GUILayout.Button("Load Deform", EditorStyles.miniButtonRight))
+        {
+            string deformJsonPath = Path.Combine(Application.dataPath, mLoadDeformFilePath);
+
+            string deformJson = File.ReadAllText(deformJsonPath);
+            bool b = parentObj.LoadDeform(deformJson);
+            
+        }
+
+
         if (GUILayout.Button("RoleJson Save Load Skinned Test", EditorStyles.miniButtonRight))
         {
             parentObj.SaveLoadJsonTest(true);
@@ -66,6 +94,10 @@ public class ModelDataManagerEditor : Editor
         if (GUILayout.Button("RoleJson Save Load Filter Test", EditorStyles.miniButtonRight))
         {
             parentObj.SaveLoadJsonTest(false);
+        }
+        if (GUILayout.Button("Rebind Bone Test", EditorStyles.miniButtonRight))
+        {
+            parentObj.RebindBone();
         }
     }
 }
