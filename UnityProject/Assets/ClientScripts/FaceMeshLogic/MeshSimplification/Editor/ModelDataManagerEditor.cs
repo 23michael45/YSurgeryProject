@@ -34,7 +34,8 @@ public class ModelDataManagerEditor : Editor
 
         if (GUILayout.Button("CalculateLowPolyFace", EditorStyles.miniButtonRight))
         {
-            string json = parentObj.CalculateLowPolyFace(Path.Combine(Application.dataPath, mHDObjFilePath));
+            byte[] objData = File.ReadAllBytes(Path.Combine(Application.dataPath, mHDObjFilePath));
+            string json = parentObj.CalculateLowPolyFace(objData);
             File.WriteAllText(Path.Combine(Application.dataPath, mSaveRoleJsonFilePath), json);
         }
 

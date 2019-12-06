@@ -5,8 +5,6 @@ using Dummiesman;
 
 public class SendMessage : MonoBehaviour
 {
-    AndroidNative mAndroidNativeUtils;
-
     public string ClothPartjson;
     public string Scencejson;
     public string Makeupjson;
@@ -29,7 +27,6 @@ public class SendMessage : MonoBehaviour
     public void Start()
     {
         loadManager = new LoadManager();
-        mAndroidNativeUtils = new AndroidNative();
     }
 
 
@@ -130,7 +127,6 @@ public class SendMessage : MonoBehaviour
     //保存当前场景。。。。。。。
     public void SaveScencejson(string Scenejson)
     {
-        mAndroidNativeUtils.CallFromUnity("SaveScencejson", Scenejson);
     }
 
 
@@ -138,7 +134,6 @@ public class SendMessage : MonoBehaviour
     //保存模型信息。。。。。。。。。   
     public void SaveRolejson(string Rolejson)
     {
-        mAndroidNativeUtils.CallFromUnity("SaveRolejson", Rolejson);
     }
 
 
@@ -146,7 +141,6 @@ public class SendMessage : MonoBehaviour
     //保存当前编辑信息
     public void SaveDeformJson(string Deformjson)
     {
-        mAndroidNativeUtils.CallFromUnity("SaveDeformJson", Deformjson);
     }
 
 
@@ -154,7 +148,6 @@ public class SendMessage : MonoBehaviour
     //编辑另存为。。。。。。。
     public void SaveDeformAs(string Deformjson)
     {
-        mAndroidNativeUtils.CallFromUnity("SaveDeformAs", Deformjson);
     }
 
 
@@ -163,7 +156,6 @@ public class SendMessage : MonoBehaviour
     //保存当前配饰信息  包含发型、服装、化妆
     public void SaveOrnamentjson(string Ornamentjson)
     {       
-        mAndroidNativeUtils.CallFromUnity("SaveOrnamentjson", Ornamentjson);
     }
 
 

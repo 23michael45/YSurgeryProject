@@ -78,6 +78,7 @@ public static class BetterStreamingAssets
 
     public static System.IO.Stream OpenRead(string path)
     {
+        Debug.Log("BetterStreamingAssets OpenRead:" + path);
         if ( path == null )
             throw new ArgumentNullException("path");
         if ( path.Length == 0 )
@@ -497,6 +498,7 @@ public static class BetterStreamingAssets
 
         public static System.IO.Stream OpenRead(string path)
         {
+            Debug.Log("BetterStreamingAssets ApkImpl OpenRead:" + path);
             ReadInfo info;
             if ( !TryGetInfo(path, out info) )
                 ThrowFileNotFound(path);

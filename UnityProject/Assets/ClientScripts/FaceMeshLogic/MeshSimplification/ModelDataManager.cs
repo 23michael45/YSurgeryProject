@@ -343,22 +343,22 @@ public class ModelDataManager : MonoBehaviour
         }
     }
 
-    public string CalculateLowPolyFace(string hdObjPath)
+    public string CalculateLowPolyFace(byte[] hdObjData)
     {
         if (mLowMeshTemplate == null)
         {
             return null;
         }
-        
 
+        Debug.Log("CalculateLowPolyFace Start");
 
         mLowMeshTemplate.name = "LoadedAssetTemplateModel";
         Transform skinTransform = mSkinnedMeshRenderer.transform;
         Transform parentBoneTransform = mLowMeshTemplate.transform.Find("Reference");
 
 
-
-        GameObject deformedMeshObject = new OBJLoader().Load(hdObjPath);
+        Stream stream = new MemoryStream(hdObjData);
+        GameObject deformedMeshObject = new OBJLoader().Load(stream);
 
 
         
@@ -370,17 +370,28 @@ public class ModelDataManager : MonoBehaviour
         Vector2[] uvs;
         Vector2[] uvInRegion;
         int[] indices;
+
+
+        Debug.Log("CalculateLowPolyFace CalculateDeformedMesh");
+
+
         sf.CalculateDeformedMesh(correspondingHDLDIndicesJson, hdDeformedMesh, mSkinnedMeshRenderer.sharedMesh, skinTransform, out vertices, out uvs, out uvInRegion, out indices);
+
+
 
         Transform[] newBones;
         Transform newParentBoneTransform;
         Transform newRootBoneTransform;
+
+        Debug.Log("CalculateLowPolyFace CloneBoneHierarchy");
         CloneBoneHierarchy(parentBoneTransform, mSkinnedMeshRenderer.rootBone, mSkinnedMeshRenderer.bones, out newBones, out newParentBoneTransform, out newRootBoneTransform);
 
         
 
         Matrix4x4[] bindposes;
         BoneWeight[] weights;
+
+        Debug.Log("CalculateLowPolyFace RebindBones");
         sf.RebindBones(boneIndexMapJson, hdDeformedMesh, mSkinnedMeshRenderer.transform, newBones, newParentBoneTransform, out bindposes);
         
         Mesh lowDeformedSkinMesh = new Mesh();
@@ -414,27 +425,26 @@ public class ModelDataManager : MonoBehaviour
             mDebugMeshFilter.sharedMesh = lowDeformedSkinMesh;
         }
 
+        Debug.Log("CalculateLowPolyFace Start RoleJson Save");
         string roleJson = RoleJson.Save(lowDeformedSkinMesh, newBones);
         
         GameObject.Destroy(newParentBoneTransform.gameObject);
 
+        Debug.Log("CalculateLowPolyFace Return RoleJson");
         return roleJson;
     }
 
 
     public bool LoadLowPolyFace(string roleJson, Texture2D tex)
     {
-        bool ret = RoleJson.Load(roleJson, ref mSkinnedMeshRenderer,ref mDebugMeshFilter);
-        if (!ret)
+        if (tex != null)
         {
-            return false;
+            Material material = new Material(Shader.Find("Unlit/Texture"));
+            material.SetTexture("_MainTex", tex);
+            mSkinnedMeshRenderer.sharedMaterial = material;
+
         }
-
-
-        Material material = new Material(Shader.Find("Unlit/Texture"));
-        material.SetTexture("_MainTex", tex);
-        mSkinnedMeshRenderer.sharedMaterial = material;
-        return ret;
+        return RoleJson.Load(roleJson, ref mSkinnedMeshRenderer,ref mDebugMeshFilter);
     }
 
 
@@ -445,14 +455,16 @@ public class ModelDataManager : MonoBehaviour
 
     public bool LoadDeform(string deformJson)
     {
-        bool ret = DeformJson.Load(deformJson, ref mSkinnedMeshRenderer);
-        if (!ret)
-        {
-            return false;
-        }
+        return DeformJson.Load(deformJson, ref mSkinnedMeshRenderer);
+    }
 
+    public string SaveAvatar()
+    {
+        return DeformJson.Save(mSkinnedMeshRenderer);
+    }
 
-
-        return true;
+    public bool LoadAvatar(string avatarJson)
+    {
+        return DeformJson.Load(avatarJson, ref mSkinnedMeshRenderer);
     }
 }
