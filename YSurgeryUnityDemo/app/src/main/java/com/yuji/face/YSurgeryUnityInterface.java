@@ -3,7 +3,6 @@ package com.yuji.face;
 import android.app.Activity;
 import android.util.Log;
 
-import com.yuji.ysurgeryandroidnative.YSurgeryAndroidNative;
 
 import org.json.JSONException;
 import org.json.JSONObject;
