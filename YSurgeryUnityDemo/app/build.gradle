@@ -16,6 +16,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    aaptOptions {
+        noCompress = ['.unity3d', '.ress', '.resource', '.obb', 'aa/android/catalog.json', 'aa/android/link.xml', 'aa/android/settings.json', 'aa/android/android/defaultlocalgroup_assets_all_8608336334c9187ae2974c433c3d0e22.bundle', 'aa/android/android/defaultlocalgroup_unitybuiltinshaders_7b2fa6eafa5fea8e341c8f44b5822381.bundle', 'json/boneindexmap.json', 'json/correspondinghdldindices.json', 'json/correspondingregionindices.json', 'model/obama53149.obj', 'model/obama53149_deform.json', 'model/obama53149_role.json', 'model/obamatexture.jpg', 'table/cloth.json', 'table/deform.json', 'table/environment.json', 'table/listscence.json', 'table/list_cloth.json', 'table/list_makeup.json', 'table/list_model.json', 'table/makeup.json', 'table/model.json', 'table/ornament.json', 'table/role.json']
+    }
 }
 
 dependencies {
@@ -25,8 +29,4 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-    implementation files('libs/NativeCamera.jar')
-    implementation files('libs/NativeGallery.jar')
-    implementation files('libs/unity-classes.jar')
-    implementation files('libs/YSurgeryAndroidNative.jar')
 }
