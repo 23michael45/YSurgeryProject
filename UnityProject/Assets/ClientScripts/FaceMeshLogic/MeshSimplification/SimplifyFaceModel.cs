@@ -55,13 +55,14 @@ public class SimplifyFaceModel : MonoBehaviour
     public void CalculateDeformedMeshLD(string loadPath)
     {
         Mesh hdDeformed = m_LDDeformedFaceMesh.GetComponent<MeshFilter>().sharedMesh;
-        Mesh ldMean = m_LDMeanFaceMesh.GetComponent<MeshFilter>().sharedMesh;
+        MeshFilter deformedMeshFilter = m_LDMeanFaceMesh.GetComponent<MeshFilter>();
+        Mesh ldMean = deformedMeshFilter.sharedMesh;
 
         Vector3[] vertices;
         Vector2[] uvs;
         Vector2[] uvInRegion;
         int[] indices;
-        CalculateDeformedMesh(loadPath, hdDeformed, ldMean, m_LDMeanFaceMesh, out vertices, out uvs, out uvInRegion, out indices);
+        CalculateDeformedMesh(loadPath, hdDeformed, deformedMeshFilter.transform, ldMean, m_LDMeanFaceMesh, out vertices, out uvs, out uvInRegion, out indices);
 
 
 
@@ -72,7 +73,7 @@ public class SimplifyFaceModel : MonoBehaviour
         ldDeformedMesh.triangles = indices;
         m_LDDeformedFaceMesh.GetComponent<MeshFilter>().sharedMesh = ldDeformedMesh;
     }
-    public void CalculateDeformedMesh(string hlMapJson, Mesh hdDeformedMesh, Mesh ldMeanMesh, Transform ldMeanTransform, out Vector3[] vertices, out Vector2[] uvs, out Vector2[] uvInRegion, out int[] indices)
+    public void CalculateDeformedMesh(string hlMapJson, Mesh hdDeformedMesh,Transform hdDefromedTransfrom, Mesh ldMeanMesh, Transform ldMeanTransform, out Vector3[] vertices, out Vector2[] uvs, out Vector2[] uvInRegion, out int[] indices)
     {
         Dictionary<int, int> l2hDict;
 
@@ -98,7 +99,7 @@ public class SimplifyFaceModel : MonoBehaviour
                 int highIndex = l2hDict[i];
 
 
-                Vector3 wpos = DeformedVertices[highIndex];
+                Vector3 wpos = hdDefromedTransfrom.localToWorldMatrix.MultiplyPoint(DeformedVertices[highIndex]);
                 Vector3 lpos = ldMeanTransform.worldToLocalMatrix.MultiplyPoint(wpos);
 
 
@@ -108,14 +109,24 @@ public class SimplifyFaceModel : MonoBehaviour
 
 
                 Vector2 uv = DeformedUVs[highIndex];
-                if (uv.x < 0)
-                {
-                    uv.x = -uv.x;
-                }
-                //  if(uv.y < 0)
-                // {
-                //     uv.y +=1;
-                // }
+                
+                //if (uv.x < 0)
+                //{
+                //    uv.x = -uv.x;
+                //}
+                //if (uv.y < 0)
+                //{
+                //    uv.y = -uv.y;
+                //}
+
+                //if (uv.x > 1)
+                //{
+                //    uv.x = 1-uv.x;
+                //}
+                //if (uv.y > 1)
+                //{
+                //    uv.y = 1 - uv.y;
+                //}
                 ldUVs[lowIndex] = uv;
 
                 uvInRegion[lowIndex] = new Vector2(1, 1);
@@ -127,14 +138,24 @@ public class SimplifyFaceModel : MonoBehaviour
 
 
                 Vector2 uv = ldMeanMesh.uv[i];
-                // if(uv.x < 0)
-                // {
-                //     uv.x +=1;
-                // }
-                //  if(uv.y < 0)
-                // {
-                //     uv.y +=1;
-                // }
+                //uv.x = 1-uv.x;
+                //if (uv.x < 0)
+                //{
+                //    uv.x = -uv.x;
+                //}
+                //if (uv.y < 0)
+                //{
+                //    uv.y = -uv.y;
+                //}
+
+                //if (uv.x > 1)
+                //{
+                //    uv.x = 1 - uv.x;
+                //}
+                //if (uv.y > 1)
+                //{
+                //    uv.y = 1 - uv.y;
+                //}
                 ldUVs[i] = uv;
                 uvInRegion[i] = new Vector2(0, 0);
             }

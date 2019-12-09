@@ -26,7 +26,7 @@ public class RuntimeLoadObj : MonoBehaviour
 
 
         
-        GameObject gomesh = new OBJLoader().Load(filePath);
+        GameObject gomesh = new OBJLoader().Load(filePath,false);
         GameObject stage = GameObject.Find("Stage");  
 
         gomesh.transform.SetParent(stage.transform);

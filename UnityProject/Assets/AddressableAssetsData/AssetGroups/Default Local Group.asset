@@ -17,13 +17,13 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: b003319caf9b67e4e821839604095281
   m_SerializeEntries:
-  - m_GUID: 4396559b2c410f84ab374387c241c8c5
-    m_Address: LowMeshTemplateTexture
+  - m_GUID: d71eab925b003864ab9bb88abb32ebce
+    m_Address: LowMeshTemplateModelFull
     m_ReadOnly: 0
     m_SerializedLabels:
     - template
-  - m_GUID: 85b1f6e5a23c4974fb1d862293d89a0c
-    m_Address: LowMeshTemplateModel
+  - m_GUID: fef30bc9b1b401942aca9dbd48eb601d
+    m_Address: LowMeshTemplateModelHead
     m_ReadOnly: 0
     m_SerializedLabels:
     - template

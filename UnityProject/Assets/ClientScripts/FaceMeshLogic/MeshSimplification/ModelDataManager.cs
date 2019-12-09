@@ -1,4 +1,6 @@
-﻿using System;
+﻿#define USE_TEMPLATE_REF
+
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -192,9 +194,11 @@ public class ModelDataManager : MonoBehaviour
 
     public static ModelDataManager Instance;
 
-
-    string lowMeshTempalteModelName = "LowMeshTemplateModel";
-    string lowMeshTempalteTextureName = "LowMeshTemplateTexture";
+#if !USE_TEMPLATE_REF
+    string lowMeshTempalteModelName = "LowMeshTemplateModelHead";
+#else
+    public AssetReference mTempalteModelRef;
+#endif
 
     GameObject mLowMeshTemplate;
     string correspondingHDLDIndicesJson;
@@ -212,9 +216,13 @@ public class ModelDataManager : MonoBehaviour
 
         correspondingHDLDIndicesJson = BetterStreamingAssets.ReadAllText("Json/correspondingHDLDIndices.json");
         boneIndexMapJson = BetterStreamingAssets.ReadAllText("Json/boneIndexMap.json");
-
+#if !USE_TEMPLATE_REF
         var opGo = Addressables.LoadAssetAsync<GameObject>(lowMeshTempalteModelName);
         opGo.Completed += OnLoadTemplateMeshDone;
+#else
+        var opGo = mTempalteModelRef.LoadAssetAsync<GameObject>();
+        opGo.Completed += OnLoadTemplateMeshDone;
+#endif
 
 
     }
@@ -231,20 +239,8 @@ public class ModelDataManager : MonoBehaviour
 
         mSkinnedMeshRenderer = mLowMeshTemplate.transform.Find("head001").GetComponent<SkinnedMeshRenderer>();
 
-
-        var opTex = Addressables.LoadAssetAsync<Texture2D>(lowMeshTempalteTextureName);
-        opTex.Completed += OnLoadTemplateTextureDone;
+        
     }
-    void OnLoadTemplateTextureDone(AsyncOperationHandle<Texture2D> obj)
-    {
-        //Texture don't Instantiate
-        //var tex = GameObject.Instantiate(obj.Result);
-        var tex = obj.Result;
-        Material mat = new Material(Shader.Find("Unlit/Texture"));
-        mat.SetTexture("_MainTex", tex);
-        mSkinnedMeshRenderer.sharedMaterial = mat;
-    }
-
     public void SaveLoadJsonTest(bool skinned)
     {
         string json = "";
@@ -363,7 +359,8 @@ public class ModelDataManager : MonoBehaviour
 
         
         SimplifyFaceModel sf = new SimplifyFaceModel();
-        Mesh hdDeformedMesh = Instantiate(deformedMeshObject.GetComponentInChildren<MeshFilter>().sharedMesh);
+        MeshFilter defromedMeshFilter = deformedMeshObject.GetComponentInChildren<MeshFilter>();
+        Mesh hdDeformedMesh = Instantiate(defromedMeshFilter.sharedMesh);
         GameObject.Destroy(deformedMeshObject);
 
         Vector3[] vertices;
@@ -375,7 +372,7 @@ public class ModelDataManager : MonoBehaviour
         Debug.Log("CalculateLowPolyFace CalculateDeformedMesh");
 
 
-        sf.CalculateDeformedMesh(correspondingHDLDIndicesJson, hdDeformedMesh, mSkinnedMeshRenderer.sharedMesh, skinTransform, out vertices, out uvs, out uvInRegion, out indices);
+        sf.CalculateDeformedMesh(correspondingHDLDIndicesJson, hdDeformedMesh, defromedMeshFilter.transform, mSkinnedMeshRenderer.sharedMesh, skinTransform, out vertices, out uvs, out uvInRegion, out indices);
 
 
 

@@ -153,12 +153,17 @@ public class LoadManager : MonoSingleton<LoadManager>
 
         AppRoot.MainDeform = new Deform();
        // Debug.Log(cur_role);
-        AppRoot.MainRole = cur_role;
-        Debug.Log(AppRoot.MainRole);
-        AppRoot.MainRole.Init();
+
+        if(cur_role)
+        {
+            AppRoot.MainRole = cur_role;
+            Debug.Log(AppRoot.MainRole);
+            AppRoot.MainRole.Init();
+            ReadJsonTable();
+
+        }
 
 
-        ReadJsonTable();
     }
 
 

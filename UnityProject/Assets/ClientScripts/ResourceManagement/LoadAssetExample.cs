@@ -60,7 +60,7 @@ public class LoadAssetExample : MonoBehaviour
     void LoadHDMeshDefromedAndGenLowMesh(string modelPath, string texturePath, SkinnedMeshRenderer ldSkinMesh, Transform ldTransform,Transform rootBoneTransform)
     {
 
-        GameObject deformedMeshObject = new OBJLoader().Load(modelPath);
+        GameObject deformedMeshObject = new OBJLoader().Load(modelPath,false);
 
         byte[] byteArray = File.ReadAllBytes(texturePath);
         Texture2D tex = new Texture2D(2, 2);
@@ -73,19 +73,15 @@ public class LoadAssetExample : MonoBehaviour
         string jsonL2HPath = Path.Combine(Application.dataPath, "../correspondingHDLDIndices.json");
         string jsonBoneMapPath = Path.Combine(Application.dataPath, "../boneIndexMap.json");
 
-        Mesh hdDeformedMesh = deformedMeshObject.GetComponentInChildren<MeshFilter>().sharedMesh;
-
-        Vector3 testPos = hdDeformedMesh.vertices[0];
-        var p1 = deformedMeshObject.transform.TransformPoint(testPos);
-        var p2 = deformedMeshObject.transform.localToWorldMatrix.MultiplyPoint(testPos);
-
-
+        MeshFilter deformedMeshFilter = deformedMeshObject.GetComponentInChildren<MeshFilter>();
+        Mesh hdDeformedMesh = deformedMeshFilter.sharedMesh;
+        
 
         Vector3[] vertices;
         Vector2[] uvs;
         Vector2[] uvInRegion;
         int[] indices;
-        sf.CalculateDeformedMesh(jsonL2HPath, hdDeformedMesh, ldSkinMesh.sharedMesh, ldTransform, out vertices, out uvs, out uvInRegion,out indices);
+        sf.CalculateDeformedMesh(jsonL2HPath, hdDeformedMesh, deformedMeshFilter.transform, ldSkinMesh.sharedMesh, ldTransform, out vertices, out uvs, out uvInRegion,out indices);
 
         Matrix4x4[] bindposes;
         BoneWeight[] weights;

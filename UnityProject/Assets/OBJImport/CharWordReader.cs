@@ -89,20 +89,44 @@ namespace Dummiesman {
             }
             return new string(this.word, startIndex, this.wordSize - startIndex);
         }
-		
-		public Vector3 ReadVector() {
+
+        public Vector3 ReadVector()
+        {
+            this.SkipWhitespaces();
+            float x = this.ReadFloat();
+            this.SkipWhitespaces();
+            float y = this.ReadFloat();
+            this.SkipWhitespaces(out var newLinePassed);
+            float z = 0f;
+            if (newLinePassed == false)
+            {
+                z = this.ReadFloat();
+            }
+            return new Vector3(x, y, z);
+        }
+
+
+        public Vector3 ReadPosVector(bool bFlipX,bool bFlipZ) {
 			this.SkipWhitespaces();
 
-            //by michael , unity load obj file,x is flip
-			float x = this.ReadFloat() * -1;
+            //by michael , unity default obj load make obj file x flipped,like  pos 1,0,0 in obj file , in unity mesh it turns to -1,0,0
+            //I want face high detail mesh(obj load to unity mesh) ,  rotate 180 in y axis
+            //so from unity mesh (x,y,z)  rotate y 180 is (-x,y,-z)   x need *-1    z need *-1
+            //from obj file (x,y,z) , x is already flipped,   so only z need *-1
+            //then face will flipped,I need flip face either
+
+            float scaleX = bFlipX ? -1.0f : 1.0f;
+            float x = this.ReadFloat() * scaleX;
 			this.SkipWhitespaces();
 			float y = this.ReadFloat();
 			this.SkipWhitespaces(out var newLinePassed);
 			float z = 0f;
 			if (newLinePassed == false) {
 
-                //by michael , unity load obj file,z is flip to fit camera look direction
-                z = this.ReadFloat() * -1;
+                //by michael ,  so only z need *-1
+
+                float scaleZ = bFlipZ ? -1.0f : 1.0f;
+                z = this.ReadFloat() * scaleZ;
 			}
 			return new Vector3(x, y, z);
 		}

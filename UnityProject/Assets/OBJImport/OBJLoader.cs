@@ -66,7 +66,7 @@ namespace Dummiesman
                 {
                     SplitMode = SplitMode.Object,
                 };
-                loader.Load(pth);
+                loader.Load(pth,false);
 
                 Debug.Log($"OBJ import time: {s.ElapsedMilliseconds}ms");
                 s.Stop();
@@ -105,7 +105,7 @@ namespace Dummiesman
         /// </summary>
         /// <param name="input">Input OBJ stream</param>
         /// <returns>Returns a GameObject represeting the OBJ file, with each imported object as a child.</returns>
-        public GameObject Load(Stream input)
+        public GameObject Load(Stream input,bool bFlipX = false)
         {
             var reader = new StreamReader(input);
             //var reader = new StringReader(inputReader.ReadToEnd());
@@ -163,7 +163,7 @@ namespace Dummiesman
 				}
 				
 				if (buffer.Is("v")) {
-					Vertices.Add(buffer.ReadVector());
+					Vertices.Add(buffer.ReadPosVector(bFlipX,false));
 					continue;
 				}
 
@@ -256,6 +256,20 @@ namespace Dummiesman
                     }
 
                     //push to builder
+                    //by michael , we need flip face cause while load pos ,z is flipped
+                    //here face will flip
+
+                    if(bFlipX)
+                    {
+                        if (vertexIndices.Count == 3)
+                        {
+                            int temp = vertexIndices[1];
+                            vertexIndices[1] = vertexIndices[2];
+                            vertexIndices[2] = temp;
+                        }
+
+                    }
+
                     currentBuilder.PushFace(currentMaterial, vertexIndices, normalIndices, uvIndices);
 
                     //clear lists
@@ -270,9 +284,9 @@ namespace Dummiesman
             }
 
             //finally, put it all together
-            GameObject obj = new GameObject(_objInfo != null ? Path.GetFileNameWithoutExtension(_objInfo.Name) : "WavefrontObject");
+            GameObject obj = new GameObject(_objInfo != null ? Path.GetFileNameWithoutExtension(_objInfo.Name) : "OBJLoadeObject");
 
-            //by michael. obj x already fliped, donot need *-1 again
+            //by michael.  alrealy do flipped,int CharWordReader.cs,ReadPosVector function. so here do nothing
             //obj.transform.localScale = new Vector3(-1f, 1f, 1f);
 
 
@@ -295,7 +309,7 @@ namespace Dummiesman
         /// <param name="input">Input OBJ stream</param>
         /// /// <param name="mtlInput">Input MTL stream</param>
         /// <returns>Returns a GameObject represeting the OBJ file, with each imported object as a child.</returns>
-        public GameObject Load(Stream input, Stream mtlInput)
+        public GameObject Load(Stream input, Stream mtlInput, bool flipX)
         {
             var mtlLoader = new MTLLoader();
             Materials = mtlLoader.Load(mtlInput);
@@ -309,7 +323,7 @@ namespace Dummiesman
         /// <param name="path">Input OBJ path</param>
         /// /// <param name="mtlPath">Input MTL path</param>
         /// <returns>Returns a GameObject represeting the OBJ file, with each imported object as a child.</returns>
-        public GameObject Load(string path, string mtlPath)
+        public GameObject Load(string path, string mtlPath, bool flipX)
         {
             _objInfo = new FileInfo(path);
             if (!string.IsNullOrEmpty(mtlPath) && File.Exists(mtlPath))
@@ -319,14 +333,14 @@ namespace Dummiesman
 
                 using (var fs = new FileStream(path, FileMode.Open))
                 {
-                    return Load(fs);
+                    return Load(fs,flipX);
                 }
             }
             else
             {
                 using (var fs = new FileStream(path, FileMode.Open))
                 {
-                    return Load(fs);
+                    return Load(fs, flipX);
                 }
             }
         }
@@ -336,9 +350,9 @@ namespace Dummiesman
         /// </summary>
         /// <param name="path">Input OBJ path</param>
         /// <returns>Returns a GameObject represeting the OBJ file, with each imported object as a child.</returns>
-        public GameObject Load(string path)
+        public GameObject Load(string path,bool flipX)
         {
-            return Load(path, null);
+            return Load(path, null, flipX);
         }
     }
 }
