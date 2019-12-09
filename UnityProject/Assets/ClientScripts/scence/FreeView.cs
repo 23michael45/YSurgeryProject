@@ -17,13 +17,13 @@ public class FreeView : MonoBehaviour
     public Transform Target;  //观察目标 
 
     public float Target_z;
-    public float humanHigh=170;
+    public float humanHigh=1700;
 
 
-    public float Distance = 70f;  	//观察距离  
-    private float MaxDistance = 500;
-    private float MinDistance = 40f;  //鼠标缩放距离最值
-    public  float ZoomSpeed = 10f;  //鼠标缩放速率 
+    public float Distance = 830f;  	//观察距离  
+    private float MaxDistance = 1500;
+    private float MinDistance = 600f;  //鼠标缩放距离最值
+    public  float ZoomSpeed = 100f;  //鼠标缩放速率 
     
 
     private float SpeedX=10;  
@@ -68,33 +68,33 @@ public class FreeView : MonoBehaviour
 
     public void OnCameraHeadBtnClk() {
        
-        CameraSlider.value = 175;
-        Distance = 70f;
-        ZoomSpeed = 10f;
-        MinDistance = 40f;
-        MaxDistance = 500F;
+        CameraSlider.value = 1750;
+        Distance = 700f;
+        ZoomSpeed = 100f;
+        MinDistance = 400f;
+        MaxDistance = 5000F;
         Vector3 mPosition = mRotation * new Vector3(0.0F, 0F, -Distance) + Target.position;  //重新计算位置 
     }
 
 
     public void OnCamraHalfBtnClk() {
 
-        CameraSlider.value = humanHigh - 45f ;
-        Distance = 320;
-        ZoomSpeed = 12f;
+        CameraSlider.value = humanHigh - 450f ;
+        Distance = 3200;
+        ZoomSpeed = 120f;
 
-        MinDistance = 90f;
-        MaxDistance = 850F;
+        MinDistance = 900f;
+        MaxDistance = 6000F;
     }
 
     public void OnCamraAllBtnClk()
     {
 
-        CameraSlider.value = 82.5f;
-        Distance = 730;
-        ZoomSpeed = 16F;
-        MinDistance = 90F;
-        MaxDistance = 900f;
+        CameraSlider.value = 825f;
+        Distance = 6000;
+        ZoomSpeed = 160F;
+        MinDistance = 900F;
+        MaxDistance = 7000f;
     }
 
 
@@ -108,7 +108,7 @@ public class FreeView : MonoBehaviour
 		{    
       
 
-       CameraSlider.maxValue = humanHigh+20 ;
+       CameraSlider.maxValue = humanHigh+200 ;
         Target = targetobject.transform;
 
 		mX=transform.eulerAngles.x;  
