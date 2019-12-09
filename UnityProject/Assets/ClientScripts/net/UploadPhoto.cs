@@ -50,7 +50,8 @@ public class UploadPhoto : MonoBehaviour
 
     public Text loadText;
 
-
+    byte[] m_HDObjData;
+    Texture2D m_TextureData;
 
 
     public void uploadImgClick()
@@ -67,6 +68,9 @@ public class UploadPhoto : MonoBehaviour
 
     private IEnumerator UploadPNG()
     {
+
+        m_HDObjData = null;
+        m_TextureData = null;
 
         //usrfacephoto = Resources.Load("test") as Texture2D;   
 
@@ -113,9 +117,15 @@ public class UploadPhoto : MonoBehaviour
                 jstr = data;
 
                 print(jstr);
+                jstr = jstr.Replace("\\\"", "\"");
                 jstr = jstr.Replace("/\"", "\"");
                 jstr = jstr.Replace("\"{\"", "{\"");
                 jstr = jstr.Replace("\"}\"", "\"}");
+                jstr = jstr.Replace("\"{", "{");
+                jstr = jstr.Replace("}\"", "}");
+                jstr = jstr.Replace("\\\\n", "");
+                jstr = jstr.Replace("\\\\t", "");
+                jstr = jstr.Replace("\\\\", "");
                 print(jstr);
 
                 getjsoninfo(jstr);
@@ -123,6 +133,20 @@ public class UploadPhoto : MonoBehaviour
 
 
         }
+
+
+        while (m_HDObjData == null || m_TextureData == null)
+        {
+            yield return null;
+        }
+
+        string roleJson = ModelDataManager.Instance.CalculateLowPolyFace(m_HDObjData);
+
+        if (ModelDataManager.Instance.LoadLowPolyFace(roleJson, m_TextureData))
+        {
+            Debug.Log("Load Low Poly Success");
+        }
+
 
     }
 
@@ -186,87 +210,94 @@ public class UploadPhoto : MonoBehaviour
         yield return w;
         if (w.isDone)
         {
-
-            //提示字符
-            if (filetype == ".obj")  { loadText.text = "保存模型中";  }  else {}    
-
             byte[] model = w.bytes;
             int length = model.Length;
 
-            //文件流信息  
-               Stream sw;
+            //提示字符
+            if (filetype == ".obj")
+            {
+                loadText.text = "保存模型中";
+                m_HDObjData = w.bytes;
+            }
+            else
+            {
+                m_TextureData = w.texture;
+            }    
 
-                DirectoryInfo t = new DirectoryInfo(localpath);
-                if (!t.Exists)
-                    {
-                    //如果此文件夹不存在则创建  
-                    t.Create();
-                     }
-                FileInfo j = new FileInfo(localpath + name + filetype);
-                if (!j.Exists)
-                {
-                    //如果此文件不存在则创建  
-                    sw = j.Create();
-                }
-                else
-                {
-                    //如果此文件存在则打开  
-                    sw = j.OpenWrite();
-                }
-                sw.Write(model, 0, length);
-                //关闭流  
-                sw.Close();
-                //销毁流  
-                sw.Dispose();
+
+            ////文件流信息  
+            //   Stream sw;
+
+            //    DirectoryInfo t = new DirectoryInfo(localpath);
+            //    if (!t.Exists)
+            //        {
+            //        //如果此文件夹不存在则创建  
+            //        t.Create();
+            //         }
+            //    FileInfo j = new FileInfo(localpath + name + filetype);
+            //    if (!j.Exists)
+            //    {
+            //        //如果此文件不存在则创建  
+            //        sw = j.Create();
+            //    }
+            //    else
+            //    {
+            //        //如果此文件存在则打开  
+            //        sw = j.OpenWrite();
+            //    }
+            //    sw.Write(model, 0, length);
+            //    //关闭流  
+            //    sw.Close();
+            //    //销毁流  
+            //    sw.Dispose();
 
 
             //写文件后加载模型      
 
 
         }
-         yield return null;
+        // yield return null;
 
-        if (filetype == ".obj")
-        {
+        //if (filetype == ".obj")
+        //{
 
-            loadText.text = "下载完毕，显示模型到场景 ";
+        //    loadText.text = "下载完毕，显示模型到场景 ";
 
-            GameObject face = RuntimeLoadObj.RutimeLoadObj(localpath  + name + filetype);
-            Debug.Log(face);
+        //    GameObject face = RuntimeLoadObj.RutimeLoadObj(localpath  + name + filetype);
+        //    Debug.Log(face);
 
-            if (face.transform.childCount!= 0)
-            {
-                face.GetComponentInChildren<MeshRenderer>().material = faematerial;
+        //    if (face.transform.childCount!= 0)
+        //    {
+        //        face.GetComponentInChildren<MeshRenderer>().material = faematerial;
 
-                //关闭拍照页，进入主页面
-                GameObject.Find("Stage").GetComponent<ActiveScene>().closeFirstpage();
-            }
-            else {
+        //        //关闭拍照页，进入主页面
+        //        GameObject.Find("Stage").GetComponent<ActiveScene>().closeFirstpage();
+        //    }
+        //    else {
 
-            }            
+        //    }            
 
-        }
+        //}
+        //else 
+        //{
+        //    Facetexture = w.texture;
 
-        else 
-        {
-            Facetexture = w.texture;
+        //    Debug.Log(localpath +  name);
 
-            Debug.Log(localpath +  name);
+        //    Debug.Log(Facetexture);
 
-            Debug.Log(Facetexture);
-
-            if (Facetexture != null)
-            {
-                faematerial.mainTexture= Facetexture;
-            }
-            else
-            {
-
-
-            }           
+        //    if (Facetexture != null)
+        //    {
+        //        faematerial.mainTexture= Facetexture;
+        //    }
+        //    else
+        //    {
 
 
-        }
+        //    }           
+
+
+        //}
 
 
     }
