@@ -4518,6 +4518,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1854187410664688767}
   - component: {fileID: 5183437595279884182}
+  - component: {fileID: 5061886803487173694}
   m_Layer: 0
   m_Name: LowMeshTemplateModelFull
   m_TagString: Untagged
@@ -4566,6 +4567,29 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &5061886803487173694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4821179854661311311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f06609af2faa974f8dbaff52beb0a49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parts: []
+  Makeupparts: []
+  rootBoneParent: {fileID: 7535315610119605661}
+  _head: {fileID: 7737490802182604348}
+  _body: {fileID: 0}
+  _eyes: {fileID: 0}
+  _eyelash: {fileID: 0}
+  _finger: {fileID: 0}
+  Rolein: {fileID: 4821179854661311311}
+  RoleID: 0
+  Deform: {fileID: 0}
 --- !u!1 &4895780934776491096
 GameObject:
   m_ObjectHideFlags: 0

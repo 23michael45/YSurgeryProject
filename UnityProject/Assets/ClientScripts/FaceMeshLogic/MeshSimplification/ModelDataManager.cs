@@ -239,7 +239,10 @@ public class ModelDataManager : MonoBehaviour
 
         mSkinnedMeshRenderer = mLowMeshTemplate.transform.Find("head001").GetComponent<SkinnedMeshRenderer>();
 
-        
+
+        Role role = mLowMeshTemplate.GetComponent<Role>();
+        LoadManager.Instance.newUser(role);
+
     }
     public void SaveLoadJsonTest(bool skinned)
     {

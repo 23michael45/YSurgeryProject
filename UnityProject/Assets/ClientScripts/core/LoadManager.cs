@@ -49,7 +49,6 @@ public class LoadManager : MonoSingleton<LoadManager>
 
     public void Start()
     {
-        newUser();
         Debug.Log(Application.persistentDataPath);
     }
 
@@ -146,17 +145,17 @@ public class LoadManager : MonoSingleton<LoadManager>
     }
 
 
-    public void newUser() {
+    public void newUser(Role newRole) {
         ///初始化可编辑模型信息。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。
         AppRoot.MainUser = new User();
         AppRoot.MainUser.Init();
 
         AppRoot.MainDeform = new Deform();
-       // Debug.Log(cur_role);
-
-        if(cur_role)
+        // Debug.Log(cur_role);
+        AppRoot.MainDeform.ratio = 0.1f;
+        if (newRole)
         {
-            AppRoot.MainRole = cur_role;
+            AppRoot.MainRole = newRole;
             Debug.Log(AppRoot.MainRole);
             AppRoot.MainRole.Init();
             ReadJsonTable();
