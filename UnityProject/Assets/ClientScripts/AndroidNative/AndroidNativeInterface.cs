@@ -132,15 +132,22 @@ public class AndroidNativeInterface : MonoBehaviour
         Instance = this;
         BetterStreamingAssets.Initialize();
 
+        try
+        {
+
+            javaUnityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
+            currentActivity = javaUnityPlayer.GetStatic<AndroidJavaObject>("currentActivity");
+            androidPlugin = new AndroidJavaObject("com.yuji.face.YSurgeryUnityInterface", currentActivity);
 
 
-        javaUnityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
-        currentActivity = javaUnityPlayer.GetStatic<AndroidJavaObject>("currentActivity");
-        androidPlugin = new AndroidJavaObject("com.yuji.face.YSurgeryUnityInterface", currentActivity);
+            listenerAdapter = new ListenerAdapter();
+            CallJavaFunc("SetUnityListener", listenerAdapter);
 
-
-        listenerAdapter = new ListenerAdapter();
-        CallJavaFunc("SetUnityListener", listenerAdapter);
+        }
+        catch(Exception e)
+        {
+            Debug.Log("AndroidNativeInterface Init Failed");
+        }
 
     }
 

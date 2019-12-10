@@ -82,40 +82,7 @@ public class AppMain : MonoSingleton<AppMain>
 #region Version
      
     
-    IEnumerator LoadVersion()
-    {
-        //不写这句IOS可能CRASH
-        yield return new WaitForEndOfFrame();
-#if UNITY_EDITOR
 
-        string versionfilepath = "file://" + Application.streamingAssetsPath + "/version.bytes";
-#else
-        string versionfilepath = AssetBundlePlatformPathManager.GetStreamingAssetsPathForWWW("/version.bytes");
-#endif
-
-        WWW w = new WWW(versionfilepath);
-        yield return w;
-
-        byte[] arr = w.bytes;
-
-        System.Text.UnicodeEncoding converter = new System.Text.UnicodeEncoding();
-        string str = converter.GetString(arr);
-        long ticks = Convert.ToInt64(str);
-		Lversion = ticks;
-        DateTime dt = new DateTime(ticks);
-        version = dt.ToString("yyyy-MM-dd-HH-mm-ss");
-
-
-        //if (File.Exists(versionfilepath))
-        //{
-        //    FileStream fs = new FileStream(versionfilepath, FileMode.Open);
-        //    byte[] farr = new byte[fs.Length];
-        //    fs.Read(farr, 0, farr.Length);
-        //    fs.Close();
-
-        //    version = converter.GetString(farr);
-        //}
-    }
     public string GetVersion()
     {
         return version;

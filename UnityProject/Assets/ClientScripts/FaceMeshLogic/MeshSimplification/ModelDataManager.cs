@@ -606,11 +606,14 @@ public class ModelDataManager : MonoBehaviour
 
     public bool LoadLowPolyFace(string roleJson, Texture2D tex)
     {
+
+        Debug.Log("Start LoadLowPolyFace");
         if (tex != null)
         {
             mSkinnedMeshRenderer.sharedMaterial.SetTexture("_MainTex", tex);
 
         }
+        Debug.Log("Start RoleJson Load");
         RoleJson roleJsonData = RoleJson.Load(roleJson, ref mSkinnedMeshRenderer,ref mDebugMeshFilter);
 
         //to do select model body by gender,height ,weight

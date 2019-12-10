@@ -16,17 +16,7 @@ MonoBehaviour:
   m_Data:
     m_SerializedData: []
   m_GUID: b003319caf9b67e4e821839604095281
-  m_SerializeEntries:
-  - m_GUID: d71eab925b003864ab9bb88abb32ebce
-    m_Address: LowMeshTemplateModelFull
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - template
-  - m_GUID: fef30bc9b1b401942aca9dbd48eb601d
-    m_Address: LowMeshTemplateModelHead
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - template
+  m_SerializeEntries: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: d00d0109c0ab0f249b9ecb2dc6fe9966, type: 2}
   m_SchemaSet:

@@ -120,11 +120,11 @@ public class UploadPhoto : MonoBehaviour
 
         }
 
-
         while (m_HDObjData == null || m_TextureData == null)
         {
             yield return null;
         }
+        Debug.Log("Obj and Tex Downloaded");
 
         string roleJson = ModelDataManager.Instance.CalculateLowPolyFace(m_HDObjData,gender,height,weight);
 
