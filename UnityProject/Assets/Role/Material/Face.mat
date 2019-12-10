@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Face
-  m_Shader: {fileID: 10752, guid: 0000000000000000f000000000000000, type: 0}
+  m_Shader: {fileID: 4800000, guid: 5c6ee782c0193da42823dfc3e90175fa, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -20,7 +20,11 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _AreaTex:
-        m_Texture: {fileID: 2800000, guid: bf8da89efe15c09478aecfeadf423b5d, type: 3}
+        m_Texture: {fileID: 2800000, guid: 2415e89aaa5be1c429b68118776aeb15, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _BodyTatoo:
+        m_Texture: {fileID: 2800000, guid: c2cce3bf6c0be004ca7283877235a1ca, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
@@ -43,6 +47,34 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _EyeBrow:
+        m_Texture: {fileID: 2800000, guid: c2cce3bf6c0be004ca7283877235a1ca, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EyeLash:
+        m_Texture: {fileID: 2800000, guid: c2cce3bf6c0be004ca7283877235a1ca, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EyeShadow:
+        m_Texture: {fileID: 2800000, guid: c2cce3bf6c0be004ca7283877235a1ca, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _FaceTatoo:
+        m_Texture: {fileID: 2800000, guid: c2cce3bf6c0be004ca7283877235a1ca, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Foundation:
+        m_Texture: {fileID: 2800000, guid: c2cce3bf6c0be004ca7283877235a1ca, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Hair:
+        m_Texture: {fileID: 2800000, guid: 3d1c4283aa30591469f93bef5cdb98f9, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Lip:
+        m_Texture: {fileID: 2800000, guid: c2cce3bf6c0be004ca7283877235a1ca, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _MainTex:
         m_Texture: {fileID: 2800000, guid: 7af0cb78b5d48ce419c593a4b2de4eb5, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -57,6 +89,14 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _ParallaxMap:
         m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Pupil:
+        m_Texture: {fileID: 2800000, guid: c2cce3bf6c0be004ca7283877235a1ca, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Shadow:
+        m_Texture: {fileID: 2800000, guid: c2cce3bf6c0be004ca7283877235a1ca, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:

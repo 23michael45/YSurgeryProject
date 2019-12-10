@@ -17,7 +17,7 @@ public class FreeView : MonoBehaviour
     public Transform Target;  //观察目标 
 
     public float Target_z;
-    public float humanHigh=1700;
+    public float humanHigh=300;
 
 
     public float Distance = 830f;  	//观察距离  
