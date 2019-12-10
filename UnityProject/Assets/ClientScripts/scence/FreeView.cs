@@ -17,8 +17,7 @@ public class FreeView : MonoBehaviour
     public Transform Target;  //观察目标 
 
     public float Target_z;
-    public float humanHigh=300;
-
+    public float humanHigh=0;
 
     public float Distance = 830f;  	//观察距离  
     private float MaxDistance = 1500;
@@ -68,7 +67,7 @@ public class FreeView : MonoBehaviour
 
     public void OnCameraHeadBtnClk() {
        
-        CameraSlider.value = 1750;
+        CameraSlider.value = humanHigh;
         Distance = 700f;
         ZoomSpeed = 100f;
         MinDistance = 400f;
@@ -90,7 +89,7 @@ public class FreeView : MonoBehaviour
     public void OnCamraAllBtnClk()
     {
 
-        CameraSlider.value = 825f;
+        CameraSlider.value = humanHigh-850f;
         Distance = 6000;
         ZoomSpeed = 160F;
         MinDistance = 900F;
@@ -108,7 +107,7 @@ public class FreeView : MonoBehaviour
 		{    
       
 
-       CameraSlider.maxValue = humanHigh+200 ;
+       CameraSlider.maxValue = humanHigh ;
         Target = targetobject.transform;
 
 		mX=transform.eulerAngles.x;  

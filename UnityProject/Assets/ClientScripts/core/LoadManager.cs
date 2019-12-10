@@ -66,7 +66,7 @@ public class LoadManager : MonoSingleton<LoadManager>
         Debug.Log(ModelString);
 
         //  try {
-        modeldata = JsonUtility.FromJson<User_Model>(ModelString);
+            modeldata = JsonUtility.FromJson<User_Model>(ModelString);
             TexturePath = modeldata.TexturePath.ToString();
             Debug.Log(TexturePath);
             ModelPath = modeldata.ModelPath.ToString();
@@ -114,6 +114,7 @@ public class LoadManager : MonoSingleton<LoadManager>
         
 
         try {
+            // 加载role.json   deform.json;
             modeldata = JsonUtility.FromJson<User_Model>(ModelString);
             Editable = (int)float.Parse(modeldata.ModelPath.ToString());
 
