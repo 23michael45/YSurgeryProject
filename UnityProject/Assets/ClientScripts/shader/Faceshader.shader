@@ -13,7 +13,7 @@
 		_Lip ("_Lip", 2D) = "white" {}
 		_FaceTatoo ("_FaceTatoo", 2D) = "white" {}	
 
-		_AreaTex ("Texture", 2D) = "white" {}
+		_AreaTex ("_AreaTex", 2D) = "white" {}
 		
     }
     SubShader
@@ -97,7 +97,7 @@
 			    fixed4 Mix_all = Mix_FaceTatoo;
 				fixed4 Area = tex2D(_AreaTex, i.uv);		
 
-				fixed4 col = lerp(Mix_all, Area, Area.a);
+				fixed4 col = lerp(Mix_all, Area, Area.a/3);
 				
 
                 // apply fog

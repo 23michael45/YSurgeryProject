@@ -18,8 +18,7 @@ public class ActiveScene : MonoBehaviour
     public Button SaveButton;
     public Button BackButton;
     public GameObject Backwindow;
-
-
+        
     public Button win_saveButton, win_saveAsButton, win_CancleButton, win_AbortButton;
 
     public LoadManager loadManager;
@@ -67,8 +66,12 @@ public class ActiveScene : MonoBehaviour
         loadManager.SaveOrnamentjson();
 
         View_UI.SetActive(true);
-        Edit_UI.SetActive(false);
 
+        Edit_UI.SetActive(false);
+        Backwindow.SetActive(false);
+        Edit_UI.GetComponent<FouseFacePart>().NoneAreaTexture();
+
+      
     }
     public void win_saveAsButton_clk   (){
         
@@ -79,7 +82,8 @@ public class ActiveScene : MonoBehaviour
         loadManager.SaveOrnamentjson();
         View_UI.SetActive(true);
         Edit_UI.SetActive(false);
-
+        Backwindow.SetActive(false);
+        Edit_UI.GetComponent<FouseFacePart>().NoneAreaTexture();
     }
     public void win_CancleButton_clk() {
 
@@ -91,17 +95,10 @@ public class ActiveScene : MonoBehaviour
 
         View_UI.SetActive(true);
         Edit_UI.SetActive(false);
+        Backwindow.SetActive(false);
 
+        Edit_UI.GetComponent<FouseFacePart>().NoneAreaTexture();
     }
-
-
-
-
-
-
-
-
-
 
 
 

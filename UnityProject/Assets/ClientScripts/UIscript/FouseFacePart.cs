@@ -67,8 +67,11 @@ public class FouseFacePart : MonoBehaviour
     public Toggle ArmItem;
     FaceAreaTextureChange faceAreaTextureChange;
 
+   
+
     public void Start()
     {
+
 
         faceAreaTextureChange = new FaceAreaTextureChange();
         foreheadItem.onValueChanged.AddListener(ison =>foreheadItem_chg());
@@ -117,11 +120,16 @@ public class FouseFacePart : MonoBehaviour
         //wristItem.onValueChanged.AddListener(ison => wristItem_chg());
         //hipItem.onValueChanged.AddListener(ison => hipItem_chg());
         //LegItem.onValueChanged.AddListener(ison => LegItem_chg());
-        //ArmItem.onValueChanged.AddListener(ison => ArmItem_chg());
-      
+        //ArmItem.onValueChanged.AddListener(ison => ArmItem_chg());       
+     
     }
 
-    
+    public void NoneAreaTexture() {
+        string TexturePath = "FaceAreaPNG/noneTex";
+        faceAreaTextureChange.ChangeFaceArea(TexturePath);
+
+    }
+
 
 
     public void foreheadItem_chg( ){

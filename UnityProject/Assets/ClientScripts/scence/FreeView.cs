@@ -107,7 +107,7 @@ public class FreeView : MonoBehaviour
 		{    
       
 
-       CameraSlider.maxValue = humanHigh ;
+       CameraSlider.maxValue = humanHigh+200;
         Target = targetobject.transform;
 
 		mX=transform.eulerAngles.x;  
