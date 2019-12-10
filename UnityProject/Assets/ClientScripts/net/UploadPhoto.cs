@@ -8,25 +8,6 @@ using UnityEngine.UI;
 
 
 
-
-[Serializable]
-class JData
-{
-    public int ret;
-    public string retMsg;
-
-    [Serializable]
-    public class JInfo
-    {
-        public string meshFile;
-        public string TextureFile;
-    };
-
-    public JInfo info;
-}
-
-
-
 public class UploadPhoto : MonoBehaviour
 {
 
@@ -54,6 +35,11 @@ public class UploadPhoto : MonoBehaviour
     Texture2D m_TextureData;
 
 
+    public int gender;
+    public float height;
+    public float weight;
+
+
     public void uploadImgClick()
     {
 
@@ -79,7 +65,7 @@ public class UploadPhoto : MonoBehaviour
         byte[] bytes = usrfacephoto.EncodeToJPG();
         print(usrfacephoto.width);
 
-       
+        CalculateResultDataJson jData = null;
 
         WWWForm form = new WWWForm();        
 
@@ -128,7 +114,7 @@ public class UploadPhoto : MonoBehaviour
                 jstr = jstr.Replace("\\\\", "");
                 print(jstr);
 
-                getjsoninfo(jstr);
+                jData = getjsoninfo(jstr);
             }
 
 
@@ -140,10 +126,12 @@ public class UploadPhoto : MonoBehaviour
             yield return null;
         }
 
-        string roleJson = ModelDataManager.Instance.CalculateLowPolyFace(m_HDObjData);
+        string roleJson = ModelDataManager.Instance.CalculateLowPolyFace(m_HDObjData,gender,height,weight);
 
         if (ModelDataManager.Instance.LoadLowPolyFace(roleJson, m_TextureData))
         {
+
+            ModelDataManager.Instance.FitCalculationJson(jData, gender);
             Debug.Log("Load Low Poly Success");
         }
 
@@ -151,9 +139,9 @@ public class UploadPhoto : MonoBehaviour
     }
 
 
-     void  getjsoninfo(string data) {
+    CalculateResultDataJson getjsoninfo(string data) {
 
-        var jsondata = JsonUtility.FromJson<JData>(data);
+        var jsondata = JsonUtility.FromJson<CalculateResultDataJson>(data);
         var ret = jsondata.ret.ToString();
         var retMsg = jsondata.retMsg.ToString();
 
@@ -175,9 +163,9 @@ public class UploadPhoto : MonoBehaviour
         //生成模型文件匹配的贴图名称
         string Texname = "10001tex";
         // string Texname = AppRoot.MainUser.currentModel.ModelID.ToString()+"tex";
-        StartCoroutine(LoadAndSaveAsset(Texname, TextureUrl, ".jpg"));  
-      
-        
+        StartCoroutine(LoadAndSaveAsset(Texname, TextureUrl, ".jpg"));
+
+        return jsondata;
     }
 
 

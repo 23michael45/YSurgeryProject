@@ -202,8 +202,8 @@ public class LoadManager : MonoSingleton<LoadManager>
 
             //加载预制模型。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。
 
-            int sex = AppRoot.MainUser.currentModel.role.sex;
-            loadmainRole(sex);//分性别加载基础人体模型
+            int gender = AppRoot.MainUser.currentModel.role.gender;
+            loadmainRole(gender);//分性别加载基础人体模型
 
         } catch {
 
@@ -384,7 +384,6 @@ public class LoadManager : MonoSingleton<LoadManager>
     {
         try
         {
-            AppRoot.MainUser.currentModel.deform.DeformNumber += 1;
 
             string Deformjson = JsonUtility.ToJson(AppRoot.MainUser.currentModel.deform);
 

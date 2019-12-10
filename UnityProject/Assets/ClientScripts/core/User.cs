@@ -18,89 +18,25 @@ public class User_Environment
 
 
 
-[Serializable]
-public class User_Role
-{
-    public int AvatarId;
-    public int DeformCount;
-    public string name;
-    public string shortCutImage;
-    public string Facemodel;
-    public string Facetexture;
-    public int sex;
-    public Dictionary<string, Vector3> Bones;
-    public Dictionary<int, Vector3> MeshPoint;
-
-}// 每个角色的基础属性
 
 
 
-[Serializable]
-public class User_Deform
-{
-    public string AvatarId;
-    public int DeformNumber;
-    [Serializable]
-    public class Shape
-    {
-        public Vector4 ForeheadSwitch, TempleSwitch, BISjawSwitch, ChinSwitch;
-    }
-    [Serializable]
-    public class Face
-    {
-        public Vector4 ApplemuscleSwitch, CheekbonesSwitch, FacialpartSwitch;
-    }
-    [Serializable]
-    public class Eyebrow
-    {
-        public Vector4 BrowbowSwitch, BrowHeadSwitch, BrowMiddleSwitch, BrowTailSwitch;
-    }
-    [Serializable]
-    public class Eye
-    {
-        public Vector4 EyecornerSwitch, UppereyelidSwitch, DoublefoldEyelidsSwitch,
-                        lowereyelidSwitch, EyebagSwitch, EyetailSwitch, BlackeyeSwitch;
-    }
-    [Serializable]
-    public class Nose
-    {
-        public Vector4 UpperbridgeSwitch, InferiorbridgeSwitch, NoseheadSwitch, ColumellaNasiSwitch,
-                        NasalBaseSwitch, NoseWingSwitch, NostrilSwitch;
-    }
-    [Serializable]
-    public class Mouth
-    {
-        public Vector4 UplipSwitch, UpjawSwitch, DownLipSwitch, DownJawSwitch, PhiltrumSwitch, CornerSwitch;
-    }
-    [Serializable]
-    public class Chest
-    {
-        public Vector4 upperItemSwitch, topItemSwitch, downItemSwitch;
-    }
-    [Serializable]
-    public class Body
-    {
-        public Vector4 NeckSwitch, ChestSwitch, WristSwitch, HipSwitch, LegSwitch, ArmSwitch,
-                        ForeheadSwitch, BISjawSwitch, ChinSwitch;
-    }
-
-    public Shape shape;
-    public Face face;
-    public Eyebrow eyebrow;
-    public Eye eye;
-    public Nose nose;
-    public Mouth mouth;
-    public Chest chest;
-    public Body body;
-
-
-}// 每个角色的变形属性
 
 
 [Serializable]
 public class User_Ornaments
 {
+    public User_Ornaments()
+    {
+
+        makeup = new Makeup();
+        cloth = new Cloth();
+       ornament = new Ornament();
+    }
+
     public int ModelID;
+
+
 
     [Serializable]
     public class Makeup
@@ -134,6 +70,15 @@ public class User_Ornaments
 [Serializable]
 public class User_Model
 {   
+    public User_Model()
+    {
+        role = new RoleJson();
+        deform = new DeformJson();
+        Ornament = new User_Ornaments();
+    }
+
+
+
     public string ModelID; 
     public string shotcutImage;
 
@@ -141,8 +86,8 @@ public class User_Model
     public string ModelPath;
     public int  Editable;
 
-    public User_Role role;
-    public User_Deform deform;
+    public RoleJson role;
+    public DeformJson deform;
     public User_Ornaments Ornament;
 
 }
@@ -172,33 +117,8 @@ public class User
     public void Init( )
     {
      
-
         currentProfile = new User_Profile();
         currentModel = new User_Model();
-        //currentModel = currentProfile.model;
-
-       // Debug.Log(currentModel);
-
-        currentModel.role= new User_Role();
-
-        currentModel.deform = new User_Deform();
-
-        currentModel.deform.shape = new User_Deform.Shape();
-        currentModel.deform.face = new User_Deform.Face ();
-        currentModel.deform.eyebrow = new User_Deform.Eyebrow ();
-        currentModel.deform.eye = new User_Deform.Eye ();
-        currentModel.deform.nose = new User_Deform.Nose ();
-        currentModel.deform.mouth = new User_Deform.Mouth ();
-        currentModel.deform.chest = new User_Deform.Chest();
-        currentModel.deform.body = new User_Deform.Body();
-        
-
-        currentModel.Ornament = new User_Ornaments();
-        currentModel.Ornament.makeup= new User_Ornaments.Makeup();
-        currentModel.Ornament.cloth = new User_Ornaments.Cloth();
-        currentModel.Ornament.ornament = new User_Ornaments.Ornament();
-         
-      
              
     }
 
@@ -231,64 +151,7 @@ public class User
         get { return currentModel.Editable; }
         set { currentModel.Editable = value; }
     }
-
-
-    /// <summary>
-    /// baseface deform............
-    /// </summary>
-
-    public string faceshotImg
-    {
-        get { return currentModel.role.shortCutImage; }
-        set { currentModel.role.shortCutImage = value; }
-    }
-
-    public string faceModel
-    {
-        get { return currentModel.role.Facemodel; }
-        set { currentModel.role.Facemodel = value; }
-    }
-
-    public string facetexture
-    {
-        get { return currentModel.role.Facetexture; }
-        set { currentModel.role.Facetexture = value; }
-    }
-
-    public Dictionary<string, Vector3> bones
-    {
-        get
-        {
-            if (currentModel.role.Bones == null)
-            {
-                currentModel.role.Bones = new Dictionary<string, Vector3>();
-            }
-            return currentModel.role.Bones;
-        }
-        set
-        {
-            currentModel.role.Bones = value;
-        }
-    }
-
-    public Dictionary<int , Vector3> MeshPoint
-    {
-        get
-        {
-            if (currentModel.role.MeshPoint == null)
-            {
-                currentModel.role.MeshPoint = new Dictionary<int , Vector3>();
-            }
-            return currentModel.role.MeshPoint;
-        }
-        set
-        {
-            currentModel.role.MeshPoint = value;
-        }
-    }
-
-
-
+    
 
     /// <summary>
     /// shape deform............

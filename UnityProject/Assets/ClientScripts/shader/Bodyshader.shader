@@ -8,8 +8,8 @@
 		_AreaTex ("_AreaTex", 2D) = "white" {}
 
 		_Hue("Hue",Range(0,359)) = 0
-		_Saturation("Saturation", Range(0,2.0)) = 1.0
-		_Value("Value", Range(0,2.0)) = 1.0
+		_Saturation("Saturation", Range(-1.0,1.0)) = 0.0
+		_Value("Value", Range(-1.0,1.0)) = 0.0
 		
     }
     SubShader
@@ -137,8 +137,8 @@
 				colorHSV.x += _Hue; //调整偏移Hue值
 				colorHSV.x = colorHSV.x % 359;    //超过360的值从0开始
 
-				colorHSV.y *= _Saturation;  //调整饱和度
-				colorHSV.z *= _Value;
+				colorHSV.y += _Saturation;  //调整饱和度
+				colorHSV.z += _Value;
 				
 				Main.xyz = HSVConvertToRGB(colorHSV.xyz);
 								

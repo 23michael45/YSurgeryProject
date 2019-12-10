@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class DeformUI : MonoBehaviour
+public class DeformUI : MonoSingleton<DeformUI>
 {
     public string Deformjson;
    
@@ -127,15 +127,11 @@ public class DeformUI : MonoBehaviour
                     LegSwitch_data,
                     ArmSwitch_data;
 
-
-
-    public User_Deform deformdata;
+    
 
 
     public void Start()
     {
-
-        deformdata = AppRoot.MainUser.currentModel.deform;
 
         foreheadItem_x.onValueChanged.AddListener(foreheadItem_x_chg);       
         foreheadItem_y.onValueChanged.AddListener(foreheadItem_y_chg);
@@ -305,16 +301,24 @@ public class DeformUI : MonoBehaviour
         ArmItem_w.onValueChanged.AddListener(ArmItem_w_chg);
 
 
+        Load(AppRoot.MainUser.currentModel.deform);
+    }
+    public void Load(DeformJson deform)
+    {
+
+        AppRoot.MainUser.currentModel.deform = deform;
 
         //预加载slider值
         DeformDataLoad();
         SliderLoad();
-        
+
+
     }
 
     public void DeformDataLoad()
-    {        
-        
+    {
+        var deformdata = AppRoot.MainUser.currentModel.deform;
+
         ForeheadSwitch_data = deformdata.shape.ForeheadSwitch;
         TempleSwitch_data = deformdata.shape.TempleSwitch;
         BISjawSwitch_data = deformdata.shape.BISjawSwitch;

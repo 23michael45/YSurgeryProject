@@ -39,7 +39,7 @@ public class UnityEmbededActivity extends UnityPlayerActivity {
                     is.read(hdObjData);
                     is.close();
 
-                    String roleJson = YSurgeryUnityInterface.instance.CalculateLowPolyFace(hdObjData);
+                    String roleJson = YSurgeryUnityInterface.instance.CalculateLowPolyFace(hdObjData,0,180,75);
                     writeToFile(roleJson,"roleJson.json");
 
                 } catch (IOException e) {

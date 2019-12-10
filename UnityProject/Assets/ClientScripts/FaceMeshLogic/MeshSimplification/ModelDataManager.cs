@@ -9,9 +9,52 @@ using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 
+
+
+
+[Serializable]
+public class CalculateResultDataJson
+{
+    public int ret;
+    public string retMsg;
+
+
+    [Serializable]
+    public class JCalcRet
+    {
+        [Serializable]
+        public class JHSVOffset
+        {
+            public float h;
+            public float s;
+            public float v;
+
+        }
+        public JHSVOffset hsv_offset;
+
+    }
+
+    [Serializable]
+    public class JInfo
+    {
+        public string meshFile;
+        public JCalcRet calcRet;
+        public string TextureFile;
+    };
+
+    public JInfo info;
+}
+
+
+
+
 [Serializable]
 public class RoleJson
 {
+    public int gender;
+    public float height;
+    public float weight;
+
     public Vector3[] vertices;
     public Vector2[] uv;
     //public int[] triangles;
@@ -23,9 +66,14 @@ public class RoleJson
     public Quaternion[] bonelocalrotation;
     public Vector3[] bonelocalscale;
 
-    public static string Save(Mesh mesh, Transform[] bones)
+    public static string Save(Mesh mesh, Transform[] bones,int gender,float height, float weight)
     {
         RoleJson data = new RoleJson();
+
+        data.gender = gender;
+        data.height = height;
+        data.weight = weight;
+
         data.vertices = mesh.vertices;
         data.uv = mesh.uv;
         //data.triangles = mesh.triangles;
@@ -54,21 +102,21 @@ public class RoleJson
         return jsonStr;
     }
 
-    public static string Save(SkinnedMeshRenderer skinnedMeshRenderer)
+    public static string Save(SkinnedMeshRenderer skinnedMeshRenderer, int gender, float height, float weight)
     {
         Mesh skinnedMesh = skinnedMeshRenderer.sharedMesh;
         Transform[] bones = skinnedMeshRenderer.bones;
-        return Save(skinnedMesh, bones);
+        return Save(skinnedMesh, bones,gender,height,weight);
 
     }
-    public static string Save(MeshFilter meshFilter)
+    public static string Save(MeshFilter meshFilter, int gender, float height, float weight)
     {
         Mesh mesh = meshFilter.sharedMesh;
-        return Save(mesh, null);
+        return Save(mesh, null, gender, height, weight);
 
     }
 
-    public static bool Load(string json, ref SkinnedMeshRenderer skinnedMesh,ref MeshFilter meshFilter)
+    public static RoleJson Load(string json, ref SkinnedMeshRenderer skinnedMesh,ref MeshFilter meshFilter)
     {
         RoleJson data = JsonUtility.FromJson<RoleJson>(json);
 
@@ -116,11 +164,12 @@ public class RoleJson
         {
             meshFilter.sharedMesh = mesh;
         }
-        return true;
+        return data;
     }
 
 }
-public class DeformJson
+
+public class DeformJson_Lengacy
 {
     public Vector3[] bonelocalpositions;
     public Quaternion[] bonelocalrotation;
@@ -129,7 +178,7 @@ public class DeformJson
 
     public static string Save(Transform[] bones)
     {
-        DeformJson data = new DeformJson();
+        DeformJson_Lengacy data = new DeformJson_Lengacy();
 
         if (bones != null)
         {
@@ -161,7 +210,7 @@ public class DeformJson
     }
     public static bool Load(string json, ref SkinnedMeshRenderer skinnedMesh)
     {
-        DeformJson data = JsonUtility.FromJson<DeformJson>(json);
+        DeformJson_Lengacy data = JsonUtility.FromJson<DeformJson_Lengacy>(json);
 
         
 
@@ -188,6 +237,90 @@ public class DeformJson
     }
 
 }
+
+
+
+[Serializable]
+public class DeformJson
+{
+    public DeformJson()
+    {
+        shape = new Shape();
+        face = new Face ();
+        eyebrow = new Eyebrow ();
+        eye = new Eye ();
+        nose = new Nose ();
+        mouth = new Mouth ();
+        chest = new Chest();
+        body = new Body();
+    }
+
+
+    [Serializable]
+    public class Shape
+    {
+        public Vector4 ForeheadSwitch, TempleSwitch, BISjawSwitch, ChinSwitch;
+    }
+    [Serializable]
+    public class Face
+    {
+        public Vector4 ApplemuscleSwitch, CheekbonesSwitch, FacialpartSwitch;
+    }
+    [Serializable]
+    public class Eyebrow
+    {
+        public Vector4 BrowbowSwitch, BrowHeadSwitch, BrowMiddleSwitch, BrowTailSwitch;
+    }
+    [Serializable]
+    public class Eye
+    {
+        public Vector4 EyecornerSwitch, UppereyelidSwitch, DoublefoldEyelidsSwitch,
+                        lowereyelidSwitch, EyebagSwitch, EyetailSwitch, BlackeyeSwitch;
+    }
+    [Serializable]
+    public class Nose
+    {
+        public Vector4 UpperbridgeSwitch, InferiorbridgeSwitch, NoseheadSwitch, ColumellaNasiSwitch,
+                        NasalBaseSwitch, NoseWingSwitch, NostrilSwitch;
+    }
+    [Serializable]
+    public class Mouth
+    {
+        public Vector4 UplipSwitch, UpjawSwitch, DownLipSwitch, DownJawSwitch, PhiltrumSwitch, CornerSwitch;
+    }
+    [Serializable]
+    public class Chest
+    {
+        public Vector4 upperItemSwitch, topItemSwitch, downItemSwitch;
+    }
+    [Serializable]
+    public class Body
+    {
+        public Vector4 NeckSwitch, ChestSwitch, WristSwitch, HipSwitch, LegSwitch, ArmSwitch,
+                        ForeheadSwitch, BISjawSwitch, ChinSwitch;
+    }
+
+    public Shape shape;
+    public Face face;
+    public Eyebrow eyebrow;
+    public Eye eye;
+    public Nose nose;
+    public Mouth mouth;
+    public Chest chest;
+    public Body body;
+
+
+    public static string Save(DeformJson deform)
+    {
+        return JsonUtility.ToJson(deform);
+    }
+    public static DeformJson Load(string json)
+    {
+        DeformJson deform = JsonUtility.FromJson<DeformJson>(json);
+        return deform;
+    }
+
+}// 每个角色的变形属性
 
 public class ModelDataManager : MonoBehaviour
 {
@@ -226,6 +359,39 @@ public class ModelDataManager : MonoBehaviour
 
 
     }
+
+    GameObject GetBody(int gender)
+    {
+        string bodyName = "";
+        if (gender == 0)
+        {
+
+            bodyName = "man_body";
+        }
+        else
+        {
+            bodyName = "women_body";
+
+        }
+
+        return mLowMeshTemplate.transform.Find(bodyName).gameObject;
+    }
+    GameObject GetNail(int gender)
+    {
+        string goName = "";
+        if (gender == 0)
+        {
+            goName = "man_zhijia";
+        }
+        else
+        {
+            goName = "women_nail";
+
+        }
+        return mLowMeshTemplate.transform.Find(goName).gameObject;
+    }
+
+
     void OnLoadTemplateMeshDone(AsyncOperationHandle<GameObject> obj)
     {
         mLowMeshTemplate = GameObject.Instantiate(obj.Result);
@@ -239,7 +405,7 @@ public class ModelDataManager : MonoBehaviour
 
         mSkinnedMeshRenderer = mLowMeshTemplate.transform.Find("head001").GetComponent<SkinnedMeshRenderer>();
 
-
+        mLowMeshTemplate.transform.parent = LoadManager.Instance.transform;
 
     }
     public void SaveLoadJsonTest(bool skinned)
@@ -247,12 +413,12 @@ public class ModelDataManager : MonoBehaviour
         string json = "";
         if (skinned)
         {
-             json = RoleJson.Save(mSkinnedMeshRenderer.sharedMesh, mSkinnedMeshRenderer.bones);
+             json = RoleJson.Save(mSkinnedMeshRenderer.sharedMesh, mSkinnedMeshRenderer.bones,0,1.78f,75f);
 
         }
         else
         {
-            json = RoleJson.Save(mDebugMeshFilter);
+            json = RoleJson.Save(mDebugMeshFilter, 0, 1.78f, 75f);
 
         }
         RoleJson.Load(json, ref mSkinnedMeshRenderer, ref mDebugMeshFilter);
@@ -340,7 +506,7 @@ public class ModelDataManager : MonoBehaviour
         }
     }
 
-    public string CalculateLowPolyFace(byte[] hdObjData)
+    public string CalculateLowPolyFace(byte[] hdObjData,int gender,float height, float weight)
     {
         if (mLowMeshTemplate == null)
         {
@@ -424,7 +590,7 @@ public class ModelDataManager : MonoBehaviour
         }
 
         Debug.Log("CalculateLowPolyFace Start RoleJson Save");
-        string roleJson = RoleJson.Save(lowDeformedSkinMesh, newBones);
+        string roleJson = RoleJson.Save(lowDeformedSkinMesh, newBones,gender,height,weight);
         
         GameObject.Destroy(newParentBoneTransform.gameObject);
 
@@ -442,33 +608,71 @@ public class ModelDataManager : MonoBehaviour
             mSkinnedMeshRenderer.sharedMaterial = material;
 
         }
-        bool ret = RoleJson.Load(roleJson, ref mSkinnedMeshRenderer,ref mDebugMeshFilter);
+        RoleJson roleJsonData = RoleJson.Load(roleJson, ref mSkinnedMeshRenderer,ref mDebugMeshFilter);
 
+        //to do select model body by gender,height ,weight
+        if(roleJsonData.gender == 0)
+        { 
+            GetBody(0).SetActive(true);
+            GetNail(0).SetActive(true);
+            GetBody(1).SetActive(false);
+            GetNail(1).SetActive(false);
+        }
+        else
+        {
+            GetBody(0).SetActive(false);
+            GetNail(0).SetActive(false);
+            GetBody(1).SetActive(true);
+            GetNail(1).SetActive(true);
+
+        }
 
         Role role = mLowMeshTemplate.GetComponent<Role>();
         LoadManager.Instance.newUser(role);
 
-        return ret;
+        return true;
     }
 
+    public bool FitCalculationJson(CalculateResultDataJson jsonData,int gender)
+    {
+        Vector3 hsvoffset = new Vector3(jsonData.info.calcRet.hsv_offset.h, jsonData.info.calcRet.hsv_offset.s, jsonData.info.calcRet.hsv_offset.v);
+        
+        foreach (var mat in GetBody(gender).GetComponent<SkinnedMeshRenderer>().sharedMaterials)
+        {
+            float hue = hsvoffset.x * 2;
+            float sat = hsvoffset.y / 255;
+            float val = hsvoffset.z / 255;
+
+
+
+            mat.SetInt("_Hue", (int)hue);
+            mat.SetFloat("_Saturation", sat);
+            mat.SetFloat("_Value", val);
+        }
+
+        return true;
+    }
 
     public string SaveDeform()
     {
-        return DeformJson.Save(mSkinnedMeshRenderer);
+        return DeformJson.Save(AppRoot.MainUser.currentModel.deform);
     }
 
     public bool LoadDeform(string deformJson)
     {
-        return DeformJson.Load(deformJson, ref mSkinnedMeshRenderer);
+        DeformJson deform = DeformJson.Load(deformJson);
+
+        DeformUI.Instance.Load(deform);
+        return true;
     }
 
     public string SaveAvatar()
     {
-        return DeformJson.Save(mSkinnedMeshRenderer);
+        return "";
     }
 
     public bool LoadAvatar(string avatarJson)
     {
-        return DeformJson.Load(avatarJson, ref mSkinnedMeshRenderer);
+        return false;
     }
 }

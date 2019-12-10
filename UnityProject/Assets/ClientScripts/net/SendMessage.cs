@@ -15,8 +15,6 @@ public class SendMessage : MonoBehaviour
 
     public LoadManager loadManager;
 
-    public User_Deform DeformNewst;
-
 
     /// <summary>
     /// 

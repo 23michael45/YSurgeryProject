@@ -12,7 +12,7 @@ import java.util.List;
 
 interface IYSurgeryUnityListener {
 
-    String onCalculateLowPolyFace(BytesWrapper ojbDataWrapper);
+    String onCalculateLowPolyFace(BytesWrapper ojbDataWrapper,int gender,float height,float weight);
     boolean onLoadLowPolyFace(String roleJson,BytesWrapper textureDataWrapper);
     String onSaveDeform();
     boolean onLoadDeform(String deformJson);
@@ -48,11 +48,14 @@ public class YSurgeryUnityInterface {
     //Java端使用的接口函数
 
     //description : 服务器计算的高模转成低模，生成roleJson数据结构
-    //param1 ：hdObjData  服务机计算生成的obj在本地磁盘上的文件二进制bytes数据
+    //param1 ：hdObjData  服务机计算生成的obj文件二进制bytes数据
+    //param2 ：gender  性别  0 男  1 女
+    //param3 ：height  身高 cm
+    //param4 ：weight  体重 kg
     //return :  json字符串，roleJson数据结构
-    public String CalculateLowPolyFace(byte[] hdObjData)
+    public String CalculateLowPolyFace(byte[] hdObjData,int gender,float height,float weight)
     {
-        return unityListener.onCalculateLowPolyFace(new BytesWrapper(hdObjData));
+        return unityListener.onCalculateLowPolyFace(new BytesWrapper(hdObjData),gender,height,weight);
     }
 
     //description : 读取roleJson数据结构及贴图，把生成的低模模型显示在屏幕上
