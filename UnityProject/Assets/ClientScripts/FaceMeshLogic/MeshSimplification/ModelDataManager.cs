@@ -240,8 +240,6 @@ public class ModelDataManager : MonoBehaviour
         mSkinnedMeshRenderer = mLowMeshTemplate.transform.Find("head001").GetComponent<SkinnedMeshRenderer>();
 
 
-        Role role = mLowMeshTemplate.GetComponent<Role>();
-        LoadManager.Instance.newUser(role);
 
     }
     public void SaveLoadJsonTest(bool skinned)
@@ -444,7 +442,13 @@ public class ModelDataManager : MonoBehaviour
             mSkinnedMeshRenderer.sharedMaterial = material;
 
         }
-        return RoleJson.Load(roleJson, ref mSkinnedMeshRenderer,ref mDebugMeshFilter);
+        bool ret = RoleJson.Load(roleJson, ref mSkinnedMeshRenderer,ref mDebugMeshFilter);
+
+
+        Role role = mLowMeshTemplate.GetComponent<Role>();
+        LoadManager.Instance.newUser(role);
+
+        return ret;
     }
 
 

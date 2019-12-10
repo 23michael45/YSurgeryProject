@@ -92,9 +92,9 @@ public class Deform : MonoBehaviour
         Vector3  offset = new Vector3(0, xx.x, xx.z);
         Vector3 offset_l = new Vector3(xx.y,-xx.x, xx.z);
         Vector3 offset_r = new Vector3(xx.y, xx.x, xx.z );
-        
 
-        
+
+
         DeformBonePos("face_forehead_joint1", offset);
         DeformBonePos("face_forehead_joint2", offset);
 
@@ -107,10 +107,10 @@ public class Deform : MonoBehaviour
 
 
 
-       DeformBonePos("face_forehead_Rt_joint1", offset_r);
-       DeformBonePos("face_forehead_Rt_joint2", offset_r);
-       DeformBonePos("face_forehead_Rt_joint2", offset_r);
-       DeformBonePos("face_forehead_Rt_joint5", offset_r);
+        DeformBonePos("face_forehead_Rt_joint1", offset_r);
+        DeformBonePos("face_forehead_Rt_joint2", offset_r);
+        DeformBonePos("face_forehead_Rt_joint4", offset_r);
+        DeformBonePos("face_forehead_Rt_joint5", offset_r);
 
 
 
