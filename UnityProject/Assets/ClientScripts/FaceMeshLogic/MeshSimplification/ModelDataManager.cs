@@ -404,6 +404,11 @@ public class ModelDataManager : MonoBehaviour
         }
 
         mSkinnedMeshRenderer = mLowMeshTemplate.transform.Find("head001").GetComponent<SkinnedMeshRenderer>();
+        mSkinnedMeshRenderer.enabled = false;
+        GetBody(0).SetActive(false);
+        GetNail(0).SetActive(false);
+        GetBody(1).SetActive(false);
+        GetNail(1).SetActive(false);
 
         mLowMeshTemplate.transform.parent = LoadManager.Instance.transform;
 
@@ -603,9 +608,7 @@ public class ModelDataManager : MonoBehaviour
     {
         if (tex != null)
         {
-            Material material = new Material(Shader.Find("Unlit/Texture"));
-            material.SetTexture("_MainTex", tex);
-            mSkinnedMeshRenderer.sharedMaterial = material;
+            mSkinnedMeshRenderer.sharedMaterial.SetTexture("_MainTex", tex);
 
         }
         RoleJson roleJsonData = RoleJson.Load(roleJson, ref mSkinnedMeshRenderer,ref mDebugMeshFilter);
@@ -626,6 +629,7 @@ public class ModelDataManager : MonoBehaviour
             GetNail(1).SetActive(true);
 
         }
+        mSkinnedMeshRenderer.enabled = true;
 
         Role role = mLowMeshTemplate.GetComponent<Role>();
         LoadManager.Instance.newUser(role);

@@ -62,50 +62,50 @@ public class LoadManager : MonoSingleton<LoadManager>
 
     public void LoadModel(string ModelString) {//加载模型
 
-        DelData();//尝试删除场景中已有Face
-        Debug.Log(ModelString);
+        //DelData();//尝试删除场景中已有Face
+        //Debug.Log(ModelString);
 
-        //  try {
-            modeldata = JsonUtility.FromJson<User_Model>(ModelString);
-            TexturePath = modeldata.TexturePath.ToString();
-            Debug.Log(TexturePath);
-            ModelPath = modeldata.ModelPath.ToString();
-            Debug.Log(ModelPath);
-            Editable = (int)float.Parse(modeldata.ModelPath.ToString());
+        ////  try {
+        //    modeldata = JsonUtility.FromJson<User_Model>(ModelString);
+        //    TexturePath = modeldata.TexturePath.ToString();
+        //    Debug.Log(TexturePath);
+        //    ModelPath = modeldata.ModelPath.ToString();
+        //    Debug.Log(ModelPath);
+        //    Editable = (int)float.Parse(modeldata.ModelPath.ToString());
 
-            try
-            {
-                face = RuntimeLoadObj.RutimeLoadObj(ModelPath);
+        //    try
+        //    {
+        //        face = RuntimeLoadObj.RutimeLoadObj(ModelPath);
 
-                try
-                {
-                    WWW w = new WWW(TexturePath);
-                    Texture2D facetex = w.texture;
+        //        try
+        //        {
+        //            WWW w = new WWW(TexturePath);
+        //            Texture2D facetex = w.texture;
 
-                    Material faematerial = new Material(Shader.Find("Unlit/Texture"));
-                    faematerial.mainTexture = facetex;
+        //            Material faematerial = new Material(Shader.Find("Unlit/Texture"));
+        //            faematerial.mainTexture = facetex;
 
-                    if (face.transform.childCount != 0)
-                    {
-                        face.GetComponentInChildren<MeshRenderer>().material = faematerial;
-                    }
-                    else
-                    { }
-                }
-                catch
-                {
-                    Debug.Log("无法加载贴图");
-                }
-            }
-            catch
-            {
-                print("路径中无模型");
-            }
-        //} catch {
+        //            if (face.transform.childCount != 0)
+        //            {
+        //                face.GetComponentInChildren<MeshRenderer>().material = faematerial;
+        //            }
+        //            else
+        //            { }
+        //        }
+        //        catch
+        //        {
+        //            Debug.Log("无法加载贴图");
+        //        }
+        //    }
+        //    catch
+        //    {
+        //        print("路径中无模型");
+        //    }
+        ////} catch {
 
-        //}
+        ////}
 
-        Debug.Log("无法加载模型");
+        //Debug.Log("无法加载模型");
     }
 
     
