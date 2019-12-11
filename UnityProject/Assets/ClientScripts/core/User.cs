@@ -196,11 +196,11 @@ public class User
     //头顶
     public Vector4 CURTopHead
     {
-        get { return currentModel.deform.shape.TopHead; }
+        get { return currentModel.deform.shape.TopHeadSwitch; }
         set
         {
-            currentModel.deform.shape.TopHead = value;
-            Vector4 var = currentModel.deform.shape.TopHead;
+            currentModel.deform.shape.TopHeadSwitch = value;
+            Vector4 var = currentModel.deform.shape.TopHeadSwitch;
             AppRoot.MainDeform.SetTopHead(var);
         }
     }
@@ -297,6 +297,21 @@ public class User
     /// <summary>
     /// Eye deform............
     /// </summary>
+    /// 
+
+    public Vector4 cur_EyeZeroSwitch//add
+    {
+        get { return currentModel.deform.eye.EyeZeroSwitch; }
+        set
+        {
+            currentModel.deform.eye.EyeZeroSwitch = value;
+            Vector4 var = currentModel.deform.eye.EyeZeroSwitch;
+            AppRoot.MainDeform.SetEyeZero(var);
+        }
+    }
+
+
+
     public Vector4 cur_EyecornerSwitch
     {
         get { return currentModel.deform.eye .EyecornerSwitch; }
@@ -359,22 +374,25 @@ public class User
         }
     }
 
-    public Vector4 cur_BlackeyeSwitch
-    {
-        get { return currentModel.deform.eye.BlackeyeSwitch; }
-        set
-        {
-            currentModel.deform.eye.BlackeyeSwitch = value;
-            Vector4 var = currentModel.deform.eye.BlackeyeSwitch;
-            AppRoot.MainDeform.SetBlackeyeSwitch(var);
-        }
-    }
+
 
 
 
     /// <summary>
     /// Nose deform............
     /// </summary>
+    /// 
+    public Vector4 cur_NoseZeroSwitch
+    {
+        get { return currentModel.deform.nose.NoseZeroSwitch; }
+        set
+        {
+            currentModel.deform.nose.NoseZeroSwitch = value;
+            Vector4 var = currentModel.deform.nose.NoseZeroSwitch;
+            AppRoot.MainDeform.SetNoseZeroSwitch(var);
+        }
+    }
+
     public Vector4 cur_UpperbridgeSwitch
     {
         get { return currentModel.deform.nose .UpperbridgeSwitch; }
@@ -435,21 +453,23 @@ public class User
             AppRoot.MainDeform.SetNoseWingSwitch(var);
         }
     }
-    public Vector4 cur_NostrilSwitch
-    {
-        get { return currentModel.deform.nose.NostrilSwitch; }
-        set
-        {
-            currentModel.deform.nose.NostrilSwitch = value;
-            Vector4 var = currentModel.deform.nose.NostrilSwitch;
-            AppRoot.MainDeform.SetNostrilSwitch(var);
-        }
-    }
+
 
 
     /// <summary>
     /// Mouth deform............
     /// </summary>
+
+    public Vector4 cur_MouthZeroSwitch
+    {
+        get { return currentModel.deform.mouth.MouthZeroSwitch; }
+        set
+        {
+            currentModel.deform.mouth.MouthZeroSwitch = value;
+            Vector4 var = currentModel.deform.mouth.MouthZeroSwitch;
+            AppRoot.MainDeform.SetMouthZeroSwitch(var);
+        }
+    }
 
     public Vector4 cur_UplipSwitch
     {

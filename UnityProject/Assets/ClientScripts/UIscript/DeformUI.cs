@@ -19,7 +19,9 @@ public class DeformUI : MonoSingleton<DeformUI>
     private Vector4 ForeheadSwitch_data,
                     TempleSwitch_data,
                     BISjawSwitch_data,
-                    ChinSwitch_data;  
+                    ChinSwitch_data, 
+                    TopHead_data;
+    
 
     //face..........
     public Slider ApplemuscleItem_x, ApplemuscleItem_y, ApplemuscleItem_w;
@@ -31,7 +33,8 @@ public class DeformUI : MonoSingleton<DeformUI>
 
     private Vector4 ApplemuscleSwitch_data,
                     CheekbonesSwitch_data,
-                    FacialpartSwitch_data;
+                    FacialpartSwitch_data,
+                    MasseterMuscle_data;
     
 
     //eyebrow....
@@ -48,7 +51,7 @@ public class DeformUI : MonoSingleton<DeformUI>
 
 
     //eye.......
-    public Slider EyeZero_x, EyeZero_y, EyeZero_z;//add
+    public Slider EyeZero_x, EyeZero_y, EyeZero_z, EyeZero_w;//add
 
     public Slider EyecornerItem_x, EyecornerItem_y, EyecornerItem_w;
     public Slider UppereyelidItem_x, UppereyelidItem_y, UppereyelidItem_w;
@@ -58,7 +61,8 @@ public class DeformUI : MonoSingleton<DeformUI>
     public Slider EyetailItem_x, EyetailItem_y, EyetailItem_w;
     public Slider BlackeyeItem_x, BlackeyeItem_y, BlackeyeItem_w;
 
-    private Vector4 EyecornerSwitch_data,
+    private Vector4 EyeZero_data,
+                    EyecornerSwitch_data,
                     UppereyelidSwitch_data,
                     DoublefoldEyelidsSwitch_data,
                     lowereyelidSwitch_data,
@@ -70,7 +74,7 @@ public class DeformUI : MonoSingleton<DeformUI>
 
 
     //nose.........
-    public Slider NoseZero_x, NoseZero_y, NoseZero_w;//add
+    public Slider NoseZero_x, NoseZero_y, NoseZero_z, NoseZero_w;//add
 
     public Slider UpperbridgeItem_x, UpperbridgeItem_y, UpperbridgeItem_w;
     public Slider InferiorbridgeItem_x, InferiorbridgeItem_y, InferiorbridgeItem_w;
@@ -81,19 +85,19 @@ public class DeformUI : MonoSingleton<DeformUI>
     public Slider NostrilItem_x, NostrilItem_y, NostrilItem_w;    
 
 
-    private Vector4 UpperbridgeSwitch_data,
+    private Vector4 NoseZero_data,
+                    UpperbridgeSwitch_data,
                     InferiorbridgeSwitch_data,
                     NoseheadSwitch_data,
                     ColumellaNasiSwitch_data,
                     NasalBaseSwitch_data,
-                    NoseWingSwitch_data,
-                    NostrilSwitch_data;
+                    NoseWingSwitch_data;
 
 
 
 
     //mouth.........
-    public Slider MouthZero_x, MouthZero_y, MouthZero_w;//add
+    public Slider MouthZero_x, MouthZero_y, MouthZero_z, MouthZero_w;//add
 
     public Slider upperlipItem_x, upperlipItem_y, upperlipItem_w;
     public Slider upperboneItem_x, upperboneItem_y, upperboneItem_w;
@@ -102,7 +106,8 @@ public class DeformUI : MonoSingleton<DeformUI>
     public Slider MiddleItem_x, MiddleItem_y, MiddleItem_w;
     public Slider cornerItem_x, cornerItem_y, cornerItem_w;
 
-    private Vector4 UplipSwitch_data,
+    private Vector4  MouthZero_data,
+                     UplipSwitch_data,
                      UpjawSwitch_data,
                      DownLipSwitch_data,
                      DownJawSwitch_data,
@@ -142,6 +147,7 @@ public class DeformUI : MonoSingleton<DeformUI>
     public void Start()
     {
 
+
         foreheadItem_x.onValueChanged.AddListener(foreheadItem_x_chg);       
         foreheadItem_y.onValueChanged.AddListener(foreheadItem_y_chg);
         foreheadItem_w.onValueChanged.AddListener(foreheadItem_z_chg);
@@ -158,6 +164,12 @@ public class DeformUI : MonoSingleton<DeformUI>
         ChinItem_y.onValueChanged.AddListener(ChinItem_y_chg);
         ChinItem_w.onValueChanged.AddListener(ChinItem_w_chg);
 
+        //////////////
+        TopHead_x.onValueChanged.AddListener(TopHead_x_chg);
+        TopHead_y.onValueChanged.AddListener(TopHead_y_chg);
+        TopHead_w.onValueChanged.AddListener(TopHead_w_chg);
+
+
         //face..........
         ApplemuscleItem_x.onValueChanged.AddListener(ApplemuscleItem_x_chg);
         ApplemuscleItem_y.onValueChanged.AddListener(ApplemuscleItem_y_chg);
@@ -171,6 +183,10 @@ public class DeformUI : MonoSingleton<DeformUI>
         FacialpartItem_y.onValueChanged.AddListener(FacialpartItem_y_chg);
         FacialpartItem_w.onValueChanged.AddListener(FacialpartItem_w_chg);
 
+        ////////////////
+        MasseterMuscle_x.onValueChanged.AddListener(MasseterMuscle_x_chg);
+        MasseterMuscle_y.onValueChanged.AddListener(MasseterMuscle_y_chg);
+        MasseterMuscle_w.onValueChanged.AddListener(MasseterMuscle_w_chg);
 
         //eyebrow....
         BrowbowItem_x.onValueChanged.AddListener(BrowbowItem_x_chg);
@@ -191,6 +207,13 @@ public class DeformUI : MonoSingleton<DeformUI>
         BrowTailItem_w.onValueChanged.AddListener(BrowTailItem_w_chg);
 
         //eye.......
+        //////////////////////
+        EyeZero_x.onValueChanged.AddListener(EyeZero_x_chg);
+        EyeZero_y.onValueChanged.AddListener(EyeZero_y_chg);
+        EyeZero_z.onValueChanged.AddListener(EyeZero_z_chg);
+        EyeZero_w.onValueChanged.AddListener(EyeZero_w_chg);
+
+
         EyecornerItem_x.onValueChanged.AddListener(EyecornerItem_x_chg);
         EyecornerItem_y.onValueChanged.AddListener(EyecornerItem_y_chg);
         EyecornerItem_w.onValueChanged.AddListener(EyecornerItem_w_chg);
@@ -213,10 +236,14 @@ public class DeformUI : MonoSingleton<DeformUI>
         EyetailItem_y.onValueChanged.AddListener(EyetailItem_y_chg);
         EyetailItem_w.onValueChanged.AddListener(EyetailItem_w_chg);
       
-        BlackeyeItem_y.onValueChanged.AddListener(BlackeyeItem_y_chg);
-        BlackeyeItem_w.onValueChanged.AddListener(BlackeyeItem_w_chg);
 
         //nose.........
+        //////////////
+        NoseZero_x .onValueChanged.AddListener(NoseZero_x_chg);
+        NoseZero_y .onValueChanged.AddListener(NoseZero_y_chg);
+        NoseZero_z .onValueChanged.AddListener(NoseZero_z_chg);
+        NoseZero_w .onValueChanged.AddListener(NoseZero_w_chg);
+
         UpperbridgeItem_x.onValueChanged.AddListener(UpperbridgeItem_x_chg);
         UpperbridgeItem_y.onValueChanged.AddListener(UpperbridgeItem_y_chg);
         UpperbridgeItem_w.onValueChanged.AddListener(UpperbridgeItem_w_chg);
@@ -242,12 +269,15 @@ public class DeformUI : MonoSingleton<DeformUI>
         NoseWingItem_y.onValueChanged.AddListener(NoseWingItem_y_chg);
         NoseWingItem_w.onValueChanged.AddListener(NoseWingItem_w_chg);
 
-        NostrilItem_x.onValueChanged.AddListener(NostrilItem_x_chg);
-        NostrilItem_y.onValueChanged.AddListener(NostrilItem_y_chg);
-        NostrilItem_w.onValueChanged.AddListener(NostrilItem_w_chg);
-
+      
 
         //mouth.........
+        ////////////////////////////
+        MouthZero_x .onValueChanged.AddListener(MouthZero_x_chg);
+        MouthZero_y .onValueChanged.AddListener(MouthZero_y_chg);
+        MouthZero_z .onValueChanged.AddListener(MouthZero_z_chg);
+        MouthZero_w .onValueChanged.AddListener(MouthZero_w_chg);
+
         upperlipItem_x.onValueChanged.AddListener(upperlipItem_x_chg);
         upperlipItem_y.onValueChanged.AddListener(upperlipItem_y_chg);
         upperlipItem_w.onValueChanged.AddListener(upperlipItem_w_chg);
@@ -332,33 +362,37 @@ public class DeformUI : MonoSingleton<DeformUI>
         TempleSwitch_data = deformdata.shape.TempleSwitch;
         BISjawSwitch_data = deformdata.shape.BISjawSwitch;
         ChinSwitch_data = deformdata.shape.ChinSwitch;
-        
+        TopHead_data = deformdata.shape.TopHeadSwitch;
+
         ApplemuscleSwitch_data = deformdata.face .ApplemuscleSwitch;
         CheekbonesSwitch_data = deformdata.face .CheekbonesSwitch;
         FacialpartSwitch_data = deformdata.face .FacialpartSwitch;
-        
+        MasseterMuscle_data = deformdata.face.MasseterMuscle;
+
         BrowbowSwitch_data = deformdata.eyebrow .BrowbowSwitch;
         BrowHeadSwitch_data = deformdata.eyebrow.BrowHeadSwitch;
         BrowMiddleSwitch_data = deformdata.eyebrow.BrowMiddleSwitch;
         BrowTailSwitch_data = deformdata.eyebrow.BrowTailSwitch;
-        
+
+
+        EyeZero_data = deformdata.eye.EyeZeroSwitch;
         EyecornerSwitch_data = deformdata.eye.EyecornerSwitch;
         UppereyelidSwitch_data = deformdata.eye.UppereyelidSwitch;
         DoublefoldEyelidsSwitch_data = deformdata.eye.DoublefoldEyelidsSwitch;
         lowereyelidSwitch_data = deformdata.eye.lowereyelidSwitch;
         EyebagSwitch_data = deformdata.eye.EyebagSwitch;
         EyetailSwitch_data = deformdata.eye.EyetailSwitch ;
-        BlackeyeSwitch_data = deformdata.eye.BlackeyeSwitch;
-        
+
+        NoseZero_data = deformdata.nose.NoseZeroSwitch;
         UpperbridgeSwitch_data = deformdata.nose .UpperbridgeSwitch;
         InferiorbridgeSwitch_data = deformdata.nose.InferiorbridgeSwitch;
         NoseheadSwitch_data = deformdata.nose.NoseheadSwitch;
         ColumellaNasiSwitch_data = deformdata.nose.ColumellaNasiSwitch ;
         NasalBaseSwitch_data = deformdata.nose.NasalBaseSwitch;
         NoseWingSwitch_data = deformdata.nose.NoseWingSwitch;
-        NostrilSwitch_data = deformdata.nose.NostrilSwitch;
-        
-        
+       
+
+        MouthZero_data = deformdata.mouth.MouthZeroSwitch;
         UplipSwitch_data = deformdata.mouth.UplipSwitch ;
         UpjawSwitch_data = deformdata.mouth.UpjawSwitch ;
         DownLipSwitch_data = deformdata.mouth.DownLipSwitch ;
@@ -400,6 +434,12 @@ public class DeformUI : MonoSingleton<DeformUI>
         ChinItem_y.value = ChinSwitch_data.y;
         ChinItem_w.value = ChinSwitch_data.w;
 
+        TopHead_x.value = TopHead_data.x;
+        TopHead_y.value = TopHead_data.y;
+        TopHead_w.value = TopHead_data.w;
+
+
+
         //face..........
         ApplemuscleItem_x.value = ApplemuscleSwitch_data.x;
         ApplemuscleItem_y.value = ApplemuscleSwitch_data.y;
@@ -412,6 +452,11 @@ public class DeformUI : MonoSingleton<DeformUI>
         FacialpartItem_x.value = FacialpartSwitch_data.x;
         FacialpartItem_y.value = FacialpartSwitch_data.y;
         FacialpartItem_w.value = FacialpartSwitch_data.w;
+
+        MasseterMuscle_x.value = MasseterMuscle_data.x;
+        MasseterMuscle_y.value = MasseterMuscle_data.y;
+        MasseterMuscle_w.value = MasseterMuscle_data.w;
+
 
 
         //eyebrow....
@@ -432,7 +477,15 @@ public class DeformUI : MonoSingleton<DeformUI>
         BrowTailItem_y.value = BrowTailSwitch_data.y;
         BrowTailItem_w.value = BrowTailSwitch_data.w;
 
+
+
         //eye.......
+
+        EyeZero_x.value = EyeZero_data.x;
+        EyeZero_y.value = EyeZero_data.y;
+        EyeZero_z.value = EyeZero_data.z;
+        EyeZero_w.value = EyeZero_data.w;
+
         EyecornerItem_x.value = EyecornerSwitch_data.x;
         EyecornerItem_y.value = EyecornerSwitch_data.y;
         EyecornerItem_w.value = EyecornerSwitch_data.w;
@@ -460,8 +513,14 @@ public class DeformUI : MonoSingleton<DeformUI>
         BlackeyeItem_x.value = BlackeyeSwitch_data.x;
         BlackeyeItem_y.value = BlackeyeSwitch_data.y;
         BlackeyeItem_w.value = BlackeyeSwitch_data.w;
-        
+
         //nose.........
+
+        NoseZero_x.value = NoseZero_data.x;
+        NoseZero_y.value = NoseZero_data.y;
+        NoseZero_z.value = NoseZero_data.z;
+        NoseZero_w.value = NoseZero_data.w;
+
         UpperbridgeItem_x.value = UpperbridgeSwitch_data.x;
         UpperbridgeItem_y.value = UpperbridgeSwitch_data.y;
         UpperbridgeItem_w.value = UpperbridgeSwitch_data.w;
@@ -486,13 +545,15 @@ public class DeformUI : MonoSingleton<DeformUI>
         NoseWingItem_x.value = NoseWingSwitch_data.x;
         NoseWingItem_y.value = NoseWingSwitch_data.y;
         NoseWingItem_w.value = NoseWingSwitch_data.w;
-
-        NostrilItem_x.value = NostrilSwitch_data.x;
-        NostrilItem_y.value = NostrilSwitch_data.y;
-        NostrilItem_w.value = NostrilSwitch_data.w;
-
+               
 
         //mouth.........
+
+        MouthZero_x.value = MouthZero_data.x;
+        MouthZero_y.value = MouthZero_data.y;
+        MouthZero_z.value = MouthZero_data.z;
+        MouthZero_w.value = MouthZero_data.w;
+
         upperlipItem_x.value = UplipSwitch_data.x;
         upperlipItem_y.value = UplipSwitch_data.y;
         upperlipItem_w.value = UplipSwitch_data.w;
@@ -557,13 +618,16 @@ public class DeformUI : MonoSingleton<DeformUI>
     }
 
 
+
+
+
+
+
     public void foreheadItem_x_chg( float val){       
 
      ForeheadSwitch_data.x = val;
    
         AppRoot.MainUser.CURForeheadSwitch = ForeheadSwitch_data; 
-
-
 
     }
     public void foreheadItem_y_chg(float val)
@@ -630,9 +694,23 @@ public class DeformUI : MonoSingleton<DeformUI>
         ChinSwitch_data.z = val;
         AppRoot.MainUser.CURChinSwitch = ChinSwitch_data;
     }
+    
 
-
-
+    public void TopHead_x_chg(float val)
+    {
+        TopHead_data.x = val;
+        AppRoot.MainUser.CURTopHead = TopHead_data;
+    }
+    public void TopHead_y_chg(float val)
+    {
+        TopHead_data.y = val;
+        AppRoot.MainUser.CURTopHead = TopHead_data;
+    }
+    public void TopHead_w_chg(float val)
+    {
+        TopHead_data.z = val;
+        AppRoot.MainUser.CURTopHead = TopHead_data;
+    }
 
 
 
@@ -690,7 +768,21 @@ public class DeformUI : MonoSingleton<DeformUI>
     }
 
 
-
+    public void MasseterMuscle_x_chg(float val)
+    {
+        MasseterMuscle_data.x = val;
+        AppRoot.MainUser.cur_MasseterMuscle = MasseterMuscle_data;
+    }
+    public void MasseterMuscle_y_chg(float val)
+    {
+        MasseterMuscle_data.y = val;
+        AppRoot.MainUser.cur_MasseterMuscle = MasseterMuscle_data;
+    }
+    public void MasseterMuscle_w_chg(float val)
+    {
+        MasseterMuscle_data.z = val;
+        AppRoot.MainUser.cur_MasseterMuscle = MasseterMuscle_data;
+    }
 
 
 
@@ -774,6 +866,29 @@ public class DeformUI : MonoSingleton<DeformUI>
 
 
     //eye.......
+
+    
+    public void EyeZero_x_chg(float val)
+    {
+        EyeZero_data.x = val;
+        AppRoot.MainUser.cur_EyeZeroSwitch = EyeZero_data;
+    }
+    public void EyeZero_y_chg(float val)
+    {
+        EyeZero_data.y = val;
+        AppRoot.MainUser.cur_EyeZeroSwitch = EyeZero_data;
+    }
+    public void EyeZero_z_chg(float val)
+    {
+        EyeZero_data.y = val;
+        AppRoot.MainUser.cur_EyeZeroSwitch = EyeZero_data;
+    }
+    public void EyeZero_w_chg(float val)
+    {
+        EyeZero_data.z = val;
+        AppRoot.MainUser.cur_EyeZeroSwitch = EyeZero_data;
+    }
+    
 
     public void EyecornerItem_x_chg(float val)
     {
@@ -876,25 +991,34 @@ public class DeformUI : MonoSingleton<DeformUI>
     }
 
 
-    public void BlackeyeItem_x_chg(float val)
-    {
-        BlackeyeSwitch_data.x = val;
-        AppRoot.MainUser.cur_BlackeyeSwitch = BlackeyeSwitch_data;
-    }
-    public void BlackeyeItem_y_chg(float val)
-    {
-        BlackeyeSwitch_data.y = val;
-        AppRoot.MainUser.cur_BlackeyeSwitch = BlackeyeSwitch_data;
-    }
-    public void BlackeyeItem_w_chg(float val)
-    {
-        BlackeyeSwitch_data.z = val;
-        AppRoot.MainUser.cur_BlackeyeSwitch = BlackeyeSwitch_data;
-    }
+
 
 
 
     //nose.........
+    
+    public void NoseZero_x_chg(float val)
+    {
+        NoseZero_data.x = val;
+        AppRoot.MainUser.cur_NoseZeroSwitch = NoseZero_data;
+    }
+    public void NoseZero_y_chg(float val)
+    {
+        NoseZero_data.y = val;
+        AppRoot.MainUser.cur_NoseZeroSwitch = NoseZero_data;
+    }
+
+    public void NoseZero_z_chg(float val)
+    {
+        NoseZero_data.y = val;
+        AppRoot.MainUser.cur_NoseZeroSwitch = NoseZero_data;
+    }
+    public void NoseZero_w_chg(float val)
+    {
+        NoseZero_data.z = val;
+        AppRoot.MainUser.cur_NoseZeroSwitch = NoseZero_data;
+    }
+
 
     public void UpperbridgeItem_x_chg(float val)
     {
@@ -1008,30 +1132,34 @@ public class DeformUI : MonoSingleton<DeformUI>
     }
 
 
-    public void NostrilItem_x_chg(float val)
-    {
-        NostrilSwitch_data.x = val;
-        AppRoot.MainUser.cur_NostrilSwitch = NostrilSwitch_data;
-    }
-    public void NostrilItem_y_chg(float val)
-    {
-        NostrilSwitch_data.y = val;
-        AppRoot.MainUser.cur_NostrilSwitch = NostrilSwitch_data;
-    }
-    public void NostrilItem_w_chg(float val)
-    {
-        NostrilSwitch_data.z = val;
-        AppRoot.MainUser.cur_NostrilSwitch = NostrilSwitch_data;
-    }
-
-
-
-
-
 
 
 
     //mouth..............................................................
+
+
+    
+
+ public void MouthZero_x_chg(float val)
+    {
+        MouthZero_data.x = val;
+        AppRoot.MainUser.cur_MouthZeroSwitch = MouthZero_data;
+    }
+    public void MouthZero_y_chg(float val)
+    {
+        MouthZero_data.y = val;
+        AppRoot.MainUser.cur_MouthZeroSwitch = MouthZero_data;
+    }
+    public void MouthZero_z_chg(float val)
+    {
+        MouthZero_data.z = val;
+        AppRoot.MainUser.cur_MouthZeroSwitch = MouthZero_data;
+    }
+    public void MouthZero_w_chg(float val)
+    {
+        MouthZero_data.w = val;
+        AppRoot.MainUser.cur_MouthZeroSwitch = MouthZero_data;
+    }
 
 
 

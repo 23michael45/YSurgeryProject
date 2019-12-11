@@ -259,7 +259,7 @@ public class DeformJson
     [Serializable]
     public class Shape
     {
-        public Vector4 ForeheadSwitch, TempleSwitch, BISjawSwitch, ChinSwitch, TopHead;
+        public Vector4 ForeheadSwitch, TempleSwitch, BISjawSwitch, ChinSwitch, TopHeadSwitch;
     }
     [Serializable]
     public class Face
@@ -274,19 +274,20 @@ public class DeformJson
     [Serializable]
     public class Eye
     {
-        public Vector4 EyecornerSwitch, UppereyelidSwitch, DoublefoldEyelidsSwitch,
-                        lowereyelidSwitch, EyebagSwitch, EyetailSwitch, BlackeyeSwitch;
+        public Vector4  EyeZeroSwitch,EyecornerSwitch, UppereyelidSwitch, DoublefoldEyelidsSwitch,
+                        lowereyelidSwitch, EyebagSwitch, EyetailSwitch;
     }
     [Serializable]
     public class Nose
     {
-        public Vector4 UpperbridgeSwitch, InferiorbridgeSwitch, NoseheadSwitch, ColumellaNasiSwitch,
-                        NasalBaseSwitch, NoseWingSwitch, NostrilSwitch;
+        public Vector4  NoseZeroSwitch,UpperbridgeSwitch, InferiorbridgeSwitch, NoseheadSwitch, 
+                        ColumellaNasiSwitch,NasalBaseSwitch, NoseWingSwitch;
     }
     [Serializable]
     public class Mouth
     {
-        public Vector4 UplipSwitch, UpjawSwitch, DownLipSwitch, DownJawSwitch, PhiltrumSwitch, CornerSwitch;
+        public Vector4 MouthZeroSwitch, UplipSwitch, UpjawSwitch, DownLipSwitch, 
+                       DownJawSwitch, PhiltrumSwitch, CornerSwitch;
     }
     [Serializable]
     public class Chest
@@ -297,7 +298,7 @@ public class DeformJson
     public class Body
     {
         public Vector4 NeckSwitch, ChestSwitch, WristSwitch, HipSwitch, LegSwitch, ArmSwitch,
-                        ForeheadSwitch, BISjawSwitch, ChinSwitch;
+                       ForeheadSwitch, BISjawSwitch, ChinSwitch;
     }
 
     public Shape shape;
