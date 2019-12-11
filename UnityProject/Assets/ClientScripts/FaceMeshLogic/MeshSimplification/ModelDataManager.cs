@@ -259,12 +259,12 @@ public class DeformJson
     [Serializable]
     public class Shape
     {
-        public Vector4 ForeheadSwitch, TempleSwitch, BISjawSwitch, ChinSwitch;
+        public Vector4 ForeheadSwitch, TempleSwitch, BISjawSwitch, ChinSwitch, TopHead;
     }
     [Serializable]
     public class Face
     {
-        public Vector4 ApplemuscleSwitch, CheekbonesSwitch, FacialpartSwitch;
+        public Vector4 ApplemuscleSwitch, CheekbonesSwitch, FacialpartSwitch, MasseterMuscle;
     }
     [Serializable]
     public class Eyebrow

@@ -229,10 +229,6 @@ public class Deform : MonoBehaviour
         Vector3 Sacle = new Vector3(xx.w, xx.w, xx.w);
         // DeformBoneScale("face_forehead_joint1", Sacle);
 
-
-
-
-
     }
     public void SetChinSwitch(Vector4  xx)//下巴
     {
@@ -275,6 +271,51 @@ public class Deform : MonoBehaviour
 
         Vector3 Sacle = new Vector3(xx.w, xx.w, xx.w);
       //  DeformBoneScale("face_forehead_joint1", Sacle);
+
+
+
+    }
+    public void SetTopHead(Vector4 xx)//下巴
+    {
+
+
+        xx = xx / ratio;
+        //Debug.Log(xx);
+
+        Vector3 offset = new Vector3(0, -xx.y, xx.z);
+        Vector3 offset_l = new Vector3(-xx.x, -xx.y, xx.z);
+        Vector3 offset_r = new Vector3(xx.x, -xx.y, xx.z);
+
+
+        Chin_cache = new Vector3(-xx.x / 2, -xx.y / 2, xx.z / 2);
+        Vector3 face_chin_Lf_joint02 = Chin_cache + BISjaw_cache3;
+
+        DeformBonePos("face_chin_Lf_joint02", face_chin_Lf_joint02);
+
+        DeformBonePos("face_chin_joint2", offset_l);
+
+        Vector3 face_Orbicular_Lf_joint1 = new Vector3(-xx.x / 2, -xx.y / 2, xx.z / 2);
+        DeformBonePos("face_Orbicular_Lf_joint1", face_Orbicular_Lf_joint1);
+
+
+
+
+        Chin_cache2 = new Vector3(xx.x / 2, -xx.y / 2, xx.z / 2);
+        Vector3 face_chin_Rt_joint02 = Chin_cache2 + BISjaw_cache4;
+        DeformBonePos("face_chin_Rt_joint02", face_chin_Rt_joint02);
+
+        DeformBonePos("face_chin_joint3", offset_r);
+
+        Vector3 face_Orbicular_Rt_joint1 = new Vector3(-xx.x / 2, -xx.y / 2, xx.z / 2);
+        DeformBonePos("face_Orbicular_Rt_joint1", face_Orbicular_Rt_joint1);
+
+        DeformBonePos("face_chin_joint1", offset);
+
+        DeformBonePos("face_Orbicular_joint1", offset);
+
+
+        Vector3 Sacle = new Vector3(xx.w, xx.w, xx.w);
+        //  DeformBoneScale("face_forehead_joint1", Sacle);
 
 
 
@@ -335,7 +376,7 @@ public class Deform : MonoBehaviour
         DeformBoneScale("face_check_Rt_joint3", Sacle);
 
     }
-    public void SetFacialpartSwitch(Vector4  xx)//咬肌
+    public void SetFacialpartSwitch(Vector4  xx)//脸部
     {
         xx = xx / ratio;
         //Debug.Log(xx);
@@ -381,8 +422,53 @@ public class Deform : MonoBehaviour
 
 
     }
-   
 
+    public void SetMasseterMuscle(Vector4 xx)//咬肌
+    {
+        xx = xx / ratio;
+        //Debug.Log(xx);
+
+        Vector3 offset = new Vector3(0, xx.y, xx.z);
+        Vector3 offset_l = new Vector3(-xx.x, xx.y, xx.z);
+        Vector3 offset_r = new Vector3(xx.x, xx.y, xx.z);
+
+
+
+        DeformBonePos("face_check_Lf_joint1", offset_l);
+        DeformBonePos("face_check_Lf_joint2", offset_l);
+
+        //DeformBonePos("face_Orbicular_Lf_joint1", offset_l);
+        //DeformBonePos("face_Orbicular_Lf_joint2", offset_l);
+        //DeformBonePos("face_Orbicular_Lf_joint3", offset_l);
+
+
+        DeformBonePos("face_check_Rt_joint1", offset_r);
+        DeformBonePos("face_check_Rt_joint2", offset_r);
+
+        //DeformBonePos("face_Orbicular_Rt_joint1", offset_r);        
+        //DeformBonePos("face_Orbicular_Rt_joint2", offset_r);
+        //DeformBonePos("face_Orbicular_Rt_joint3", offset_r);
+
+        Vector3 Sacle = new Vector3(xx.w, xx.w, xx.w);
+
+        DeformBoneScale("face_check_Lf_joint1", Sacle);
+        DeformBoneScale("face_check_Lf_joint2", Sacle);
+
+        //DeformBoneScale("face_Orbicular_Lf_joint1", Sacle);
+        //DeformBoneScale("face_Orbicular_Lf_joint2", Sacle);
+        //DeformBoneScale("face_Orbicular_Lf_joint3", Sacle);
+
+        DeformBoneScale("face_check_Rt_joint1", Sacle);
+        DeformBoneScale("face_check_Rt_joint2", Sacle);
+
+        //DeformBoneScale("face_Orbicular_Rt_joint1", Sacle);
+        //DeformBoneScale("face_Orbicular_Rt_joint2", Sacle);
+        //DeformBoneScale("face_Orbicular_Rt_joint3", Sacle);
+
+
+
+
+    }
     private float Forehead_kuan = 0.000f;
     private float Forehead_kuan2 = 0.000f;
     private float Forehaed_qianhou = 0.000f;

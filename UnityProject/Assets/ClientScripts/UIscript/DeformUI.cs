@@ -14,6 +14,8 @@ public class DeformUI : MonoSingleton<DeformUI>
     public Slider BISjawItem_x, BISjawItem_y, BISjawItem_w;
     public Slider ChinItem_x, ChinItem_y, ChinItem_w;
 
+    public Slider TopHead_x, TopHead_y, TopHead_w;//add
+
     private Vector4 ForeheadSwitch_data,
                     TempleSwitch_data,
                     BISjawSwitch_data,
@@ -24,6 +26,7 @@ public class DeformUI : MonoSingleton<DeformUI>
     public Slider CheekbonesItem_x, CheekbonesItem_y, CheekbonesItem_w;
     public Slider FacialpartItem_x, FacialpartItem_y, FacialpartItem_w;
 
+    public Slider MasseterMuscle_x, MasseterMuscle_y, MasseterMuscle_w;//add
 
 
     private Vector4 ApplemuscleSwitch_data,
@@ -40,11 +43,13 @@ public class DeformUI : MonoSingleton<DeformUI>
     private Vector4 BrowbowSwitch_data,
                     BrowHeadSwitch_data,
                     BrowMiddleSwitch_data,
-                    BrowTailSwitch_data; 
+                    BrowTailSwitch_data;
 
 
 
     //eye.......
+    public Slider EyeZero_x, EyeZero_y, EyeZero_z;//add
+
     public Slider EyecornerItem_x, EyecornerItem_y, EyecornerItem_w;
     public Slider UppereyelidItem_x, UppereyelidItem_y, UppereyelidItem_w;
     public Slider DoublefoldEyelidsItem_x, DoublefoldEyelidsItem_y, DoublefoldEyelidsItem_w;
@@ -65,6 +70,8 @@ public class DeformUI : MonoSingleton<DeformUI>
 
 
     //nose.........
+    public Slider NoseZero_x, NoseZero_y, NoseZero_w;//add
+
     public Slider UpperbridgeItem_x, UpperbridgeItem_y, UpperbridgeItem_w;
     public Slider InferiorbridgeItem_x, InferiorbridgeItem_y, InferiorbridgeItem_w;
     public Slider NoseheadItem_x, NoseheadItem_y, NoseheadItem_z, NoseheadItem_w;
@@ -86,6 +93,8 @@ public class DeformUI : MonoSingleton<DeformUI>
 
 
     //mouth.........
+    public Slider MouthZero_x, MouthZero_y, MouthZero_w;//add
+
     public Slider upperlipItem_x, upperlipItem_y, upperlipItem_w;
     public Slider upperboneItem_x, upperboneItem_y, upperboneItem_w;
     public Slider downlipItem_x, downlipItem_y, downlipItem_w;

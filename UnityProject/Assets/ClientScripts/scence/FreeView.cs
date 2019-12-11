@@ -212,7 +212,7 @@ public class FreeView : MonoBehaviour
 	{  
    
 
-     CameraSlider.maxValue = humanHigh+20 ;
+     CameraSlider.maxValue = humanHigh+200 ;
      Target = targetobject.transform;
 
     Input.multiTouchEnabled=true;  //允许多点触控  

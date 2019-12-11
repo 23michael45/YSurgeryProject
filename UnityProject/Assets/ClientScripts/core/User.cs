@@ -19,10 +19,6 @@ public class User_Environment
 
 
 
-
-
-
-
 [Serializable]
 public class User_Ornaments
 {
@@ -197,7 +193,17 @@ public class User
         }
     }
 
-
+    //头顶
+    public Vector4 CURTopHead
+    {
+        get { return currentModel.deform.shape.TopHead; }
+        set
+        {
+            currentModel.deform.shape.TopHead = value;
+            Vector4 var = currentModel.deform.shape.TopHead;
+            AppRoot.MainDeform.SetTopHead(var);
+        }
+    }
     /// <summary>
     /// Face deform............
     /// </summary>
@@ -230,6 +236,17 @@ public class User
             currentModel.deform.face.FacialpartSwitch = value;
             Vector4 var = currentModel.deform.face.FacialpartSwitch;
             AppRoot.MainDeform.SetFacialpartSwitch (var);
+        }
+    }
+
+    public Vector4 cur_MasseterMuscle
+    {
+        get { return currentModel.deform.face.MasseterMuscle; }
+        set
+        {
+            currentModel.deform.face.MasseterMuscle = value;
+            Vector4 var = currentModel.deform.face.MasseterMuscle;
+            AppRoot.MainDeform.SetMasseterMuscle(var);
         }
     }
 
