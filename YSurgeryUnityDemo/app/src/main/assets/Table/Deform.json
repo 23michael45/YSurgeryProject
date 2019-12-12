@@ -5,12 +5,14 @@
 "Shape":{
 "ForeheadSwitch":{"x":0,"y":0,"z":0,"w":0},
 "TempleSwitch" :{"x":0,"y":0,"z":0,"w":0},
+"ChinSwitch" :{"x":0,"y":0,"z":0,"w":0},
 "BISjawSwitch" :{"x":0,"y":0,"z":0,"w":0},
-"ChinSwitch" :{"x":0,"y":0,"z":0,"w":0}
+"TopHead":{"x":0,"y":0,"z":0,"w":0}
 },
 "Face":{
 "ApplemuscleSwitch ": {"x":0,"y":0,"z":0,"w":0},
 "CheekbonesSwitch " : {"x":0,"y":0,"z":0,"w":0},
+"MasseterMuscle":{"x":0,"y":0,"z":0,"w":0},
 "FacialpartSwitch " : {"x":0,"y":0,"z":0,"w":0}
 },
 "Eyebrow":{
