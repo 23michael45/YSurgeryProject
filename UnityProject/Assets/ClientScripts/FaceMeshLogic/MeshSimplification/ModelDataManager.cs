@@ -670,18 +670,24 @@ public class ModelDataManager : MonoBehaviour
     {
         Vector3 hsvoffset = new Vector3(jsonData.info.calcRet.hsv_offset.h, jsonData.info.calcRet.hsv_offset.s, jsonData.info.calcRet.hsv_offset.v);
 
-        foreach (var mat in GetBody(gender).GetComponent<SkinnedMeshRenderer>().sharedMaterials)
+        var smr = GetBody(gender).GetComponent<SkinnedMeshRenderer>();
+
+        for(int i = 0 ; i< smr.sharedMaterials.Length;i++)
         {
+            var mat = new Material(smr.sharedMaterials[i]);
+
             float hue = hsvoffset.x * 2;
             float sat = hsvoffset.y / 255;
             float val = hsvoffset.z / 255;
 
-
-
             mat.SetInt("_Hue", (int)hue);
             mat.SetFloat("_Saturation", sat);
             mat.SetFloat("_Value", val);
+
+
+            smr.sharedMaterials[i] = mat;
         }
+
 
         return true;
     }

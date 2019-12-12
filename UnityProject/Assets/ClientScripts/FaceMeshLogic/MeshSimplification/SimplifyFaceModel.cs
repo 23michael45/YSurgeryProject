@@ -73,7 +73,7 @@ public class SimplifyFaceModel : MonoBehaviour
         ldDeformedMesh.triangles = indices;
         m_LDDeformedFaceMesh.GetComponent<MeshFilter>().sharedMesh = ldDeformedMesh;
     }
-    public void CalculateDeformedMesh(string hlMapJson, Mesh hdDeformedMesh,Transform hdDefromedTransfrom, Mesh ldMeanMesh, Transform ldMeanTransform, out Vector3[] vertices, out Vector2[] uvs, out Vector2[] uvInRegion, out int[] indices)
+    public void CalculateDeformedMesh(string hlMapJson, Mesh hdDeformedMesh, Transform hdDefromedTransfrom, Mesh ldMeanMesh, Transform ldMeanTransform, out Vector3[] vertices, out Vector2[] uvs, out Vector2[] uvInRegion, out int[] indices)
     {
         Dictionary<int, int> l2hDict;
 
@@ -109,7 +109,7 @@ public class SimplifyFaceModel : MonoBehaviour
 
 
                 Vector2 uv = DeformedUVs[highIndex];
-                
+
                 //if (uv.x < 0)
                 //{
                 //    uv.x = -uv.x;
@@ -508,10 +508,6 @@ public class SimplifyFaceModel : MonoBehaviour
             {
                 //Debug.Log(string.Format("mindist {2} lowIndex {0} highIndex {1}", lowIndex, minHighIndex,minDist));
                 Vector2 uv = highuv[minHighIndex];
-                if (uv.x < 0)
-                {
-                    uv.x = -uv.x;
-                }
                 lowuv[lowIndex] = uv;
             }
 
@@ -533,10 +529,17 @@ public class SimplifyFaceModel : MonoBehaviour
         if (smr)
         {
             smr.sharedMesh = newLowMesh;
-
         }
 
-        UnityFBXExporter.FBXExporter.ExportGameObjToFBX(gameObject, Path.Combine(Application.dataPath, savePath));
+        if (lmf != null)
+        {
+            lmf.sharedMesh = newLowMesh;
+        }
+        if (lsmr)
+        {
+            lsmr.sharedMesh = newLowMesh;
+        }
+        // UnityFBXExporter.FBXExporter.ExportGameObjToFBX(gameObject, Path.Combine(Application.dataPath, savePath));
     }
 
     public void RebindDeformedBone(string loadPath)
@@ -547,7 +550,7 @@ public class SimplifyFaceModel : MonoBehaviour
         Matrix4x4[] bindposes;
         RebindBones(loadPath, hdDeformed, skinMesh.transform, skinMesh.bones, skinMesh.rootBone, out bindposes);
     }
-    public void RebindBones(string boneIndexJson, Mesh hdDeformedMesh,Transform skinnedMeshRendererTransform, Transform[] bones, Transform parentBonesTransfrom, out Matrix4x4[] bindposes)
+    public void RebindBones(string boneIndexJson, Mesh hdDeformedMesh, Transform skinnedMeshRendererTransform, Transform[] bones, Transform parentBonesTransfrom, out Matrix4x4[] bindposes)
     {
         Transform[] dstBonesHierarchy = parentBonesTransfrom.GetComponentsInChildren<Transform>();
         Dictionary<string, Transform> bonesMap = new Dictionary<string, Transform>();
@@ -568,7 +571,7 @@ public class SimplifyFaceModel : MonoBehaviour
         //不能直接用bindposes,要new 出一份，否则会改变ldSkinMeanMesh
         //bindposes = ldSkinMeanMesh.sharedMesh.bindposes;
         bindposes = new Matrix4x4[bones.Length];
-        
+
         foreach (KeyValuePair<string, int> kv in biMap)
         {
             if (kv.Value != -1)
@@ -704,7 +707,7 @@ public class SimplifyFaceModel : MonoBehaviour
     void LoadHLMapJson(string loadPath, out Dictionary<int, int> l2hDict)
     {
         HLVertexMap hlMap = LoadJson<HLVertexMap>(loadPath);
-        LoadHLMapJson(hlMap,out l2hDict);
+        LoadHLMapJson(hlMap, out l2hDict);
     }
     void LoadHLMapJson(HLVertexMap hlMap, out Dictionary<int, int> l2hDict)
     {

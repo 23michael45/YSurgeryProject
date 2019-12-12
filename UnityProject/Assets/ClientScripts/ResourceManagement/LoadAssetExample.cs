@@ -5,7 +5,7 @@ using System.IO;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
-
+using UnityEngine.Timeline;
 public class LoadAssetExample : MonoBehaviour
 {
     public string mAssetaddress;
