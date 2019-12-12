@@ -66,7 +66,7 @@ public class RoleJson
     public Quaternion[] bonelocalrotation;
     public Vector3[] bonelocalscale;
 
-    public static string Save(Mesh mesh, Transform[] bones,int gender,float height, float weight)
+    public static string Save(Mesh mesh, Transform[] bones, int gender, float height, float weight)
     {
         RoleJson data = new RoleJson();
 
@@ -106,7 +106,7 @@ public class RoleJson
     {
         Mesh skinnedMesh = skinnedMeshRenderer.sharedMesh;
         Transform[] bones = skinnedMeshRenderer.bones;
-        return Save(skinnedMesh, bones,gender,height,weight);
+        return Save(skinnedMesh, bones, gender, height, weight);
 
     }
     public static string Save(MeshFilter meshFilter, int gender, float height, float weight)
@@ -116,7 +116,7 @@ public class RoleJson
 
     }
 
-    public static RoleJson Load(string json, ref SkinnedMeshRenderer skinnedMesh,ref MeshFilter meshFilter)
+    public static RoleJson Load(string json, ref SkinnedMeshRenderer skinnedMesh, ref MeshFilter meshFilter)
     {
         RoleJson data = JsonUtility.FromJson<RoleJson>(json);
 
@@ -174,7 +174,7 @@ public class DeformJson_Lengacy
     public Vector3[] bonelocalpositions;
     public Quaternion[] bonelocalrotation;
     public Vector3[] bonelocalscale;
-    
+
 
     public static string Save(Transform[] bones)
     {
@@ -212,7 +212,7 @@ public class DeformJson_Lengacy
     {
         DeformJson_Lengacy data = JsonUtility.FromJson<DeformJson_Lengacy>(json);
 
-        
+
 
         if (skinnedMesh.bones.Length != data.bonelocalpositions.Length)
         {
@@ -230,9 +230,9 @@ public class DeformJson_Lengacy
 
             }
             skinnedMesh.bones = bones;
-            
+
         }
-        
+
         return true;
     }
 
@@ -246,11 +246,11 @@ public class DeformJson
     public DeformJson()
     {
         shape = new Shape();
-        face = new Face ();
-        eyebrow = new Eyebrow ();
-        eye = new Eye ();
-        nose = new Nose ();
-        mouth = new Mouth ();
+        face = new Face();
+        eyebrow = new Eyebrow();
+        eye = new Eye();
+        nose = new Nose();
+        mouth = new Mouth();
         chest = new Chest();
         body = new Body();
     }
@@ -274,19 +274,19 @@ public class DeformJson
     [Serializable]
     public class Eye
     {
-        public Vector4  EyeZeroSwitch,EyecornerSwitch, UppereyelidSwitch, DoublefoldEyelidsSwitch,
+        public Vector4 EyeZeroSwitch, EyecornerSwitch, UppereyelidSwitch, DoublefoldEyelidsSwitch,
                         lowereyelidSwitch, EyebagSwitch, EyetailSwitch;
     }
     [Serializable]
     public class Nose
     {
-        public Vector4  NoseZeroSwitch,UpperbridgeSwitch, InferiorbridgeSwitch, NoseheadSwitch, 
-                        ColumellaNasiSwitch,NasalBaseSwitch, NoseWingSwitch;
+        public Vector4 NoseZeroSwitch, UpperbridgeSwitch, InferiorbridgeSwitch, NoseheadSwitch,
+                        ColumellaNasiSwitch, NasalBaseSwitch, NoseWingSwitch;
     }
     [Serializable]
     public class Mouth
     {
-        public Vector4 MouthZeroSwitch, UplipSwitch, UpjawSwitch, DownLipSwitch, 
+        public Vector4 MouthZeroSwitch, UplipSwitch, UpjawSwitch, DownLipSwitch,
                        DownJawSwitch, PhiltrumSwitch, CornerSwitch;
     }
     [Serializable]
@@ -419,7 +419,7 @@ public class ModelDataManager : MonoBehaviour
         string json = "";
         if (skinned)
         {
-             json = RoleJson.Save(mSkinnedMeshRenderer.sharedMesh, mSkinnedMeshRenderer.bones,0,1.78f,75f);
+            json = RoleJson.Save(mSkinnedMeshRenderer.sharedMesh, mSkinnedMeshRenderer.bones, 0, 1.78f, 75f);
 
         }
         else
@@ -447,7 +447,7 @@ public class ModelDataManager : MonoBehaviour
 
 
 
-    void CloneBoneHierarchy(Transform parentBoneTransform,Transform rootBoneTransform, Transform[] bones,out Transform[] newBones,out Transform newParentBoneTransform, out Transform newRootBoneTransform)
+    void CloneBoneHierarchy(Transform parentBoneTransform, Transform rootBoneTransform, Transform[] bones, out Transform[] newBones, out Transform newParentBoneTransform, out Transform newRootBoneTransform)
     {
         newParentBoneTransform = null;
         newRootBoneTransform = null;
@@ -468,7 +468,7 @@ public class ModelDataManager : MonoBehaviour
             DstBoneDict[srcBone.name] = bone;
 
         }
-        
+
         foreach (var kv in DstBoneDict)
         {
 
@@ -512,12 +512,32 @@ public class ModelDataManager : MonoBehaviour
         }
     }
 
-    public string CalculateLowPolyFace(byte[] hdObjData,int gender,float height, float weight)
+
+    void SetTemplateXDirection(bool bPositive)
+    {
+        Vector3 localScale = mLowMeshTemplate.transform.localScale;
+        float scaleX = localScale.x;
+        scaleX = Math.Abs(scaleX);
+
+        if (bPositive)
+        {
+            localScale.x = scaleX;
+        }
+        else
+        {
+
+            localScale.x = -scaleX;
+        }
+        mLowMeshTemplate.transform.localScale = localScale;
+    }
+
+    public string CalculateLowPolyFace(byte[] hdObjData, int gender, float height, float weight)
     {
         if (mLowMeshTemplate == null)
         {
             return null;
         }
+        SetTemplateXDirection(true);
 
         Debug.Log("CalculateLowPolyFace Start");
 
@@ -530,7 +550,7 @@ public class ModelDataManager : MonoBehaviour
         GameObject deformedMeshObject = new OBJLoader().Load(stream);
 
 
-        
+
         SimplifyFaceModel sf = new SimplifyFaceModel();
         MeshFilter defromedMeshFilter = deformedMeshObject.GetComponentInChildren<MeshFilter>();
         Mesh hdDeformedMesh = Instantiate(defromedMeshFilter.sharedMesh);
@@ -556,14 +576,14 @@ public class ModelDataManager : MonoBehaviour
         Debug.Log("CalculateLowPolyFace CloneBoneHierarchy");
         CloneBoneHierarchy(parentBoneTransform, mSkinnedMeshRenderer.rootBone, mSkinnedMeshRenderer.bones, out newBones, out newParentBoneTransform, out newRootBoneTransform);
 
-        
+
 
         Matrix4x4[] bindposes;
         BoneWeight[] weights;
 
         Debug.Log("CalculateLowPolyFace RebindBones");
         sf.RebindBones(boneIndexMapJson, hdDeformedMesh, mSkinnedMeshRenderer.transform, newBones, newParentBoneTransform, out bindposes);
-        
+
         Mesh lowDeformedSkinMesh = new Mesh();
         lowDeformedSkinMesh.vertices = vertices;
 
@@ -572,7 +592,7 @@ public class ModelDataManager : MonoBehaviour
 
 
         lowDeformedSkinMesh.triangles = indices;
-        
+
         lowDeformedSkinMesh.bindposes = bindposes;
         lowDeformedSkinMesh.boneWeights = mSkinnedMeshRenderer.sharedMesh.boneWeights;
 
@@ -596,17 +616,21 @@ public class ModelDataManager : MonoBehaviour
         }
 
         Debug.Log("CalculateLowPolyFace Start RoleJson Save");
-        string roleJson = RoleJson.Save(lowDeformedSkinMesh, newBones,gender,height,weight);
-        
+        string roleJson = RoleJson.Save(lowDeformedSkinMesh, newBones, gender, height, weight);
+
         GameObject.Destroy(newParentBoneTransform.gameObject);
 
         Debug.Log("CalculateLowPolyFace Return RoleJson");
+
+        
+        SetTemplateXDirection(false);
         return roleJson;
     }
 
 
     public bool LoadLowPolyFace(string roleJson, Texture2D tex)
     {
+        SetTemplateXDirection(true);
 
         Debug.Log("Start LoadLowPolyFace");
         if (tex != null)
@@ -615,11 +639,11 @@ public class ModelDataManager : MonoBehaviour
 
         }
         Debug.Log("Start RoleJson Load");
-        RoleJson roleJsonData = RoleJson.Load(roleJson, ref mSkinnedMeshRenderer,ref mDebugMeshFilter);
+        RoleJson roleJsonData = RoleJson.Load(roleJson, ref mSkinnedMeshRenderer, ref mDebugMeshFilter);
 
         //to do select model body by gender,height ,weight
-        if(roleJsonData.gender == 0)
-        { 
+        if (roleJsonData.gender == 0)
+        {
             GetBody(0).SetActive(true);
             GetNail(0).SetActive(true);
             GetBody(1).SetActive(false);
@@ -638,13 +662,14 @@ public class ModelDataManager : MonoBehaviour
         Role role = mLowMeshTemplate.GetComponent<Role>();
         LoadManager.Instance.newUser(role);
 
+        SetTemplateXDirection(false);
         return true;
     }
 
-    public bool FitCalculationJson(CalculateResultDataJson jsonData,int gender)
+    public bool FitCalculationJson(CalculateResultDataJson jsonData, int gender)
     {
         Vector3 hsvoffset = new Vector3(jsonData.info.calcRet.hsv_offset.h, jsonData.info.calcRet.hsv_offset.s, jsonData.info.calcRet.hsv_offset.v);
-        
+
         foreach (var mat in GetBody(gender).GetComponent<SkinnedMeshRenderer>().sharedMaterials)
         {
             float hue = hsvoffset.x * 2;
@@ -663,24 +688,35 @@ public class ModelDataManager : MonoBehaviour
 
     public string SaveDeform()
     {
-        return DeformJson.Save(AppRoot.MainUser.currentModel.deform);
+        SetTemplateXDirection(true);
+        string deformJson = DeformJson.Save(AppRoot.MainUser.currentModel.deform);
+        
+        SetTemplateXDirection(false);
+        return deformJson;
     }
 
     public bool LoadDeform(string deformJson)
     {
+        SetTemplateXDirection(true);
         DeformJson deform = DeformJson.Load(deformJson);
 
         DeformUI.Instance.Load(deform);
+        
+        SetTemplateXDirection(false);
         return true;
     }
 
     public string SaveAvatar()
     {
+        SetTemplateXDirection(true);
+        SetTemplateXDirection(false);
         return "";
     }
 
     public bool LoadAvatar(string avatarJson)
     {
+        SetTemplateXDirection(true);
+        SetTemplateXDirection(false);
         return false;
     }
 }
