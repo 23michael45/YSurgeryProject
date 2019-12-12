@@ -11,9 +11,12 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 public class UnityEmbededActivity extends UnityPlayerActivity {
 
@@ -40,7 +43,7 @@ public class UnityEmbededActivity extends UnityPlayerActivity {
                     is.close();
 
                     String roleJson = YSurgeryUnityInterface.instance.CalculateLowPolyFace(hdObjData,0,180,75);
-                    writeToFile(roleJson,"roleJson.json");
+                    writeToFile(roleJson,"obama53149_role.json");
 
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -58,18 +61,19 @@ public class UnityEmbededActivity extends UnityPlayerActivity {
             public void onClick(View view) {
 
                 try {
-                    InputStream is=getAssets().open("Model/obama53149_role.json");
+//                    InputStream is=getAssets().open("Model/obama53149_role.json");
+//
+//                    int size = is.available();
+//                    byte[] buffer = new byte[size];
+//                    is.read(buffer);
+//                    is.close();
+//
+//                    // byte buffer into a string
+//                    String roleJson = new String(buffer);
 
-                    int size = is.available();
-                    byte[] buffer = new byte[size];
-                    is.read(buffer);
-                    is.close();
+                    String roleJson = ReadFromFile("obama53149_role.json");
 
-                    // byte buffer into a string
-                    String roleJson = new String(buffer);
-
-
-                    is=getAssets().open("Model/obamaTexture.jpg");
+                    InputStream is=getAssets().open("Model/obamaTexture.jpg");
 
                     byte[] textureData=new byte[is.available()];
                     is.read(textureData);
@@ -90,7 +94,7 @@ public class UnityEmbededActivity extends UnityPlayerActivity {
             public void onClick(View view) {
 
                 String deformJson = YSurgeryUnityInterface.instance.SaveDeform();
-                writeToFile(deformJson,"deformJson.json");
+                writeToFile(deformJson,"obama53149_deform.json");
 
                 Toast.makeText(UnityEmbededActivity.this,"SaveDeform Finish",Toast.LENGTH_LONG).show();
             }
@@ -101,21 +105,23 @@ public class UnityEmbededActivity extends UnityPlayerActivity {
             @Override
             public void onClick(View view) {
 
-                try {
-                    InputStream is=getAssets().open("Model/obama53149_deform.json");
+//                try {
+//                    InputStream is=getAssets().open("Model/obama53149_deform.json");
+//
+//                    int size = is.available();
+//                    byte[] buffer = new byte[size];
+//                    is.read(buffer);
+//                    is.close();
+//
+//                    // byte buffer into a string
+//                    String defromJson = new String(buffer);
 
-                    int size = is.available();
-                    byte[] buffer = new byte[size];
-                    is.read(buffer);
-                    is.close();
-
-                    // byte buffer into a string
-                    String defromJson = new String(buffer);
+                    String defromJson = ReadFromFile("obama53149_deform.json");
 
                     YSurgeryUnityInterface.instance.LoadDeform(defromJson);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
             }
         });
 
@@ -147,5 +153,22 @@ public class UnityEmbededActivity extends UnityPlayerActivity {
             writer.close();
         } catch (IOException e) {
         }
+    }
+
+    private String ReadFromFile(String path) {
+        try {
+
+            String fullpath = Environment.getExternalStorageDirectory() + "/" + path;
+//            File file = new File(path);
+
+//            if (!file.exists()) {
+//                return "";
+//            }
+            String content = new String(Files.readAllBytes(Paths.get(fullpath)));
+            return content;
+
+        } catch (IOException e) {
+        }
+        return "";
     }
 }
