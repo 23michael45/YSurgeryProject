@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ViewUI : MonoBehaviour
+public class ViewUI : MonoSingleton<ViewUI>
 {
 
 
@@ -70,12 +70,10 @@ public class ViewUI : MonoBehaviour
         Edit_UI.SetActive(true);
         View_UI.SetActive(false);
         
-        SendMessage.LoadEditMode(modelstring);
+        // SendMessage.LoadEditMode(modelstring);
       
 
     }
-
-
 
     public void BoardButton_CLK()
     {

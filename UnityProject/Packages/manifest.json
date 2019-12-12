@@ -1,4 +1,5 @@
 {
+  "registry": "https://staging-packages.unity.com",
   "dependencies": {
     "com.unity.addressables": "1.2.4",
     "com.unity.package-manager-ui": "2.0.8",

@@ -19,6 +19,8 @@ interface IYSurgeryUnityListener {
     String onSaveAvatar();
     boolean onLoadAvatar(String avatarJson);
 
+    void onEnterEditMode();
+    void onExitEditMode();
 }
 
 
@@ -102,6 +104,15 @@ public class YSurgeryUnityInterface {
         return unityListener.onLoadAvatar(avatarJson);
     }
 
+    //description : 进入编辑模式
+    public void EnterEditMode()
+    {
+        unityListener.onEnterEditMode();
+    }
 
-
+    //description : 退出编辑模式
+    public void ExitEditMode()
+    {
+        unityListener.onExitEditMode();
+    }
 }

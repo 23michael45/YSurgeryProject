@@ -14,7 +14,7 @@ public class ListenerAdapter : AndroidJavaProxy
         Debug.Log("ListenerAdapter Construction");
     }
 
-    string onCalculateLowPolyFace(AndroidJavaObject hdObjDataWrapper,int gender,float height,float weight)
+    string onCalculateLowPolyFace(AndroidJavaObject hdObjDataWrapper, int gender, float height, float weight)
     {
         bool finish = false;
         string ret = "";
@@ -23,7 +23,7 @@ public class ListenerAdapter : AndroidJavaProxy
             AndroidJavaObject bufferObject = hdObjDataWrapper.Call<AndroidJavaObject>("getBytes");
             byte[] buffer = AndroidJNIHelper.ConvertFromJNIArray<byte[]>(bufferObject.GetRawObject());
 
-            ret = ModelDataManager.Instance.CalculateLowPolyFace(buffer,gender,height,weight);
+            ret = ModelDataManager.Instance.CalculateLowPolyFace(buffer, gender, height, weight);
             finish = true;
         }, null);
 
@@ -60,9 +60,9 @@ public class ListenerAdapter : AndroidJavaProxy
             ret = ModelDataManager.Instance.LoadLowPolyFace(roleJson, tex);
             finish = true;
 
-        },null);
+        }, null);
 
-        while(!finish)
+        while (!finish)
         {
             Thread.Sleep(10);
         }
@@ -120,6 +120,26 @@ public class ListenerAdapter : AndroidJavaProxy
         return ModelDataManager.Instance.LoadAvatar(avatarJson);
 
     }
+
+
+    void onEnterEditMode()
+    {
+        Loom.QueueOnMainThread((param) =>
+        {
+                    ViewUI.Instance.EditButton_clk();
+
+        }, null);
+    }
+
+    void onExitEditMode()
+    {
+        Loom.QueueOnMainThread((param) =>
+                {
+                    ActiveScene.Instance.BackFirstpage();
+        
+
+                }, null);
+    }
 }
 
 
@@ -144,7 +164,7 @@ public class AndroidNativeInterface : MonoBehaviour
             CallJavaFunc("SetUnityListener", listenerAdapter);
 
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             Debug.Log("AndroidNativeInterface Init Failed");
         }
@@ -159,8 +179,8 @@ public class AndroidNativeInterface : MonoBehaviour
     static AndroidJavaObject androidPlugin;
 
     static ListenerAdapter listenerAdapter;
-    
-    
+
+
     private void CallJavaFunc(string funcName, params object[] args)
     {
         if (Application.platform == RuntimePlatform.Android)

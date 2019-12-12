@@ -5,7 +5,7 @@ using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ActiveScene : MonoBehaviour
+public class ActiveScene : MonoSingleton<ActiveScene>
 {
 
     public GameObject fistpage ;  
