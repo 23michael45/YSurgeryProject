@@ -333,7 +333,7 @@ public class ModelDataManager : MonoBehaviour
 #else
     public AssetReference mTempalteModelRef;
 #endif
-
+    public Texture2D mBoneWeightMask;
     GameObject mLowMeshTemplate;
     string correspondingHDLDIndicesJson;
     string boneIndexMapJson;
@@ -584,8 +584,19 @@ public class ModelDataManager : MonoBehaviour
         Debug.Log("CalculateLowPolyFace RebindBones");
         sf.RebindBones(boneIndexMapJson, hdDeformedMesh, mSkinnedMeshRenderer.transform, newBones, newParentBoneTransform, out bindposes);
 
+
+
+
+
+
+        Vector3[] finalVertices;
+        sf.CalculateFinalWeighTexture(correspondingHDLDIndicesJson, mBoneWeightMask, vertices, uvs, mSkinnedMeshRenderer.sharedMesh.vertices, out finalVertices);
+
+
+
+
         Mesh lowDeformedSkinMesh = new Mesh();
-        lowDeformedSkinMesh.vertices = vertices;
+        lowDeformedSkinMesh.vertices = finalVertices;
 
         //uv分两通道 区域内用计算出的，区域外用低模自身的
         lowDeformedSkinMesh.uv = uvs;
@@ -622,7 +633,7 @@ public class ModelDataManager : MonoBehaviour
 
         Debug.Log("CalculateLowPolyFace Return RoleJson");
 
-        
+
         SetTemplateXDirection(false);
         return roleJson;
     }
@@ -672,7 +683,7 @@ public class ModelDataManager : MonoBehaviour
 
         var smr = GetBody(gender).GetComponent<SkinnedMeshRenderer>();
 
-        for(int i = 0 ; i< smr.sharedMaterials.Length;i++)
+        for (int i = 0; i < smr.sharedMaterials.Length; i++)
         {
             var mat = new Material(smr.sharedMaterials[i]);
 
@@ -696,7 +707,7 @@ public class ModelDataManager : MonoBehaviour
     {
         SetTemplateXDirection(true);
         string deformJson = DeformJson.Save(AppRoot.MainUser.currentModel.deform);
-        
+
         SetTemplateXDirection(false);
         return deformJson;
     }
@@ -707,7 +718,7 @@ public class ModelDataManager : MonoBehaviour
         DeformJson deform = DeformJson.Load(deformJson);
 
         DeformUI.Instance.Load(deform);
-        
+
         SetTemplateXDirection(false);
         return true;
     }

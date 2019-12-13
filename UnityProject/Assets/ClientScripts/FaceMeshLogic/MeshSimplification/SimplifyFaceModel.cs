@@ -169,6 +169,41 @@ public class SimplifyFaceModel : MonoBehaviour
 
     }
 
+
+    public void CalculateFinalWeighTexture(string hlMapJson, Texture2D wightTexMask, Vector3[] deformedVertices, Vector2[] uvs, Vector3[] orgVertices, out Vector3[] finalVertices)
+    {
+        Dictionary<int, int> l2hDict;
+
+        HLVertexMap hlMap = JsonUtility.FromJson<HLVertexMap>(hlMapJson);
+        LoadHLMapJson(hlMap, out l2hDict);
+
+
+        finalVertices = new Vector3[orgVertices.Length];
+
+        for (int i = 0; i < orgVertices.Length; i++)
+        {
+            if (l2hDict.ContainsKey(i))
+            {
+                Vector2 uv = uvs[i];
+
+                float u = uv.x * wightTexMask.width;
+                float v = uv.y * wightTexMask.height;
+
+                Color alpha = wightTexMask.GetPixel((int)u, (int)v);
+                float a = alpha.r;
+
+
+                finalVertices[i] = deformedVertices[i] * a + orgVertices[i] * (1 - a);
+
+            }
+            else{
+                finalVertices[i] = deformedVertices[i];
+            }
+        }
+
+
+    }
+
     public void CalculateVerticesCorrespondingRelation(string jsonPath, bool raycast = false)
     {
 
@@ -539,7 +574,7 @@ public class SimplifyFaceModel : MonoBehaviour
         {
             lsmr.sharedMesh = newLowMesh;
         }
-        // UnityFBXExporter.FBXExporter.ExportGameObjToFBX(gameObject, Path.Combine(Application.dataPath, savePath));
+        UnityFBXExporter.FBXExporter.ExportGameObjToFBX(gameObject, Path.Combine(Application.dataPath, savePath));
     }
 
     public void RebindDeformedBone(string loadPath)
