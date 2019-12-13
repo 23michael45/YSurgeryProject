@@ -393,6 +393,15 @@ public class ModelDataManager : MonoBehaviour
     }
 
 
+    void CloneMaterial(SkinnedMeshRenderer smr)
+    {
+        for(int i = 0 ; i< smr.materials.Length;i++)
+        {
+            smr.materials[i] = new Material(smr.materials[i]);
+            
+        }
+    }
+
     void OnLoadTemplateMeshDone(AsyncOperationHandle<GameObject> obj)
     {
         mLowMeshTemplate = GameObject.Instantiate(obj.Result);
@@ -410,6 +419,12 @@ public class ModelDataManager : MonoBehaviour
         GetNail(0).SetActive(false);
         GetBody(1).SetActive(false);
         GetNail(1).SetActive(false);
+
+
+        CloneMaterial(mSkinnedMeshRenderer);
+        CloneMaterial(GetBody(0).GetComponent<SkinnedMeshRenderer>());
+        CloneMaterial(GetBody(1).GetComponent<SkinnedMeshRenderer>());
+
 
         mLowMeshTemplate.transform.parent = LoadManager.Instance.transform;
 
@@ -683,9 +698,9 @@ public class ModelDataManager : MonoBehaviour
 
         var smr = GetBody(gender).GetComponent<SkinnedMeshRenderer>();
 
-        for (int i = 0; i < smr.sharedMaterials.Length; i++)
+        for (int i = 0; i < smr.materials.Length; i++)
         {
-            var mat = new Material(smr.sharedMaterials[i]);
+            var mat = smr.materials[i];
 
             float hue = hsvoffset.x * 2;
             float sat = hsvoffset.y / 255;
@@ -695,8 +710,6 @@ public class ModelDataManager : MonoBehaviour
             mat.SetFloat("_Saturation", sat);
             mat.SetFloat("_Value", val);
 
-
-            smr.sharedMaterials[i] = mat;
         }
 
 
