@@ -10,43 +10,87 @@
         android:id="@+id/ViewPlaceLayout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="9" />
+        android:layout_weight="18" />
 
     <LinearLayout
-        android:id="@+id/ButtonsLayout"
+        android:id="@+id/ButtonsLayout1"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/CalculateBtn"
+            android:id="@+id/EnterEditBtn"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="Calculate RoleJson" />
+            android:text="EnterEditBtn"
+            android:textSize="8sp" />
 
         <Button
-            android:id="@+id/LoadPolyBtn"
+            android:id="@+id/ExitEditBtn"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="Load RoleJson" />
+            android:text="ExitEditBtn"
+            android:textSize="8sp" />
+
+        <Button
+            android:id="@+id/FullScreenBtn"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="FullScreenBtn"
+            android:textSize="8sp" />
+
+        <Button
+            android:id="@+id/NotFullScreenBtn"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="NotFullScreenBtn"
+            android:textSize="8sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ButtonLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/CalcuatePolyBtn"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="CalcuateBtn"
+            android:textSize="8sp" />
+
+        <Button
+            android:id="@+id/LoadRoleBtn"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="LoadRoleBtn"
+            android:textSize="8sp" />
 
         <Button
             android:id="@+id/SaveDeformBtn"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="Save DeformJson" />
+            android:text="SaveDeformBtn"
+            android:textSize="8sp" />
 
         <Button
             android:id="@+id/LoadDeformBtn"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="Load DeformJson" />
-
+            android:text="LoadDeformBtn"
+            android:textSize="8sp" />
     </LinearLayout>
 
 </LinearLayout>

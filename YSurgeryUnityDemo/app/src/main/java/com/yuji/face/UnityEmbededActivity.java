@@ -1,17 +1,18 @@
 package com.yuji.face;
 
+import android.app.Activity;
 import android.content.Intent;
-import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.constraint.ConstraintLayout;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.Toast;
 
 import java.io.File;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
@@ -30,11 +31,11 @@ public class UnityEmbededActivity extends UnityPlayerActivity {
         layout.addView(mUnityPlayer.getView());
 
 
-        Button calculateBtn = (Button)findViewById(R.id.CalculateBtn);
+        Button calculateBtn = (Button)findViewById(R.id.CalcuatePolyBtn);
         calculateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Log.i("CalcuateBtn","Click CalcuateBtn");
                 try {
                     InputStream is=getAssets().open("Model/obama53149.obj");
 
@@ -55,11 +56,12 @@ public class UnityEmbededActivity extends UnityPlayerActivity {
         });
 
 
-        Button loadPolyBtn = (Button)findViewById(R.id.LoadPolyBtn);
+        Button loadPolyBtn = (Button)findViewById(R.id.LoadRoleBtn);
         loadPolyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
+                Log.i("LoadRoleBtn","Click LoadRoleBtn");
                 try {
 //                    InputStream is=getAssets().open("Model/obama53149_role.json");
 //
@@ -93,6 +95,7 @@ public class UnityEmbededActivity extends UnityPlayerActivity {
             @Override
             public void onClick(View view) {
 
+                Log.i("SaveDeformBtn","Click SaveDeformBtn");
                 String deformJson = YSurgeryUnityInterface.instance.SaveDeform();
                 writeToFile(deformJson,"obama53149_deform.json");
 
@@ -105,6 +108,7 @@ public class UnityEmbededActivity extends UnityPlayerActivity {
             @Override
             public void onClick(View view) {
 
+                Log.i("LoadDeformBtn","Click LoadDeformBtn");
 //                try {
 //                    InputStream is=getAssets().open("Model/obama53149_deform.json");
 //
@@ -125,6 +129,49 @@ public class UnityEmbededActivity extends UnityPlayerActivity {
             }
         });
 
+
+        Button enterEditBtn = (Button)findViewById(R.id.EnterEditBtn);
+        enterEditBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Log.i("EnterEditBtn","Click EnterEditBtn");
+                YSurgeryUnityInterface.instance.EnterEditMode();
+            }
+        });
+
+        Button exitEditBtn = (Button)findViewById(R.id.ExitEditBtn);
+        exitEditBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Log.i("ExitEditBtn","Click ExitEditBtn");
+                YSurgeryUnityInterface.instance.ExitEditMode();
+            }
+        });
+
+
+       final Activity activity = this;
+
+        Button fullScreenBtn = (Button)findViewById(R.id.FullScreenBtn);
+        fullScreenBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Log.i("FullScreenBtn","Click FullScreenBtn");
+                YSurgeryUnityInterface.instance.FullScreen(activity,true);
+            }
+        });
+
+        Button notFullScreenBtn = (Button)findViewById(R.id.NotFullScreenBtn);
+        notFullScreenBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Log.i("NotFullScreenBtn","Click NotFullScreenBtn");
+                YSurgeryUnityInterface.instance.FullScreen(activity,false);
+            }
+        });
     }
     @Override
     public boolean onKeyDown(int keycode,KeyEvent event)

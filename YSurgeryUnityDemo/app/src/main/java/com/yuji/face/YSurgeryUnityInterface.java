@@ -2,6 +2,7 @@ package com.yuji.face;
 
 import android.app.Activity;
 import android.util.Log;
+import android.view.WindowManager;
 
 
 import org.json.JSONException;
@@ -21,6 +22,7 @@ interface IYSurgeryUnityListener {
 
     void onEnterEditMode();
     void onExitEditMode();
+    void onFullScreen(boolean b);
 }
 
 
@@ -114,5 +116,28 @@ public class YSurgeryUnityInterface {
     public void ExitEditMode()
     {
         unityListener.onExitEditMode();
+    }
+
+    //description : 退出编辑模式
+    public void FullScreen(Activity activity,boolean b)
+    {
+//        unityListener.onFullScreen(b);
+        full(activity,b);
+    }
+
+
+
+    private void full(Activity activity,boolean enable) {
+        if (enable) {
+            WindowManager.LayoutParams lp =  activity.getWindow().getAttributes();
+            lp.flags |= WindowManager.LayoutParams.FLAG_FULLSCREEN;
+            activity.getWindow().setAttributes(lp);
+            activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+        } else {
+            WindowManager.LayoutParams attr = activity.getWindow().getAttributes();
+            attr.flags &= (~WindowManager.LayoutParams.FLAG_FULLSCREEN);
+            activity.getWindow().setAttributes(attr);
+            activity.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+        }
     }
 }
