@@ -55,6 +55,8 @@ public class RoleJson
     public float height;
     public float weight;
 
+    public CalculateResultDataJson retJsonData;
+
     public Vector3[] vertices;
     public Vector2[] uv;
     //public int[] triangles;
@@ -66,13 +68,14 @@ public class RoleJson
     public Quaternion[] bonelocalrotation;
     public Vector3[] bonelocalscale;
 
-    public static string Save(Mesh mesh, Transform[] bones, int gender, float height, float weight)
+    public static string Save(Mesh mesh, Transform[] bones, int gender, float height, float weight, CalculateResultDataJson retJsonData)
     {
         RoleJson data = new RoleJson();
 
         data.gender = gender;
         data.height = height;
         data.weight = weight;
+        data.retJsonData = retJsonData;
 
         data.vertices = mesh.vertices;
         data.uv = mesh.uv;
@@ -102,17 +105,17 @@ public class RoleJson
         return jsonStr;
     }
 
-    public static string Save(SkinnedMeshRenderer skinnedMeshRenderer, int gender, float height, float weight)
+    public static string Save(SkinnedMeshRenderer skinnedMeshRenderer, int gender, float height, float weight, CalculateResultDataJson retJsonData)
     {
         Mesh skinnedMesh = skinnedMeshRenderer.sharedMesh;
         Transform[] bones = skinnedMeshRenderer.bones;
-        return Save(skinnedMesh, bones, gender, height, weight);
+        return Save(skinnedMesh, bones, gender, height, weight, retJsonData);
 
     }
-    public static string Save(MeshFilter meshFilter, int gender, float height, float weight)
+    public static string Save(MeshFilter meshFilter, int gender, float height, float weight, CalculateResultDataJson retJsonData)
     {
         Mesh mesh = meshFilter.sharedMesh;
-        return Save(mesh, null, gender, height, weight);
+        return Save(mesh, null, gender, height, weight, retJsonData);
 
     }
 
@@ -164,6 +167,8 @@ public class RoleJson
         {
             meshFilter.sharedMesh = mesh;
         }
+
+
         return data;
     }
 
@@ -395,10 +400,10 @@ public class ModelDataManager : MonoBehaviour
 
     void CloneMaterial(SkinnedMeshRenderer smr)
     {
-        for(int i = 0 ; i< smr.materials.Length;i++)
+        for (int i = 0; i < smr.materials.Length; i++)
         {
             smr.materials[i] = new Material(smr.materials[i]);
-            
+
         }
     }
 
@@ -434,12 +439,12 @@ public class ModelDataManager : MonoBehaviour
         string json = "";
         if (skinned)
         {
-            json = RoleJson.Save(mSkinnedMeshRenderer.sharedMesh, mSkinnedMeshRenderer.bones, 0, 1.78f, 75f);
+            json = RoleJson.Save(mSkinnedMeshRenderer.sharedMesh, mSkinnedMeshRenderer.bones, 0, 1.78f, 75f, null);
 
         }
         else
         {
-            json = RoleJson.Save(mDebugMeshFilter, 0, 1.78f, 75f);
+            json = RoleJson.Save(mDebugMeshFilter, 0, 1.78f, 75f, null);
 
         }
         RoleJson.Load(json, ref mSkinnedMeshRenderer, ref mDebugMeshFilter);
@@ -545,14 +550,30 @@ public class ModelDataManager : MonoBehaviour
         }
         mLowMeshTemplate.transform.localScale = localScale;
     }
+    CalculateResultDataJson GetResultDataJson(string jstr)
+    {
+        jstr = jstr.Replace("\\\"", "\"");
+        jstr = jstr.Replace("/\"", "\"");
+        jstr = jstr.Replace("\"{\"", "{\"");
+        jstr = jstr.Replace("\"}\"", "\"}");
+        jstr = jstr.Replace("\"{", "{");
+        jstr = jstr.Replace("}\"", "}");
+        jstr = jstr.Replace("\\\\n", "");
+        jstr = jstr.Replace("\\\\t", "");
+        jstr = jstr.Replace("\\\\", "");
 
-    public string CalculateLowPolyFace(byte[] hdObjData, int gender, float height, float weight)
+        var jsondata = JsonUtility.FromJson<CalculateResultDataJson>(jstr);
+        return jsondata;
+    }
+
+    public string CalculateLowPolyFace(byte[] hdObjData, int gender, float height, float weight, string retJson)
     {
         if (mLowMeshTemplate == null)
         {
             return null;
         }
         SetTemplateXDirection(true);
+
 
         Debug.Log("CalculateLowPolyFace Start");
 
@@ -642,12 +663,13 @@ public class ModelDataManager : MonoBehaviour
         }
 
         Debug.Log("CalculateLowPolyFace Start RoleJson Save");
-        string roleJson = RoleJson.Save(lowDeformedSkinMesh, newBones, gender, height, weight);
+
+        CalculateResultDataJson retJsonData = GetResultDataJson(retJson);
+        string roleJson = RoleJson.Save(lowDeformedSkinMesh, newBones, gender, height, weight, retJsonData);
 
         GameObject.Destroy(newParentBoneTransform.gameObject);
 
         Debug.Log("CalculateLowPolyFace Return RoleJson");
-
 
         SetTemplateXDirection(false);
         return roleJson;
@@ -688,32 +710,40 @@ public class ModelDataManager : MonoBehaviour
         Role role = mLowMeshTemplate.GetComponent<Role>();
         LoadManager.Instance.newUser(role);
 
+        FitCalculationJson(roleJsonData.retJsonData, roleJsonData.gender, roleJsonData.weight, roleJsonData.height);
+
         SetTemplateXDirection(false);
         return true;
     }
 
-    public bool FitCalculationJson(CalculateResultDataJson jsonData, int gender)
+    public bool FitCalculationJson(CalculateResultDataJson jsonData, int gender, float weight, float height)
     {
-        Vector3 hsvoffset = new Vector3(jsonData.info.calcRet.hsv_offset.h, jsonData.info.calcRet.hsv_offset.s, jsonData.info.calcRet.hsv_offset.v);
-
-        var smr = GetBody(gender).GetComponent<SkinnedMeshRenderer>();
-
-        for (int i = 0; i < smr.materials.Length; i++)
+        if (jsonData != null && jsonData.info != null)
         {
-            var mat = smr.materials[i];
 
-            float hue = hsvoffset.x * 2;
-            float sat = hsvoffset.y / 255;
-            float val = hsvoffset.z / 255;
 
-            mat.SetInt("_Hue", (int)hue);
-            mat.SetFloat("_Saturation", sat);
-            mat.SetFloat("_Value", val);
+            Vector3 hsvoffset = new Vector3(jsonData.info.calcRet.hsv_offset.h, jsonData.info.calcRet.hsv_offset.s, jsonData.info.calcRet.hsv_offset.v);
 
+            var smr = GetBody(gender).GetComponent<SkinnedMeshRenderer>();
+
+            for (int i = 0; i < smr.materials.Length; i++)
+            {
+                var mat = smr.materials[i];
+
+                float hue = hsvoffset.x * 2;
+                float sat = hsvoffset.y / 255;
+                float val = hsvoffset.z / 255;
+
+                mat.SetInt("_Hue", (int)hue);
+                mat.SetFloat("_Saturation", sat);
+                mat.SetFloat("_Value", val);
+
+            }
+
+
+            return true;
         }
-
-
-        return true;
+        return false;
     }
 
     public string SaveDeform()

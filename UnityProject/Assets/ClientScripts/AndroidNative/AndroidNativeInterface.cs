@@ -14,7 +14,7 @@ public class ListenerAdapter : AndroidJavaProxy
         Debug.Log("ListenerAdapter Construction");
     }
 
-    string onCalculateLowPolyFace(AndroidJavaObject hdObjDataWrapper, int gender, float height, float weight)
+    string onCalculateLowPolyFace(AndroidJavaObject hdObjDataWrapper, int gender, float height, float weight,string retJson)
     {
         bool finish = false;
         string ret = "";
@@ -23,7 +23,7 @@ public class ListenerAdapter : AndroidJavaProxy
             AndroidJavaObject bufferObject = hdObjDataWrapper.Call<AndroidJavaObject>("getBytes");
             byte[] buffer = AndroidJNIHelper.ConvertFromJNIArray<byte[]>(bufferObject.GetRawObject());
 
-            ret = ModelDataManager.Instance.CalculateLowPolyFace(buffer, gender, height, weight);
+            ret = ModelDataManager.Instance.CalculateLowPolyFace(buffer, gender, height, weight,retJson);
             finish = true;
         }, null);
 

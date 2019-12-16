@@ -126,12 +126,10 @@ public class UploadPhoto : MonoBehaviour
         }
         Debug.Log("Obj and Tex Downloaded");
 
-        string roleJson = ModelDataManager.Instance.CalculateLowPolyFace(m_HDObjData,gender,height,weight);
+        string roleJson = ModelDataManager.Instance.CalculateLowPolyFace(m_HDObjData,gender,height,weight,jstr);
 
         if (ModelDataManager.Instance.LoadLowPolyFace(roleJson, m_TextureData))
         {
-
-            ModelDataManager.Instance.FitCalculationJson(jData, gender);
             Debug.Log("Load Low Poly Success");
         }
 

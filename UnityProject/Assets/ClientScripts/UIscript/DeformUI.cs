@@ -344,13 +344,74 @@ public class DeformUI : MonoSingleton<DeformUI>
     }
     public void Load(DeformJson deform)
     {
-
-        AppRoot.MainUser.currentModel.deform = deform;
+        //先重置值为0
+        ZeroDeformData();
+        SliderLoad();
 
         //预加载slider值
+        AppRoot.MainUser.currentModel.deform = deform;
         DeformDataLoad();
         SliderLoad();
 
+
+    }
+    public void ZeroDeformData()
+    {
+
+        ForeheadSwitch_data = new Vector4();
+        TempleSwitch_data = new Vector4();
+        BISjawSwitch_data = new Vector4();
+        ChinSwitch_data = new Vector4();
+        TopHead_data = new Vector4();
+
+        ApplemuscleSwitch_data = new Vector4();
+        CheekbonesSwitch_data = new Vector4();
+        FacialpartSwitch_data = new Vector4();
+        MasseterMuscle_data = new Vector4();
+
+        BrowbowSwitch_data = new Vector4();
+        BrowHeadSwitch_data = new Vector4();
+        BrowMiddleSwitch_data = new Vector4();
+        BrowTailSwitch_data = new Vector4();
+
+
+        EyeZero_data = new Vector4();
+        EyecornerSwitch_data = new Vector4();
+        UppereyelidSwitch_data = new Vector4();
+        DoublefoldEyelidsSwitch_data = new Vector4();
+        lowereyelidSwitch_data = new Vector4();
+        EyebagSwitch_data = new Vector4();
+        EyetailSwitch_data = new Vector4();
+
+        NoseZero_data = new Vector4();
+        UpperbridgeSwitch_data = new Vector4();
+        InferiorbridgeSwitch_data = new Vector4();
+        NoseheadSwitch_data = new Vector4();
+        ColumellaNasiSwitch_data = new Vector4();
+        NasalBaseSwitch_data = new Vector4();
+        NoseWingSwitch_data = new Vector4();
+
+
+        MouthZero_data = new Vector4();
+        UplipSwitch_data = new Vector4();
+        UpjawSwitch_data = new Vector4();
+        DownLipSwitch_data = new Vector4();
+        DownJawSwitch_data = new Vector4();
+        PhiltrumSwitch_data = new Vector4();
+        CornerSwitch_data = new Vector4();
+
+        upperItemSwitch_data = new Vector4();
+        topItemSwitch_data = new Vector4();
+        downItemSwitch_data = new Vector4();
+
+        NeckSwitch_data = new Vector4();
+        ChestSwitch_data = new Vector4();
+        WristSwitch_data = new Vector4();
+        HipSwitch_data = new Vector4();
+        LegSwitch_data = new Vector4();
+        ArmSwitch_data = new Vector4();
+
+        // Debug.Log(ForeheadSwitch_data);
 
     }
 
