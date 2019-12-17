@@ -90,7 +90,6 @@ public class PhotoSelector : MonoBehaviour
 
             //图片显示框的宽度等比缩放
             float y = m_RawImage.transform.GetComponent<RectTransform>().sizeDelta.y;
-            float x = m_RawImage.transform.GetComponent<RectTransform>().sizeDelta.x;
             float x2 = y * m_PickedTexture.width / m_PickedTexture.height;
             Vector2 resizerect = new Vector2(x2,y);            
              m_RawImage.transform.GetComponent<RectTransform>().sizeDelta = resizerect;
@@ -112,6 +111,11 @@ public class PhotoSelector : MonoBehaviour
 
 
 
+
+
+
+
+
     public void imagerotate()
     {
           
@@ -126,13 +130,13 @@ public class PhotoSelector : MonoBehaviour
                 for (int j = 0; j < height - 1; j++)
                 {
                     Color color = texture.GetPixel(i, j);
-                    newTexture.SetPixel(j, width - 1 - i, color);
+                // newTexture.SetPixel(j, width - 1 - i, color);
+                newTexture.SetPixel(height - 1 - j, i, color);
                 }
             }
             newTexture.Apply();
             m_PickedTexture = newTexture;
-
-
+        
 
         float y = m_RawImage.transform.GetComponent<RectTransform>().sizeDelta.y;
         float x = m_RawImage.transform.GetComponent<RectTransform>().sizeDelta.x;
