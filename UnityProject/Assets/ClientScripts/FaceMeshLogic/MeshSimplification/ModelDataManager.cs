@@ -59,6 +59,7 @@ public class RoleJson
 
     public Vector3[] vertices;
     public Vector2[] uv;
+    public Vector2[] uv2Type;
     //public int[] triangles;
     //public BoneWeight[] boneWeights;
 
@@ -79,6 +80,7 @@ public class RoleJson
 
         data.vertices = mesh.vertices;
         data.uv = mesh.uv;
+        data.uv2Type = mesh.uv2;
         //data.triangles = mesh.triangles;
         //data.boneWeights = mesh.boneWeights;
 
@@ -129,6 +131,7 @@ public class RoleJson
 
         mesh.vertices = data.vertices;
         mesh.uv = data.uv;
+        mesh.uv2 = data.uv2Type;
         mesh.triangles = skinnedMesh.sharedMesh.triangles;
 
         if (skinnedMesh.bones.Length != data.bonelocalpositions.Length)
@@ -552,6 +555,10 @@ public class ModelDataManager : MonoBehaviour
     }
     CalculateResultDataJson GetResultDataJson(string jstr)
     {
+        if(string.IsNullOrEmpty(jstr))
+        {
+            return null;
+        }
         jstr = jstr.Replace("\\\"", "\"");
         jstr = jstr.Replace("/\"", "\"");
         jstr = jstr.Replace("\"{\"", "{\"");
@@ -594,14 +601,14 @@ public class ModelDataManager : MonoBehaviour
 
         Vector3[] vertices;
         Vector2[] uvs;
-        Vector2[] uvInRegion;
+        Vector2[] uv2Type;
         int[] indices;
 
 
         Debug.Log("CalculateLowPolyFace CalculateDeformedMesh");
 
 
-        sf.CalculateDeformedMesh(correspondingHDLDIndicesJson, hdDeformedMesh, defromedMeshFilter.transform, mSkinnedMeshRenderer.sharedMesh, skinTransform, out vertices, out uvs, out uvInRegion, out indices);
+        sf.CalculateDeformedMesh(correspondingHDLDIndicesJson, hdDeformedMesh, defromedMeshFilter.transform, mSkinnedMeshRenderer.sharedMesh, skinTransform, out vertices, out uvs, out uv2Type, out indices);
 
 
 
@@ -634,8 +641,9 @@ public class ModelDataManager : MonoBehaviour
         Mesh lowDeformedSkinMesh = new Mesh();
         lowDeformedSkinMesh.vertices = finalVertices;
 
-        //uv分两通道 区域内用计算出的，区域外用低模自身的
+        //uv分两通道 uv2表示点类型 x 1表示脸内，0表示脸外   y表示点具体类型，如鼻孔等等
         lowDeformedSkinMesh.uv = uvs;
+        lowDeformedSkinMesh.uv2 = uv2Type;
 
 
         lowDeformedSkinMesh.triangles = indices;
@@ -779,4 +787,6 @@ public class ModelDataManager : MonoBehaviour
         SetTemplateXDirection(false);
         return false;
     }
+
+
 }

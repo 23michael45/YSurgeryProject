@@ -9,6 +9,11 @@ using UnityEngine;
 public class SimplifyFaceModel : MonoBehaviour
 {
 
+    int[] LeftNoseIndices = {327};
+
+
+    int[] RightNoseIndices = {3302};
+
     [Serializable]
     public class HLVertexMap
     {
@@ -60,20 +65,20 @@ public class SimplifyFaceModel : MonoBehaviour
 
         Vector3[] vertices;
         Vector2[] uvs;
-        Vector2[] uvInRegion;
+        Vector2[] uv2Type;
         int[] indices;
-        CalculateDeformedMesh(loadPath, hdDeformed, deformedMeshFilter.transform, ldMean, m_LDMeanFaceMesh, out vertices, out uvs, out uvInRegion, out indices);
+        CalculateDeformedMesh(loadPath, hdDeformed, deformedMeshFilter.transform, ldMean, m_LDMeanFaceMesh, out vertices, out uvs, out uv2Type, out indices);
 
 
 
         Mesh ldDeformedMesh = new Mesh();
         ldDeformedMesh.vertices = vertices;
         ldDeformedMesh.uv = uvs;
-        ldDeformedMesh.uv2 = uvInRegion;
+        ldDeformedMesh.uv2 = uv2Type;
         ldDeformedMesh.triangles = indices;
         m_LDDeformedFaceMesh.GetComponent<MeshFilter>().sharedMesh = ldDeformedMesh;
     }
-    public void CalculateDeformedMesh(string hlMapJson, Mesh hdDeformedMesh, Transform hdDefromedTransfrom, Mesh ldMeanMesh, Transform ldMeanTransform, out Vector3[] vertices, out Vector2[] uvs, out Vector2[] uvInRegion, out int[] indices)
+    public void CalculateDeformedMesh(string hlMapJson, Mesh hdDeformedMesh, Transform hdDefromedTransfrom, Mesh ldMeanMesh, Transform ldMeanTransform, out Vector3[] vertices, out Vector2[] uvs, out Vector2[] uv2Type, out int[] indices)
     {
         Dictionary<int, int> l2hDict;
 
@@ -87,7 +92,7 @@ public class SimplifyFaceModel : MonoBehaviour
         Vector2[] ldUVs = new Vector2[ldMeanMesh.vertices.Length];
 
 
-        uvInRegion = new Vector2[ldMeanMesh.vertices.Length];
+        uv2Type = new Vector2[ldMeanMesh.vertices.Length];
 
         Debug.Log("Low Mesh Vertices Count:" + ldVertices.Length);
         for (int i = 0; i < ldVertices.Length; i++)
@@ -109,27 +114,22 @@ public class SimplifyFaceModel : MonoBehaviour
 
 
                 Vector2 uv = DeformedUVs[highIndex];
-
-                //if (uv.x < 0)
-                //{
-                //    uv.x = -uv.x;
-                //}
-                //if (uv.y < 0)
-                //{
-                //    uv.y = -uv.y;
-                //}
-
-                //if (uv.x > 1)
-                //{
-                //    uv.x = 1-uv.x;
-                //}
-                //if (uv.y > 1)
-                //{
-                //    uv.y = 1 - uv.y;
-                //}
+                
                 ldUVs[lowIndex] = uv;
 
-                uvInRegion[lowIndex] = new Vector2(1, 1);
+                Vector2 uvIn = new Vector2();
+                //x为0，表示脸部区域内的点
+                uvIn.x = 0;
+
+                //y可以不同的值，标识点的类型
+
+                //0.1鼻孔
+                if(LeftNoseIndices.Contains(lowIndex) || RightNoseIndices.Contains(lowIndex))
+                {
+                    uvIn.y = 1f;
+                }
+
+                uv2Type[lowIndex] = uvIn;
             }
             else
             {
@@ -138,26 +138,18 @@ public class SimplifyFaceModel : MonoBehaviour
 
 
                 Vector2 uv = ldMeanMesh.uv[i];
-                //uv.x = 1-uv.x;
-                //if (uv.x < 0)
-                //{
-                //    uv.x = -uv.x;
-                //}
-                //if (uv.y < 0)
-                //{
-                //    uv.y = -uv.y;
-                //}
-
-                //if (uv.x > 1)
-                //{
-                //    uv.x = 1 - uv.x;
-                //}
-                //if (uv.y > 1)
-                //{
-                //    uv.y = 1 - uv.y;
-                //}
                 ldUVs[i] = uv;
-                uvInRegion[i] = new Vector2(0, 0);
+
+
+                Vector2 uvOut = new Vector2();
+
+                //x为0，表示脸部区域外的点
+                uvOut.x = 0;
+
+                //y可以不同的值，标识点的类型
+                uvOut.y = 0;
+
+                uv2Type[i] = uvOut;
             }
 
         }
@@ -196,7 +188,8 @@ public class SimplifyFaceModel : MonoBehaviour
                 finalVertices[i] = deformedVertices[i] * a + orgVertices[i] * (1 - a);
 
             }
-            else{
+            else
+            {
                 finalVertices[i] = deformedVertices[i];
             }
         }
