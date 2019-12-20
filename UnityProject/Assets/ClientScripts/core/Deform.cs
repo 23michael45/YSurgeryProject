@@ -96,7 +96,7 @@ public class Deform : MonoBehaviour
 
 
         DeformBonePos("face_forehead_joint1", offset);
-        DeformBonePos("face_forehead_joint2", offset);
+       // DeformBonePos("face_forehead_joint2", offset);
 
 
 
@@ -944,7 +944,6 @@ public class Deform : MonoBehaviour
 
         DeformBonePos("face_Philtrum_joint0", offset);
         Vector3 Sacle = new Vector3(xx.w, xx.w, xx.w);
-
         DeformBoneScale("face_Philtrum_joint0", Sacle);
        
 
