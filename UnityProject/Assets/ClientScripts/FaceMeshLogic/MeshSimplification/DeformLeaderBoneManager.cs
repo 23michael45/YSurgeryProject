@@ -18,6 +18,10 @@ public class DeformLeaderBoneManager : MonoBehaviour
 
     private void Start()
     {
+        if(mRootBone ==null)
+        {
+            mRootBone = transform;
+        }
         Init();
     }
 
