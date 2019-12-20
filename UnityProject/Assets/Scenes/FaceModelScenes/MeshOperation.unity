@@ -858,6 +858,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  mLeaderBones: []
 --- !u!1 &445747338
 GameObject:
   m_ObjectHideFlags: 0
@@ -1078,6 +1079,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  mLeaderBones: []
 --- !u!1 &494385135
 GameObject:
   m_ObjectHideFlags: 0
@@ -1450,6 +1452,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mRootBone: {fileID: 857064006}
+  mLeaderEffectByLeader: 1
 --- !u!4 &857064006
 Transform:
   m_ObjectHideFlags: 0
@@ -2398,3 +2401,4 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  mLeaderBones: []

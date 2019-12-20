@@ -3,25 +3,35 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DeformLeaderBone : MonoBehaviour
+public class DeformLeaderBone : DeformBaseBone
 {
     public float mRange;
+    [NonSerialized]
+    public bool mLeaderEffectByLeader;
     public AnimationCurve mCurve;
 
     [NonSerialized]
     public List<DeformCommonBone> mCommonBones = new List<DeformCommonBone>();
 
-    [NonSerialized]
-    public Vector3 mDefaultPosition;
-    // Start is called before the first frame update
-    void Awake()
+
+    private bool bEditing = false;
+
+
+    public void StartEdit()
     {
-        mDefaultPosition = transform.position;
+        bEditing = true;
+    }
+    public void StopEdit()
+    {
+        bEditing = false;
     }
 
-    // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
-        
+        if (!bEditing && mLeaderEffectByLeader)
+        {
+            CalculatePosition();
+
+        }
     }
 }

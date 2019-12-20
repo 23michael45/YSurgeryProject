@@ -7,11 +7,12 @@ using UnityEngine;
 public class DeformLeaderBoneManagerEditor : Editor
 {
 
+    static DeformLeaderBone editLeaderBone;
     public override void OnInspectorGUI()
     {
-        
+
         base.OnInspectorGUI();
-        DeformLeaderBoneManager parentObj = (DeformLeaderBoneManager)target;    
+        DeformLeaderBoneManager parentObj = (DeformLeaderBoneManager)target;
 
 
 
@@ -19,12 +20,25 @@ public class DeformLeaderBoneManagerEditor : Editor
 
         DeformLeaderBone[] leaderBones = parentObj.GetComponentsInChildren<DeformLeaderBone>();
 
-        EditorGUI.indentLevel ++;
-        foreach(var leaderBone in leaderBones)
+        EditorGUI.indentLevel++;
+        foreach (var leaderBone in leaderBones)
         {
-             var bone = EditorGUILayout.ObjectField(leaderBone.name, leaderBone, typeof(Transform), true) as Transform;
+            var bone = EditorGUILayout.ObjectField(leaderBone.name, leaderBone, typeof(Transform), true) as Transform;
         }
 
-        EditorGUI.indentLevel --;
+        EditorGUI.indentLevel--;
+
+
+        editLeaderBone = EditorGUILayout.ObjectField("Editing Leader Bone", editLeaderBone, typeof(DeformLeaderBone), true) as DeformLeaderBone;
+
+        if (GUILayout.Button("Start Edit", EditorStyles.miniButtonRight))
+        {
+            parentObj.StartEdit(editLeaderBone);
+
+        }
+        if (GUILayout.Button("Stop Edit", EditorStyles.miniButtonRight))
+        {
+            parentObj.EndEdit(editLeaderBone);
+        }
     }
 }
