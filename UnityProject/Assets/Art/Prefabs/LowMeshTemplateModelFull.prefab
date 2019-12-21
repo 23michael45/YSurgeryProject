@@ -1957,7 +1957,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mRootBone: {fileID: 0}
   mInitFromFile: 1
-  mLeaderEffectByLeader: 1
+  mLeaderEffectByLeader: 0
 --- !u!1 &2378553995425243075
 GameObject:
   m_ObjectHideFlags: 0

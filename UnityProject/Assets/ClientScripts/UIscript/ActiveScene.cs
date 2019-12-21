@@ -23,10 +23,7 @@ public class ActiveScene : MonoSingleton<ActiveScene>
 
     public LoadManager loadManager;
 
-
-    public bool apk = false;
-
-
+    
 
     public void Start()
     {
@@ -52,21 +49,19 @@ public class ActiveScene : MonoSingleton<ActiveScene>
        
 
     public  void BackFirstpage()    {
-       
-        if (apk)
-        {
+#if AS_NATIVE_PROJECT
+        
+        Edit_UI.SetActive(false);
+        Edit_UI.GetComponent<FouseFacePart>().NoneAreaTexture();
+        
 
-            Backwindow.SetActive(true);
+#else
+
+        Backwindow.SetActive(true);
+#endif    
+
+
         }
-
-        else {
-
-            Edit_UI.SetActive(false);
-            Edit_UI.GetComponent<FouseFacePart>().NoneAreaTexture();
-        }      
-
-
-    }
 
 
 

@@ -681,9 +681,13 @@ public class ModelDataManager : MonoBehaviour
         Debug.Log("CalculateLowPolyFace Return RoleJson");
 
 
-        DeformLeaderBoneManager.Instance.ResetBindPose();
         
         SetTemplateXDirection(false);
+
+
+        //after flip x ,then rebind bone leader pose
+        DeformLeaderBoneManager.Instance.ResetBindPose();
+
         return roleJson;
     }
 
@@ -725,9 +729,13 @@ public class ModelDataManager : MonoBehaviour
 
         FitCalculationJson(roleJsonData.retJsonData, roleJsonData.gender, roleJsonData.weight, roleJsonData.height);
 
-
-        DeformLeaderBoneManager.Instance.ResetBindPose();
+        
         SetTemplateXDirection(false);
+
+
+
+        //after flip x ,then rebind bone leader pose
+        DeformLeaderBoneManager.Instance.ResetBindPose();
         return true;
     }
 

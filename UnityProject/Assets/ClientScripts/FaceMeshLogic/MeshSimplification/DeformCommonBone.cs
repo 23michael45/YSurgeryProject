@@ -10,4 +10,9 @@ public class DeformCommonBone : DeformBaseBone
     {
         CalculatePosition();
     }
+
+    public void PrintDebug()
+    {
+        Debug.Log(string.Format("DeformCommonBone : {0}  {1}  {2}", gameObject.name, transform.position, mDefaultPosition));
+    }
 }
