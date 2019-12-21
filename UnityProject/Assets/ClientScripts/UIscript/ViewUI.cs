@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ViewUI : MonoSingleton<ViewUI>
+public class ViewUI : MonoBehaviour
 {
+    public static ViewUI Instance;
 
 
     public Button EditButton;
@@ -32,8 +33,9 @@ public class ViewUI : MonoSingleton<ViewUI>
 
     private void Awake()
     {
+        Instance = this;
 #if AS_NATIVE_PROJECT
-        
+
         gameObject.SetActive(false);
     
 #endif

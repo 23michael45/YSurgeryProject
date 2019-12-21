@@ -710,7 +710,8 @@ PlayerSettings:
   webGLCompressionFormat: 1
   webGLLinkerTarget: 1
   webGLThreadsSupport: 0
-  scriptingDefineSymbols: {}
+  scriptingDefineSymbols:
+    7: AS_NATIVE_PROJECT
   platformArchitecture: {}
   scriptingBackend:
     Android: 1

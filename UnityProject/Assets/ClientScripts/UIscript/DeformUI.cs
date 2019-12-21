@@ -4,8 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class DeformUI : MonoSingleton<DeformUI>
+public class DeformUI : MonoBehaviour
 {
+    public static DeformUI Instance;
     public string Deformjson;
    
     // shape.........
@@ -141,21 +142,25 @@ public class DeformUI : MonoSingleton<DeformUI>
                     LegSwitch_data,
                     ArmSwitch_data;
 
-    
 
+    private void Awake()
+    {
+        Instance = this;
+        gameObject.SetActive(false);
+    }
 
     public void Start()
     {
 
 
-        foreheadItem_x.onValueChanged.AddListener(foreheadItem_x_chg);       
+        foreheadItem_x.onValueChanged.AddListener(foreheadItem_x_chg);
         foreheadItem_y.onValueChanged.AddListener(foreheadItem_y_chg);
         foreheadItem_w.onValueChanged.AddListener(foreheadItem_z_chg);
 
         TempleItem_x.onValueChanged.AddListener(TempleItem_x_chg);
         TempleItem_y.onValueChanged.AddListener(TempleItem_y_chg);
         TempleItem_w.onValueChanged.AddListener(TempleItem_w_chg);
-                   
+
         BISjawItem_x.onValueChanged.AddListener(BISjawItem_x_chg);
         BISjawItem_y.onValueChanged.AddListener(BISjawItem_y_chg);
         BISjawItem_w.onValueChanged.AddListener(BISjawItem_w_chg);
@@ -221,7 +226,7 @@ public class DeformUI : MonoSingleton<DeformUI>
         UppereyelidItem_x.onValueChanged.AddListener(UppereyelidItem_x_chg);
         UppereyelidItem_y.onValueChanged.AddListener(UppereyelidItem_y_chg);
         UppereyelidItem_w.onValueChanged.AddListener(UppereyelidItem_w_chg);
-       
+
         DoublefoldEyelidsItem_y.onValueChanged.AddListener(DoublefoldEyelidsItem_y_chg);
         DoublefoldEyelidsItem_w.onValueChanged.AddListener(DoublefoldEyelidsItem_w_chg);
 
@@ -229,20 +234,20 @@ public class DeformUI : MonoSingleton<DeformUI>
         lowereyelidItem_y.onValueChanged.AddListener(lowereyelidItem_y_chg);
         lowereyelidItem_w.onValueChanged.AddListener(lowereyelidItem_w_chg);
 
-        EyebagItem_y.onValueChanged.AddListener(EyebagItem_y_chg);        
+        EyebagItem_y.onValueChanged.AddListener(EyebagItem_y_chg);
         EyebagItem_w.onValueChanged.AddListener(EyebagItem_w_chg);
 
         EyetailItem_x.onValueChanged.AddListener(EyetailItem_x_chg);
         EyetailItem_y.onValueChanged.AddListener(EyetailItem_y_chg);
         EyetailItem_w.onValueChanged.AddListener(EyetailItem_w_chg);
-      
+
 
         //nose.........
         //////////////
-        NoseZero_x .onValueChanged.AddListener(NoseZero_x_chg);
-        NoseZero_y .onValueChanged.AddListener(NoseZero_y_chg);
-        NoseZero_z .onValueChanged.AddListener(NoseZero_z_chg);
-        NoseZero_w .onValueChanged.AddListener(NoseZero_w_chg);
+        NoseZero_x.onValueChanged.AddListener(NoseZero_x_chg);
+        NoseZero_y.onValueChanged.AddListener(NoseZero_y_chg);
+        NoseZero_z.onValueChanged.AddListener(NoseZero_z_chg);
+        NoseZero_w.onValueChanged.AddListener(NoseZero_w_chg);
 
         UpperbridgeItem_x.onValueChanged.AddListener(UpperbridgeItem_x_chg);
         UpperbridgeItem_y.onValueChanged.AddListener(UpperbridgeItem_y_chg);
@@ -269,14 +274,14 @@ public class DeformUI : MonoSingleton<DeformUI>
         NoseWingItem_y.onValueChanged.AddListener(NoseWingItem_y_chg);
         NoseWingItem_w.onValueChanged.AddListener(NoseWingItem_w_chg);
 
-      
+
 
         //mouth.........
         ////////////////////////////
-        MouthZero_x .onValueChanged.AddListener(MouthZero_x_chg);
-        MouthZero_y .onValueChanged.AddListener(MouthZero_y_chg);
-        MouthZero_z .onValueChanged.AddListener(MouthZero_z_chg);
-        MouthZero_w .onValueChanged.AddListener(MouthZero_w_chg);
+        MouthZero_x.onValueChanged.AddListener(MouthZero_x_chg);
+        MouthZero_y.onValueChanged.AddListener(MouthZero_y_chg);
+        MouthZero_z.onValueChanged.AddListener(MouthZero_z_chg);
+        MouthZero_w.onValueChanged.AddListener(MouthZero_w_chg);
 
         upperlipItem_x.onValueChanged.AddListener(upperlipItem_x_chg);
         upperlipItem_y.onValueChanged.AddListener(upperlipItem_y_chg);
@@ -338,9 +343,13 @@ public class DeformUI : MonoSingleton<DeformUI>
 
         ArmItem_x.onValueChanged.AddListener(ArmItem_x_chg);
         ArmItem_w.onValueChanged.AddListener(ArmItem_w_chg);
-
-
-        Load(AppRoot.MainUser.currentModel.deform);
+    }
+    private void OnEnable()
+    {
+        if(AppRoot.MainUser!= null && AppRoot.MainUser.currentModel != null)
+        {
+            Load(AppRoot.MainUser.currentModel.deform);
+        }
     }
     public void Load(DeformJson deform)
     {

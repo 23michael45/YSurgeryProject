@@ -111,5 +111,14 @@ public class ModelDataManagerEditor : Editor
         {
             parentObj.RebindBone();
         }
+
+        if (GUILayout.Button("EnterEditMode", EditorStyles.miniButtonRight))
+        {
+            ViewUI.Instance.EditButton_clk();
+        }
+        if (GUILayout.Button("ExitEditMode", EditorStyles.miniButtonRight))
+        {
+            ActiveScene.Instance.BackFirstpage();
+        }
     }
 }
