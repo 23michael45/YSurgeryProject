@@ -24,6 +24,10 @@ public class ActiveScene : MonoSingleton<ActiveScene>
     public LoadManager loadManager;
 
 
+    public bool apk = false;
+
+
+
     public void Start()
     {
 
@@ -47,12 +51,24 @@ public class ActiveScene : MonoSingleton<ActiveScene>
     
        
 
-    public  void BackFirstpage()    {      
+    public  void BackFirstpage()    {
+       
+        if (apk)
+        {
 
+            Backwindow.SetActive(true);
+        }
 
-        Backwindow.SetActive(true);
+        else {
+
+            Edit_UI.SetActive(false);
+            Edit_UI.GetComponent<FouseFacePart>().NoneAreaTexture();
+        }      
+
 
     }
+
+
 
 
 
@@ -66,7 +82,6 @@ public class ActiveScene : MonoSingleton<ActiveScene>
         loadManager.SaveOrnamentjson();
 
         View_UI.SetActive(true);
-
         Edit_UI.SetActive(false);
         Backwindow.SetActive(false);
         Edit_UI.GetComponent<FouseFacePart>().NoneAreaTexture();
