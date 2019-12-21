@@ -32,7 +32,6 @@ public class ViewUI : MonoSingleton<ViewUI>
 
     private void Awake()
     {
-        gameObject.SetActive(false);
 #if AS_NATIVE_PROJECT
         
         gameObject.SetActive(false);
