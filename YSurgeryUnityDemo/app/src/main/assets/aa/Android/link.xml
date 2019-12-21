@@ -15,6 +15,7 @@
     <type fullname="UnityEngine.Animator" preserve="all" />
   </assembly>
   <assembly fullname="Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+    <type fullname="DeformLeaderBoneManager" preserve="all" />
     <type fullname="Role" preserve="all" />
   </assembly>
   <assembly fullname="UnityEditor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">

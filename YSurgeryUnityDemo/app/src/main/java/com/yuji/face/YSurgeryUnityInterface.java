@@ -13,7 +13,7 @@ import java.util.List;
 
 interface IYSurgeryUnityListener {
 
-    String onCalculateLowPolyFace(BytesWrapper ojbDataWrapper,int gender,float height,float weight);
+    String onCalculateLowPolyFace(BytesWrapper ojbDataWrapper,int gender,float height,float weight,String retJson);
     boolean onLoadLowPolyFace(String roleJson,BytesWrapper textureDataWrapper);
     String onSaveDeform();
     boolean onLoadDeform(String deformJson);
@@ -56,10 +56,11 @@ public class YSurgeryUnityInterface {
     //param2 ：gender  性别  0 男  1 女
     //param3 ：height  身高 cm
     //param4 ：weight  体重 kg
+    //param4 ：retJson  服务器计算返回的json字符串
     //return :  json字符串，roleJson数据结构
-    public String CalculateLowPolyFace(byte[] hdObjData,int gender,float height,float weight)
+    public String CalculateLowPolyFace(byte[] hdObjData,int gender,float height,float weight,String retJson)
     {
-        return unityListener.onCalculateLowPolyFace(new BytesWrapper(hdObjData),gender,height,weight);
+        return unityListener.onCalculateLowPolyFace(new BytesWrapper(hdObjData),gender,height,weight,retJson);
     }
 
     //description : 读取roleJson数据结构及贴图，把生成的低模模型显示在屏幕上
@@ -118,10 +119,10 @@ public class YSurgeryUnityInterface {
         unityListener.onExitEditMode();
     }
 
-    //description : 退出编辑模式
+    //description : 设置全屏模式
     public void FullScreen(Activity activity,boolean b)
     {
-//        unityListener.onFullScreen(b);
+        //unityListener.onFullScreen(b);
         full(activity,b);
     }
 

@@ -1,0 +1,6 @@
+﻿{
+"SetForeheadSwitch":{"face_forehead_joint1","face_forehead_Lf_joint1","face_forehead_Lf_joint2","face_forehead_Rt_joint1","face_forehead_Rt_joint2"},
+"SetTempleSwitch":{"face_forehead_Lf_joint4","face_forehead_Rt_joint4"},
+
+
+}

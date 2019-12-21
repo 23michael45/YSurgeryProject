@@ -43,7 +43,9 @@ public class UnityEmbededActivity extends UnityPlayerActivity {
                     is.read(hdObjData);
                     is.close();
 
-                    String roleJson = YSurgeryUnityInterface.instance.CalculateLowPolyFace(hdObjData,0,180,75);
+                    String retJsonStr = "{\"ret\":0,\"retMsg\":\"操作成功\",\"info\":\"{\\\"meshFile\\\":\\\"https://yjkj-0508.oss-cn-shenzhen.aliyuncs.com/FAC:796846f41e7443c09318310f06d02c87.mesh\\\",\\\"calcRet\\\":\\\"{\\\\n\\\\t\\\\\\\"hsv_offset\\\\\\\": {\\\\n\\\\t\\\\t\\\\\\\"h\\\\\\\": 0.0,\\\\n\\\\t\\\\t\\\\\\\"s\\\\\\\": 35.45960236825087,\\\\n\\\\t\\\\t\\\\\\\"v\\\\\\\": -35.737425387350388\\\\n\\\\t}\\\\n}\\\",\\\"TextureFile\\\":\\\"https://yjkj-0508.oss-cn-shenzhen.aliyuncs.com/FAC:646e7a4f055a492abac118bf696e2363.jpg\\\"}\"}";
+
+                    String roleJson = YSurgeryUnityInterface.instance.CalculateLowPolyFace(hdObjData,0,180,75,retJsonStr);
                     writeToFile(roleJson,"obama53149_role.json");
 
                 } catch (IOException e) {
