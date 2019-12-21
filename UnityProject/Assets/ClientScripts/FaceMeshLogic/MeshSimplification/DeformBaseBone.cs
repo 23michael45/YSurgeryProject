@@ -15,7 +15,7 @@ public class DeformBaseBone : MonoBehaviour
         ResetDefaultPosition();
     }
 
-    public void CalculatePosition()
+    protected void CalculatePosition()
     {
         Vector3 offsetPos = Vector3.zero;
 
@@ -37,7 +37,7 @@ public class DeformBaseBone : MonoBehaviour
 
     protected virtual void Update()
     {
-
+        Calculate();
     }
 
 
@@ -45,5 +45,10 @@ public class DeformBaseBone : MonoBehaviour
     {
 
         mDefaultPosition = transform.position;
+    }
+
+
+    public virtual void Calculate()
+    {
     }
 }

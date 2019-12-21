@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0.4506572, g: 0.50062335, b: 0.5749496, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -833,6 +833,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6e1c58a3314dcb4fb8c00a845b50e80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mLeaderBones: []
   mRange: 10
   mCurve:
     serializedVersion: 2
@@ -858,7 +859,6 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  mLeaderBones: []
 --- !u!1 &445747338
 GameObject:
   m_ObjectHideFlags: 0
@@ -1054,6 +1054,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6e1c58a3314dcb4fb8c00a845b50e80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mLeaderBones: []
   mRange: 10
   mCurve:
     serializedVersion: 2
@@ -1079,7 +1080,6 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  mLeaderBones: []
 --- !u!1 &494385135
 GameObject:
   m_ObjectHideFlags: 0
@@ -1452,6 +1452,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mRootBone: {fileID: 857064006}
+  mInitFromFile: 1
   mLeaderEffectByLeader: 1
 --- !u!4 &857064006
 Transform:
@@ -2376,6 +2377,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6e1c58a3314dcb4fb8c00a845b50e80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mLeaderBones: []
   mRange: 10
   mCurve:
     serializedVersion: 2
@@ -2401,4 +2403,3 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  mLeaderBones: []

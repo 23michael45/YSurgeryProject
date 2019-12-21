@@ -555,7 +555,7 @@ public class ModelDataManager : MonoBehaviour
     }
     CalculateResultDataJson GetResultDataJson(string jstr)
     {
-        if(string.IsNullOrEmpty(jstr))
+        if (string.IsNullOrEmpty(jstr))
         {
             return null;
         }
@@ -575,6 +575,7 @@ public class ModelDataManager : MonoBehaviour
 
     public string CalculateLowPolyFace(byte[] hdObjData, int gender, float height, float weight, string retJson)
     {
+        FreeView.Inst().ResetStage();
         if (mLowMeshTemplate == null)
         {
             return null;
@@ -679,6 +680,9 @@ public class ModelDataManager : MonoBehaviour
 
         Debug.Log("CalculateLowPolyFace Return RoleJson");
 
+
+        DeformLeaderBoneManager.Instance.ResetBindPose();
+        
         SetTemplateXDirection(false);
         return roleJson;
     }
@@ -686,6 +690,7 @@ public class ModelDataManager : MonoBehaviour
 
     public bool LoadLowPolyFace(string roleJson, Texture2D tex)
     {
+        FreeView.Inst().ResetStage();
         SetTemplateXDirection(true);
 
         Debug.Log("Start LoadLowPolyFace");
@@ -720,6 +725,8 @@ public class ModelDataManager : MonoBehaviour
 
         FitCalculationJson(roleJsonData.retJsonData, roleJsonData.gender, roleJsonData.weight, roleJsonData.height);
 
+
+        DeformLeaderBoneManager.Instance.ResetBindPose();
         SetTemplateXDirection(false);
         return true;
     }

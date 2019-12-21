@@ -25,6 +25,7 @@ public class DeformLeaderBoneManagerSetup
 
 public class DeformLeaderBoneManager : MonoBehaviour
 {
+    public static DeformLeaderBoneManager Instance;
     public Transform mRootBone;
 
     public bool mInitFromFile = false;
@@ -35,8 +36,16 @@ public class DeformLeaderBoneManager : MonoBehaviour
     [NonSerialized]
     public List<DeformCommonBone> mCommonBones = new List<DeformCommonBone>();
 
+
+    [NonSerialized]
+    Dictionary<string, DeformLeaderBone> mLeaderBoneDic = new Dictionary<string, DeformLeaderBone>();
+
     DeformLeaderBone mCurrentEditBone;
 
+    void Awake()
+    {
+        Instance = this;
+    }
 
     private void Start()
     {
@@ -53,12 +62,38 @@ public class DeformLeaderBoneManager : MonoBehaviour
 
             Init();
         }
+
+        enabled = false;
+    }
+    void OnEnable()
+    {
+        foreach (DeformLeaderBone lb in mLeaderBones)
+        {
+            lb.enabled = true;
+        }
+        foreach (DeformCommonBone cb in mCommonBones)
+        {
+            cb.enabled = true;
+        }
+
+    }
+    void OnDisable()
+    {
+        foreach (DeformLeaderBone lb in mLeaderBones)
+        {
+            lb.enabled = false;
+        }
+        foreach (DeformCommonBone cb in mCommonBones)
+        {
+            cb.enabled = false;
+        }
     }
 
     void Init()
     {
         mLeaderBones.Clear();
         mCommonBones.Clear();
+        mLeaderBoneDic.Clear();
 
         Transform[] bones = mRootBone.GetComponentsInChildren<Transform>();
         foreach (Transform bone in bones)
@@ -72,9 +107,11 @@ public class DeformLeaderBoneManager : MonoBehaviour
             if (lb != null)
             {
                 mLeaderBones.Add(lb);
+                mLeaderBoneDic[lb.name] = lb;
                 lb.mCommonBones.Clear();
                 lb.mLeaderBones.Clear();
                 lb.mLeaderEffectByLeader = mLeaderEffectByLeader;
+
             }
             else
             {
@@ -103,6 +140,11 @@ public class DeformLeaderBoneManager : MonoBehaviour
 
     void InitFromResource()
     {
+        mLeaderBones.Clear();
+        mCommonBones.Clear();
+        mLeaderBoneDic.Clear();
+
+
         CurveHolder curves = Resources.Load<GameObject>("CurveHolder").GetComponent<CurveHolder>();
 
 
@@ -134,6 +176,7 @@ public class DeformLeaderBoneManager : MonoBehaviour
                     var lb = bone.gameObject.AddComponent<DeformLeaderBone>();
 
                     mLeaderBones.Add(lb);
+                    mLeaderBoneDic[lb.name] = lb;
                     lb.mCommonBones.Clear();
                     lb.mLeaderBones.Clear();
                     lb.mLeaderEffectByLeader = mLeaderEffectByLeader;
@@ -141,6 +184,7 @@ public class DeformLeaderBoneManager : MonoBehaviour
                     lb.mRange = leaderBone.range;
                     lb.mCurve = curves.curves[leaderBone.curveIndex];
 
+                    lb.enabled = false;
                     isLeader = true;
                     break;
                 }
@@ -160,6 +204,7 @@ public class DeformLeaderBoneManager : MonoBehaviour
                 {
                     mCommonBones.Add(cb);
                     cb.mLeaderBones.Clear();
+                    cb.enabled = false;
                 }
             }
 
@@ -188,7 +233,11 @@ public class DeformLeaderBoneManager : MonoBehaviour
                 {
                     if (Vector3.Distance(lb.transform.position, interlb.transform.position) < lb.mRange)
                     {
-                        lb.mLeaderBones.Add(interlb);
+                        if (lb.transform.parent == interlb.transform.parent)
+                        {
+                            lb.mLeaderBones.Add(interlb);
+
+                        }
                     }
                 }
 
@@ -199,8 +248,11 @@ public class DeformLeaderBoneManager : MonoBehaviour
             {
                 if (Vector3.Distance(cb.transform.position, lb.transform.position) < lb.mRange)
                 {
-                    lb.mCommonBones.Add(cb);
-                    cb.mLeaderBones.Add(lb);
+                    if (lb.transform.parent == cb.transform.parent)
+                    {
+                        lb.mCommonBones.Add(cb);
+                        cb.mLeaderBones.Add(lb);
+                    }
                 }
             }
         }
@@ -220,6 +272,33 @@ public class DeformLeaderBoneManager : MonoBehaviour
         }
         mCurrentEditBone.StopEdit();
 
+
+        ResetBindPose();
+    }
+
+
+    public void StartEdit(string boneName)
+    {
+        if (mLeaderBoneDic.ContainsKey(boneName))
+        {
+            DeformLeaderBone editlb = mLeaderBoneDic[boneName];
+            StartEdit(editlb);
+        }
+
+    }
+
+    public void StopEdit(string boneName)
+    {
+        if (mLeaderBoneDic.ContainsKey(boneName))
+        {
+            DeformLeaderBone editlb = mLeaderBoneDic[boneName];
+            EndEdit(editlb);
+        }
+
+    }
+
+    public void ResetBindPose()
+    {
         foreach (DeformLeaderBone lb in mLeaderBones)
         {
             lb.ResetDefaultPosition();
@@ -228,5 +307,6 @@ public class DeformLeaderBoneManager : MonoBehaviour
         {
             cb.ResetDefaultPosition();
         }
+
     }
 }

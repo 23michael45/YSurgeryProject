@@ -26,7 +26,7 @@ public class DeformLeaderBone : DeformBaseBone
         bEditing = false;
     }
 
-    protected override void Update()
+    public override void Calculate()
     {
         if (!bEditing && mLeaderEffectByLeader)
         {

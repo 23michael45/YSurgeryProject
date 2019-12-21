@@ -1,68 +1,305 @@
 {
     "leaderBones": [
-       { "boneName": "face_forehead_joint1",  "range": 10, "curveIndex": 0 }, 
-       { "boneName": "face_forehead_Lf_joint1",  "range": 10, "curveIndex": 0 }, 
-	   { "boneName": "face_forehead_Lf_joint2",  "range": 10, "curveIndex": 0 }, 
-	   { "boneName": "face_forehead_Rt_joint1",  "range": 10, "curveIndex": 0 }, 
-	   { "boneName": "face_forehead_Rt_joint2",  "range": 10, "curveIndex": 0 }, 
-	   { "boneName": "face_forehead_Lf_joint4",  "range": 10, "curveIndex": 0 }, 
-	   { "boneName": "face_forehead_Rt_joint4",  "range": 10, "curveIndex": 0 }, 
-	   { "boneName": "face_chin_Lf_joint06",  "range": 10, "curveIndex": 0 }, 
-	   { "boneName": "face_chin_Rt_joint06",  "range": 10, "curveIndex": 0 }, 
-	   { "boneName": "face_chin_Lf_joint03",  "range": 10, "curveIndex": 0 }, 
-	   { "boneName": "face_chin_Rt_joint03",  "range": 10, "curveIndex": 0 }, 
-	   { "boneName": "face_chin_joint2",  "range": 10, "curveIndex": 0 }, 
-	   { "boneName": "face_chin_joint3",  "range": 10, "curveIndex": 0 }, 
-	   { "boneName": "face_chin_joint1",  "range": 10, "curveIndex": 0 }, 
-	   { "boneName": "face_calvaria_joint1",  "range": 10, "curveIndex": 0 }, 
-	   { "boneName": "face_L_check_Bone002",  "range": 10, "curveIndex": 0 }, 
-	   { "boneName": "face_R_check_Bone002",  "range": 10, "curveIndex": 0 }, 
-	   { "boneName": "face_check_Lf_joint3",  "range": 10, "curveIndex": 0 }, 
-	   { "boneName": "face_check_Rt_joint3",  "range": 10, "curveIndex": 0 }, 
-	   { "boneName": "face_check_Lf_joint1",  "range": 10, "curveIndex": 0 }, 
-	   { "boneName": "face_check_Rt_joint1",  "range": 10, "curveIndex": 0 }, 
-	   { "boneName": "face_brow_Lf_joint0",  "range": 10, "curveIndex": 0 }, 
-	   { "boneName": "face_brow_Rt_joint0",  "range": 10, "curveIndex": 0 }, 
-	   { "boneName": "face_brow_Lf_joint1",  "range": 10, "curveIndex": 0 }, 
-	   { "boneName": "face_brow_Rt_joint1",  "range": 10, "curveIndex": 0 }, 
-	   { "boneName": "face_brow_Lf_joint3",  "range": 10, "curveIndex": 0 }, 
-	   { "boneName": "face_brow_Rt_joint3",  "range": 10, "curveIndex": 0 }, 
-	   { "boneName": "face_brow_Lf_joint5",  "range": 10, "curveIndex": 0 }, 
-	   { "boneName": "face_brow_Rt_joint5",  "range": 10, "curveIndex": 0 }, 
-	   { "boneName": "face_eye_Lf_joint0",  "range": 10, "curveIndex": 0 }, 
-	   { "boneName": "face_eye_Rt_joint0",  "range": 10, "curveIndex": 0 }, 
-       { "boneName": "face_eyeLids_Lf_joint1",  "range": 10, "curveIndex": 0 }, 
-	   { "boneName": "face_eyeLids_Rt_joint1",  "range": 10, "curveIndex": 0 }, 
-	   { "boneName": "face_eyeLidsUp_Lf_joint2",  "range": 10, "curveIndex": 0 }, 
-	   { "boneName": "face_eyeLidsUp_Rt_joint2",  "range": 10, "curveIndex": 0 }, 
-	   { "boneName": "face_eyeLidsdown_Lf_joint2",  "range": 10, "curveIndex": 0 }, 
-	   { "boneName": "face_eyeLidsdown_Rt_joint2",  "range": 10, "curveIndex": 0 }, 
-	   { "boneName": "face_eyeLids_Lf_joint2",  "range": 10, "curveIndex": 0 }, 
-	   { "boneName": "face_eyeLids_Rt_joint2",  "range": 10, "curveIndex": 0 }, 
-	   { "boneName": "face_nose_joint0",  "range": 10, "curveIndex": 0 }, 
-	   { "boneName": "face_bridge_joint1",  "range": 10, "curveIndex": 0 }, 
-	   { "boneName": "face_bridge_Lf_joint1",  "range": 10, "curveIndex": 0 }, 
-	   { "boneName": "face_bridge_Rt_joint1",  "range": 10, "curveIndex": 0 }, 
-	   { "boneName": "face_bridge_joint2",  "range": 10, "curveIndex": 0 }, 
-	   { "boneName": "face_nose_joint1",  "range": 10, "curveIndex": 0 }, 
-	   { "boneName": "face_nose_joint2",  "range": 10, "curveIndex": 0 }, 
-	   { "boneName": "face_nosewing_Lf_joint1",  "range": 10, "curveIndex": 0 }, 
-	   { "boneName": "face_nosewing_Rt_joint1",  "range": 10, "curveIndex": 0 }, 
-	   { "boneName": "face_nosewing_Lf_joint003",  "range": 10, "curveIndex": 0 }, 
-	   { "boneName": "face_nosewing_Rt_joint003",  "range": 10, "curveIndex": 0 }, 
-	   { "boneName": "face_nosewing_Lf_joint2",  "range": 10, "curveIndex": 0 }, 
-	   { "boneName": "face_nosewing_Rt_joint2",  "range": 10, "curveIndex": 0 }, 
-	   { "boneName": "face_mouthLip_joint0",  "range": 10, "curveIndex": 0 }, 
-	   { "boneName": "face_mouthLip_up_joint1",  "range": 10, "curveIndex": 0 }, 
-	   { "boneName": "face_mouthLip_up_joint0",  "range": 10, "curveIndex": 0 }, 
-	   { "boneName": "face_mouthLip_dn_joint1",  "range": 10, "curveIndex": 0 }, 
-	   { "boneName": "face_mouthLip_dn_joint0",  "range": 10, "curveIndex": 0 }, 
-	   { "boneName": "face_Philtrum_joint0",  "range": 10, "curveIndex": 0 }, 
-	   { "boneName": "face_mouthLip_Lf_joint1",  "range": 10, "curveIndex": 0 }, 
-	   { "boneName": "face_mouthLip_Rt_joint1",  "range": 10, "curveIndex": 0 }, 
-
-
-
+        {
+            "boneName": "face_forehead_joint1", 
+            "range": 10, 
+            "curveIndex": 0
+        }, 
+        {
+            "boneName": "face_forehead_Lf_joint1", 
+            "range": 10, 
+            "curveIndex": 0
+        }, 
+        {
+            "boneName": "face_forehead_Lf_joint2", 
+            "range": 10, 
+            "curveIndex": 0
+        }, 
+        {
+            "boneName": "face_forehead_Rt_joint1", 
+            "range": 10, 
+            "curveIndex": 0
+        }, 
+        {
+            "boneName": "face_forehead_Rt_joint2", 
+            "range": 10, 
+            "curveIndex": 0
+        }, 
+        {
+            "boneName": "face_forehead_Lf_joint4", 
+            "range": 10, 
+            "curveIndex": 0
+        }, 
+        {
+            "boneName": "face_forehead_Rt_joint4", 
+            "range": 10, 
+            "curveIndex": 0
+        }, 
+        {
+            "boneName": "face_chin_Lf_joint06", 
+            "range": 10, 
+            "curveIndex": 0
+        }, 
+        {
+            "boneName": "face_chin_Rt_joint06", 
+            "range": 10, 
+            "curveIndex": 0
+        }, 
+        {
+            "boneName": "face_chin_Lf_joint03", 
+            "range": 10, 
+            "curveIndex": 0
+        }, 
+        {
+            "boneName": "face_chin_Rt_joint03", 
+            "range": 10, 
+            "curveIndex": 0
+        }, 
+        {
+            "boneName": "face_chin_joint2", 
+            "range": 10, 
+            "curveIndex": 0
+        }, 
+        {
+            "boneName": "face_chin_joint3", 
+            "range": 10, 
+            "curveIndex": 0
+        }, 
+        {
+            "boneName": "face_chin_joint1", 
+            "range": 10, 
+            "curveIndex": 0
+        }, 
+        {
+            "boneName": "face_calvaria_joint1", 
+            "range": 10, 
+            "curveIndex": 0
+        }, 
+        {
+            "boneName": "face_L_check_Bone002", 
+            "range": 10, 
+            "curveIndex": 0
+        }, 
+        {
+            "boneName": "face_R_check_Bone002", 
+            "range": 10, 
+            "curveIndex": 0
+        }, 
+        {
+            "boneName": "face_check_Lf_joint3", 
+            "range": 10, 
+            "curveIndex": 0
+        }, 
+        {
+            "boneName": "face_check_Rt_joint3", 
+            "range": 10, 
+            "curveIndex": 0
+        }, 
+        {
+            "boneName": "face_check_Lf_joint1", 
+            "range": 10, 
+            "curveIndex": 0
+        }, 
+        {
+            "boneName": "face_check_Rt_joint1", 
+            "range": 10, 
+            "curveIndex": 0
+        }, 
+        {
+            "boneName": "face_brow_Lf_joint0", 
+            "range": 10, 
+            "curveIndex": 0
+        }, 
+        {
+            "boneName": "face_brow_Rt_joint0", 
+            "range": 10, 
+            "curveIndex": 0
+        }, 
+        {
+            "boneName": "face_brow_Lf_joint1", 
+            "range": 10, 
+            "curveIndex": 0
+        }, 
+        {
+            "boneName": "face_brow_Rt_joint1", 
+            "range": 10, 
+            "curveIndex": 0
+        }, 
+        {
+            "boneName": "face_brow_Lf_joint3", 
+            "range": 10, 
+            "curveIndex": 0
+        }, 
+        {
+            "boneName": "face_brow_Rt_joint3", 
+            "range": 10, 
+            "curveIndex": 0
+        }, 
+        {
+            "boneName": "face_brow_Lf_joint5", 
+            "range": 10, 
+            "curveIndex": 0
+        }, 
+        {
+            "boneName": "face_brow_Rt_joint5", 
+            "range": 10, 
+            "curveIndex": 0
+        }, 
+        {
+            "boneName": "face_eye_Lf_joint0", 
+            "range": 10, 
+            "curveIndex": 0
+        }, 
+        {
+            "boneName": "face_eye_Rt_joint0", 
+            "range": 10, 
+            "curveIndex": 0
+        }, 
+        {
+            "boneName": "face_eyeLids_Lf_joint1", 
+            "range": 10, 
+            "curveIndex": 0
+        }, 
+        {
+            "boneName": "face_eyeLids_Rt_joint1", 
+            "range": 10, 
+            "curveIndex": 0
+        }, 
+        {
+            "boneName": "face_eyeLidsUp_Lf_joint2", 
+            "range": 10, 
+            "curveIndex": 0
+        }, 
+        {
+            "boneName": "face_eyeLidsUp_Rt_joint2", 
+            "range": 10, 
+            "curveIndex": 0
+        }, 
+        {
+            "boneName": "face_eyeLidsdown_Lf_joint2", 
+            "range": 10, 
+            "curveIndex": 0
+        }, 
+        {
+            "boneName": "face_eyeLidsdown_Rt_joint2", 
+            "range": 10, 
+            "curveIndex": 0
+        }, 
+        {
+            "boneName": "face_eyeLids_Lf_joint2", 
+            "range": 10, 
+            "curveIndex": 0
+        }, 
+        {
+            "boneName": "face_eyeLids_Rt_joint2", 
+            "range": 10, 
+            "curveIndex": 0
+        }, 
+        {
+            "boneName": "face_nose_joint0", 
+            "range": 10, 
+            "curveIndex": 0
+        }, 
+        {
+            "boneName": "face_bridge_joint1", 
+            "range": 10, 
+            "curveIndex": 0
+        }, 
+        {
+            "boneName": "face_bridge_Lf_joint1", 
+            "range": 10, 
+            "curveIndex": 0
+        }, 
+        {
+            "boneName": "face_bridge_Rt_joint1", 
+            "range": 10, 
+            "curveIndex": 0
+        }, 
+        {
+            "boneName": "face_bridge_joint2", 
+            "range": 10, 
+            "curveIndex": 0
+        }, 
+        {
+            "boneName": "face_nose_joint1", 
+            "range": 10, 
+            "curveIndex": 0
+        }, 
+        {
+            "boneName": "face_nose_joint2", 
+            "range": 10, 
+            "curveIndex": 0
+        }, 
+        {
+            "boneName": "face_nosewing_Lf_joint1", 
+            "range": 10, 
+            "curveIndex": 0
+        }, 
+        {
+            "boneName": "face_nosewing_Rt_joint1", 
+            "range": 10, 
+            "curveIndex": 0
+        }, 
+        {
+            "boneName": "face_nosewing_Lf_joint003", 
+            "range": 10, 
+            "curveIndex": 0
+        }, 
+        {
+            "boneName": "face_nosewing_Rt_joint003", 
+            "range": 10, 
+            "curveIndex": 0
+        }, 
+        {
+            "boneName": "face_nosewing_Lf_joint2", 
+            "range": 10, 
+            "curveIndex": 0
+        }, 
+        {
+            "boneName": "face_nosewing_Rt_joint2", 
+            "range": 10, 
+            "curveIndex": 0
+        }, 
+        {
+            "boneName": "face_mouthLip_joint0", 
+            "range": 10, 
+            "curveIndex": 0
+        }, 
+        {
+            "boneName": "face_mouthLip_up_joint1", 
+            "range": 10, 
+            "curveIndex": 0
+        }, 
+        {
+            "boneName": "face_mouthLip_up_joint0", 
+            "range": 10, 
+            "curveIndex": 0
+        }, 
+        {
+            "boneName": "face_mouthLip_dn_joint1", 
+            "range": 10, 
+            "curveIndex": 0
+        }, 
+        {
+            "boneName": "face_mouthLip_dn_joint0", 
+            "range": 10, 
+            "curveIndex": 0
+        }, 
+        {
+            "boneName": "face_Philtrum_joint0", 
+            "range": 10, 
+            "curveIndex": 0
+        }, 
+        {
+            "boneName": "face_mouthLip_Lf_joint1", 
+            "range": 10, 
+            "curveIndex": 0
+        }, 
+        {
+            "boneName": "face_mouthLip_Rt_joint1", 
+            "range": 10, 
+            "curveIndex": 0
+        }
     ]
 }
 

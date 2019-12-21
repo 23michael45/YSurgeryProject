@@ -6,7 +6,7 @@ using UnityEngine;
 public class DeformCommonBone : DeformBaseBone
 {
 
-    protected override void Update()
+    public override void Calculate()
     {
         CalculatePosition();
     }

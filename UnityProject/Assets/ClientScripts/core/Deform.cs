@@ -1200,7 +1200,7 @@ public class Deform : MonoBehaviour
     public void DeformBonePos(string bonename, Vector3 offset) {
 
 
-     
+     DeformLeaderBoneManager.Instance.StartEdit(bonename);
 
         AppRoot.MainRole._bones[bonename].transform.localPosition = AppRoot.MainRole.bonesPostion[bonename] + offset;               
 
