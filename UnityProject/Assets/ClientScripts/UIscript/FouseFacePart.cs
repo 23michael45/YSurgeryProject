@@ -7,17 +7,17 @@ using UnityEngine.EventSystems;
 public class FouseFacePart : MonoBehaviour
 {
     public string Deformjson;
-   
+
     // shape.........
     public Toggle foreheadItem;
     public Toggle TempleItem;
     public Toggle BISjawItem;
     public Toggle ChinItem;
 
-      //face..........
+    //face..........
     public Toggle ApplemuscleItem;
     public Toggle CheekbonesItem;
-    public Toggle FacialpartItem;    
+    public Toggle FacialpartItem;
 
 
     //eyebrow....
@@ -25,14 +25,14 @@ public class FouseFacePart : MonoBehaviour
     public Toggle BrowHeadItem;
     public Toggle BrowMiddleItem;
     public Toggle BrowTailItem;
-      
+
 
     //eye.......
     public Toggle EyecornerItem;
     public Toggle UppereyelidItem;
     public Toggle DoublefoldEyelidsItem;
     public Toggle lowereyelidItem;
-    public Toggle  EyebagItem;
+    public Toggle EyebagItem;
     public Toggle EyetailItem;
     public Toggle BlackeyeItem;
 
@@ -43,7 +43,7 @@ public class FouseFacePart : MonoBehaviour
     public Toggle ColumellaNasiItem;
     public Toggle NasalBaseItem;
     public Toggle NoseWingItem;
-    public Toggle NostrilItem;    
+    public Toggle NostrilItem;
 
     //mouth.........
     public Toggle upperlipItem;
@@ -67,24 +67,24 @@ public class FouseFacePart : MonoBehaviour
     public Toggle ArmItem;
     FaceAreaTextureChange faceAreaTextureChange;
 
-   
+
 
     public void Start()
     {
-
+        foreheadItem_chg(true);
 
         faceAreaTextureChange = new FaceAreaTextureChange();
-        foreheadItem.onValueChanged.AddListener(ison =>foreheadItem_chg());
-        TempleItem.onValueChanged.AddListener(ison => TempleItem_chg());       
-        BISjawItem.onValueChanged.AddListener(ison => BISjawItem_chg());
-        ChinItem.onValueChanged.AddListener(ison => ChinItem_chg());      
+        foreheadItem.onValueChanged.AddListener(foreheadItem_chg);
+        TempleItem.onValueChanged.AddListener(TempleItem_chg);
+        BISjawItem.onValueChanged.AddListener(BISjawItem_chg);
+        ChinItem.onValueChanged.AddListener(ison => ChinItem_chg());
         //face..........
-        ApplemuscleItem.onValueChanged.AddListener(ison => ApplemuscleItem_chg()); 
-        CheekbonesItem.onValueChanged.AddListener(ison => CheekbonesItem_chg());       
+        ApplemuscleItem.onValueChanged.AddListener(ison => ApplemuscleItem_chg());
+        CheekbonesItem.onValueChanged.AddListener(ison => CheekbonesItem_chg());
         FacialpartItem.onValueChanged.AddListener(ison => FacialpartItem_chg());
         //eyebrow....
-        BrowbowItem.onValueChanged.AddListener(ison => BrowbowItem_chg());  
-        BrowHeadItem.onValueChanged.AddListener(ison => BrowHeadItem_chg());   
+        BrowbowItem.onValueChanged.AddListener(ison => BrowbowItem_chg());
+        BrowHeadItem.onValueChanged.AddListener(ison => BrowHeadItem_chg());
         BrowMiddleItem.onValueChanged.AddListener(ison => BrowMiddleItem_chg());
         BrowTailItem.onValueChanged.AddListener(ison => BrowTailItem_chg());
         //eye.......
@@ -92,8 +92,8 @@ public class FouseFacePart : MonoBehaviour
         UppereyelidItem.onValueChanged.AddListener(ison => UppereyelidItem_chg());
         DoublefoldEyelidsItem.onValueChanged.AddListener(ison => DoublefoldEyelidsItem_chg());
         lowereyelidItem.onValueChanged.AddListener(ison => lowereyelidItem_chg());
-        EyebagItem.onValueChanged.AddListener(ison => EyebagItem_chg());        
-        EyetailItem.onValueChanged.AddListener(ison => EyetailItem_chg());      
+        EyebagItem.onValueChanged.AddListener(ison => EyebagItem_chg());
+        EyetailItem.onValueChanged.AddListener(ison => EyetailItem_chg());
         BlackeyeItem.onValueChanged.AddListener(ison => BlackeyeItem_chg());
         //nose.........
         UpperbridgeItem.onValueChanged.AddListener(ison => UpperbridgeItem_chg());
@@ -106,7 +106,7 @@ public class FouseFacePart : MonoBehaviour
         //mouth.........
         upperlipItem.onValueChanged.AddListener(ison => upperlipItem_chg());
         upperboneItem.onValueChanged.AddListener(ison => upperboneItem_chg());
-        downlipItem.onValueChanged.AddListener(ison => downlipItem_chg());    
+        downlipItem.onValueChanged.AddListener(ison => downlipItem_chg());
         downBoneItem.onValueChanged.AddListener(ison => downBoneItem_chg());
         MiddleItem.onValueChanged.AddListener(ison => MiddleItem_chg());
         cornerItem.onValueChanged.AddListener(ison => cornerItem_chg());
@@ -121,7 +121,7 @@ public class FouseFacePart : MonoBehaviour
         //hipItem.onValueChanged.AddListener(ison => hipItem_chg());
         //LegItem.onValueChanged.AddListener(ison => LegItem_chg());
         //ArmItem.onValueChanged.AddListener(ison => ArmItem_chg());       
-     
+
     }
 
     public void NoneAreaTexture() {
@@ -132,21 +132,63 @@ public class FouseFacePart : MonoBehaviour
 
 
 
-    public void foreheadItem_chg( ){
-        string TexturePath = "FaceAreaPNG/01Shape/forehead";
-        faceAreaTextureChange.ChangeFaceArea(TexturePath);       
+    public void foreheadItem_chg(bool b) {
+
+        if (b)
+        {
+
+            string TexturePath = "FaceAreaPNG/01Shape/forehead";
+            faceAreaTextureChange.ChangeFaceArea(TexturePath);
+            
+            DeformLeaderBoneManager.Instance.StartEdit("face_forehead_Lf_joint1");
+            DeformLeaderBoneManager.Instance.StartEdit("face_forehead_Rt_joint1");
+        }
+        else
+        {
+            DeformLeaderBoneManager.Instance.StopEdit("face_forehead_Lf_joint1");
+            DeformLeaderBoneManager.Instance.StopEdit("face_forehead_Rt_joint1");
+
+        }
     }
+
     
 
-    public void TempleItem_chg()
+    public void TempleItem_chg(bool b)
     {
-        string TexturePath = "FaceAreaPNG/01Shape/Temple";
-        faceAreaTextureChange.ChangeFaceArea(TexturePath);
+        if (b)
+        {
+
+            string TexturePath = "FaceAreaPNG/01Shape/Temple";
+            faceAreaTextureChange.ChangeFaceArea(TexturePath);
+
+            DeformLeaderBoneManager.Instance.StartEdit("face_temple_Lf_joint1");
+            DeformLeaderBoneManager.Instance.StartEdit("face_temple_Rt_joint1");
+        }
+        else
+        {
+            DeformLeaderBoneManager.Instance.StopEdit("face_temple_Lf_joint1");
+            DeformLeaderBoneManager.Instance.StopEdit("face_temple_Rt_joint1");
+
+        }
     }    
-    public void BISjawItem_chg()
+    public void BISjawItem_chg(bool b)
     {
-        string TexturePath = "FaceAreaPNG/01Shape/BISjaw";
-        faceAreaTextureChange.ChangeFaceArea(TexturePath);
+        if (b)
+        {
+
+            string TexturePath = "FaceAreaPNG/01Shape/BISjaw";
+            faceAreaTextureChange.ChangeFaceArea(TexturePath);
+
+            DeformLeaderBoneManager.Instance.StartEdit("face_temple_Lf_joint1");
+            DeformLeaderBoneManager.Instance.StartEdit("face_temple_Rt_joint1");
+        }
+        else
+        {
+            DeformLeaderBoneManager.Instance.StopEdit("face_temple_Lf_joint1");
+            DeformLeaderBoneManager.Instance.StopEdit("face_temple_Rt_joint1");
+
+        }
+
     }
     public void ChinItem_chg()
     {

@@ -39,8 +39,7 @@ public class DeformLeaderBoneManager : MonoBehaviour
 
     [NonSerialized]
     Dictionary<string, DeformLeaderBone> mLeaderBoneDic = new Dictionary<string, DeformLeaderBone>();
-
-    DeformLeaderBone mCurrentEditBone;
+    
 
     void Awake()
     {
@@ -260,19 +259,12 @@ public class DeformLeaderBoneManager : MonoBehaviour
 
     public void StartEdit(DeformLeaderBone editBone)
     {
-        mCurrentEditBone = editBone;
-        mCurrentEditBone.StartEdit();
+        editBone.StartEdit();
     }
 
     public void EndEdit(DeformLeaderBone editBone)
     {
-        if (editBone != mCurrentEditBone)
-        {
-            Debug.LogError("End Edit Bone not same");
-        }
-        mCurrentEditBone.StopEdit();
-
-
+        editBone.StopEdit();
         ResetBindPose();
     }
 

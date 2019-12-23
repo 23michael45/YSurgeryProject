@@ -94,22 +94,22 @@ public class Deform : MonoBehaviour
 
 
 
-        DeformBonePos("face_forehead_joint1", offset);
-        DeformBonePos("face_forehead_joint2", offset);
+        //DeformBonePos("face_forehead_joint1", offset_l);
+        //DeformBonePos("face_forehead_joint2", offset_r);
 
 
 
         DeformBonePos("face_forehead_Lf_joint1", offset_l);
-        DeformBonePos("face_forehead_Lf_joint2", offset_l);
-        DeformBonePos("face_forehead_Lf_joint4", offset_l);
-        DeformBonePos("face_forehead_Lf_joint5", offset_l);
+        //DeformBonePos("face_forehead_Lf_joint2", offset_l);
+        //DeformBonePos("face_forehead_Lf_joint4", offset_l);
+        //DeformBonePos("face_forehead_Lf_joint5", offset_l);
 
 
 
         DeformBonePos("face_forehead_Rt_joint1", offset_r);
-        DeformBonePos("face_forehead_Rt_joint2", offset_r);
-        DeformBonePos("face_forehead_Rt_joint2", offset_r);
-        DeformBonePos("face_forehead_Rt_joint5", offset_r);
+        //DeformBonePos("face_forehead_Rt_joint2", offset_r);
+        //DeformBonePos("face_forehead_Rt_joint2", offset_r);
+        //DeformBonePos("face_forehead_Rt_joint5", offset_r);
 
 
 
@@ -132,15 +132,15 @@ public class Deform : MonoBehaviour
 
 
         DeformBonePos("face_temple_Lf_joint1", offset_l);
-        DeformBonePos("face_temple_Lf_joint3", offset_l);
-        DeformBonePos("face_temple_Lf_joint2", offset_l);
-        DeformBonePos("face_temple_Lf_joint004", offset_l);
+        //DeformBonePos("face_temple_Lf_joint3", offset_l);
+        //DeformBonePos("face_temple_Lf_joint2", offset_l);
+        //DeformBonePos("face_temple_Lf_joint004", offset_l);
 
 
         DeformBonePos("face_temple_Rt_joint1", offset_r);
-        DeformBonePos("face_temple_Rt_joint3", offset_r);
-        DeformBonePos("face_temple_Rt_joint2", offset_r);
-        DeformBonePos("face_temple_Rt_joint004", offset_r);
+        //DeformBonePos("face_temple_Rt_joint3", offset_r);
+        //DeformBonePos("face_temple_Rt_joint2", offset_r);
+        //DeformBonePos("face_temple_Rt_joint004", offset_r);
 
 
 

@@ -1479,10 +1479,4 @@ public class DeformUI : MonoBehaviour
 
 
 
-
-
-
-
-
-
 }
