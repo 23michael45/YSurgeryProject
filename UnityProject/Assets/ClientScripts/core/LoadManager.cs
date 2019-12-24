@@ -150,10 +150,7 @@ public class LoadManager : MonoSingleton<LoadManager>
         ///初始化可编辑模型信息。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。
         AppRoot.MainUser = new User();
         AppRoot.MainUser.Init();
-
-        AppRoot.MainDeform = new Deform();
-        // Debug.Log(cur_role);
-        AppRoot.MainDeform.ratio = 0.1f;
+        
         if (newRole)
         {
             AppRoot.MainRole = newRole;

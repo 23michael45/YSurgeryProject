@@ -31,6 +31,8 @@ public class DeformLeaderBoneManager : MonoBehaviour
     public bool mInitFromFile = false;
     public bool mLeaderEffectByLeader = false;
 
+
+
     [NonSerialized]
     public List<DeformLeaderBone> mLeaderBones = new List<DeformLeaderBone>();
     [NonSerialized]
@@ -39,7 +41,11 @@ public class DeformLeaderBoneManager : MonoBehaviour
 
     [NonSerialized]
     Dictionary<string, DeformLeaderBone> mLeaderBoneDic = new Dictionary<string, DeformLeaderBone>();
-    
+
+    [NonSerialized]
+    Dictionary<string, Vector3> mRoleJsonBoneInitPositionMap = new Dictionary<string, Vector3>();
+    Dictionary<string, Transform> mRoleJsonBoneMap = new Dictionary<string, Transform>();
+
 
     void Awake()
     {
@@ -254,6 +260,41 @@ public class DeformLeaderBoneManager : MonoBehaviour
                     }
                 }
             }
+        }
+    }
+
+
+    public void RoleJsonInitData(SkinnedMeshRenderer skinnedmesh)
+    {
+
+        mRoleJsonBoneInitPositionMap.Clear();
+        mRoleJsonBoneMap.Clear();
+
+        Transform[] bones = skinnedmesh.bones;
+        for(int i = 0; i< bones.Length;i++)
+        {
+            Transform bone = bones[i];
+            mRoleJsonBoneInitPositionMap[bone.name] = bone.position;
+            mRoleJsonBoneMap[bone.name] = bone;
+        }
+        
+    }
+    public void SetLeaderBonePosition(string bonename,Vector3 offset)
+    {
+        mRoleJsonBoneMap[bonename].position = mRoleJsonBoneInitPositionMap[bonename] + offset;
+    }
+    public Vector3 GetLeaderBonePositonOffset(string bonename)
+    {
+        if(!mRoleJsonBoneMap.ContainsKey(bonename) || !mRoleJsonBoneInitPositionMap.ContainsKey(bonename))
+        {
+            Debug.LogError("DeformLeaderBoneManager mRoleJsonBoneMap mRoleJsonBoneInitPositionMap not contains key:" + bonename);
+            return Vector3.zero;
+        }
+        else
+        {
+            Vector3 offset = mRoleJsonBoneMap[bonename].position - mRoleJsonBoneInitPositionMap[bonename];
+            return offset;
+
         }
     }
 

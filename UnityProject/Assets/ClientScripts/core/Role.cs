@@ -27,11 +27,7 @@ public class Role : MonoBehaviour
     public int RoleID = 0;
 
     Animator animator = null;
-
-    public Deform Deform;
-
-
-   
+    
 
 
     //∂®“Â∆§∑Ù…´ø®
@@ -106,19 +102,9 @@ public class Role : MonoBehaviour
 
   public void Init()
     {
-        //parts = new GameObject[(int)ClothPart.Count];
-
-        //Makeupparts = new Texture2D[(int)MakeupPart.Count];
-
         GetBaseBonePostion();
-
-       // Debug.Log(bonesPostion);
-
-      //  Debug.Log(_bones);
-
-        Deform = new Deform();
-        Deform.init();
-       
+        
+      
     }
     
     public void GetBaseBonePostion() {        

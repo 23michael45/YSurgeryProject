@@ -1,0 +1,11 @@
+{
+	"pairList": [{
+		"leaderBoneName": "face_forehead_Lf_joint1",
+		"leaderBoneSymName": "face_forehead_Rt_joint1",
+		"sliderNames": ["foreheadItem_x", "foreheadItem_y", "foreheadItem_w"]
+	}, {
+		"leaderBoneName": "face_temple_Lf_joint1",
+		"leaderBoneSymName": "face_temple_Rt_joint1",
+		"sliderNames": ["BISjawItem_x", "BISjawItem_y", "BISjawItem_w"]
+	}]
+}

@@ -69,6 +69,7 @@ public class RoleJson
     public Quaternion[] bonelocalrotation;
     public Vector3[] bonelocalscale;
 
+
     public static string Save(Mesh mesh, Transform[] bones, int gender, float height, float weight, CalculateResultDataJson retJsonData)
     {
         RoleJson data = new RoleJson();
@@ -177,7 +178,7 @@ public class RoleJson
 
 }
 
-public class DeformJson_Lengacy
+public class DeformJson
 {
     public Vector3[] bonelocalpositions;
     public Quaternion[] bonelocalrotation;
@@ -186,7 +187,7 @@ public class DeformJson_Lengacy
 
     public static string Save(Transform[] bones)
     {
-        DeformJson_Lengacy data = new DeformJson_Lengacy();
+        DeformJson data = new DeformJson();
 
         if (bones != null)
         {
@@ -216,9 +217,9 @@ public class DeformJson_Lengacy
         return Save(bones);
 
     }
-    public static bool Load(string json, ref SkinnedMeshRenderer skinnedMesh)
+    public static DeformJson Load(string json, ref SkinnedMeshRenderer skinnedMesh)
     {
-        DeformJson_Lengacy data = JsonUtility.FromJson<DeformJson_Lengacy>(json);
+        DeformJson data = JsonUtility.FromJson<DeformJson>(json);
 
 
 
@@ -241,7 +242,7 @@ public class DeformJson_Lengacy
 
         }
 
-        return true;
+        return data;
     }
 
 }
@@ -249,9 +250,9 @@ public class DeformJson_Lengacy
 
 
 [Serializable]
-public class DeformJson
+public class DeformJson_UI
 {
-    public DeformJson()
+    public DeformJson_UI()
     {
         shape = new Shape();
         face = new Face();
@@ -348,6 +349,10 @@ public class ModelDataManager : MonoBehaviour
 
     SkinnedMeshRenderer mSkinnedMeshRenderer;
     public MeshFilter mDebugMeshFilter;
+
+
+    RoleJson mCurrentRoleJson;
+    DeformJson mCurrentDeformJson;
 
     void Awake()
     {
@@ -706,6 +711,9 @@ public class ModelDataManager : MonoBehaviour
         Debug.Log("Start RoleJson Load");
         RoleJson roleJsonData = RoleJson.Load(roleJson, ref mSkinnedMeshRenderer, ref mDebugMeshFilter);
 
+        mCurrentRoleJson = roleJsonData;
+        mCurrentDeformJson = null;
+        
         //to do select model body by gender,height ,weight
         if (roleJsonData.gender == 0)
         {
@@ -736,6 +744,7 @@ public class ModelDataManager : MonoBehaviour
 
         //after flip x ,then rebind bone leader pose
         DeformLeaderBoneManager.Instance.ResetBindPose();
+        DeformLeaderBoneManager.Instance.RoleJsonInitData(mSkinnedMeshRenderer);
         return true;
     }
 
@@ -771,21 +780,19 @@ public class ModelDataManager : MonoBehaviour
 
     public string SaveDeform()
     {
-        SetTemplateXDirection(true);
-        string deformJson = DeformJson.Save(AppRoot.MainUser.currentModel.deform);
+        string deformJson = DeformJson.Save(mSkinnedMeshRenderer);
+        DeformLeaderBoneManager.Instance.ResetBindPose();
 
-        SetTemplateXDirection(false);
         return deformJson;
     }
 
     public bool LoadDeform(string deformJson)
     {
-        SetTemplateXDirection(true);
-        DeformJson deform = DeformJson.Load(deformJson);
-
-        DeformUI.Instance.Load(deform);
-
-        SetTemplateXDirection(false);
+        DeformJson deform = DeformJson.Load(deformJson,ref mSkinnedMeshRenderer);
+        mCurrentDeformJson = deform;
+        
+        DeformUI.Instance.Reload();
+        DeformLeaderBoneManager.Instance.ResetBindPose();
         return true;
     }
 

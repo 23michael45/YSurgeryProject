@@ -67,13 +67,16 @@ public class FouseFacePart : MonoBehaviour
     public Toggle ArmItem;
     FaceAreaTextureChange faceAreaTextureChange;
 
+    private void Awake()
+    {
 
+        faceAreaTextureChange = new FaceAreaTextureChange(); 
+    }
 
     public void Start()
     {
         foreheadItem_chg(true);
 
-        faceAreaTextureChange = new FaceAreaTextureChange();
         foreheadItem.onValueChanged.AddListener(foreheadItem_chg);
         TempleItem.onValueChanged.AddListener(TempleItem_chg);
         BISjawItem.onValueChanged.AddListener(BISjawItem_chg);
@@ -130,65 +133,52 @@ public class FouseFacePart : MonoBehaviour
 
     }
 
-
-
-    public void foreheadItem_chg(bool b) {
-
+    void ToggleItemChange(bool b,string texturePath,string leaderboneLeft,string leaderboneRight)
+    {
         if (b)
         {
 
-            string TexturePath = "FaceAreaPNG/01Shape/forehead";
-            faceAreaTextureChange.ChangeFaceArea(TexturePath);
-            
-            DeformLeaderBoneManager.Instance.StartEdit("face_forehead_Lf_joint1");
-            DeformLeaderBoneManager.Instance.StartEdit("face_forehead_Rt_joint1");
+            faceAreaTextureChange.ChangeFaceArea(texturePath);
+
+            DeformLeaderBoneManager.Instance.StartEdit(leaderboneLeft);
+            DeformLeaderBoneManager.Instance.StartEdit(leaderboneRight);
+
+            //左右对称，所以设置一次slider值即可
+            DeformUI.Instance.SetItemValueByLeaderBoneName(leaderboneLeft);
         }
         else
         {
-            DeformLeaderBoneManager.Instance.StopEdit("face_forehead_Lf_joint1");
-            DeformLeaderBoneManager.Instance.StopEdit("face_forehead_Rt_joint1");
+            DeformLeaderBoneManager.Instance.StopEdit(leaderboneLeft);
+            DeformLeaderBoneManager.Instance.StopEdit(leaderboneRight);
 
         }
+    }
+
+    public void foreheadItem_chg(bool b) {
+
+        string texturePath = "FaceAreaPNG/01Shape/forehead";
+        string leaderboneLeft = "face_forehead_Lf_joint1";
+        string leaderboneRight = "face_forehead_Rt_joint1";
+        ToggleItemChange(b, texturePath, leaderboneLeft, leaderboneRight);
     }
 
     
 
     public void TempleItem_chg(bool b)
     {
-        if (b)
-        {
+        string texturePath = "FaceAreaPNG/01Shape/Temple";
+        string leaderboneLeft = "face_temple_Lf_joint1";
+        string leaderboneRight = "face_temple_Rt_joint1";
+        ToggleItemChange(b, texturePath, leaderboneLeft, leaderboneRight);
 
-            string TexturePath = "FaceAreaPNG/01Shape/Temple";
-            faceAreaTextureChange.ChangeFaceArea(TexturePath);
-
-            DeformLeaderBoneManager.Instance.StartEdit("face_temple_Lf_joint1");
-            DeformLeaderBoneManager.Instance.StartEdit("face_temple_Rt_joint1");
-        }
-        else
-        {
-            DeformLeaderBoneManager.Instance.StopEdit("face_temple_Lf_joint1");
-            DeformLeaderBoneManager.Instance.StopEdit("face_temple_Rt_joint1");
-
-        }
     }    
     public void BISjawItem_chg(bool b)
     {
-        if (b)
-        {
-
-            string TexturePath = "FaceAreaPNG/01Shape/BISjaw";
-            faceAreaTextureChange.ChangeFaceArea(TexturePath);
-
-            DeformLeaderBoneManager.Instance.StartEdit("face_temple_Lf_joint1");
-            DeformLeaderBoneManager.Instance.StartEdit("face_temple_Rt_joint1");
-        }
-        else
-        {
-            DeformLeaderBoneManager.Instance.StopEdit("face_temple_Lf_joint1");
-            DeformLeaderBoneManager.Instance.StopEdit("face_temple_Rt_joint1");
-
-        }
-
+        string texturePath = "FaceAreaPNG/01Shape/BISjaw";
+        string leaderboneLeft = "face_chin_Lf_joint08";
+        string leaderboneRight = "face_chin_Rt_joint08";
+        ToggleItemChange(b, texturePath, leaderboneLeft, leaderboneRight);
+  
     }
     public void ChinItem_chg()
     {
