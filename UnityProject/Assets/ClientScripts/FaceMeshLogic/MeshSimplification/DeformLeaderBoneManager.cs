@@ -68,7 +68,7 @@ public class DeformLeaderBoneManager : MonoBehaviour
             Init();
         }
 
-        enabled = false;
+        //enabled = false;
     }
     void OnEnable()
     {
@@ -189,7 +189,7 @@ public class DeformLeaderBoneManager : MonoBehaviour
                     lb.mRange = leaderBone.range;
                     lb.mCurve = curves.curves[leaderBone.curveIndex];
 
-                    lb.enabled = false;
+                    //lb.enabled = false;
                     isLeader = true;
                     break;
                 }
@@ -209,7 +209,7 @@ public class DeformLeaderBoneManager : MonoBehaviour
                 {
                     mCommonBones.Add(cb);
                     cb.mLeaderBones.Clear();
-                    cb.enabled = false;
+                    //cb.enabled = false;
                 }
             }
 
@@ -264,13 +264,13 @@ public class DeformLeaderBoneManager : MonoBehaviour
     }
 
 
-    public void RoleJsonInitData(SkinnedMeshRenderer skinnedmesh)
+    public void RoleJsonInitData()
     {
 
         mRoleJsonBoneInitPositionMap.Clear();
         mRoleJsonBoneMap.Clear();
 
-        Transform[] bones = skinnedmesh.bones;
+        Transform[] bones = mRootBone.GetComponentsInChildren<Transform>(true);
         for(int i = 0; i< bones.Length;i++)
         {
             Transform bone = bones[i];
@@ -281,7 +281,7 @@ public class DeformLeaderBoneManager : MonoBehaviour
     }
     public void SetLeaderBonePosition(string bonename,Vector3 offset)
     {
-        mRoleJsonBoneMap[bonename].position = mRoleJsonBoneInitPositionMap[bonename] + offset;
+        mRoleJsonBoneMap[bonename].position = RootLocalToWorld(mRoleJsonBoneInitPositionMap[bonename] + offset);
     }
     public Vector3 GetLeaderBonePositonOffset(string bonename)
     {
@@ -292,7 +292,7 @@ public class DeformLeaderBoneManager : MonoBehaviour
         }
         else
         {
-            Vector3 offset = mRoleJsonBoneMap[bonename].position - mRoleJsonBoneInitPositionMap[bonename];
+            Vector3 offset = WorldToRootLocal(mRoleJsonBoneMap[bonename].position) - mRoleJsonBoneInitPositionMap[bonename];
             return offset;
 
         }
@@ -340,6 +340,18 @@ public class DeformLeaderBoneManager : MonoBehaviour
         {
             cb.ResetDefaultPosition();
         }
+
+    }
+
+    public Vector3 WorldToRootLocal(Vector3 world)
+    {
+        // return world;
+        return mRootBone.parent.parent.worldToLocalMatrix * world;
+    }
+    public Vector3 RootLocalToWorld(Vector3 local)
+    {
+        // return local;
+        return mRootBone.parent.parent.localToWorldMatrix * local;
 
     }
 }

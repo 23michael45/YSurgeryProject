@@ -75,16 +75,23 @@ public class LeaderBoneSliderMap
             onepair.sliderControls.Clear();
             foreach (string slidername in onepair.sliderNames)
             {
+                if(tempDic.ContainsKey(slidername))
+                {
                 Slider slider = tempDic[slidername];
                 onepair.sliderControls.Add(slider);
                 reverseMap.Add(slider, onepair);
+
+                }
+                else{
+                    Debug.LogWarning("LeaderBoneSliderMap InitControl tempDic not contains : " + slidername);
+                }
             }
             keyMap.Add(onepair.leaderBoneName, onepair);
         }
     }
     public LeaderBoneSliderMap.LeaderBoneSliderPair FindLeaderBoneSliderPair(Slider slider)
     {
-        if(reverseMap.ContainsKey(slider))
+        if (reverseMap.ContainsKey(slider))
         {
 
             return reverseMap[slider];
@@ -113,7 +120,7 @@ public class LeaderBoneSliderMap
     public void Save()
     {
         string jstr = JsonUtility.ToJson(this);
-        File.WriteAllText(Path.Combine(Application.dataPath, "Resources/LeaderBoneSliderMap.bytes"),jstr);
+        File.WriteAllText(Path.Combine(Application.dataPath, "Resources/LeaderBoneSliderMap.bytes"), jstr);
 
     }
     public static LeaderBoneSliderMap Load(Transform root)
@@ -156,17 +163,17 @@ public class DeformUI : MonoBehaviour
         foreach (Slider slider in sliders)
         {
             slider.onValueChanged.AddListener((float v) => { OnItemValueChanged(v, slider); });
-      
+
         }
     }
-    
+
     public void Reload()
     {
         Slider[] sliders = GetComponentsInChildren<Slider>(true);
         foreach (Slider slider in sliders)
         {
             var pair = mLeaderBoneSliderMap.FindLeaderBoneSliderPair(slider);
-            if(pair != null)
+            if (pair != null)
             {
                 SetItemValueByLeaderBoneName(pair);
             }
@@ -178,10 +185,13 @@ public class DeformUI : MonoBehaviour
         float val = v / ratio;
         var pair = mLeaderBoneSliderMap.FindLeaderBoneSliderPair(item);
 
-        var offsetL = DeformLeaderBoneManager.Instance.GetLeaderBonePositonOffset(pair.leaderBoneName);
+        Vector3 offsetL = DeformLeaderBoneManager.Instance.GetLeaderBonePositonOffset(pair.leaderBoneName);
+        Vector3 offsetR = Vector3.zero;
+        if (!string.IsNullOrWhiteSpace(pair.leaderBoneSymName) && pair.leaderBoneSymName != "null")
+        {
+            offsetR = DeformLeaderBoneManager.Instance.GetLeaderBonePositonOffset(pair.leaderBoneSymName);
+        }
 
-        var offsetR = DeformLeaderBoneManager.Instance.GetLeaderBonePositonOffset(pair.leaderBoneSymName);
-        
         if (item.name.EndsWith("_x"))
         {
 
@@ -208,7 +218,11 @@ public class DeformUI : MonoBehaviour
 
         }
         DeformLeaderBoneManager.Instance.SetLeaderBonePosition(pair.leaderBoneName, offsetL);
-        DeformLeaderBoneManager.Instance.SetLeaderBonePosition(pair.leaderBoneSymName, offsetR);
+
+        if (!string.IsNullOrWhiteSpace(pair.leaderBoneSymName) && pair.leaderBoneSymName != "null")
+        {
+            DeformLeaderBoneManager.Instance.SetLeaderBonePosition(pair.leaderBoneSymName, offsetR);
+        }
     }
 
 
@@ -222,7 +236,7 @@ public class DeformUI : MonoBehaviour
         var offset = DeformLeaderBoneManager.Instance.GetLeaderBonePositonOffset(pair.leaderBoneName);
         offset = offset * ratio;
 
-        foreach(var slider in pair.sliderControls)
+        foreach (var slider in pair.sliderControls)
         {
             if (slider.name.EndsWith("_x"))
             {

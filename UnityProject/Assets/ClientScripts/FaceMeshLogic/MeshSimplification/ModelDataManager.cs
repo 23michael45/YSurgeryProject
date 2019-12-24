@@ -744,7 +744,8 @@ public class ModelDataManager : MonoBehaviour
 
         //after flip x ,then rebind bone leader pose
         DeformLeaderBoneManager.Instance.ResetBindPose();
-        DeformLeaderBoneManager.Instance.RoleJsonInitData(mSkinnedMeshRenderer);
+        DeformLeaderBoneManager.Instance.RoleJsonInitData();
+        DeformUI.Instance.Reload();
         return true;
     }
 
@@ -791,8 +792,8 @@ public class ModelDataManager : MonoBehaviour
         DeformJson deform = DeformJson.Load(deformJson,ref mSkinnedMeshRenderer);
         mCurrentDeformJson = deform;
         
-        DeformUI.Instance.Reload();
         DeformLeaderBoneManager.Instance.ResetBindPose();
+        DeformUI.Instance.Reload();
         return true;
     }
 

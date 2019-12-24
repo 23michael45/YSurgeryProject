@@ -2,17 +2,17 @@
     "leaderBones": [
         {
             "boneName": "face_forehead_joint1", 
-            "range": 10, 
+            "range": 100, 
             "curveIndex": 0
         }, 
         {
             "boneName": "face_forehead_Lf_joint1", 
-            "range": 10, 
+            "range": 100, 
             "curveIndex": 0
         }, 
         {
             "boneName": "face_forehead_Lf_joint2", 
-            "range": 10, 
+            "range": 100, 
             "curveIndex": 0
         }, 
         {

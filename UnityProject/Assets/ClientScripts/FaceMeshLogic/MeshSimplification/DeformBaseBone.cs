@@ -27,10 +27,10 @@ public class DeformBaseBone : MonoBehaviour
 
             float weight = lb.mCurve.Evaluate(portion);
 
-            offsetPos += (lb.transform.position - lb.mDefaultPosition) * weight;
+            offsetPos += (DeformLeaderBoneManager.Instance.WorldToRootLocal(lb.transform.position) - lb.mDefaultPosition) * weight;
         }
 
-        transform.position = mDefaultPosition + offsetPos;
+        transform.position = DeformLeaderBoneManager.Instance.RootLocalToWorld(mDefaultPosition + offsetPos);
     }
 
 
