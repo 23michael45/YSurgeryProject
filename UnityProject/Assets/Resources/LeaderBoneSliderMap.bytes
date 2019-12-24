@@ -84,7 +84,7 @@
 	{	"leaderBoneName": "face_mouthLip_up_joint0","leaderBoneSymName": "null",
 		"sliderNames": ["upperboneItem_x", "upperboneItem_y", "upperboneItem_w"]},
 		
-	{	"leaderBoneName": "face_mouthLip_Lf_joint3","leaderBoneSymName": "face_mouthLip_Rt_joint3",
+	{	"leaderBoneName": "face_mouthLip_Lf_joint6","leaderBoneSymName": "face_mouthLip_Rt_joint6",
 		"sliderNames": ["downlipItem_x", "downlipItem_y", "downlipItem_w"]},	
 
 	{	"leaderBoneName": "face_mouthLip_dn_joint0","leaderBoneSymName": "null",
