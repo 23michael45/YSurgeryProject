@@ -266,6 +266,7 @@ ModelImporter:
     100520: women_nail
     100522: Wrist_L_M
     100524: Wrist_R_M
+    100526: Object001
     400000: Ankle_L_scaleM
     400002: Ankle_R_scaleM
     400004: Arm_L_scale01
@@ -529,6 +530,7 @@ ModelImporter:
     400520: women_nail
     400522: Wrist_L_M
     400524: Wrist_R_M
+    400526: Object001
     2100000: wuman_body_lambert2
     2100002: 02 - Default
     2100004: 03 - Default
@@ -538,10 +540,22 @@ ModelImporter:
     2100012: 'Material #72'
     2100014: 'Material #73'
     2100016: 'Material #0'
+    2100018: 'Material #75'
+    2100020: 09 - Default
+    2100022: 'Material #74'
+    2100024: w_finger
+    2100026: w_body
+    2100028: w-arm
+    2100030: m_finger
+    2100032: M-body
+    2100034: m_arm
+    2100036: head
     2300000: BaselFaceModel2017
     2300002: teeth
+    2300004: Object001
     3300000: BaselFaceModel2017
     3300002: teeth
+    3300004: Object001
     4300000: women_nail
     4300002: women_body
     4300004: teeth
@@ -549,6 +563,7 @@ ModelImporter:
     4300008: man_body
     4300010: head001
     4300012: BaselFaceModel2017
+    4300014: Object001
     7400000: Take 001
     9500000: //RootNode
     13700000: head001
@@ -556,9 +571,49 @@ ModelImporter:
     13700004: man_zhijia
     13700006: women_body
     13700008: women_nail
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: 09 - Default
+    second: {fileID: 2100000, guid: 3f7a9f7dca39e6b40806cdfbf5a9f36e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M-body
+    second: {fileID: 2100000, guid: cb02129aeea59d848a62b1976ea02b03, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: head
+    second: {fileID: 2100000, guid: 3f7a9f7dca39e6b40806cdfbf5a9f36e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: m_arm
+    second: {fileID: 2100000, guid: 511d4a4f95bc6f7469a91fb2b0abe90c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: m_lambert6
+    second: {fileID: 2100000, guid: b6057e52242cadf4a95c3ad0aa335def, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: w-arm
+    second: {fileID: 2100000, guid: b6057e52242cadf4a95c3ad0aa335def, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: w_body
+    second: {fileID: 2100000, guid: a04ee3606851c5846843f50bf4e12712, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: wuman_body_lambert2
+    second: {fileID: 2100000, guid: a04ee3606851c5846843f50bf4e12712, type: 2}
   materials:
-    importMaterials: 1
+    importMaterials: 0
     materialName: 0
     materialSearch: 1
     materialLocation: 1

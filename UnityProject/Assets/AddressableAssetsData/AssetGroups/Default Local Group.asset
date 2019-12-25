@@ -16,7 +16,11 @@ MonoBehaviour:
   m_Data:
     m_SerializedData: []
   m_GUID: b003319caf9b67e4e821839604095281
-  m_SerializeEntries: []
+  m_SerializeEntries:
+  - m_GUID: 757b0038a1ab01a429b8292d1b73b6df
+    m_Address: Assets/Art/Models/LowMesh/stanardmodelfullhead_skin_size.FBX
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: d00d0109c0ab0f249b9ecb2dc6fe9966, type: 2}
   m_SchemaSet:
