@@ -1,0 +1,18 @@
+{
+	"pairList": [{
+		"textureName": "FaceAreaPNG/01Shape/forehead",
+		"leaderBoneName": "face_forehead_Lf_joint1",
+		"leaderBoneSymName": "face_forehead_Rt_joint1",
+		"toggleName": "ForeheadSwitch"
+	}, {
+		"textureName": "FaceAreaPNG/01Shape/Temple",
+		"leaderBoneName": "face_temple_Lf_joint1",
+		"leaderBoneSymName": "face_temple_Rt_joint1",
+		"toggleName": "BISjawSwitch"
+	}, {
+		"textureName": "FaceAreaPNG/01Shape/BISjaw",
+		"leaderBoneName": "face_chin_Lf_joint06",
+		"leaderBoneSymName": "face_chin_Rt_joint06",
+		"toggleName": "ChinSwitch"
+	}]
+}

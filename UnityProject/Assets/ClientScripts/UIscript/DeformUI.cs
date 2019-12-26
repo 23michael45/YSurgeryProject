@@ -75,14 +75,15 @@ public class LeaderBoneSliderMap
             onepair.sliderControls.Clear();
             foreach (string slidername in onepair.sliderNames)
             {
-                if(tempDic.ContainsKey(slidername))
+                if (tempDic.ContainsKey(slidername))
                 {
-                Slider slider = tempDic[slidername];
-                onepair.sliderControls.Add(slider);
-                reverseMap.Add(slider, onepair);
+                    Slider slider = tempDic[slidername];
+                    onepair.sliderControls.Add(slider);
+                    reverseMap.Add(slider, onepair);
 
                 }
-                else{
+                else
+                {
                     Debug.LogWarning("LeaderBoneSliderMap InitControl tempDic not contains : " + slidername);
                 }
             }
@@ -143,6 +144,7 @@ public class DeformUI : MonoBehaviour
 
     private void Awake()
     {
+        Debug.Log("DeformUI Awake");
         Instance = this;
         gameObject.SetActive(false);
         InitLeaderBoneSliderMap();
@@ -151,7 +153,7 @@ public class DeformUI : MonoBehaviour
     void InitLeaderBoneSliderMap()
     {
 
-#if INITSAVE
+#if DO_INITSAVE
         LeaderBoneSliderMap.GenJsonFile();
 #endif
         mLeaderBoneSliderMap = LeaderBoneSliderMap.Load(transform);
@@ -159,10 +161,14 @@ public class DeformUI : MonoBehaviour
     }
     public void Start()
     {
-        Slider[] sliders = GetComponentsInChildren<Slider>(true);
-        foreach (Slider slider in sliders)
+
+        foreach (var onepair in mLeaderBoneSliderMap.pairList)
         {
-            slider.onValueChanged.AddListener((float v) => { OnItemValueChanged(v, slider); });
+            foreach (var slider in onepair.sliderControls)
+            {
+                slider.onValueChanged.AddListener((float v) => { OnItemValueChanged(v, slider); });
+
+            }
 
         }
     }

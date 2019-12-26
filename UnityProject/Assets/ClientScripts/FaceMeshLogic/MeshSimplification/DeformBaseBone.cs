@@ -44,7 +44,7 @@ public class DeformBaseBone : MonoBehaviour
     public void ResetDefaultPosition()
     {
 
-        mDefaultPosition = transform.position;
+        mDefaultPosition = DeformLeaderBoneManager.Instance.WorldToRootLocal(transform.position);
     }
 
 

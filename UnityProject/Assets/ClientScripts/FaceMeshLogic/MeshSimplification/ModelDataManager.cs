@@ -122,32 +122,36 @@ public class RoleJson
 
     }
 
-    public static RoleJson Load(string json, ref SkinnedMeshRenderer skinnedMesh, ref MeshFilter meshFilter)
+    public static RoleJson Load(string json)
     {
         RoleJson data = JsonUtility.FromJson<RoleJson>(json);
+        return data;
+    }
+    public void Load(ref SkinnedMeshRenderer skinnedMesh, ref MeshFilter meshFilter)
+    {
 
 
 
         Mesh mesh = new Mesh();
 
-        mesh.vertices = data.vertices;
-        mesh.uv = data.uv;
-        mesh.uv2 = data.uv2Type;
+        mesh.vertices = vertices;
+        mesh.uv = uv;
+        mesh.uv2 = uv2Type;
         mesh.triangles = skinnedMesh.sharedMesh.triangles;
 
-        if (skinnedMesh.bones.Length != data.bonelocalpositions.Length)
+        if (skinnedMesh.bones.Length != bonelocalpositions.Length)
         {
         }
         else
         {
             Transform[] bones = skinnedMesh.bones;
-            for (int i = 0; i < data.bonelocalpositions.Length; i++)
+            for (int i = 0; i < bonelocalpositions.Length; i++)
             {
 
 
-                bones[i].localPosition = data.bonelocalpositions[i];
-                bones[i].localRotation = data.bonelocalrotation[i];
-                bones[i].localScale = data.bonelocalscale[i];
+                bones[i].localPosition = bonelocalpositions[i];
+                bones[i].localRotation = bonelocalrotation[i];
+                bones[i].localScale = bonelocalscale[i];
 
             }
             skinnedMesh.bones = bones;
@@ -173,7 +177,7 @@ public class RoleJson
         }
 
 
-        return data;
+
     }
 
 }
@@ -352,6 +356,7 @@ public class ModelDataManager : MonoBehaviour
 
 
     RoleJson mCurrentRoleJson;
+    Texture2D mCurrentHeadTexture;
     DeformJson mCurrentDeformJson;
 
     void Awake()
@@ -455,7 +460,8 @@ public class ModelDataManager : MonoBehaviour
             json = RoleJson.Save(mDebugMeshFilter, 0, 1.78f, 75f, null);
 
         }
-        RoleJson.Load(json, ref mSkinnedMeshRenderer, ref mDebugMeshFilter);
+        var roleJson = RoleJson.Load(json);
+        roleJson.Load(ref mSkinnedMeshRenderer, ref mDebugMeshFilter);
     }
     public void RebindBone()
     {
@@ -686,7 +692,7 @@ public class ModelDataManager : MonoBehaviour
         Debug.Log("CalculateLowPolyFace Return RoleJson");
 
 
-        
+
         SetTemplateXDirection(false);
 
 
@@ -697,8 +703,28 @@ public class ModelDataManager : MonoBehaviour
     }
 
 
+
     public bool LoadLowPolyFace(string roleJson, Texture2D tex)
     {
+        RoleJson roleJsonData = RoleJson.Load(roleJson);
+        mCurrentRoleJson = roleJsonData;
+        mCurrentHeadTexture = tex;
+        bool b = LoadLowPolyFace(mCurrentRoleJson, mCurrentHeadTexture);
+
+        return b;
+    }
+    public void ResetRole()
+    {
+        if (mCurrentRoleJson != null && mCurrentHeadTexture != null)
+        {
+            LoadLowPolyFace(mCurrentRoleJson, mCurrentHeadTexture);
+        }
+    }
+    public bool LoadLowPolyFace(RoleJson roleJsonData, Texture2D tex)
+    {
+        mCurrentRoleJson = roleJsonData;
+
+
         FreeView.Inst().ResetStage();
         SetTemplateXDirection(true);
 
@@ -709,11 +735,9 @@ public class ModelDataManager : MonoBehaviour
 
         }
         Debug.Log("Start RoleJson Load");
-        RoleJson roleJsonData = RoleJson.Load(roleJson, ref mSkinnedMeshRenderer, ref mDebugMeshFilter);
+        roleJsonData.Load(ref mSkinnedMeshRenderer, ref mDebugMeshFilter);
 
-        mCurrentRoleJson = roleJsonData;
-        mCurrentDeformJson = null;
-        
+
         //to do select model body by gender,height ,weight
         if (roleJsonData.gender == 0)
         {
@@ -737,7 +761,7 @@ public class ModelDataManager : MonoBehaviour
 
         FitCalculationJson(roleJsonData.retJsonData, roleJsonData.gender, roleJsonData.weight, roleJsonData.height);
 
-        
+
         SetTemplateXDirection(false);
 
 
@@ -746,6 +770,7 @@ public class ModelDataManager : MonoBehaviour
         DeformLeaderBoneManager.Instance.ResetBindPose();
         DeformLeaderBoneManager.Instance.RoleJsonInitData();
         DeformUI.Instance.Reload();
+        mCurrentDeformJson = null;
         return true;
     }
 
@@ -789,9 +814,9 @@ public class ModelDataManager : MonoBehaviour
 
     public bool LoadDeform(string deformJson)
     {
-        DeformJson deform = DeformJson.Load(deformJson,ref mSkinnedMeshRenderer);
+        DeformJson deform = DeformJson.Load(deformJson, ref mSkinnedMeshRenderer);
         mCurrentDeformJson = deform;
-        
+
         DeformLeaderBoneManager.Instance.ResetBindPose();
         DeformUI.Instance.Reload();
         return true;
