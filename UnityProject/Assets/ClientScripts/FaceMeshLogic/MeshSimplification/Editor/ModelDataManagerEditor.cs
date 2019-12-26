@@ -7,12 +7,15 @@ using UnityEngine;
 [CustomEditor(typeof(ModelDataManager))]
 public class ModelDataManagerEditor : Editor
 {
+
+    string mPhotoName = "obama53149";
+
     string mHDObjFilePath = "../Model/obama53149.obj";
     string mSaveRoleJsonFilePath = "../Model/obama53149_role.json";
 
 
     string mLoadRoleJsonFilePath = "../Model/obama53149_role.json";
-    string mTextureFilePath = "../Model/obamaTexture.jpg";
+    string mTextureFilePath = "../Model/obama53149Texture.jpg";
 
 
     string mSaveDeformFilePath = "../Model/obama53149_deform.json";

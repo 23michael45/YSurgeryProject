@@ -4605,7 +4605,6 @@ MonoBehaviour:
   _finger: {fileID: 0}
   Rolein: {fileID: 4821179854661311311}
   RoleID: 0
-  Deform: {fileID: 0}
 --- !u!1 &4895780934776491096
 GameObject:
   m_ObjectHideFlags: 0
@@ -5795,8 +5794,8 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: cdbc2e01dadfe004987d371387200926, type: 2}
-  - {fileID: 2100000, guid: 541f688b12c42fa408c0024358dd732c, type: 2}
+  - {fileID: 2100000, guid: a04ee3606851c5846843f50bf4e12712, type: 2}
+  - {fileID: 2100000, guid: b6057e52242cadf4a95c3ad0aa335def, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -7849,8 +7848,8 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: df5d2e10de518494aba7862894afc50b, type: 2}
-  - {fileID: 2100000, guid: 1e1380c6a71e11243850eca8606ba3b4, type: 2}
+  - {fileID: 2100000, guid: cb02129aeea59d848a62b1976ea02b03, type: 2}
+  - {fileID: 2100000, guid: 511d4a4f95bc6f7469a91fb2b0abe90c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
