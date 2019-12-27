@@ -22,11 +22,11 @@ public class FreeView : MonoBehaviour
     public float Distance = 830f;  	//观察距离  
     private float MaxDistance = 1500;
     private float MinDistance = 600f;  //鼠标缩放距离最值
-    public float ZoomSpeed = 100f;  //鼠标缩放速率 
+    public float ZoomSpeed = 1000f;  //鼠标缩放速率 
 
 
-    private float SpeedX = 10;
-    private float SpeedY = 100;  //旋转速度  
+    private float SpeedX = 100;
+    private float SpeedY = 1000;  //旋转速度  
 
     private float MinLimitY = -20F;
     private float MaxLimitY = 40F;  //角度限制  
@@ -37,7 +37,7 @@ public class FreeView : MonoBehaviour
     //private float viewtarget;    //目标点位置
 
     public bool isNeedDamping = false;  //是否启用差值 
-    public float Damping = 10F;  //速度  
+    public float Damping = 100F;  //速度  
 
     private Quaternion mRotation;   //存储角度的四元数  
     private Quaternion stageRotation;
@@ -70,7 +70,7 @@ public class FreeView : MonoBehaviour
 
         CameraSlider.value = humanHigh;
         Distance = 700f;
-        ZoomSpeed = 100f;
+        ZoomSpeed = 1000f;
         MinDistance = 400f;
         MaxDistance = 5000F;
         Vector3 mPosition = mRotation * new Vector3(0.0F, 0F, -Distance) + Target.position;  //重新计算位置 

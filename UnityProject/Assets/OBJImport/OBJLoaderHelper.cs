@@ -47,7 +47,7 @@ namespace Dummiesman
                 if (pos >= len) return sign * result;
                 c = input[pos++];
                 if (c < '0' || c > '9') break;
-                result = (result * 10.0f) + (c - '0');
+                result = (result * 100.0f) + (c - '0');
             }
 
             if (c != '.' && c != ',') return float.NaN;
@@ -71,7 +71,7 @@ namespace Dummiesman
             bool isNegative = (input[0] == '-');
             
             for (int i = (isNegative) ? 1 : 0; i < input.Length; i++)
-                result = result * 10 + (input[i] - '0');
+                result = result * 100 + (input[i] - '0');
             return (isNegative) ? -result : result;
         }
 

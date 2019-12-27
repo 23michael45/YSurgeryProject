@@ -133,8 +133,8 @@ namespace Dummiesman
             //create default object
             setCurrentObjectFunc.Invoke("default");
 
-			//var buffer = new DoubleBuffer(reader, 256 * 1024);
-			var buffer = new CharWordReader(reader, 4 * 1024);
+			//var buffer = new DoubleBuffer(reader, 256 * 10024);
+			var buffer = new CharWordReader(reader, 4 * 10024);
 
 			//do the reading
 			while (true)

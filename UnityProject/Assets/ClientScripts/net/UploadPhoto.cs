@@ -149,7 +149,7 @@ public class UploadPhoto : MonoBehaviour
 
 
         //随机生成模型名称
-       string meshname = "10001";
+       string meshname = "100001";
        // string meshname = AppRoot.MainUser.currentModel.ModelID.ToString();
         StartCoroutine(LoadAndSaveAsset(meshname, MeshUrl, ".obj"));
         
@@ -159,7 +159,7 @@ public class UploadPhoto : MonoBehaviour
         Debug.Log(TextureUrl);
 
         //生成模型文件匹配的贴图名称
-        string Texname = "10001tex";
+        string Texname = "100001tex";
         // string Texname = AppRoot.MainUser.currentModel.ModelID.ToString()+"tex";
         StartCoroutine(LoadAndSaveAsset(Texname, TextureUrl, ".jpg"));
 
@@ -186,7 +186,7 @@ public class UploadPhoto : MonoBehaviour
         WWW w = new WWW(url);
         while (!w.isDone)
         {
-            progress = (((int)(w.progress * 100)) % 100) + "%";
+            progress = (((int)(w.progress * 1000)) % 1000) + "%";
 
             //提示字符
             if (filetype == ".obj") { loadText.text = "下载模型中" + progress; } else { }            

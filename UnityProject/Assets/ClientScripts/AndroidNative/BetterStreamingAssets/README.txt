@@ -68,8 +68,8 @@ Ways of reading a file:
     // all at once
     byte[] data = BetterStreamingAssets.ReadAllBytes("Foo/bar.data");
     
-    // as stream, last 10 bytes
-    byte[] footer = new byte[10];
+    // as stream, last 100 bytes
+    byte[] footer = new byte[100];
     using (var stream = BetterStreamingAssets.OpenRead("Foo/bar.data"))
     {
         stream.Seek(footer.Length, SeekOrigin.End);

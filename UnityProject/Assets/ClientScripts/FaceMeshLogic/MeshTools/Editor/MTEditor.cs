@@ -33,7 +33,7 @@ namespace MeshTools
 		Rect windowRect = new Rect(24, 24, 200, 260);
 #else
         // Size of the GUI window.
-        Rect windowRect = new Rect(24, 24, 105, 200);
+        Rect windowRect = new Rect(24, 24, 1005, 200);
 #endif
 
 		// Automatically set - used to clamp the GUI window to the sceneview window rect.

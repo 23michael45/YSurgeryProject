@@ -215,7 +215,7 @@ public class SimplifyFaceModel : MonoBehaviour
             for (int h = 0; h < highVertices.Length; h++)
             {
                 Vector3 hv = m_HDMeanFaceMesh.localToWorldMatrix.MultiplyPoint(highVertices[h]);
-                Vector3 from = hv + Vector3.forward * 1000;
+                Vector3 from = hv + Vector3.forward * 10000;
                 RaycastHit hit;
                 // Does the ray intersect any objects excluding the player layer
                 if (Physics.Raycast(from, -Vector3.forward, out hit, Mathf.Infinity))
@@ -532,7 +532,7 @@ public class SimplifyFaceModel : MonoBehaviour
             }
 
 
-            if (minDist < 10f)
+            if (minDist < 100f)
             {
                 //Debug.Log(string.Format("mindist {2} lowIndex {0} highIndex {1}", lowIndex, minHighIndex,minDist));
                 Vector2 uv = highuv[minHighIndex];

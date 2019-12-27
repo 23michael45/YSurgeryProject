@@ -187,7 +187,7 @@ namespace MeshTools
 					}
 				}
 
-				if( showProgressBar && i % 100 == 0)
+				if( showProgressBar && i % 1000 == 0)
 					EditorUtility.DisplayProgressBar("Optimize Mesh for Editing", "Caching elements...", i/(float)vertexCount);
 
 				sharedTriangles.Add( indices );

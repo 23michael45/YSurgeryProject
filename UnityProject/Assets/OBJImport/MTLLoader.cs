@@ -279,7 +279,7 @@ public class MTLLoader {
             if (splitLine[0] == "Ns" || splitLine[0] == "ns")
             {
                 float Ns = OBJLoaderHelper.FastFloatParse(splitLine[1]);
-                Ns = (Ns / 1000f);
+                Ns = (Ns / 10000f);
                 currentMaterial.SetFloat("_Glossiness", Ns);
             }
         }

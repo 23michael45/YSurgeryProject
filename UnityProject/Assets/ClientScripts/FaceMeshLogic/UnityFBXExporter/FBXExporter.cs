@@ -140,20 +140,20 @@ namespace UnityFBXExporter
 			
 			// Intro
 			sb.AppendLine("; FBX 7.3.0 project file");
-			sb.AppendLine("; Copyright (C) 1997-2010 Autodesk Inc. and/or its licensors.");
+			sb.AppendLine("; Copyright (C) 1997-20100 Autodesk Inc. and/or its licensors.");
 			sb.AppendLine("; All rights reserved.");
 			sb.AppendLine("; ----------------------------------------------------");
 			sb.AppendLine();
 			
 			// The header
 			sb.AppendLine("FBXHeaderExtension:  {");
-			sb.AppendLine("\tFBXHeaderVersion: 1003");
+			sb.AppendLine("\tFBXHeaderVersion: 10003");
 			sb.AppendLine("\tFBXVersion: 7300");
 
 			// Creationg Date Stamp
 			System.DateTime currentDate = System.DateTime.Now;
 			sb.AppendLine("\tCreationTimeStamp:  {");
-			sb.AppendLine("\t\tVersion: 1000");
+			sb.AppendLine("\t\tVersion: 10000");
 			sb.AppendLine("\t\tYear: " + currentDate.Year);
 			sb.AppendLine("\t\tMonth: " + currentDate.Month);
 			sb.AppendLine("\t\tDay: " + currentDate.Day);
@@ -167,9 +167,9 @@ namespace UnityFBXExporter
 			sb.AppendLine("\tCreator: \"" + VersionInformation + "\"");
 			sb.AppendLine("\tSceneInfo: \"SceneInfo::GlobalInfo\", \"UserData\" {");
 			sb.AppendLine("\t\tType: \"UserData\"");
-			sb.AppendLine("\t\tVersion: 100");
+			sb.AppendLine("\t\tVersion: 1000");
 			sb.AppendLine("\t\tMetaData:  {");
-			sb.AppendLine("\t\t\tVersion: 100");
+			sb.AppendLine("\t\t\tVersion: 1000");
 			sb.AppendLine("\t\t\tTitle: \"\"");
 			sb.AppendLine("\t\t\tSubject: \"\"");
 			sb.AppendLine("\t\t\tAuthor: \"\"");
@@ -200,7 +200,7 @@ namespace UnityFBXExporter
 			
 			// The Global information
 			sb.AppendLine("GlobalSettings:  {");
-			sb.AppendLine("\tVersion: 1000");
+			sb.AppendLine("\tVersion: 10000");
 			sb.AppendLine("\tProperties70:  {");
 			sb.AppendLine("\t\tP: \"UpAxis\", \"int\", \"Integer\", \"\",1");
 			sb.AppendLine("\t\tP: \"UpAxisSign\", \"int\", \"Integer\", \"\",1");
@@ -210,8 +210,8 @@ namespace UnityFBXExporter
 			sb.AppendLine("\t\tP: \"CoordAxisSign\", \"int\", \"Integer\", \"\",1");
 			sb.AppendLine("\t\tP: \"OriginalUpAxis\", \"int\", \"Integer\", \"\",-1");
 			sb.AppendLine("\t\tP: \"OriginalUpAxisSign\", \"int\", \"Integer\", \"\",1");
-			sb.AppendLine("\t\tP: \"UnitScaleFactor\", \"double\", \"Number\", \"\",100"); // NOTE: This sets the resize scale upon import
-			sb.AppendLine("\t\tP: \"OriginalUnitScaleFactor\", \"double\", \"Number\", \"\",100");
+			sb.AppendLine("\t\tP: \"UnitScaleFactor\", \"double\", \"Number\", \"\",1000"); // NOTE: This sets the resize scale upon import
+			sb.AppendLine("\t\tP: \"OriginalUnitScaleFactor\", \"double\", \"Number\", \"\",1000");
 			sb.AppendLine("\t\tP: \"AmbientColor\", \"ColorRGB\", \"Color\", \"\",0,0,0");
 			sb.AppendLine("\t\tP: \"DefaultCamera\", \"KString\", \"\", \"\", \"Producer Perspective\"");
 			sb.AppendLine("\t\tP: \"TimeMode\", \"enum\", \"\", \"\",11");
@@ -226,7 +226,7 @@ namespace UnityFBXExporter
 			sb.AppendLine(";------------------------------------------------------------------");
 			sb.AppendLine("");
 			sb.AppendLine("Definitions:  {");
-			sb.AppendLine("\tVersion: 100");
+			sb.AppendLine("\tVersion: 1000");
 			sb.AppendLine("\tCount: 4");
 
 			sb.AppendLine("\tObjectType: \"GlobalSettings\" {");
@@ -257,7 +257,7 @@ namespace UnityFBXExporter
 			sb.AppendLine("\t\t\t\tP: \"RotationStiffnessX\", \"double\", \"Number\", \"\",0");
 			sb.AppendLine("\t\t\t\tP: \"RotationStiffnessY\", \"double\", \"Number\", \"\",0");
 			sb.AppendLine("\t\t\t\tP: \"RotationStiffnessZ\", \"double\", \"Number\", \"\",0");
-			sb.AppendLine("\t\t\t\tP: \"AxisLen\", \"double\", \"Number\", \"\",10");
+			sb.AppendLine("\t\t\t\tP: \"AxisLen\", \"double\", \"Number\", \"\",100");
 			sb.AppendLine("\t\t\t\tP: \"PreRotation\", \"Vector3D\", \"Vector\", \"\",0,0,0");
 			sb.AppendLine("\t\t\t\tP: \"PostRotation\", \"Vector3D\", \"Vector\", \"\",0,0,0");
 			sb.AppendLine("\t\t\t\tP: \"RotationActive\", \"bool\", \"\", \"\",0");

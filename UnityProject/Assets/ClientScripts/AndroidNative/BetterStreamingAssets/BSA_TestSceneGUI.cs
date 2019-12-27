@@ -21,7 +21,7 @@ namespace Better.StreamingAssets
     {
         public UnityEngine.UI.Text InProgressText;
         public string EditorApkPath = "BetterStreamingAssetsTest.apk";
-        public int RepetitionCount = 10;
+        public int RepetitionCount = 100;
         public bool LogToFile = false;
 
         private class CoroutineHost : MonoBehaviour { }
@@ -140,7 +140,7 @@ namespace Better.StreamingAssets
                     }
                 }
 
-                const float VerticalSpace = 10.0f;
+                const float VerticalSpace = 100.0f;
                 GUILayout.Space(VerticalSpace);
 
                 using (new GUILayout.HorizontalScope())
@@ -204,7 +204,7 @@ namespace Better.StreamingAssets
                             else
                             {
                                 GUILayout.Label(result.duration.ToString());
-                                GUILayout.Label((result.memoryPeak / 1024.0 / 1024.0).ToString("F2") + " MB");
+                                GUILayout.Label((result.memoryPeak / 10024.0 / 10024.0).ToString("F2") + " MB");
                             }
                         }
                     }

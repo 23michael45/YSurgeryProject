@@ -174,7 +174,7 @@ public class OBJExporter : ScriptableWizard
         {
             string meshName = sceneMeshes[i].gameObject.name;
             float progress = (float)(i + 1) / maxExportProgress;
-            EditorUtility.DisplayProgressBar("Exporting objects... (" + Mathf.Round(progress * 100) + "%)", "Exporting object " + meshName, progress);
+            EditorUtility.DisplayProgressBar("Exporting objects... (" + Mathf.Round(progress * 1000) + "%)", "Exporting object " + meshName, progress);
             MeshFilter mf = sceneMeshes[i];
             MeshRenderer mr = sceneMeshes[i].gameObject.GetComponent<MeshRenderer>();
 

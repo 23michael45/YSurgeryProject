@@ -25,7 +25,7 @@ namespace Better.StreamingAssets
         private const string TestResourcesPath = "Assets/Resources/" + TestDirName;
         private const int TestFiles = SizesCount * 2 + SizesCount * 2 * BundlesTypesCount + TexturesCount * BundlesTypesCount + TexturesCount;
 
-        private static int[] SizesMB = new int[SizesCount] { 10, 50 };
+        private static int[] SizesMB = new int[SizesCount] { 100, 50 };
         private static string[] BundlesLabels = new string[BundlesTypesCount] { "lzma", "lz4", "uncompressed" };
         private static BuildAssetBundleOptions[] BundlesOptions = new BuildAssetBundleOptions[BundlesTypesCount] { BuildAssetBundleOptions.None, BuildAssetBundleOptions.ChunkBasedCompression, BuildAssetBundleOptions.UncompressedAssetBundle };
 
@@ -45,7 +45,7 @@ namespace Better.StreamingAssets
             try
             {
                 var random = new System.Random(126556343);
-                long mb = 1024 * 1024;
+                long mb = 10024 * 10024;
                 foreach ( var size in SizesMB )
                 {
                     var p = "Assets/raw_compressable_" + size.ToString("00") + "MB.bytes";
@@ -181,7 +181,7 @@ namespace Better.StreamingAssets
                 {
                     var name = string.Format(format, size);
                     var referenceBytes = BetterStreamingAssets.ReadAllBytes(TestDirName + "/" + name);
-                    Assert.AreEqual(size * 1024 * 1024, referenceBytes.Length);
+                    Assert.AreEqual(size * 10024 * 10024, referenceBytes.Length);
 
                     foreach (var suffix in BundlesLabels)
                     {

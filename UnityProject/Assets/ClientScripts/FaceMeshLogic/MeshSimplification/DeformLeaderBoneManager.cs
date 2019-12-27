@@ -12,7 +12,7 @@ public class DeformLeaderBoneManagerSetup
     public class LeaderBoneData
     {
         public string boneName = "default";
-        public float range = 10.0f;
+        public float range = 100.0f;
 
         public int curveIndex = 0;
     }
