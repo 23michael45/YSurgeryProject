@@ -71,7 +71,7 @@ public class Role : MonoBehaviour
     private float zero_px;
     private float zero_py;
 
-    private float scale_10024_to_model;
+    private float scale_1024_to_model;
     private string mobilepath;
     private float curhigh_ST = 0;
     private float curweight_ST =0;
@@ -315,12 +315,12 @@ public class Role : MonoBehaviour
     //        if (AppRoot.MainUser.isman)
     //        {
 
-    //            AppRoot.MainUser.CUR_animtor = 151000000;
+    //            AppRoot.MainUser.CUR_animtor = 15100000;
 
     //        }
     //        else
     //        {
-    //            AppRoot.MainUser.CUR_animtor = 251000000;
+    //            AppRoot.MainUser.CUR_animtor = 25100000;
 
     //        }
 

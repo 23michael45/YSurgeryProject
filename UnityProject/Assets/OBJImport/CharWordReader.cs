@@ -140,7 +140,7 @@ namespace Dummiesman {
 			
 			while (this.currentChar >= '0' && this.currentChar <= '9') {
 				var digit = this.currentChar - '0';
-				result = result * 100 + digit;
+				result = result * 10 + digit;
 				this.MoveNext();
 			}
 
@@ -161,7 +161,7 @@ namespace Dummiesman {
 				if (this.currentChar == 'e' || this.currentChar == 'E') {
 					this.MoveNext();
 					var exp = this.ReadInt();
-					num = num * Mathf.Pow(100f, exp);
+					num = num * Mathf.Pow(10f, exp);
 				}
 			}
 			if (isNegative == true) {

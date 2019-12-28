@@ -89,7 +89,7 @@ public class Loom : MonoBehaviour
         Initialize();
         while (numThreads >= maxThreads)
         {
-            Thread.Sleep(1000);
+            Thread.Sleep(100);
         }
         Interlocked.Increment(ref numThreads);
         ThreadPool.QueueUserWorkItem(RunAction, a);

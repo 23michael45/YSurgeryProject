@@ -86,7 +86,7 @@ namespace UnityFBXExporter
 
 				tempObjectSb.AppendLine();
 				tempObjectSb.AppendLine("\tMaterial: " + referenceId + ", \"Material::" + materialName + "\", \"\" {");
-				tempObjectSb.AppendLine("\t\tVersion: 1002");
+				tempObjectSb.AppendLine("\t\tVersion: 102");
 				tempObjectSb.AppendLine("\t\tShadingModel: \"phong\"");
 				tempObjectSb.AppendLine("\t\tMultiLayer: 0");
 				tempObjectSb.AppendLine("\t\tProperties70:  {");

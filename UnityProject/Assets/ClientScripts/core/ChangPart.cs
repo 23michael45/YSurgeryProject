@@ -25,7 +25,7 @@ public enum MakeupPart
     Mouth = 7,
     FaceTatoo = 8,
     BodyTatoo = 9,
-    Finger = 100,
+    Finger = 10,
     Count
 }
 

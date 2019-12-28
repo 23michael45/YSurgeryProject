@@ -178,7 +178,7 @@ namespace UnityFBXExporter
 				tempObjectSb.AppendLine("\t\t} ");
 				tempObjectSb.AppendLine("\t\tGeometryVersion: 124");
 				tempObjectSb.AppendLine("\t\tLayerElementNormal: 0 {");
-				tempObjectSb.AppendLine("\t\t\tVersion: 1001");
+				tempObjectSb.AppendLine("\t\t\tVersion: 101");
 				tempObjectSb.AppendLine("\t\t\tName: \"\"");
 				tempObjectSb.AppendLine("\t\t\tMappingInformationType: \"ByPolygonVertex\"");
 				tempObjectSb.AppendLine("\t\t\tReferenceInformationType: \"Direct\"");
@@ -259,7 +259,7 @@ namespace UnityFBXExporter
 					}
 
 					tempObjectSb.AppendLine("\t\tLayerElementColor: 0 {");
-					tempObjectSb.AppendLine("\t\t\tVersion: 1001");
+					tempObjectSb.AppendLine("\t\t\tVersion: 101");
 					tempObjectSb.AppendLine("\t\t\tName: \"Col\"");
 					tempObjectSb.AppendLine("\t\t\tMappingInformationType: \"ByPolygonVertex\"");
 					tempObjectSb.AppendLine("\t\t\tReferenceInformationType: \"IndexToDirect\"");
@@ -318,7 +318,7 @@ namespace UnityFBXExporter
 				Vector2[] uvs = mesh.uv;
 
 				tempObjectSb.AppendLine("\t\tLayerElementUV: 0 {"); // the Zero here is for the first UV map
-				tempObjectSb.AppendLine("\t\t\tVersion: 1001");
+				tempObjectSb.AppendLine("\t\t\tVersion: 101");
 				tempObjectSb.AppendLine("\t\t\tName: \"map1\"");
 				tempObjectSb.AppendLine("\t\t\tMappingInformationType: \"ByPolygonVertex\"");
 				tempObjectSb.AppendLine("\t\t\tReferenceInformationType: \"IndexToDirect\"");
@@ -368,7 +368,7 @@ namespace UnityFBXExporter
 				// ============ MATERIALS =============
 
 				tempObjectSb.AppendLine("\t\tLayerElementMaterial: 0 {");
-				tempObjectSb.AppendLine("\t\t\tVersion: 1001");
+				tempObjectSb.AppendLine("\t\t\tVersion: 101");
 				tempObjectSb.AppendLine("\t\t\tName: \"\"");
 				tempObjectSb.AppendLine("\t\t\tMappingInformationType: \"ByPolygon\"");
 				tempObjectSb.AppendLine("\t\t\tReferenceInformationType: \"IndexToDirect\"");
@@ -433,7 +433,7 @@ namespace UnityFBXExporter
 
 				// ============= INFORMS WHAT TYPE OF LATER ELEMENTS ARE IN THIS GEOMETRY =================
 				tempObjectSb.AppendLine("\t\tLayer: 0 {");
-				tempObjectSb.AppendLine("\t\t\tVersion: 1000");
+				tempObjectSb.AppendLine("\t\t\tVersion: 100");
 				tempObjectSb.AppendLine("\t\t\tLayerElement:  {");
 				tempObjectSb.AppendLine("\t\t\t\tType: \"LayerElementNormal\"");
 				tempObjectSb.AppendLine("\t\t\t\tTypedIndex: 0");

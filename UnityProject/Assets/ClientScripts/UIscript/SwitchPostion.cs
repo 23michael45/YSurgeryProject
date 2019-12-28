@@ -17,7 +17,7 @@ public class SwitchPostion : MonoBehaviour
       
 
     private float distane;
-    private float step=100f;
+    private float step=10f;
     private float screenret;
 
 

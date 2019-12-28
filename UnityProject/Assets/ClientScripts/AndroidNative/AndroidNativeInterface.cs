@@ -29,7 +29,7 @@ public class ListenerAdapter : AndroidJavaProxy
 
         while (!finish)
         {
-            Thread.Sleep(100);
+            Thread.Sleep(10);
         }
 
         return ret;
@@ -64,7 +64,7 @@ public class ListenerAdapter : AndroidJavaProxy
 
         while (!finish)
         {
-            Thread.Sleep(100);
+            Thread.Sleep(10);
         }
 
         return ret;
@@ -85,7 +85,7 @@ public class ListenerAdapter : AndroidJavaProxy
 
         while (!finish)
         {
-            Thread.Sleep(100);
+            Thread.Sleep(10);
         }
 
         return ret;
@@ -105,7 +105,7 @@ public class ListenerAdapter : AndroidJavaProxy
 
         while (!finish)
         {
-            Thread.Sleep(100);
+            Thread.Sleep(10);
         }
 
         return ret;
@@ -236,7 +236,7 @@ public class BarHelper
     public static void Hide()
     {
 #if !UNITY_EDITOR && UNITY_ANDROID
-        setStatusBarValue(10024); // WindowManager.LayoutParams.FLAG_FULLSCREEN; change this to 0 if unsatisfied
+        setStatusBarValue(1024); // WindowManager.LayoutParams.FLAG_FULLSCREEN; change this to 0 if unsatisfied
 #endif
     }
 

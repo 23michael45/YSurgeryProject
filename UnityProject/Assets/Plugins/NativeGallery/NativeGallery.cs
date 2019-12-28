@@ -449,7 +449,7 @@ public static class NativeGallery
 	{
 		try
 		{
-			return isJpeg ? texture.EncodeToJPG( 1000 ) : texture.EncodeToPNG();
+			return isJpeg ? texture.EncodeToJPG( 100 ) : texture.EncodeToPNG();
 		}
 		catch( UnityException )
 		{
@@ -498,7 +498,7 @@ public static class NativeGallery
 
 		try
 		{
-			return isJpeg ? sourceTexReadable.EncodeToJPG( 1000 ) : sourceTexReadable.EncodeToPNG();
+			return isJpeg ? sourceTexReadable.EncodeToJPG( 100 ) : sourceTexReadable.EncodeToPNG();
 		}
 		catch( Exception e )
 		{

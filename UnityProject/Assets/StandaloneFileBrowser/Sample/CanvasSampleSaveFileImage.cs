@@ -14,8 +14,8 @@ public class CanvasSampleSaveFileImage : MonoBehaviour, IPointerDownHandler {
 
     void Awake() {
         // Create red texture
-        var width = 1000;
-        var height = 1000;
+        var width = 100;
+        var height = 100;
         Texture2D tex = new Texture2D(width, height, TextureFormat.RGB24, false);
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {

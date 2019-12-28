@@ -89,7 +89,7 @@ namespace Dummiesman
                 r.BaseStream.Seek(2, SeekOrigin.Begin);
 
                 byte imageType = r.ReadByte();
-                if (imageType != 100 && imageType != 2)
+                if (imageType != 10 && imageType != 2)
                 {
                     Debug.LogError($"Unsupported targa image type. ({imageType})");
                     return null;
