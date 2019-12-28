@@ -3,18 +3,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public class ShowOnlyAttribute : PropertyAttribute
+{
+}
 public class DeformLeaderBone : DeformBaseBone
 {
     public float mRange;
-    [NonSerialized]
-    public bool mLeaderEffectByLeader;
+    public float mOffsetScale;
     public AnimationCurve mCurve;
 
-    [NonSerialized]
-    public List<DeformCommonBone> mCommonBones = new List<DeformCommonBone>();
+    public bool mShowPositionFromLeaderBones = false;
 
 
-    private bool bEditing = false;
+
+
+    [ShowOnly]
+    public bool bEditing = false;
+    [ShowOnly]
+    public bool mAffectedByLeader;
+    
+    public List<DeformCommonBone> mInRangeCommonBones = new List<DeformCommonBone>();
+    public List<DeformLeaderBone> mInRangeLeaderBones = new List<DeformLeaderBone>();
+
 
 
     public void StartEdit()
@@ -28,10 +38,69 @@ public class DeformLeaderBone : DeformBaseBone
 
     public override void Calculate()
     {
-        if (!bEditing && mLeaderEffectByLeader)
+        if (!bEditing && mAffectedByLeader)
         {
             CalculatePosition();
 
+        }
+    }
+
+
+    protected override void CalculatePosition()
+    {
+        Vector3 offsetPos = Vector3.zero;
+
+        foreach (DeformLeaderBone lb in mPositionFromLeaderBones)
+        {
+            if(lb.bEditing == true)
+            {
+
+                float dist = Vector3.Distance(lb.mDefaultPosition, mDefaultPosition);
+
+                float portion = dist / lb.mRange;
+
+                float weight = lb.mCurve.Evaluate(portion);
+
+                offsetPos += (DeformLeaderBoneManager.Instance.WorldToRootLocal(lb.transform.position) - lb.mDefaultPosition) * weight;
+            }
+        }
+        try
+        {
+
+            transform.position = DeformLeaderBoneManager.Instance.RootLocalToWorld(mDefaultPosition + offsetPos);
+
+        }
+        catch
+        {
+            Debug.LogError("CalculatePosition error:" + gameObject.name);
+        }
+    }
+
+    void OnDrawGizmosSelected()
+    {
+
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawSphere(transform.position, 5);
+
+        Gizmos.color = Color.blue;
+        foreach (var commonBone in mInRangeCommonBones)
+        {
+            Gizmos.DrawSphere(commonBone.transform.position, 5);
+        }
+        Gizmos.color = Color.red;
+        foreach (var commonBone in mInRangeLeaderBones)
+        {
+            Gizmos.DrawSphere(commonBone.transform.position, 5);
+        }
+
+
+        if (mShowPositionFromLeaderBones)
+        {
+            Gizmos.color = Color.green;
+            foreach (var leaderBone in mPositionFromLeaderBones)
+            {
+                Gizmos.DrawSphere(leaderBone.transform.position, 5);
+            }
         }
     }
 }

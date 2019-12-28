@@ -7,36 +7,54 @@ using System;
 using System.IO;
 
 [Serializable]
-public class LeaderBoneSliderMap
+public class LeaderBoneControlMap
 {
 
     [Serializable]
-    public class LeaderBoneSliderPair
+    public class LeaderBoneControlPair
     {
+        public string ToggleName;
+        public string ToggleTextureName;
+        public string AreaTextureName;
         public string leaderBoneName;
         public string leaderBoneSymName;
         public List<string> sliderNames = new List<string>();
+  
 
+        [NonSerialized]
+        public Toggle toggleControl;
         [NonSerialized]
         public List<Slider> sliderControls = new List<Slider>();
 
     }
 
     [SerializeField]
-    public List<LeaderBoneSliderPair> pairList = new List<LeaderBoneSliderPair>();
+    public List<LeaderBoneControlPair> pairList = new List<LeaderBoneControlPair>();
 
 
     [NonSerialized]
-    public Dictionary<string, LeaderBoneSliderMap.LeaderBoneSliderPair> keyMap = new Dictionary<string, LeaderBoneSliderMap.LeaderBoneSliderPair>();
+    public Dictionary<string, LeaderBoneControlMap.LeaderBoneControlPair> keyMap = new Dictionary<string, LeaderBoneControlMap.LeaderBoneControlPair>();
     [NonSerialized]
-    public Dictionary<Slider, LeaderBoneSliderMap.LeaderBoneSliderPair> reverseMap = new Dictionary<Slider, LeaderBoneSliderMap.LeaderBoneSliderPair>();
+    public Dictionary<Slider, LeaderBoneControlMap.LeaderBoneControlPair> reverseSliderMap = new Dictionary<Slider, LeaderBoneControlMap.LeaderBoneControlPair>();
+
+
+    [NonSerialized]
+    public Dictionary<string, LeaderBoneControlMap.LeaderBoneControlPair> keyToggleMap = new Dictionary<string, LeaderBoneControlMap.LeaderBoneControlPair>();
+    [NonSerialized]
+    public Dictionary<Toggle, LeaderBoneControlMap.LeaderBoneControlPair> reverseToggleMap = new Dictionary<Toggle, LeaderBoneControlMap.LeaderBoneControlPair>();
+
 
 
     public static void GenJsonFile()
     {
 
-        LeaderBoneSliderMap initMap = new LeaderBoneSliderMap();
-        LeaderBoneSliderMap.LeaderBoneSliderPair pair = new LeaderBoneSliderMap.LeaderBoneSliderPair();
+        LeaderBoneControlMap initMap = new LeaderBoneControlMap();
+        LeaderBoneControlMap.LeaderBoneControlPair pair = new LeaderBoneControlMap.LeaderBoneControlPair();
+
+
+        pair.ToggleName = "ForeheadSwitch";
+        pair.ToggleTextureName = "EditPartToggle/01shape/forehead";
+        pair.AreaTextureName = "FaceAreaPNG/01Shape/forehead";
         pair.leaderBoneName = "face_forehead_Lf_joint1";
         pair.leaderBoneSymName = "face_forehead_Rt_joint1";
         pair.sliderNames.Add("foreheadItem_x");
@@ -44,7 +62,11 @@ public class LeaderBoneSliderMap
         pair.sliderNames.Add("foreheadItem_w");
         initMap.pairList.Add(pair);
 
-        pair = new LeaderBoneSliderMap.LeaderBoneSliderPair();
+        pair = new LeaderBoneControlMap.LeaderBoneControlPair();
+
+        pair.ToggleName = "BISjawSwitch";
+        pair.ToggleTextureName = "EditPartToggle/01shape/cheek";
+        pair.AreaTextureName = "FaceAreaPNG/01Shape/BISjaw";
         pair.leaderBoneName = "face_temple_Lf_joint1";
         pair.leaderBoneSymName = "face_temple_Rt_joint1";
         pair.sliderNames.Add("BISjawItem_x");
@@ -56,30 +78,29 @@ public class LeaderBoneSliderMap
 
     }
 
-    public void InitControl(Transform root)
+    public void InitControl(Transform sliderRoot,Transform toggleRoot)
     {
 
-        Dictionary<string, Slider> tempDic = new Dictionary<string, Slider>();
-        Slider[] sliders = root.gameObject.GetComponentsInChildren<Slider>(true);
+        keyMap.Clear();
+        reverseSliderMap.Clear();
+
+        Dictionary<string, Slider> tempSliderDic = new Dictionary<string, Slider>();
+        Slider[] sliders = sliderRoot.gameObject.GetComponentsInChildren<Slider>(true);
         foreach (Slider slider in sliders)
         {
-            tempDic.Add(slider.name, slider);
-            Debug.Log(slider.name);
+            tempSliderDic.Add(slider.name, slider);
         }
 
-        keyMap.Clear();
-        reverseMap.Clear();
-
-        foreach (LeaderBoneSliderMap.LeaderBoneSliderPair onepair in pairList)
+        foreach (LeaderBoneControlMap.LeaderBoneControlPair onepair in pairList)
         {
             onepair.sliderControls.Clear();
             foreach (string slidername in onepair.sliderNames)
             {
-                if (tempDic.ContainsKey(slidername))
+                if (tempSliderDic.ContainsKey(slidername))
                 {
-                    Slider slider = tempDic[slidername];
+                    Slider slider = tempSliderDic[slidername];
                     onepair.sliderControls.Add(slider);
-                    reverseMap.Add(slider, onepair);
+                    reverseSliderMap.Add(slider, onepair);
 
                 }
                 else
@@ -87,15 +108,65 @@ public class LeaderBoneSliderMap
                     Debug.LogWarning("LeaderBoneSliderMap InitControl tempDic not contains : " + slidername);
                 }
             }
-            keyMap.Add(onepair.leaderBoneName, onepair);
+
+            if(string.IsNullOrEmpty(onepair.leaderBoneName) || onepair.leaderBoneName == "null")
+            {
+
+                Debug.LogWarning(string.Format("onepair.leaderBoneName : {0}  is null contains : " , onepair.leaderBoneName));
+            }
+            else
+            {
+
+                if (keyMap.ContainsKey(onepair.leaderBoneName))
+                {
+
+                    Debug.LogError("LeaderBoneSliderMap keyMap already contains : " + onepair.leaderBoneName);
+                }
+                else
+                {
+                    keyMap.Add(onepair.leaderBoneName, onepair);
+
+                }
+
+            }
         }
-    }
-    public LeaderBoneSliderMap.LeaderBoneSliderPair FindLeaderBoneSliderPair(Slider slider)
-    {
-        if (reverseMap.ContainsKey(slider))
+
+
+
+
+        keyToggleMap.Clear();
+        reverseToggleMap.Clear();
+
+        Dictionary<string, Toggle> tempToggleDic = new Dictionary<string, Toggle>();
+        Toggle[] toggles = toggleRoot.gameObject.GetComponentsInChildren<Toggle>(true);
+        foreach (Toggle toggle in toggles)
+        {
+            if (tempToggleDic.ContainsKey(toggle.name))
+            {
+                Debug.LogWarning("FacePartInfoMap InitControl Already Contains :" + toggle.name);
+            }
+            else
+            {
+                tempToggleDic.Add(toggle.name, toggle);
+
+            }
+        }
+
+        foreach (LeaderBoneControlMap.LeaderBoneControlPair onepair in pairList)
         {
 
-            return reverseMap[slider];
+            Toggle toggle = tempToggleDic[onepair.ToggleName];
+            onepair.toggleControl = toggle;
+            reverseToggleMap.Add(toggle, onepair);
+            keyToggleMap.Add(onepair.ToggleName, onepair);
+        }
+    }
+    public LeaderBoneControlMap.LeaderBoneControlPair FindPair(Slider slider)
+    {
+        if (reverseSliderMap.ContainsKey(slider))
+        {
+
+            return reverseSliderMap[slider];
         }
         else
         {
@@ -103,8 +174,20 @@ public class LeaderBoneSliderMap
             return null;
         }
     }
+    public LeaderBoneControlMap.LeaderBoneControlPair FindPair(Toggle toggle)
+    {
+        if (reverseToggleMap.ContainsKey(toggle))
+        {
 
-    public LeaderBoneSliderMap.LeaderBoneSliderPair FindLeaderBoneSliderPair(string leaderBoneName)
+            return reverseToggleMap[toggle];
+        }
+        else
+        {
+            Debug.LogWarning("LeaderBoneControlMap reverseToggleMap not contains key:" + toggle.name);
+            return null;
+        }
+    }
+    public LeaderBoneControlMap.LeaderBoneControlPair FindPairByBoneName(string leaderBoneName)
     {
         if (keyMap.ContainsKey(leaderBoneName))
         {
@@ -117,36 +200,68 @@ public class LeaderBoneSliderMap
             return null;
         }
     }
+    public LeaderBoneControlMap.LeaderBoneControlPair FindPairByToggleName(string togglename)
+    {
+        if (keyToggleMap.ContainsKey(togglename))
+        {
+
+            return keyToggleMap[togglename];
+        }
+        else
+        {
+            Debug.LogWarning("LeaderBoneControlMap keyToggleMap not contains key:" + togglename);
+            return null;
+        }
+    }
+
 
     public void Save()
     {
         string jstr = JsonUtility.ToJson(this);
-        File.WriteAllText(Path.Combine(Application.dataPath, "Resources/LeaderBoneSliderMap.bytes"), jstr);
+        File.WriteAllText(Path.Combine(Application.dataPath, "Resources/LeaderBoneControlMap.bytes"), jstr);
 
     }
-    public static LeaderBoneSliderMap Load(Transform root)
+    public static LeaderBoneControlMap Load(Transform sliderRoot,Transform toggleRoot)
     {
-        TextAsset ta = Resources.Load<TextAsset>("LeaderBoneSliderMap");
-        LeaderBoneSliderMap map = JsonUtility.FromJson<LeaderBoneSliderMap>(ta.text);
-        map.InitControl(root);
+        TextAsset ta = Resources.Load<TextAsset>("LeaderBoneControlMap");
+        LeaderBoneControlMap map = JsonUtility.FromJson<LeaderBoneControlMap>(ta.text);
+        map.InitControl(sliderRoot,toggleRoot);
         return map;
     }
 }
 
+
+
 public class DeformUI : MonoBehaviour
 {
     public static DeformUI Instance;
-    public string Deformjson;
 
-    public float ratio = 0.1f;
+    public Transform sliderRoot;
+    public Transform toggleRoot;
 
-    LeaderBoneSliderMap mLeaderBoneSliderMap;
+
+    public Button ResetBtn;
+    public Button UndoBtn;
+    public Button SaveBtn;
+
+    
+    string currentToggleName;
+
+
+    Stack<Snapshot> undoStatck = new Stack<Snapshot>();
+
+    [NonSerialized]
+    FaceAreaTextureChange faceAreaTextureChange;
+    [NonSerialized]
+    public LeaderBoneControlMap mLeaderBoneControlMap;
 
     private void Awake()
     {
+        faceAreaTextureChange = new FaceAreaTextureChange();
         Debug.Log("DeformUI Awake");
         Instance = this;
         gameObject.SetActive(false);
+
         InitLeaderBoneSliderMap();
     }
 
@@ -154,23 +269,54 @@ public class DeformUI : MonoBehaviour
     {
 
 #if DO_INITSAVE
-        LeaderBoneSliderMap.GenJsonFile();
+        LeaderBoneControlMap.GenJsonFile();
 #endif
-        mLeaderBoneSliderMap = LeaderBoneSliderMap.Load(transform);
+        mLeaderBoneControlMap = LeaderBoneControlMap.Load(sliderRoot,toggleRoot);
 
     }
     public void Start()
     {
 
-        foreach (var onepair in mLeaderBoneSliderMap.pairList)
+        foreach (var onepair in mLeaderBoneControlMap.pairList)
         {
             foreach (var slider in onepair.sliderControls)
             {
                 slider.onValueChanged.AddListener((float v) => { OnItemValueChanged(v, slider); });
 
+                Debug.Log("slider Add listener:" + slider.name);
+                SliderDrag sg = slider.gameObject.GetComponent<SliderDrag>();
+                if(sg == null)
+                {
+                    sg = slider.gameObject.AddComponent<SliderDrag>();
+                }
+                sg.onStartDrag.AddListener(OnItemStartDrag);
+                sg.onEndDrag.AddListener(OnItemEndDrag); 
             }
 
         }
+        bool firstToggle = true;
+        foreach (var onepair in DeformUI.Instance.mLeaderBoneControlMap.pairList)
+        {
+            if (firstToggle)
+            {
+                ToggleItemChange(true, onepair);
+                firstToggle = false;
+            }
+            onepair.toggleControl.onValueChanged.AddListener((bool b) =>
+            {
+                ToggleItemChange(b, onepair);
+            });
+        }
+
+        ResetBtn.onClick.AddListener(OnReset);
+        UndoBtn.onClick.AddListener(OnUndo); UndoBtn.interactable = false;
+        SaveBtn.onClick.AddListener(OnSave);
+    }
+    public void NoneAreaTexture()
+    {
+        string TexturePath = "FaceAreaPNG/noneTex";
+        faceAreaTextureChange.ChangeFaceArea(TexturePath);
+
     }
 
     public void Reload()
@@ -178,7 +324,7 @@ public class DeformUI : MonoBehaviour
         Slider[] sliders = GetComponentsInChildren<Slider>(true);
         foreach (Slider slider in sliders)
         {
-            var pair = mLeaderBoneSliderMap.FindLeaderBoneSliderPair(slider);
+            var pair = mLeaderBoneControlMap.FindPair(slider);
             if (pair != null)
             {
                 SetItemValueByLeaderBoneName(pair);
@@ -186,10 +332,9 @@ public class DeformUI : MonoBehaviour
         }
     }
 
-    void OnItemValueChanged(float v, Slider item)
+    void OnItemValueChanged(float val, Slider item)
     {
-        float val = v / ratio;
-        var pair = mLeaderBoneSliderMap.FindLeaderBoneSliderPair(item);
+        var pair = mLeaderBoneControlMap.FindPair(item);
 
         Vector3 offsetL = DeformLeaderBoneManager.Instance.GetLeaderBonePositonOffset(pair.leaderBoneName);
         Vector3 offsetR = Vector3.zero;
@@ -197,6 +342,8 @@ public class DeformUI : MonoBehaviour
         {
             offsetR = DeformLeaderBoneManager.Instance.GetLeaderBonePositonOffset(pair.leaderBoneSymName);
         }
+
+        val = val * DeformLeaderBoneManager.Instance.GetOffsetScale(pair.leaderBoneName);
 
         if (item.name.EndsWith("_x"))
         {
@@ -230,17 +377,27 @@ public class DeformUI : MonoBehaviour
             DeformLeaderBoneManager.Instance.SetLeaderBonePosition(pair.leaderBoneSymName, offsetR);
         }
     }
+    void OnItemStartDrag(Slider item)
+    {
+        Debug.Log("OnItemStartDrag : " + item.name);
+        undoStatck.Push(DeformLeaderBoneManager.Instance.TakeSnapshot(currentToggleName));
+        UndoBtn.interactable = true;
+    }
+    void OnItemEndDrag(Slider item)
+    {
+        Debug.Log("OnItemEndDrag : " + item.name);
 
+    }
 
     public void SetItemValueByLeaderBoneName(string leaderBoneName)
     {
-        SetItemValueByLeaderBoneName(mLeaderBoneSliderMap.FindLeaderBoneSliderPair(leaderBoneName));
+        SetItemValueByLeaderBoneName(mLeaderBoneControlMap.FindPairByBoneName(leaderBoneName));
     }
 
-    public void SetItemValueByLeaderBoneName(LeaderBoneSliderMap.LeaderBoneSliderPair pair)
+    public void SetItemValueByLeaderBoneName(LeaderBoneControlMap.LeaderBoneControlPair pair)
     {
         var offset = DeformLeaderBoneManager.Instance.GetLeaderBonePositonOffset(pair.leaderBoneName);
-        offset = offset * ratio;
+        offset = offset / DeformLeaderBoneManager.Instance.GetOffsetScale(pair.leaderBoneName);
 
         foreach (var slider in pair.sliderControls)
         {
@@ -271,5 +428,59 @@ public class DeformUI : MonoBehaviour
 
     }
 
+    void ToggleItemChange(bool b, LeaderBoneControlMap.LeaderBoneControlPair pair)
+    {
+        if (b)
+        {
+            currentToggleName = pair.ToggleName;
+
+            faceAreaTextureChange.ChangeFaceArea(pair.AreaTextureName);
+
+            DeformLeaderBoneManager.Instance.StartEdit(pair.leaderBoneName);
+            DeformLeaderBoneManager.Instance.StartEdit(pair.leaderBoneSymName);
+
+            //左右对称，所以设置一次slider值即可
+            DeformUI.Instance.SetItemValueByLeaderBoneName(pair.leaderBoneName);
+        }
+        else
+        {
+            DeformLeaderBoneManager.Instance.StopEdit(pair.leaderBoneName);
+            DeformLeaderBoneManager.Instance.StopEdit(pair.leaderBoneSymName);
+
+        }
+    }
+
+
+    void OnReset()
+    {
+        ModelDataManager.Instance.ResetRole();
+        undoStatck.Clear();
+        UndoBtn.interactable = false;
+    }
+    void OnUndo()
+    {
+        if(undoStatck.Count > 0)
+        {
+            var snapshot = undoStatck.Pop();
+            DeformLeaderBoneManager.Instance.RestoreSnapshot(snapshot);
+            Reload();
+
+            if(currentToggleName != snapshot.toggleName)
+            {
+                var pair = mLeaderBoneControlMap.FindPairByToggleName(snapshot.toggleName);
+                pair.toggleControl.isOn = true;
+            }
+            
+
+            if(undoStatck.Count == 0)
+            {
+                UndoBtn.interactable = false;
+            }
+        }
+    }
+    void OnSave()
+    {
+
+    }
 
 }

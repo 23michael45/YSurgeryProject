@@ -79,7 +79,7 @@ public class ActiveScene : MonoSingleton<ActiveScene>
         View_UI.SetActive(true);
         Edit_UI.SetActive(false);
         Backwindow.SetActive(false);
-        Edit_UI.GetComponent<FouseFacePart>().NoneAreaTexture();
+        DeformUI.Instance.NoneAreaTexture();
 
       
     }
@@ -93,7 +93,7 @@ public class ActiveScene : MonoSingleton<ActiveScene>
         View_UI.SetActive(true);
         Edit_UI.SetActive(false);
         Backwindow.SetActive(false);
-        Edit_UI.GetComponent<FouseFacePart>().NoneAreaTexture();
+        DeformUI.Instance.NoneAreaTexture();
     }
     public void win_CancleButton_clk() {
 
@@ -107,7 +107,7 @@ public class ActiveScene : MonoSingleton<ActiveScene>
         Edit_UI.SetActive(false);
         Backwindow.SetActive(false);
 
-        Edit_UI.GetComponent<FouseFacePart>().NoneAreaTexture();
+        DeformUI.Instance.NoneAreaTexture();
     }
 
 

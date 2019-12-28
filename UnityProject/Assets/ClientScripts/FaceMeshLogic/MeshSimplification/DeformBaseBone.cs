@@ -8,18 +8,18 @@ public class DeformBaseBone : MonoBehaviour
     [NonSerialized]
     public Vector3 mDefaultPosition;
 
-    public List<DeformLeaderBone> mLeaderBones = new List<DeformLeaderBone>();
+    public List<DeformLeaderBone> mPositionFromLeaderBones = new List<DeformLeaderBone>();
 
     public void Awake()
     {
         ResetDefaultPosition();
     }
 
-    protected void CalculatePosition()
+    protected virtual void CalculatePosition()
     {
         Vector3 offsetPos = Vector3.zero;
 
-        foreach (DeformLeaderBone lb in mLeaderBones)
+        foreach (DeformLeaderBone lb in mPositionFromLeaderBones)
         {
             float dist = Vector3.Distance(lb.mDefaultPosition, mDefaultPosition);
 
@@ -29,8 +29,15 @@ public class DeformBaseBone : MonoBehaviour
 
             offsetPos += (DeformLeaderBoneManager.Instance.WorldToRootLocal(lb.transform.position) - lb.mDefaultPosition) * weight;
         }
+        try
+        {
+            transform.position = DeformLeaderBoneManager.Instance.RootLocalToWorld(mDefaultPosition + offsetPos);
 
-        transform.position = DeformLeaderBoneManager.Instance.RootLocalToWorld(mDefaultPosition + offsetPos);
+        }
+        catch
+        {
+            Debug.LogError("CalculatePosition error:" + gameObject.name);
+        }
     }
 
 
