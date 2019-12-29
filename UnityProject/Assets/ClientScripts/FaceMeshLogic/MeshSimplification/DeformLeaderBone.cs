@@ -78,6 +78,8 @@ public class DeformLeaderBone : DeformBaseBone
 
     void OnDrawGizmosSelected()
     {
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawWireSphere(transform.position, mRange);
 
         Gizmos.color = Color.yellow;
         Gizmos.DrawSphere(transform.position, 5);

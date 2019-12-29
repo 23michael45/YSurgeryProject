@@ -123,5 +123,10 @@ public class ModelDataManagerEditor : Editor
         {
             ActiveScene.Instance.BackFirstpage();
         }
+
+        if (GUILayout.Button("Reset Bone and Vertex Data to Mean Face", EditorStyles.miniButtonRight))
+        {
+            parentObj.ResetBoneInitData();
+        }
     }
 }

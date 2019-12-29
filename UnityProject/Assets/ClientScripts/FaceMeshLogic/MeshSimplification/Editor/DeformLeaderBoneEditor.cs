@@ -13,7 +13,11 @@ public class DeformLeaderBoneEditor : Editor
         base.OnInspectorGUI();
         DeformLeaderBone parentObj = (DeformLeaderBone)target;
 
-        
+        if (GUILayout.Button("Reinit Bone Data", EditorStyles.miniButtonRight))
+        {
+            DeformLeaderBoneManager.Instance.ReinitBoneData();
+
+        }
 
     }
 }

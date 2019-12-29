@@ -40,5 +40,13 @@ public class DeformLeaderBoneManagerEditor : Editor
         {
             parentObj.EndEdit(editLeaderBone);
         }
+
+        EditorGUILayout.Space();
+
+        if (GUILayout.Button("Reinit Bone Data", EditorStyles.miniButtonRight))
+        {
+            parentObj.ReinitBoneData();
+
+        }
     }
 }

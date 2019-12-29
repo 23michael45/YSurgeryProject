@@ -251,7 +251,21 @@ public class DeformJson
 
 }
 
-
+public class MeanInitData
+{
+    public class VertexData
+    {
+        public Vector3 localPosition;
+    }
+    public class BoneData
+    {
+        public Vector3 localPosition;
+        public Quaternion localRotation;
+        public Vector3 localScale;
+    }
+    public List<VertexData> Vertices = new List<VertexData>();
+    public Dictionary<string, BoneData> Bones = new Dictionary<string, BoneData>();
+}
 
 [Serializable]
 public class DeformJson_UI
@@ -352,9 +366,10 @@ public class ModelDataManager : MonoBehaviour
     string boneIndexMapJson;
 
     SkinnedMeshRenderer mSkinnedMeshRenderer;
+    Transform mReferenceTransform;
     public MeshFilter mDebugMeshFilter;
 
-
+    MeanInitData mMeanInitData;
     RoleJson mCurrentRoleJson;
     Texture2D mCurrentHeadTexture;
     DeformJson mCurrentDeformJson;
@@ -420,6 +435,64 @@ public class ModelDataManager : MonoBehaviour
         }
     }
 
+
+    void InitBoneInitData()
+    {
+        mMeanInitData = new MeanInitData();
+
+
+        Vector3[] vertices = mSkinnedMeshRenderer.sharedMesh.vertices;
+        foreach(Vector3 vertex in vertices)
+        {
+            MeanInitData.VertexData vd = new MeanInitData.VertexData();
+            vd.localPosition = vertex;
+            mMeanInitData.Vertices.Add(vd);
+        }
+
+
+        Transform[] srcBones = mReferenceTransform.GetComponentsInChildren<Transform>();
+        foreach (Transform t in srcBones)
+        {
+            MeanInitData.BoneData bd = new MeanInitData.BoneData();
+            bd.localPosition = t.localPosition;
+            bd.localRotation = t.localRotation;
+            bd.localScale = t.localScale;
+
+            mMeanInitData.Bones[t.name] = bd;
+        }
+    }
+    public void ResetBoneInitData()
+    {
+        Mesh mesh = mSkinnedMeshRenderer.sharedMesh;
+        Vector3[] vertices = new Vector3[mesh.vertices.Length];
+        for(int i = 0; i< vertices.Length;i++)
+        {
+            vertices[i] = mMeanInitData.Vertices[i].localPosition;
+        }
+        mSkinnedMeshRenderer.sharedMesh.vertices = vertices;
+
+
+        Transform[] srcBones = mReferenceTransform.GetComponentsInChildren<Transform>();
+        foreach (Transform t in srcBones)
+        {
+            MeanInitData.BoneData bd = mMeanInitData.Bones[t.name];
+
+            t.localPosition = bd.localPosition;
+            t.localRotation = bd.localRotation;
+            t.localScale = bd.localScale;
+        }
+
+        var bones = mSkinnedMeshRenderer.bones;
+        Matrix4x4[] bindposes = new Matrix4x4[mesh.bindposes.Length];
+        for (int i = 0; i < bones.Length; i++)
+        {
+            bindposes[i] = bones[i].worldToLocalMatrix * mSkinnedMeshRenderer.localToWorldMatrix;
+        }
+        mesh.bindposes = bindposes;
+
+        DeformLeaderBoneManager.Instance.ResetBindPose();
+    }
+
     void OnLoadTemplateMeshDone(AsyncOperationHandle<GameObject> obj)
     {
         mLowMeshTemplate = GameObject.Instantiate(obj.Result);
@@ -437,6 +510,7 @@ public class ModelDataManager : MonoBehaviour
         GetNail(0).SetActive(false);
         GetBody(1).SetActive(false);
         GetNail(1).SetActive(false);
+        mReferenceTransform = mLowMeshTemplate.transform.Find("Reference");
 
 
         CloneMaterial(mSkinnedMeshRenderer);
@@ -445,7 +519,7 @@ public class ModelDataManager : MonoBehaviour
 
 
         mLowMeshTemplate.transform.parent = LoadManager.Instance.transform;
-
+        InitBoneInitData();
     }
     public void SaveLoadJsonTest(bool skinned)
     {
@@ -481,13 +555,13 @@ public class ModelDataManager : MonoBehaviour
 
 
 
-    void CloneBoneHierarchy(Transform parentBoneTransform, Transform rootBoneTransform, Transform[] bones, out Transform[] newBones, out Transform newParentBoneTransform, out Transform newRootBoneTransform)
+    void CloneBoneHierarchy(Transform referenceTransform, Transform rootBoneTransform, Transform[] bones, out Transform[] newBones, out Transform newParentBoneTransform, out Transform newRootBoneTransform)
     {
         newParentBoneTransform = null;
         newRootBoneTransform = null;
 
 
-        Transform[] srcBones = parentBoneTransform.GetComponentsInChildren<Transform>();
+        Transform[] srcBones = referenceTransform.GetComponentsInChildren<Transform>();
 
 
         Dictionary<string, Transform> SrcBoneDict = new Dictionary<string, Transform>();
@@ -587,6 +661,7 @@ public class ModelDataManager : MonoBehaviour
     public string CalculateLowPolyFace(byte[] hdObjData, int gender, float height, float weight, string retJson)
     {
         FreeView.Inst().ResetStage();
+        ResetBoneInitData();
         if (mLowMeshTemplate == null)
         {
             return null;
@@ -598,7 +673,6 @@ public class ModelDataManager : MonoBehaviour
 
         mLowMeshTemplate.name = "LoadedAssetTemplateModel";
         Transform skinTransform = mSkinnedMeshRenderer.transform;
-        Transform parentBoneTransform = mLowMeshTemplate.transform.Find("Reference");
 
 
         Stream stream = new MemoryStream(hdObjData);
@@ -629,7 +703,7 @@ public class ModelDataManager : MonoBehaviour
         Transform newRootBoneTransform;
 
         Debug.Log("CalculateLowPolyFace CloneBoneHierarchy");
-        CloneBoneHierarchy(parentBoneTransform, mSkinnedMeshRenderer.rootBone, mSkinnedMeshRenderer.bones, out newBones, out newParentBoneTransform, out newRootBoneTransform);
+        CloneBoneHierarchy(mReferenceTransform, mSkinnedMeshRenderer.rootBone, mSkinnedMeshRenderer.bones, out newBones, out newParentBoneTransform, out newRootBoneTransform);
 
 
 

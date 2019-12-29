@@ -60,7 +60,6 @@ public class DeformLeaderBoneManager : MonoBehaviour
     void Awake()
     {
         Instance = this;
-        //gameObject.SetActive(false);
     }
 
     private void Start()
@@ -79,6 +78,7 @@ public class DeformLeaderBoneManager : MonoBehaviour
             Init();
         }
 
+        //SetWorking(false);
         //enabled = false;
     }
     void OnEnable()
@@ -155,6 +155,11 @@ public class DeformLeaderBoneManager : MonoBehaviour
 
 
 
+    }
+
+    public void ReinitBoneData()
+    {
+        InitBoneData();
     }
 
     void InitFromResource()
@@ -247,6 +252,9 @@ public class DeformLeaderBoneManager : MonoBehaviour
 
         foreach (DeformLeaderBone lb in mLeaderBones)
         {
+            lb.mInRangeLeaderBones.Clear();
+            lb.mPositionFromLeaderBones.Clear();
+            lb.mInRangeCommonBones.Clear();
             foreach (DeformLeaderBone interlb in mLeaderBones)
             {
                 if (interlb != lb)
@@ -273,7 +281,8 @@ public class DeformLeaderBoneManager : MonoBehaviour
 
 
             foreach (DeformCommonBone cb in mCommonBones)
-            {
+            { 
+                cb.mPositionFromLeaderBones.Clear();
                 if (Vector3.Distance(cb.transform.position, lb.transform.position) < lb.mRange)
                 {
                     if (lb.transform.parent == cb.transform.parent)
@@ -286,7 +295,7 @@ public class DeformLeaderBoneManager : MonoBehaviour
         }
     }
 
-
+    //重置骨骼初始值列表，为当前骨骼位置。初始值列表用于限定SLIDER条，与default position不同。初始值列表，只在LoadLowPoly时，初始化一次，每个人只有一份
     public void RoleJsonInitData()
     {
 
