@@ -5,8 +5,8 @@
       "ToggleName": "ForeheadSwitch",
       "ToggleTextureName": "EditPartToggle/01shape/forehead",
       "AreaTextureName": "FaceAreaPNG/01Shape/forehead",
-      "leaderBoneName": "face_forehead_Lf_joint1",
-      "leaderBoneSymName": "face_forehead_Rt_joint1",
+      "leaderBoneName": "face_forehead_Lf_joint2",
+      "leaderBoneSymName": "face_forehead_Rt_joint2",
       "sliderNames": [ "foreheadItem_x", "foreheadItem_y", "foreheadItem_z" ]
     },
 
@@ -25,7 +25,7 @@
       "AreaTextureName": "FaceAreaPNG/noneTex",
       "leaderBoneName":"face_chin_Lf_joint03",
       "leaderBoneSymName":"face_chin_Rt_joint03",
-      "sliderNames": [ "MasseterMuscle_x", "MasseterMuscle_y", "MasseterMuscle_z" ]
+      "sliderNames": [ "MasseterMuscleItem_x", "MasseterMuscleItem_y", "MasseterMuscleItem_z" ]
     },
 
     {
@@ -43,7 +43,7 @@
       "AreaTextureName": "FaceAreaPNG/noneTex",
       "leaderBoneName": "face_calvaria_joint1",
       "leaderBoneSymName": "null",
-      "sliderNames": [ "TopHead_x", "TopHead_y", "TopHead_z" ]
+      "sliderNames": [ "TopheadItem_x", "TopheadItem_y", "TopheadItem_z" ]
     },
 
     {
@@ -84,16 +84,16 @@
     {
       "ToggleName": "BrowbowSwitch",
       "ToggleTextureName": "EditPartToggle/03eyebrow/boweyebrow",
-      "AreaTextureName": "FaceAreaPNG/03eyebrow/forehead",
+      "AreaTextureName": "FaceAreaPNG/03eyebrow/Browbow",
       "leaderBoneName": "face_brow_Lf_joint0",
       "leaderBoneSymName": "face_brow_Rt_joint0",
-      "sliderNames": [ "BrowbowItem_x", "BrowbowItem_y", "BrowbowItem_z" ]
+      "sliderNames": [ "BrowbowItem_x", "BrowbowItem_y", "BrowbowItem_z","BrowbowItem_w"]
     },
 
     {
       "ToggleName": "BrowHeadSwitch",
       "ToggleTextureName": "EditPartToggle/03eyebrow/headbrow",
-      "AreaTextureName": "FaceAreaPNG/03eyebrow/Browbow",
+      "AreaTextureName": "FaceAreaPNG/03eyebrow/BrowHead",
       "leaderBoneName": "face_brow_Lf_joint1",
       "leaderBoneSymName": "face_brow_Rt_joint1",
       "sliderNames": [ "BrowHeadItem_x", "BrowHeadItem_y", "BrowHeadItem_z" ]
@@ -120,10 +120,10 @@
     {
       "ToggleName": "EyeZeroSwitch",
       "ToggleTextureName": "EditPartToggle/04eye/eyezero",
-      "AreaTextureName": "FaceAreaPNG/04eye/forehead",
+      "AreaTextureName": "FaceAreaPNG/04eye/Eyezero",
       "leaderBoneName": "face_eye_Lf_joint0",
       "leaderBoneSymName": "face_eye_Rt_joint0",
-      "sliderNames": [ "EyeZero_x", "EyeZero_y", "EyeZero_z", "EyeZero_w" ]
+      "sliderNames": [ "EyeZeroItem_x", "EyeZeroItem_y", "EyeZeroItem_z", "EyeZeroItem_w" ]
     },
 
     {
@@ -182,10 +182,10 @@
     {
       "ToggleName": "NoseZeroSwitch",
       "ToggleTextureName": "EditPartToggle/05nose/nosezero",
-      "AreaTextureName": "FaceAreaPNG/noneTex",
+      "AreaTextureName": "FaceAreaPNG/05nose/Nosezero",
       "leaderBoneName": "face_nose_joint0",
       "leaderBoneSymName": "null",
-      "sliderNames": [ "NoseZero_x", "NoseZero_y", "NoseZero_z", "NoseZero_w" ]
+      "sliderNames": [ "NoseZeroItem_x", "NoseZeroItem_y", "NoseZeroItem_z", "NoseZeroItem_w" ]
     },
 
     {
@@ -245,10 +245,10 @@
     {
       "ToggleName": "MouthZeroSwitch",
       "ToggleTextureName": "EditPartToggle/06lips/mouthzero",
-      "AreaTextureName": "FaceAreaPNG/noneTex",
+      "AreaTextureName": "FaceAreaPNG/06lips/Mouthzero",
       "leaderBoneName": "face_mouthLip_joint0",
       "leaderBoneSymName": "null",
-      "sliderNames": [ "MouthZero_x", "MouthZero_y", "MouthZero_z", "MouthZero_w" ]
+      "sliderNames": [ "MouthZeroItem_x", "MouthZeroItem_y", "MouthZeroItem_z", "MouthZeroItem_w" ]
     },
 
     {

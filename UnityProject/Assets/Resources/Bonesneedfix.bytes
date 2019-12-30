@@ -1,0 +1,12 @@
+ // 眉毛根骨骼，slider滑动后，骨骼没有位移
+ {
+      "ToggleName": "BrowbowSwitch",
+      "ToggleTextureName": "EditPartToggle/03eyebrow/boweyebrow",
+      "AreaTextureName": "FaceAreaPNG/03eyebrow/forehead",
+      "leaderBoneName": "face_brow_Lf_joint0",
+      "leaderBoneSymName": "face_brow_Rt_joint0",
+      "sliderNames": [ "BrowbowItem_x", "BrowbowItem_y", "BrowbowItem_z" ]
+    },
+	
+
+
