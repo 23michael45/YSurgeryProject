@@ -327,7 +327,7 @@ public class DeformUI : MonoBehaviour
             var pair = mLeaderBoneControlMap.FindPair(slider);
             if (pair != null)
             {
-                SetItemValueByLeaderBoneName(pair);
+                SeSliderValueByLeaderBoneName(pair);
             }
         }
     }
@@ -336,45 +336,57 @@ public class DeformUI : MonoBehaviour
     {
         var pair = mLeaderBoneControlMap.FindPair(item);
 
-        Vector3 offsetL = DeformLeaderBoneManager.Instance.GetLeaderBonePositonOffset(pair.leaderBoneName);
-        Vector3 offsetR = Vector3.zero;
-        if (!string.IsNullOrWhiteSpace(pair.leaderBoneSymName) && pair.leaderBoneSymName != "null")
+
+        Vector4 scale4 = DeformLeaderBoneManager.Instance.GetOffsetScale(pair.leaderBoneName);
+
+        if (item.name.EndsWith("_w"))
         {
-            offsetR = DeformLeaderBoneManager.Instance.GetLeaderBonePositonOffset(pair.leaderBoneSymName);
-        }
-
-        val = val * DeformLeaderBoneManager.Instance.GetOffsetScale(pair.leaderBoneName);
-
-        if (item.name.EndsWith("_x"))
-        {
-
-            offsetL.x = val;
-            offsetR.x = -val;
+            float scale = scale4.w;
+            float newScale = Mathf.Pow(scale, val);
+            Debug.Log("OnItemValueChanged w scale :" + scale + ": val :" + val);
+            DeformLeaderBoneManager.Instance.SetLeaderBoneScale(pair.leaderBoneName, newScale);
 
         }
-        else if (item.name.EndsWith("_y"))
+        else
         {
-            offsetL.y = val;
-            offsetR.y = val;
+            Vector3 offsetL = DeformLeaderBoneManager.Instance.GetLeaderBonePositonOffset(pair.leaderBoneName);
+            Vector3 offsetR = Vector3.zero;
+            if (!string.IsNullOrWhiteSpace(pair.leaderBoneSymName) && pair.leaderBoneSymName != "null")
+            {
+                offsetR = DeformLeaderBoneManager.Instance.GetLeaderBonePositonOffset(pair.leaderBoneSymName);
+            }
 
-        }
-        else if (item.name.EndsWith("_z"))
-        {
 
-            offsetL.z = val;
-            offsetR.z = val;
+            if (item.name.EndsWith("_x"))
+            {
+                float scale = scale4.x;
 
-        }
-        else if (item.name.EndsWith("_w"))
-        {
-            //to do scale
+                offsetL.x = val * scale;
+                offsetR.x = -val * scale;
 
-        }
-        DeformLeaderBoneManager.Instance.SetLeaderBonePosition(pair.leaderBoneName, offsetL);
+            }
+            else if (item.name.EndsWith("_y"))
+            {
+                float scale = scale4.y;
+                offsetL.y = val * scale;
+                offsetR.y = val * scale;
 
-        if (!string.IsNullOrWhiteSpace(pair.leaderBoneSymName) && pair.leaderBoneSymName != "null")
-        {
-            DeformLeaderBoneManager.Instance.SetLeaderBonePosition(pair.leaderBoneSymName, offsetR);
+            }
+            else if (item.name.EndsWith("_z"))
+            {
+
+                float scale = scale4.z;
+                offsetL.z = val * scale;
+                offsetR.z = val * scale;
+
+            }
+
+            DeformLeaderBoneManager.Instance.SetLeaderBonePosition(pair.leaderBoneName, offsetL);
+
+            if (!string.IsNullOrWhiteSpace(pair.leaderBoneSymName) && pair.leaderBoneSymName != "null")
+            {
+                DeformLeaderBoneManager.Instance.SetLeaderBonePosition(pair.leaderBoneSymName, offsetR);
+            }
         }
     }
     void OnItemStartDrag(Slider item)
@@ -389,40 +401,57 @@ public class DeformUI : MonoBehaviour
 
     }
 
-    public void SetItemValueByLeaderBoneName(string leaderBoneName)
+    public void SeSliderValueByLeaderBoneName(string leaderBoneName)
     {
-        SetItemValueByLeaderBoneName(mLeaderBoneControlMap.FindPairByBoneName(leaderBoneName));
+        SeSliderValueByLeaderBoneName(mLeaderBoneControlMap.FindPairByBoneName(leaderBoneName));
     }
 
-    public void SetItemValueByLeaderBoneName(LeaderBoneControlMap.LeaderBoneControlPair pair)
+    public void SeSliderValueByLeaderBoneName(LeaderBoneControlMap.LeaderBoneControlPair pair)
     {
-        var offset = DeformLeaderBoneManager.Instance.GetLeaderBonePositonOffset(pair.leaderBoneName);
-        offset = offset / DeformLeaderBoneManager.Instance.GetOffsetScale(pair.leaderBoneName);
+        Vector4 scale4 = DeformLeaderBoneManager.Instance.GetOffsetScale(pair.leaderBoneName); 
+    
 
         foreach (var slider in pair.sliderControls)
         {
-            if (slider.name.EndsWith("_x"))
+          
+            if (slider.name.EndsWith("_w"))
             {
 
-                slider.value = offset.x;
-
+                var scale = DeformLeaderBoneManager.Instance.GetLeaderBoneScaleOffset(pair.leaderBoneName);
+                float v = 0f;
+                if (scale4.w == 1)
+                {
+                    v = 0;
+                }
+                else
+                {
+                    v = Mathf.Log(scale, scale4.w);
+                }
+                Debug.Log(string.Format("SetItemValueByLeaderBoneName ScaleOffset {0} Setup {1} v {2} boneName {3}" ,scale,scale4.w,v, pair.leaderBoneName));
+                slider.value = v;
             }
-            else if (slider.name.EndsWith("_y"))
+            else
             {
+                var offset = DeformLeaderBoneManager.Instance.GetLeaderBonePositonOffset(pair.leaderBoneName);
 
-                slider.value = offset.y;
+                if (slider.name.EndsWith("_x"))
+                {
 
-            }
-            else if (slider.name.EndsWith("_z"))
-            {
+                    slider.value = offset.x / scale4.x;
 
-                slider.value = offset.z;
+                }
+                else if (slider.name.EndsWith("_y"))
+                {
 
-            }
-            else if (slider.name.EndsWith("_w"))
-            {
+                    slider.value = offset.y / scale4.y;
 
-                //to do scale
+                }
+                else if (slider.name.EndsWith("_z"))
+                {
+
+                    slider.value = offset.z / scale4.z;
+
+                }
             }
         }
 
@@ -440,7 +469,7 @@ public class DeformUI : MonoBehaviour
             DeformLeaderBoneManager.Instance.StartEdit(pair.leaderBoneSymName);
 
             //左右对称，所以设置一次slider值即可
-            DeformUI.Instance.SetItemValueByLeaderBoneName(pair.leaderBoneName);
+            DeformUI.Instance.SeSliderValueByLeaderBoneName(pair.leaderBoneName);
         }
         else
         {

@@ -9,7 +9,7 @@ public class ShowOnlyAttribute : PropertyAttribute
 public class DeformLeaderBone : DeformBaseBone
 {
     public float mRange;
-    public float mOffsetScale;
+    public Vector4 mOffsetScale;
     public AnimationCurve mCurve;
 
     public bool mShowPositionFromLeaderBones = false;

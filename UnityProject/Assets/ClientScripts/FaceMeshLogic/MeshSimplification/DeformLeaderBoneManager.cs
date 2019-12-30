@@ -13,7 +13,7 @@ public class DeformLeaderBoneManagerSetup
     {
         public string boneName = "default";
         public float range = 10.0f;
-        public float offsetScale = 1.0f;
+        public Vector4 offsetScale;
 
         public int curveIndex = 0;
     }
@@ -29,6 +29,7 @@ public class Snapshot
     {
         public Vector3 curPos;
         public Vector3 defaultPos;
+        public Vector3 curScale;
         public bool editing;
     }
     public string toggleName;
@@ -312,13 +313,16 @@ public class DeformLeaderBoneManager : MonoBehaviour
         
     }
 
-    public float GetOffsetScale(string bonename)
+    public Vector4 GetOffsetScale(string bonename)
     {
-        float scale = 1.0f;
+        Vector4 scale = Vector4.one;
         if(mLeaderBoneDic.ContainsKey(bonename))
         {
-
             scale = mLeaderBoneDic[bonename].mOffsetScale;
+        }
+        else
+        {
+            Debug.LogError("GetOffsetScale mLeaderBoneDic not contains:" + bonename);
         }
         return scale;
 
@@ -337,6 +341,28 @@ public class DeformLeaderBoneManager : MonoBehaviour
         else
         {
             Vector3 offset = WorldToRootLocal(mRoleJsonBoneMap[bonename].position) - mRoleJsonBoneInitPositionMap[bonename];
+            
+            return offset;
+
+        }
+    }
+
+    public void SetLeaderBoneScale(string bonename, float newScale)
+    {
+        Vector3 newScale3 = Vector3.one * newScale;
+        mRoleJsonBoneMap[bonename].localScale = newScale3;
+    }
+    public float GetLeaderBoneScaleOffset(string bonename)
+    {
+        if (!mRoleJsonBoneMap.ContainsKey(bonename))
+        {
+            Debug.LogError("DeformLeaderBoneManager mRoleJsonBoneMap not contains key:" + bonename);
+            return 1.0f;
+        }
+        else
+        {
+            //localScale x y z equal
+            float offset = mRoleJsonBoneMap[bonename].localScale.x;
             
             return offset;
 
@@ -398,6 +424,7 @@ public class DeformLeaderBoneManager : MonoBehaviour
             Snapshot.BoneData bd = new Snapshot.BoneData();
             bd.curPos = WorldToRootLocal(lb.transform.position);
             bd.defaultPos = lb.mDefaultPosition;
+            bd.curScale = lb.transform.localScale;
             bd.editing = lb.bEditing;
 
             ss.map[lb.name] = bd;
@@ -422,6 +449,7 @@ public class DeformLeaderBoneManager : MonoBehaviour
             var bd = snapshot.map[lb.name];
             lb.transform.position = RootLocalToWorld(bd.curPos);
             lb.mDefaultPosition = bd.defaultPos;
+            lb.transform.localScale = bd.curScale;
             lb.bEditing = bd.editing;
             
         }
