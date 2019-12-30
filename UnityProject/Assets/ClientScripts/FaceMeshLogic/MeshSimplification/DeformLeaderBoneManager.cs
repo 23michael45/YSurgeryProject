@@ -262,7 +262,7 @@ public class DeformLeaderBoneManager : MonoBehaviour
                 {
                     if (Vector3.Distance(lb.transform.position, interlb.transform.position) < lb.mRange)
                     {
-                        if (lb.transform.parent == interlb.transform.parent)
+                        //if (lb.transform.parent == interlb.transform.parent)
                         {
                             lb.mInRangeLeaderBones.Add(interlb);
 
@@ -270,7 +270,7 @@ public class DeformLeaderBoneManager : MonoBehaviour
                     }
                     if (Vector3.Distance(lb.transform.position, interlb.transform.position) < interlb.mRange)
                     {
-                        if (lb.transform.parent == interlb.transform.parent)
+                        //if (lb.transform.parent == interlb.transform.parent)
                         {
                             lb.mPositionFromLeaderBones.Add(interlb);
 
@@ -280,16 +280,22 @@ public class DeformLeaderBoneManager : MonoBehaviour
 
             }
 
+        }
 
-            foreach (DeformCommonBone cb in mCommonBones)
-            { 
-                cb.mPositionFromLeaderBones.Clear();
-                if (Vector3.Distance(cb.transform.position, lb.transform.position) < lb.mRange)
+
+
+
+        foreach (DeformCommonBone cb in mCommonBones)
+        {
+            cb.mPositionFromLeaderBones.Clear();
+            foreach (DeformLeaderBone interlb in mLeaderBones)
+            {
+                if (Vector3.Distance(cb.transform.position, interlb.transform.position) < interlb.mRange)
                 {
-                    if (lb.transform.parent == cb.transform.parent)
+                    //if (lb.transform.parent == cb.transform.parent)
                     {
-                        lb.mInRangeCommonBones.Add(cb);
-                        cb.mPositionFromLeaderBones.Add(lb);
+                        interlb.mInRangeCommonBones.Add(cb);
+                        cb.mPositionFromLeaderBones.Add(interlb);
                     }
                 }
             }
