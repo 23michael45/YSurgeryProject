@@ -41,8 +41,8 @@
       "ToggleName": "TopHeadSwitch",
       "ToggleTextureName": "EditPartToggle/01shape/tophead",
       "AreaTextureName": "FaceAreaPNG/noneTex",
-      "leaderBoneName": "face_calvaria_joint1",
-      "leaderBoneSymName": "null",
+      "leaderBoneName": "face_forehead_Lf_joint1",
+      "leaderBoneSymName": "face_forehead_Rt_joint1",
       "sliderNames": [ "TopheadItem_x", "TopheadItem_y", "TopheadItem_z" ]
     },
 
@@ -141,7 +141,7 @@
       "AreaTextureName": "FaceAreaPNG/04eye/Uppereyelid",
       "leaderBoneName": "face_eyeLidsUp_Lf_joint1",
       "leaderBoneSymName": "face_eyeLidsUp_Rt_joint1",
-      "sliderNames": [ "UppereyelidItem_x", "UppereyelidItem_y", "UppereyelidItem_z" ]
+      "sliderNames": [ "UppereyelidItem_x", "UppereyelidItem_y", "UppereyelidItem_z" ]	  
     },
 
     {
