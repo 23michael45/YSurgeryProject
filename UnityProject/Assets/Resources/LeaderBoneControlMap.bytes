@@ -7,25 +7,25 @@
       "AreaTextureName": "FaceAreaPNG/01Shape/forehead",
       "leaderBoneName": "face_forehead_Lf_joint1",
       "leaderBoneSymName": "face_forehead_Rt_joint1",
-      "sliderNames": [ "foreheadItem_x", "foreheadItem_y", "foreheadItem_w" ]
+      "sliderNames": [ "foreheadItem_x", "foreheadItem_y", "foreheadItem_z" ]
     },
 
     {
       "ToggleName": "BISjawSwitch",
       "ToggleTextureName": "EditPartToggle/01shape/cheek",
       "AreaTextureName": "FaceAreaPNG/01Shape/BISjaw",
-      "leaderBoneName": "face_chin_Lf_joint06",
+      "leaderBoneName":"face_chin_Lf_joint06",
       "leaderBoneSymName": "face_chin_Rt_joint06",
-      "sliderNames": [ "BISjawItem_x", "BISjawItem_y", "BISjawItem_w" ]
+      "sliderNames": [ "BISjawItem_x", "BISjawItem_y", "BISjawItem_z" ]
     },
 
     {
       "ToggleName": "MasseterMuscleSwitch",
       "ToggleTextureName": "EditPartToggle/01shape/downcheek",
       "AreaTextureName": "FaceAreaPNG/noneTex",
-      "leaderBoneName": "face_chin_Lf_joint03",
-      "leaderBoneSymName": "face_chin_Rt_joint03",
-      "sliderNames": [ "MasseterMuscle_x", "MasseterMuscle_y", "MasseterMuscle_w" ]
+      "leaderBoneName":"face_chin_Lf_joint03",
+      "leaderBoneSymName":"face_chin_Rt_joint03",
+      "sliderNames": [ "MasseterMuscle_x", "MasseterMuscle_y", "MasseterMuscle_z" ]
     },
 
     {
@@ -34,7 +34,7 @@
       "AreaTextureName": "FaceAreaPNG/01Shape/Chin",
       "leaderBoneName": "face_chin_joint2",
       "leaderBoneSymName": "face_chin_joint3",
-      "sliderNames": [ "ChinItem_x", "ChinItem_y", "ChinItem_w" ]
+      "sliderNames": [ "ChinItem_x", "ChinItem_y", "ChinItem_z" ]
     },
 
     {
@@ -43,7 +43,7 @@
       "AreaTextureName": "FaceAreaPNG/noneTex",
       "leaderBoneName": "face_calvaria_joint1",
       "leaderBoneSymName": "null",
-      "sliderNames": [ "TopHead_x", "TopHead_y", "TopHead_w" ]
+      "sliderNames": [ "TopHead_x", "TopHead_y", "TopHead_z" ]
     },
 
     {
@@ -52,7 +52,7 @@
       "AreaTextureName": "FaceAreaPNG/02Face/Applemuscle",
       "leaderBoneName": "face_L_check_Bone002",
       "leaderBoneSymName": "face_R_check_Bone002",
-      "sliderNames": [ "ApplemuscleItem_x", "ApplemuscleItem_y", "ApplemuscleItem_w" ]
+      "sliderNames": [ "ApplemuscleItem_x", "ApplemuscleItem_y", "ApplemuscleItem_z" ]
     },
 
     {
@@ -61,7 +61,7 @@
       "AreaTextureName": "FaceAreaPNG/02Face/Cheekbones",
       "leaderBoneName": "face_check_Lf_joint3",
       "leaderBoneSymName": "face_check_Rt_joint3",
-      "sliderNames": [ "CheekbonesItem_x", "CheekbonesItem_y", "CheekbonesItem_w" ]
+      "sliderNames": [ "CheekbonesItem_x", "CheekbonesItem_y", "CheekbonesItem_z" ]
     },
 
     {
@@ -70,7 +70,7 @@
       "AreaTextureName": "FaceAreaPNG/02Face/Facialpart",
       "leaderBoneName": "face_check_Lf_joint1",
       "leaderBoneSymName": "face_check_Rt_joint1",
-      "sliderNames": [ "FacialpartItem_x", "FacialpartItem_y", "FacialpartItem_w" ]
+      "sliderNames": [ "FacialpartItem_x", "FacialpartItem_y", "FacialpartItem_z" ]
     },
     {
       "ToggleName": "TempleSwitch",
@@ -78,7 +78,7 @@
       "AreaTextureName": "FaceAreaPNG/02Face/Temple",
       "leaderBoneName": "face_temple_Lf_joint1",
       "leaderBoneSymName": "face_temple_Rt_joint1",
-      "sliderNames": [ "TempleItem_x", "TempleItem_y", "TempleItem_w" ]
+      "sliderNames": [ "TempleItem_x", "TempleItem_y", "TempleItem_z" ]
     },
 
     {
@@ -87,7 +87,7 @@
       "AreaTextureName": "FaceAreaPNG/03eyebrow/forehead",
       "leaderBoneName": "face_brow_Lf_joint0",
       "leaderBoneSymName": "face_brow_Rt_joint0",
-      "sliderNames": [ "BrowbowItem_x", "BrowbowItem_y", "BrowbowItem_w" ]
+      "sliderNames": [ "BrowbowItem_x", "BrowbowItem_y", "BrowbowItem_z" ]
     },
 
     {
@@ -96,7 +96,7 @@
       "AreaTextureName": "FaceAreaPNG/03eyebrow/Browbow",
       "leaderBoneName": "face_brow_Lf_joint1",
       "leaderBoneSymName": "face_brow_Rt_joint1",
-      "sliderNames": [ "BrowHeadItem_x", "BrowHeadItem_y", "BrowHeadItem_w" ]
+      "sliderNames": [ "BrowHeadItem_x", "BrowHeadItem_y", "BrowHeadItem_z" ]
     },
 
     {
@@ -105,7 +105,7 @@
       "AreaTextureName": "FaceAreaPNG/03eyebrow/BrowMiddle",
       "leaderBoneName": "face_brow_Lf_joint3",
       "leaderBoneSymName": "face_brow_Rt_joint3",
-      "sliderNames": [ "BrowMiddleItem_x", "BrowMiddleItem_y", "BrowMiddleItem_w" ]
+      "sliderNames": [ "BrowMiddleItem_x", "BrowMiddleItem_y", "BrowMiddleItem_z" ]
     },
 
     {
@@ -114,7 +114,7 @@
       "AreaTextureName": "FaceAreaPNG/03eyebrow/BrowTail",
       "leaderBoneName": "face_brow_Lf_joint5",
       "leaderBoneSymName": "face_brow_Rt_joint5",
-      "sliderNames": [ "BrowTailItem_x", "BrowTailItem_y", "BrowTailItem_w" ]
+      "sliderNames": [ "BrowTailItem_x", "BrowTailItem_y", "BrowTailItem_z" ]
     },
 
     {
@@ -132,7 +132,7 @@
       "AreaTextureName": "FaceAreaPNG/04eye/Eyecorner",
       "leaderBoneName": "face_eyeLids_Lf_joint1",
       "leaderBoneSymName": "face_eyeLids_Rt_joint1",
-      "sliderNames": [ "EyecornerItem_x", "EyecornerItem_y", "EyecornerItem_w" ]
+      "sliderNames": [ "EyecornerItem_x", "EyecornerItem_y", "EyecornerItem_z" ]
     },
 
     {
@@ -141,7 +141,7 @@
       "AreaTextureName": "FaceAreaPNG/04eye/Uppereyelid",
       "leaderBoneName": "face_eyeLidsUp_Lf_joint1",
       "leaderBoneSymName": "face_eyeLidsUp_Rt_joint1",
-      "sliderNames": [ "UppereyelidItem_x", "UppereyelidItem_y", "UppereyelidItem_w" ]
+      "sliderNames": [ "UppereyelidItem_x", "UppereyelidItem_y", "UppereyelidItem_z" ]
     },
 
     {
@@ -150,7 +150,7 @@
       "AreaTextureName": "FaceAreaPNG/04eye/lowereyelid",
       "leaderBoneName": "face_eyeLidsdown_Lf_joint1",
       "leaderBoneSymName": "face_eyeLidsdown_Rt_joint1",
-      "sliderNames": [ "lowereyelidItem_x", "lowereyelidItem_y", "lowereyelidItem_w" ]
+      "sliderNames": [ "lowereyelidItem_x", "lowereyelidItem_y", "lowereyelidItem_z" ]
     },
 
     {
@@ -159,7 +159,7 @@
       "AreaTextureName": "FaceAreaPNG/04eye/Eyetail",
       "leaderBoneName": "face_eyeLids_Lf_joint2",
       "leaderBoneSymName": "face_eyeLids_Rt_joint2",
-      "sliderNames": [ "EyetailItem_x", "EyetailItem_y", "EyetailItem_w" ]
+      "sliderNames": [ "EyetailItem_x", "EyetailItem_y", "EyetailItem_z" ]
     },
 
     {
@@ -194,7 +194,7 @@
       "AreaTextureName": "FaceAreaPNG/05nose/Upperbridge",
       "leaderBoneName": "face_bridge_Lf_joint1",
       "leaderBoneSymName": "face_bridge_Rt_joint1",
-      "sliderNames": [ "UpperbridgeItem_x", "UpperbridgeItem_y", "UpperbridgeItem_w" ]
+      "sliderNames": [ "UpperbridgeItem_x", "UpperbridgeItem_y", "UpperbridgeItem_z" ]
     },
 
     {
@@ -203,7 +203,7 @@
       "AreaTextureName": "FaceAreaPNG/05nose/Inferiorbridge",
       "leaderBoneName": "face_bridge_joint2",
       "leaderBoneSymName": "null",
-      "sliderNames": [ "InferiorbridgeItem_x", "InferiorbridgeItem_y", "InferiorbridgeItem_w" ]
+      "sliderNames": [ "InferiorbridgeItem_x", "InferiorbridgeItem_y", "InferiorbridgeItem_z" ]
     },
 
     {
@@ -221,7 +221,7 @@
       "AreaTextureName": "FaceAreaPNG/05nose/ColumellaNasi",
       "leaderBoneName": "face_nose_joint2",
       "leaderBoneSymName": "null",
-      "sliderNames": [ "ColumellaNasiItem_x", "ColumellaNasiItem_y", "ColumellaNasiItem_w" ]
+      "sliderNames": [ "ColumellaNasiItem_x", "ColumellaNasiItem_y", "ColumellaNasiItem_z" ]
     },
 
     {
@@ -230,7 +230,7 @@
       "AreaTextureName": "FaceAreaPNG/05nose/NasalBase",
       "leaderBoneName": "face_nosewing_Lf_joint1",
       "leaderBoneSymName": "face_nosewing_Rt_joint1",
-      "sliderNames": [ "NasalBaseItem_x", "NasalBaseItem_y", "NasalBaseItem_w" ]
+      "sliderNames": [ "NasalBaseItem_x", "NasalBaseItem_y", "NasalBaseItem_z" ]
     },
 
     {
@@ -239,7 +239,7 @@
       "AreaTextureName": "FaceAreaPNG/05nose/NoseWing",
       "leaderBoneName": "face_nosewing_Lf_joint003",
       "leaderBoneSymName": "face_nosewing_Rt_joint003",
-      "sliderNames": [ "NoseWingItem_x", "NoseWingItem_y", "NoseWingItem_w" ]
+      "sliderNames": [ "NoseWingItem_x", "NoseWingItem_y", "NoseWingItem_z" ]
     },
 
     {
@@ -257,7 +257,7 @@
       "AreaTextureName": "FaceAreaPNG/06lips/upperlip",
       "leaderBoneName": "face_mouthLip_Lf_joint2",
       "leaderBoneSymName": "face_mouthLip_Rt_joint2",
-      "sliderNames": [ "upperlipItem_x", "upperlipItem_y", "upperlipItem_w" ]
+      "sliderNames": [ "upperlipItem_x", "upperlipItem_y", "upperlipItem_z" ]
     },
 
     {
@@ -266,7 +266,7 @@
       "AreaTextureName": "FaceAreaPNG/06lips/upperbone",
       "leaderBoneName": "face_mouthLip_up_joint0",
       "leaderBoneSymName": "null",
-      "sliderNames": [ "upperboneItem_x", "upperboneItem_y", "upperboneItem_w" ]
+      "sliderNames": [ "upperboneItem_x", "upperboneItem_y", "upperboneItem_z" ]
     },
 
     {
@@ -275,7 +275,7 @@
       "AreaTextureName": "FaceAreaPNG/06lips/downlip",
       "leaderBoneName": "face_mouthLip_Lf_joint6",
       "leaderBoneSymName": "face_mouthLip_Rt_joint6",
-      "sliderNames": [ "downlipItem_x", "downlipItem_y", "downlipItem_w" ]
+      "sliderNames": [ "downlipItem_x", "downlipItem_y", "downlipItem_z" ]
     },
 
     {
@@ -284,7 +284,7 @@
       "AreaTextureName": "FaceAreaPNG/06lips/downBone",
       "leaderBoneName": "face_mouthLip_dn_joint0",
       "leaderBoneSymName": "null",
-      "sliderNames": [ "downBoneItem_x", "downBoneItem_y", "downBoneItem_w" ]
+      "sliderNames": [ "downBoneItem_x", "downBoneItem_y", "downBoneItem_z" ]
     },
 
     {
@@ -293,7 +293,7 @@
       "AreaTextureName": "FaceAreaPNG/06lips/Middle",
       "leaderBoneName": "face_Philtrum_joint0",
       "leaderBoneSymName": "null",
-      "sliderNames": [ "MiddleItem_x", "MiddleItem_y", "MiddleItem_w" ]
+      "sliderNames": [ "MiddleItem_x", "MiddleItem_y", "MiddleItem_z" ]
     },
 
     {
@@ -302,52 +302,8 @@
       "AreaTextureName": "FaceAreaPNG/06lips/corner",
       "leaderBoneName": "face_mouthLip_Lf_joint1",
       "leaderBoneSymName": "face_mouthLip_Rt_joint1",
-      "sliderNames": [ "cornerItem_x", "cornerItem_y", "cornerItem_w" ]
+      "sliderNames": [ "cornerItem_x", "cornerItem_y", "cornerItem_z" ]
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
