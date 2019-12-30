@@ -16,6 +16,7 @@ public class DeformLeaderBoneManagerSetup
         public Vector4 offsetScale;
 
         public int curveIndex = 0;
+        public List<string> excludeBoneNames = new List<string>();
     }
 
     [SerializeField]
@@ -33,6 +34,7 @@ public class Snapshot
         public bool editing;
     }
     public string toggleName;
+    public string partName;
     public Dictionary<string, BoneData> map = new Dictionary<string, BoneData>();
 }
 
@@ -57,10 +59,16 @@ public class DeformLeaderBoneManager : MonoBehaviour
     Dictionary<string, Vector3> mRoleJsonBoneInitPositionMap = new Dictionary<string, Vector3>();
     Dictionary<string, Transform> mRoleJsonBoneMap = new Dictionary<string, Transform>();
 
-
+    DeformLeaderBoneManagerSetup mDeformLeaderBoneManagerSetup;
     void Awake()
     {
         Instance = this;
+
+        DeformLeaderBoneManagerSetup setup = new DeformLeaderBoneManagerSetup();
+        DeformLeaderBoneManagerSetup.LeaderBoneData lbd = new DeformLeaderBoneManagerSetup.LeaderBoneData();
+        setup.leaderBones.Add(lbd);
+        string jstr = JsonUtility.ToJson(setup);
+        File.WriteAllText(Application.dataPath + "/../temp.json", jstr);
     }
 
     private void Start()
@@ -131,7 +139,6 @@ public class DeformLeaderBoneManager : MonoBehaviour
                 mLeaderBoneDic[lb.name] = lb;
                 lb.mInRangeCommonBones.Clear();
                 lb.mPositionFromLeaderBones.Clear();
-
             }
             else
             {
@@ -175,9 +182,9 @@ public class DeformLeaderBoneManager : MonoBehaviour
 
         TextAsset textAsset = Resources.Load<TextAsset>("LeaderBoneSetup");
         Debug.Log(textAsset.text);
-        DeformLeaderBoneManagerSetup setup = JsonUtility.FromJson<DeformLeaderBoneManagerSetup>(textAsset.text);
+        mDeformLeaderBoneManagerSetup = JsonUtility.FromJson<DeformLeaderBoneManagerSetup>(textAsset.text);
 
-        Debug.Log(setup.leaderBones.Count);
+        Debug.Log(mDeformLeaderBoneManagerSetup.leaderBones.Count);
 
 
 
@@ -194,7 +201,7 @@ public class DeformLeaderBoneManager : MonoBehaviour
                 Destroy(deformBaseBone);
             }
             bool isLeader = false;
-            foreach (var leaderBone in setup.leaderBones)
+            foreach (var leaderBone in mDeformLeaderBoneManagerSetup.leaderBones)
             {
                 if (bone.name == leaderBone.boneName)
                 {
@@ -210,6 +217,7 @@ public class DeformLeaderBoneManager : MonoBehaviour
                     lb.mOffsetScale = leaderBone.offsetScale;
                     lb.mCurve = curves.curves[leaderBone.curveIndex];
 
+                    lb.mExcludeBones = leaderBone.excludeBoneNames;
                     //lb.enabled = false;
                     isLeader = true;
                     break;
@@ -263,14 +271,16 @@ public class DeformLeaderBoneManager : MonoBehaviour
                     if (Vector3.Distance(lb.transform.position, interlb.transform.position) < lb.mRange)
                     {
                         //if (lb.transform.parent == interlb.transform.parent)
+                        if(!lb.mExcludeBones.Contains(interlb.name))//lb 不影响哪些骨骼，在excludeBones里
                         {
                             lb.mInRangeLeaderBones.Add(interlb);
-
                         }
                     }
                     if (Vector3.Distance(lb.transform.position, interlb.transform.position) < interlb.mRange)
                     {
                         //if (lb.transform.parent == interlb.transform.parent)
+
+                        if (!interlb.mExcludeBones.Contains(lb.name))//interlb 不影响哪些骨骼，在excludeBones里
                         {
                             lb.mPositionFromLeaderBones.Add(interlb);
 
@@ -293,6 +303,7 @@ public class DeformLeaderBoneManager : MonoBehaviour
                 if (Vector3.Distance(cb.transform.position, interlb.transform.position) < interlb.mRange)
                 {
                     //if (lb.transform.parent == cb.transform.parent)
+                    if (!interlb.mExcludeBones.Contains(cb.name))//interlb 不影响哪些骨骼，在excludeBones里
                     {
                         interlb.mInRangeCommonBones.Add(cb);
                         cb.mPositionFromLeaderBones.Add(interlb);
@@ -421,10 +432,11 @@ public class DeformLeaderBoneManager : MonoBehaviour
     }
 
 
-    public Snapshot TakeSnapshot(string toggleName)
+    public Snapshot TakeSnapshot(string partName,string toggleName)
     {
         Snapshot ss = new Snapshot();
         ss.toggleName = toggleName;
+        ss.partName = partName;
         foreach (DeformLeaderBone lb in mLeaderBones)
         {
             Snapshot.BoneData bd = new Snapshot.BoneData();

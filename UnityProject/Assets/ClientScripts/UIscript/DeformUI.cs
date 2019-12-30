@@ -230,6 +230,12 @@ public class LeaderBoneControlMap
     }
 }
 
+public class PartDetailToggleMap
+{
+
+    public Dictionary<string, Toggle> partToggleDic = new Dictionary<string, Toggle>();
+    public Dictionary<string, Toggle> detailFirstToggleDic = new Dictionary<string, Toggle>();
+}
 
 
 public class DeformUI : MonoBehaviour
@@ -245,7 +251,8 @@ public class DeformUI : MonoBehaviour
     public Button SaveBtn;
 
     
-    string currentToggleName;
+    string currentDetailToggleName;
+    string currentPartToggleName;
 
 
     Stack<Snapshot> undoStatck = new Stack<Snapshot>();
@@ -254,6 +261,15 @@ public class DeformUI : MonoBehaviour
     FaceAreaTextureChange faceAreaTextureChange;
     [NonSerialized]
     public LeaderBoneControlMap mLeaderBoneControlMap;
+
+
+
+
+    public List<Toggle> partToggles;
+    public List<Toggle> detailFirstToggles;
+    PartDetailToggleMap mPartDetailToggleMap;
+
+    Coroutine mDelayFaceNoMaskTexCoroutine;
 
     private void Awake()
     {
@@ -276,6 +292,28 @@ public class DeformUI : MonoBehaviour
     }
     public void Start()
     {
+        mPartDetailToggleMap = new PartDetailToggleMap();
+        bool firstPartToggle = true;
+        
+        for(int i = 0; i< partToggles.Count;i++)
+        {
+            Toggle partToggle = partToggles[i];
+            Toggle detailFirstToggle = detailFirstToggles[i];
+
+            mPartDetailToggleMap.partToggleDic[partToggle.name] = partToggle;
+            mPartDetailToggleMap.detailFirstToggleDic[partToggle.name] = detailFirstToggle;
+
+            if (firstPartToggle)
+            {
+                PartToggleChange(true, partToggle);
+                firstPartToggle = false;
+            }
+
+            partToggle.onValueChanged.AddListener((bool b) =>
+            {
+                PartToggleChange(b, partToggle);
+            });
+        }
 
         foreach (var onepair in mLeaderBoneControlMap.pairList)
         {
@@ -294,17 +332,17 @@ public class DeformUI : MonoBehaviour
             }
 
         }
-        bool firstToggle = true;
+        bool firstDetailToggle = true;
         foreach (var onepair in DeformUI.Instance.mLeaderBoneControlMap.pairList)
         {
-            if (firstToggle)
+            if (firstDetailToggle)
             {
-                ToggleItemChange(true, onepair);
-                firstToggle = false;
+                DetailToggleItemChange(true, onepair);
+                firstDetailToggle = false;
             }
             onepair.toggleControl.onValueChanged.AddListener((bool b) =>
             {
-                ToggleItemChange(b, onepair);
+                DetailToggleItemChange(b, onepair);
             });
         }
 
@@ -316,7 +354,7 @@ public class DeformUI : MonoBehaviour
     {
         string TexturePath = "FaceAreaPNG/noneTex";
         faceAreaTextureChange.ChangeFaceArea(TexturePath);
-
+        mDelayFaceNoMaskTexCoroutine = null;
     }
 
     public void Reload()
@@ -345,7 +383,10 @@ public class DeformUI : MonoBehaviour
             float newScale = Mathf.Pow(scale, val);
             Debug.Log("OnItemValueChanged w scale :" + scale + ": val :" + val);
             DeformLeaderBoneManager.Instance.SetLeaderBoneScale(pair.leaderBoneName, newScale);
-
+            if (!string.IsNullOrWhiteSpace(pair.leaderBoneSymName) && pair.leaderBoneSymName != "null")
+            {
+                DeformLeaderBoneManager.Instance.SetLeaderBoneScale(pair.leaderBoneSymName, newScale);
+            }
         }
         else
         {
@@ -392,7 +433,7 @@ public class DeformUI : MonoBehaviour
     void OnItemStartDrag(Slider item)
     {
         Debug.Log("OnItemStartDrag : " + item.name);
-        undoStatck.Push(DeformLeaderBoneManager.Instance.TakeSnapshot(currentToggleName));
+        undoStatck.Push(DeformLeaderBoneManager.Instance.TakeSnapshot(currentPartToggleName,currentDetailToggleName));
         UndoBtn.interactable = true;
     }
     void OnItemEndDrag(Slider item)
@@ -457,11 +498,33 @@ public class DeformUI : MonoBehaviour
 
     }
 
-    void ToggleItemChange(bool b, LeaderBoneControlMap.LeaderBoneControlPair pair)
+    IEnumerator DelayFaceNoMask()
+    {
+        yield return new WaitForSeconds(2);
+        NoneAreaTexture();
+    }
+
+    void PartToggleChange(bool b ,Toggle t)
+    {
+        if(b)
+        {
+            currentPartToggleName = t.name;
+            var firstToggle = mPartDetailToggleMap.detailFirstToggleDic[t.name];
+            firstToggle.isOn = false;//先false，以免出现原来为true，不执行事件的情况
+            firstToggle.isOn = true;
+        }
+        else
+        {
+
+        }
+
+    }
+
+    void DetailToggleItemChange(bool b, LeaderBoneControlMap.LeaderBoneControlPair pair)
     {
         if (b)
         {
-            currentToggleName = pair.ToggleName;
+            currentDetailToggleName = pair.ToggleName;
 
             faceAreaTextureChange.ChangeFaceArea(pair.AreaTextureName);
 
@@ -470,6 +533,13 @@ public class DeformUI : MonoBehaviour
 
             //左右对称，所以设置一次slider值即可
             DeformUI.Instance.SeSliderValueByLeaderBoneName(pair.leaderBoneName);
+
+            if(mDelayFaceNoMaskTexCoroutine != null)
+            {
+                StopCoroutine(mDelayFaceNoMaskTexCoroutine);
+                mDelayFaceNoMaskTexCoroutine = null;
+            }
+            mDelayFaceNoMaskTexCoroutine = StartCoroutine(DelayFaceNoMask());
         }
         else
         {
@@ -494,10 +564,15 @@ public class DeformUI : MonoBehaviour
             DeformLeaderBoneManager.Instance.RestoreSnapshot(snapshot);
             Reload();
 
-            if(currentToggleName != snapshot.toggleName)
+            if(currentDetailToggleName != snapshot.toggleName)
             {
                 var pair = mLeaderBoneControlMap.FindPairByToggleName(snapshot.toggleName);
                 pair.toggleControl.isOn = true;
+            }
+
+            if(mPartDetailToggleMap.partToggleDic.ContainsKey(snapshot.partName))
+            {
+                mPartDetailToggleMap.partToggleDic[snapshot.partName].isOn = true;
             }
             
 

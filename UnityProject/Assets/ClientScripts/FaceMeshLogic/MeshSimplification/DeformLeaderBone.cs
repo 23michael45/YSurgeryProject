@@ -25,7 +25,7 @@ public class DeformLeaderBone : DeformBaseBone
     public List<DeformCommonBone> mInRangeCommonBones = new List<DeformCommonBone>();
     public List<DeformLeaderBone> mInRangeLeaderBones = new List<DeformLeaderBone>();
 
-
+    public List<string> mExcludeBones = new List<string>();
 
     public void StartEdit()
     {
