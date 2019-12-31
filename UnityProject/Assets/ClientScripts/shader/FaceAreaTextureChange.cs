@@ -14,7 +14,7 @@ public class FaceAreaTextureChange : MonoBehaviour
 
 
             GameObject Role = AppRoot.MainRole.Rolein;
-            GameObject head = Role.transform.Find("head001").gameObject;
+            GameObject head = Role.transform.Find("head").gameObject;
             Material Facematerial = head.GetComponent<SkinnedMeshRenderer>().material;
 
             Debug.Log(TexturePath);

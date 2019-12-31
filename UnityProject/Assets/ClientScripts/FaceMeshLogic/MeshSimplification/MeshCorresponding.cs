@@ -36,7 +36,7 @@ public class MeshCorresponding : MonoBehaviour
 
 
             //处理点位置重复的情况
-            if (regionVertexDict.ContainsValue(vertexRegion))
+            if (regionVertexDict.ContainsValue(vertexRegion) && regionVertexDictReverse.ContainsKey(vertexRegion))
             {
                 Debug.LogError(string.Format("Region Mesh Vertex Duplicate : {0} {1}", j, regionVertexDictReverse[vertexRegion]));
             }
