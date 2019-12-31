@@ -268,6 +268,8 @@ ModelImporter:
     100524: Wrist_R_M
     100526: Object001
     100528: head
+    100530: FaceRegion
+    100532: noseholeRegion
     400000: Ankle_L_scaleM
     400002: Ankle_R_scaleM
     400004: Arm_L_scale01
@@ -533,6 +535,8 @@ ModelImporter:
     400524: Wrist_R_M
     400526: Object001
     400528: head
+    400530: FaceRegion
+    400532: noseholeRegion
     2100000: wuman_body_lambert2
     2100002: 02 - Default
     2100004: 03 - Default
@@ -555,9 +559,13 @@ ModelImporter:
     2300000: BaselFaceModel2017
     2300002: teeth
     2300004: Object001
+    2300006: FaceRegion
+    2300008: noseholeRegion
     3300000: BaselFaceModel2017
     3300002: teeth
     3300004: Object001
+    3300006: FaceRegion
+    3300008: noseholeRegion
     4300000: women_nail
     4300002: women_body
     4300004: teeth
@@ -567,6 +575,8 @@ ModelImporter:
     4300012: BaselFaceModel2017
     4300014: Object001
     4300016: head
+    4300018: FaceRegion
+    4300020: noseholeRegion
     7400000: Take 001
     9500000: //RootNode
     13700000: head001
