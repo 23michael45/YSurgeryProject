@@ -351,7 +351,20 @@ public class SimplifyFaceModel : MonoBehaviour
         MeshCorresponding mc = new MeshCorresponding();
         List<int> indicesInLDMesh = mc.Load(loadPath);
 
-        Mesh LDMeanMesh = m_LDMeanFaceMesh.GetComponent<MeshFilter>().sharedMesh;
+        Mesh LDMeanMesh = null;
+        var smr = m_LDMeanFaceMesh.GetComponent<SkinnedMeshRenderer>();
+        var mf = m_LDMeanFaceMesh.GetComponent<MeshFilter>();
+        if (smr)
+        {
+            LDMeanMesh = smr.sharedMesh;
+        }
+        else if(mf)
+        {
+            LDMeanMesh = mf.sharedMesh;
+
+        }
+
+
         Mesh HDMeanMesh = m_HDMeanFaceMesh.GetComponent<MeshFilter>().sharedMesh;
 
         List<Vector3> hdVertices = HDMeanMesh.vertices.OfType<Vector3>().ToList();

@@ -6,13 +6,13 @@ using UnityEngine;
 [CustomEditor(typeof(SimplifyFaceModel))]
 public class MeshSimplificationEditor : Editor
 {
-    string mRegionJsonPath = "../correspondingRegionIndices.json";
-    string mSaveLD2HDJsonPath = "../correspondingHDLDIndices.json";
+    string mRegionJsonPath = "StreamingAssets/Json/correspondingRegionIndices.json";
+    string mSaveLD2HDJsonPath = "StreamingAssets/Json/correspondingHDLDIndices.json";
 
-    string mSaveBoneIndexJsonPath = "../boneIndexMap.json";
+    string mSaveBoneIndexJsonPath = "StreamingAssets/Json/boneIndexMap.json";
 
-    string mLoadLD2HDJsonPath = "../correspondingHDLDIndices.json";
-    string mLoadBoneIndexJsonPath = "../boneIndexMap.json";
+    string mLoadLD2HDJsonPath = "StreamingAssets/Json/correspondingHDLDIndices.json";
+    string mLoadBoneIndexJsonPath = "StreamingAssets/Json/boneIndexMap.json";
 
     string mSaveMeshPath = "../lowMeshWithUV.fbx";
 

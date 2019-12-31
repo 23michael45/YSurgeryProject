@@ -40,7 +40,7 @@ public class MeshInfoSelector : MonoBehaviour
         trivertices[0] = mesh.vertices[mTri0];
         trivertices[1] = mesh.vertices[mTri1];
         trivertices[2] = mesh.vertices[mTri2];
-        
+
         trivertices[0] = transform.TransformPoint(trivertices[0]);
         trivertices[1] = transform.TransformPoint(trivertices[1]);
         trivertices[2] = transform.TransformPoint(trivertices[2]);
@@ -51,7 +51,7 @@ public class MeshInfoSelector : MonoBehaviour
 
     public void PickVertex(Ray ray)
     {
-        
+
         RaycastHit hit;
         if (!Physics.Raycast(ray, out hit))
             return;
@@ -59,7 +59,7 @@ public class MeshInfoSelector : MonoBehaviour
         MeshCollider meshCollider = hit.collider as MeshCollider;
         if (meshCollider == null || meshCollider.sharedMesh == null)
             return;
-        
+
         Mesh mesh = meshCollider.sharedMesh;
         Vector3[] vertices = mesh.vertices;
         Vector2[] uvs = mesh.uv;
@@ -87,7 +87,7 @@ public class MeshInfoSelector : MonoBehaviour
 
         mMinDist = float.MaxValue;
 
-        for(int i = 0; i < 3;i++)
+        for (int i = 0; i < 3; i++)
         {
             float dist = Vector3.Distance(trivertices[i], hit.point);
             //float dist = Vector3.Cross(ray.direction,  - ray.origin).magnitude;
@@ -117,7 +117,7 @@ public class MeshInfoSelector : MonoBehaviour
         }
 
         SkinnedMeshRenderer smr = meshSourceObject.GetComponent<SkinnedMeshRenderer>();
-        if(smr)
+        if (smr)
         {
             mesh = smr.sharedMesh;
             material = smr.sharedMaterial;
@@ -132,7 +132,24 @@ public class MeshInfoSelector : MonoBehaviour
         transform.rotation = meshSourceObject.transform.rotation;
 
 
-      
+
     }
-    
+
+
+
+    void OnDrawGizmosSelected()
+    {
+
+        Mesh mesh = gameObject.GetComponent<MeshFilter>().sharedMesh;
+
+        Vector3 localPos = mesh.vertices[mSelectIndex];
+
+        mSelectVertex = localPos;
+
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawSphere(transform.TransformPoint(localPos), 5);
+
+
+
+    }
 }

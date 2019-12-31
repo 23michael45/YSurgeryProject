@@ -69,4 +69,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42cc0b0288c9a3d4789aa4ec76dfc753, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mTempalteModelRef:
+    m_AssetGUID: c02dc366ec5bf774b8d67e6320bea0d1
+    m_SubObjectName: 
+  mBoneWeightMask: {fileID: 0}
   mDebugMeshFilter: {fileID: 0}

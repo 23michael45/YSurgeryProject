@@ -435,11 +435,37 @@ public class DeformUI : MonoBehaviour
         Debug.Log("OnItemStartDrag : " + item.name);
         undoStatck.Push(DeformLeaderBoneManager.Instance.TakeSnapshot(currentPartToggleName,currentDetailToggleName));
         UndoBtn.interactable = true;
+
+        var pair = mLeaderBoneControlMap.FindPair(item);
+
+        if(item.name.EndsWith("_w"))
+        {
+            DeformLeaderBoneManager.Instance.SetWorking(false);
+        }
+        else
+        {
+
+            DeformLeaderBoneManager.Instance.StartEdit(pair.leaderBoneName);
+            DeformLeaderBoneManager.Instance.StartEdit(pair.leaderBoneSymName);
+        }
+
     }
     void OnItemEndDrag(Slider item)
     {
         Debug.Log("OnItemEndDrag : " + item.name);
 
+        var pair = mLeaderBoneControlMap.FindPair(item);
+        if (item.name.EndsWith("_w"))
+        {
+
+            DeformLeaderBoneManager.Instance.ResetBindPose();
+            DeformLeaderBoneManager.Instance.SetWorking(true);
+        }
+        else
+        {
+            DeformLeaderBoneManager.Instance.StopEdit(pair.leaderBoneName);
+            DeformLeaderBoneManager.Instance.StopEdit(pair.leaderBoneSymName);
+        }
     }
 
     public void SeSliderValueByLeaderBoneName(string leaderBoneName)
@@ -528,8 +554,6 @@ public class DeformUI : MonoBehaviour
 
             faceAreaTextureChange.ChangeFaceArea(pair.AreaTextureName);
 
-            DeformLeaderBoneManager.Instance.StartEdit(pair.leaderBoneName);
-            DeformLeaderBoneManager.Instance.StartEdit(pair.leaderBoneSymName);
 
             //左右对称，所以设置一次slider值即可
             DeformUI.Instance.SeSliderValueByLeaderBoneName(pair.leaderBoneName);
@@ -543,8 +567,6 @@ public class DeformUI : MonoBehaviour
         }
         else
         {
-            DeformLeaderBoneManager.Instance.StopEdit(pair.leaderBoneName);
-            DeformLeaderBoneManager.Instance.StopEdit(pair.leaderBoneSymName);
 
         }
     }

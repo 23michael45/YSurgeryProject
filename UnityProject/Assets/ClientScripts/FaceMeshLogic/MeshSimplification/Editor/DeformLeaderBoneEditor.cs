@@ -19,5 +19,16 @@ public class DeformLeaderBoneEditor : Editor
 
         }
 
+        if(Selection.activeGameObject == parentObj.gameObject)
+        {
+            parentObj.mSelectedDirectly = true;
+        }
+        else
+        {
+            parentObj.mSelectedDirectly = false;
+
+        }
     }
+
+
 }

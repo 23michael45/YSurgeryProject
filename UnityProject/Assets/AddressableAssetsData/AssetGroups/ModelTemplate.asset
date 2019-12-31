@@ -17,16 +17,13 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: 1347f2d1b9dd11443824db6998decc14
   m_SerializeEntries:
-  - m_GUID: d71eab925b003864ab9bb88abb32ebce
-    m_Address: LowMeshTemplateModelFull
+  - m_GUID: c02dc366ec5bf774b8d67e6320bea0d1
+    m_Address: Assets/Art/Prefabs/LowGeometryTemplate.prefab
     m_ReadOnly: 0
     m_SerializedLabels:
     - template
-  - m_GUID: fef30bc9b1b401942aca9dbd48eb601d
-    m_Address: LowMeshTemplateModelHead
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - template
+    m_mainAssetType: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: d00d0109c0ab0f249b9ecb2dc6fe9966, type: 2}
   m_SchemaSet:

@@ -6,7 +6,7 @@ using UnityEngine;
 [CustomEditor(typeof(MeshCorresponding))]
 public class MeshCorrespondingEditor : Editor
 {
-    string mJsonPath = "../correspondingRegionIndices.json";
+    string mJsonPath = "StreamingAssets/Json/correspondingRegionIndices.json";
     public override void OnInspectorGUI()
     {
         base.OnInspectorGUI();

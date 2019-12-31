@@ -361,7 +361,7 @@ public class ModelDataManager : MonoBehaviour
     public AssetReference mTempalteModelRef;
 #endif
     public Texture2D mBoneWeightMask;
-    GameObject mLowMeshTemplate;
+    GameObject mLowGeometryTemplate;
     string correspondingHDLDIndicesJson;
     string boneIndexMapJson;
 
@@ -408,7 +408,7 @@ public class ModelDataManager : MonoBehaviour
 
         }
 
-        return mLowMeshTemplate.transform.Find(bodyName).gameObject;
+        return mLowGeometryTemplate.transform.Find(bodyName).gameObject;
     }
     GameObject GetNail(int gender)
     {
@@ -422,7 +422,7 @@ public class ModelDataManager : MonoBehaviour
             goName = "women_nail";
 
         }
-        return mLowMeshTemplate.transform.Find(goName).gameObject;
+        return mLowGeometryTemplate.transform.Find(goName).gameObject;
     }
 
 
@@ -495,22 +495,24 @@ public class ModelDataManager : MonoBehaviour
 
     void OnLoadTemplateMeshDone(AsyncOperationHandle<GameObject> obj)
     {
-        mLowMeshTemplate = GameObject.Instantiate(obj.Result);
+        mLowGeometryTemplate = GameObject.Instantiate(obj.Result);
 
 
-        Transform orgHighModel = mLowMeshTemplate.transform.Find("BaselFaceModel2017");
+        Transform orgHighModel = mLowGeometryTemplate.transform.Find("BaselFaceModel2017");
         if (orgHighModel)
         {
             GameObject.Destroy(orgHighModel.gameObject);
         }
+        mLowGeometryTemplate.transform.Find("Object001").gameObject.SetActive(false);
+        mLowGeometryTemplate.transform.Find("teeth").gameObject.SetActive(false);
 
-        mSkinnedMeshRenderer = mLowMeshTemplate.transform.Find("head001").GetComponent<SkinnedMeshRenderer>();
+        mSkinnedMeshRenderer = mLowGeometryTemplate.transform.Find("head").GetComponent<SkinnedMeshRenderer>();
         mSkinnedMeshRenderer.enabled = false;
         GetBody(0).SetActive(false);
         GetNail(0).SetActive(false);
         GetBody(1).SetActive(false);
         GetNail(1).SetActive(false);
-        mReferenceTransform = mLowMeshTemplate.transform.Find("Reference");
+        mReferenceTransform = mLowGeometryTemplate.transform.Find("Reference");
 
 
         CloneMaterial(mSkinnedMeshRenderer);
@@ -518,7 +520,7 @@ public class ModelDataManager : MonoBehaviour
         CloneMaterial(GetBody(1).GetComponent<SkinnedMeshRenderer>());
 
 
-        mLowMeshTemplate.transform.parent = LoadManager.Instance.transform;
+        mLowGeometryTemplate.transform.parent = LoadManager.Instance.transform;
         InitBoneInitData();
     }
     public void SaveLoadJsonTest(bool skinned)
@@ -623,7 +625,7 @@ public class ModelDataManager : MonoBehaviour
 
     void SetTemplateXDirection(bool bPositive)
     {
-        Vector3 localScale = mLowMeshTemplate.transform.localScale;
+        Vector3 localScale = mLowGeometryTemplate.transform.localScale;
         float scaleX = localScale.x;
         scaleX = Math.Abs(scaleX);
 
@@ -636,7 +638,7 @@ public class ModelDataManager : MonoBehaviour
 
             localScale.x = -scaleX;
         }
-        mLowMeshTemplate.transform.localScale = localScale;
+        mLowGeometryTemplate.transform.localScale = localScale;
     }
     CalculateResultDataJson GetResultDataJson(string jstr)
     {
@@ -662,7 +664,7 @@ public class ModelDataManager : MonoBehaviour
     {
         FreeView.Inst().ResetStage();
         ResetBoneInitData();
-        if (mLowMeshTemplate == null)
+        if (mLowGeometryTemplate == null)
         {
             return null;
         }
@@ -671,7 +673,7 @@ public class ModelDataManager : MonoBehaviour
 
         Debug.Log("CalculateLowPolyFace Start");
 
-        mLowMeshTemplate.name = "LoadedAssetTemplateModel";
+        mLowGeometryTemplate.name = "LoadedAssetTemplateModel";
         Transform skinTransform = mSkinnedMeshRenderer.transform;
 
 
@@ -830,7 +832,7 @@ public class ModelDataManager : MonoBehaviour
         }
         mSkinnedMeshRenderer.enabled = true;
 
-        Role role = mLowMeshTemplate.GetComponent<Role>();
+        Role role = mLowGeometryTemplate.GetComponent<Role>();
         LoadManager.Instance.newUser(role);
 
         FitCalculationJson(roleJsonData.retJsonData, roleJsonData.gender, roleJsonData.weight, roleJsonData.height);

@@ -13,7 +13,7 @@ public class DeformLeaderBone : DeformBaseBone
     public AnimationCurve mCurve;
 
     public bool mShowPositionFromLeaderBones = false;
-
+    public bool mSelectedDirectly = false;
 
 
 
@@ -78,30 +78,33 @@ public class DeformLeaderBone : DeformBaseBone
 
     void OnDrawGizmosSelected()
     {
-        Gizmos.color = Color.cyan;
-        Gizmos.DrawWireSphere(transform.position, mRange);
-
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawSphere(transform.position, 5);
-
-        Gizmos.color = Color.blue;
-        foreach (var commonBone in mInRangeCommonBones)
+        if (mSelectedDirectly)
         {
-            Gizmos.DrawSphere(commonBone.transform.position, 5);
-        }
-        Gizmos.color = Color.red;
-        foreach (var commonBone in mInRangeLeaderBones)
-        {
-            Gizmos.DrawSphere(commonBone.transform.position, 5);
-        }
+            Gizmos.color = Color.cyan;
+            Gizmos.DrawWireSphere(transform.position, mRange);
 
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawSphere(transform.position, 5);
 
-        if (mShowPositionFromLeaderBones)
-        {
-            Gizmos.color = Color.green;
-            foreach (var leaderBone in mPositionFromLeaderBones)
+            Gizmos.color = Color.blue;
+            foreach (var commonBone in mInRangeCommonBones)
             {
-                Gizmos.DrawSphere(leaderBone.transform.position, 5);
+                Gizmos.DrawSphere(commonBone.transform.position, 5);
+            }
+            Gizmos.color = Color.red;
+            foreach (var commonBone in mInRangeLeaderBones)
+            {
+                Gizmos.DrawSphere(commonBone.transform.position, 5);
+            }
+
+
+            if (mShowPositionFromLeaderBones)
+            {
+                Gizmos.color = Color.green;
+                foreach (var leaderBone in mPositionFromLeaderBones)
+                {
+                    Gizmos.DrawSphere(leaderBone.transform.position, 5);
+                }
             }
         }
     }

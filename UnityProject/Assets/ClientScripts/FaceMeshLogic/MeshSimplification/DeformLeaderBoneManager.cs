@@ -98,15 +98,15 @@ public class DeformLeaderBoneManager : MonoBehaviour
     {
         SetWorking(false);
     }
-    void SetWorking(bool b)
+    public void SetWorking(bool b)
     {
         foreach (DeformLeaderBone lb in mLeaderBones)
         {
-            lb.enabled = false;
+            lb.enabled = b;
         }
         foreach (DeformCommonBone cb in mCommonBones)
         {
-            cb.enabled = false;
+            cb.enabled = b;
         }
     }
 
@@ -367,7 +367,41 @@ public class DeformLeaderBoneManager : MonoBehaviour
     public void SetLeaderBoneScale(string bonename, float newScale)
     {
         Vector3 newScale3 = Vector3.one * newScale;
-        mRoleJsonBoneMap[bonename].localScale = newScale3;
+        if(mRoleJsonBoneMap.ContainsKey(bonename))
+        {
+            Transform bone = mRoleJsonBoneMap[bonename];
+
+            Vector3 oldScale3 = bone.localScale;
+            bone.localScale = newScale3;
+
+            DeformLeaderBone lb = bone.GetComponent<DeformLeaderBone>();
+            if(lb)
+            {
+                foreach(var interlb in lb.mInRangeLeaderBones)
+                {
+                    if(interlb.transform.parent != lb.transform)
+                    {
+                        Vector3 dir = interlb.transform.position - lb.transform.position;
+                        dir =  dir / oldScale3.x * newScale;
+                        interlb.transform.position = lb.transform.position + dir;
+                    }
+                }
+                foreach(var cb in lb.mInRangeCommonBones)
+                {
+                    if (cb.transform.parent != lb.transform)
+                    {
+                        Vector3 dir = cb.transform.position - lb.transform.position;
+                        dir = dir / oldScale3.x * newScale;
+                        cb.transform.position = lb.transform.position + dir;
+
+                    }
+                }
+            }
+
+        }
+
+
+
     }
     public float GetLeaderBoneScaleOffset(string bonename)
     {
