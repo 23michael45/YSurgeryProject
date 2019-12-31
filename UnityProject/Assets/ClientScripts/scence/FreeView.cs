@@ -63,6 +63,37 @@ public class FreeView : MonoBehaviour
 
     }
 
+    public void FrontView() {
+
+
+        stageRotation = Quaternion.Euler(0, 0 , 0);
+
+
+    }
+       
+
+    public void ThirtyDegree() {
+
+
+        stageRotation = Quaternion.Euler(0, 30, 0);
+
+    }
+
+    public void FortyFiveDegree() {
+
+
+        stageRotation = Quaternion.Euler(0, 45, 0);
+
+    }
+
+
+    public void NinetyDegree() {
+
+
+        stageRotation = Quaternion.Euler(0, 90, 0);
+
+    }
+
 
 
     public void OnCameraHeadBtnClk()

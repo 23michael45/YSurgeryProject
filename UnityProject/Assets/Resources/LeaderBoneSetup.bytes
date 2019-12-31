@@ -225,7 +225,7 @@
 				"w": 1.5
 			},
 			"curveIndex": 0,
-			"excludeBoneNames": []
+			"excludeBoneNames": ["face_eyeLids_Lf_joint2","face_eyeLidsUp_Lf_joint2","face_eyeLidsUp_Lf_joint1","face_eyeLids_Lf_joint1","face_eyeLidsdown_Lf_joint1","face_eyeLidsdown_Lf_joint2","face_eye_Lf_joint0"]
 		},
 		{
 			"boneName": "face_brow_Rt_joint0",
@@ -237,7 +237,7 @@
 				"w": 1.5
 			},
 			"curveIndex": 0,
-			"excludeBoneNames": []
+			"excludeBoneNames": ["face_eyeLids_Rt_joint1","face_eyeLidsUp_Rt_joint1","face_eyeLidsUp_Rt_joint2","face_eyeLids_Rt_joint2","face_eyeLidsdown_Rt_joint2","face_eyeLidsdown_Rt_joint1","face_eye_Rt_joint0"]
 		},
 		{
 			"boneName": "face_brow_Lf_joint1",
@@ -249,7 +249,7 @@
 				"w": 1.5
 			},
 			"curveIndex": 0,
-			"excludeBoneNames": []
+			"excludeBoneNames": ["face_brow_Lf_joint0","face_eyeLidsUp_Lf_joint2","face_eyeLidsUp_Lf_joint1","face_eyeLids_Lf_joint2","face_eyeLids_Lf_joint1"]
 		},
 		{
 			"boneName": "face_brow_Rt_joint1",
@@ -261,7 +261,7 @@
 				"w": 1.5
 			},
 			"curveIndex": 0,
-			"excludeBoneNames": []
+			"excludeBoneNames": ["face_brow_Rt_joint0","face_eyeLidsUp_Rt_joint1","face_eyeLidsUp_Rt_joint2","face_eyeLids_Rt_joint1","face_eyeLids_Rt_joint2"]
 		},
 		{
 			"boneName": "face_brow_Lf_joint3",
@@ -273,7 +273,7 @@
 				"w": 1.5
 			},
 			"curveIndex": 0,
-			"excludeBoneNames": []
+			"excludeBoneNames": ["face_brow_Lf_joint0","face_eyeLidsUp_Lf_joint2","face_eyeLidsUp_Lf_joint1","face_eyeLids_Lf_joint2","face_eyeLids_Lf_joint1"]
 		},
 		{
 			"boneName": "face_brow_Rt_joint3",
@@ -285,7 +285,7 @@
 				"w": 1.5
 			},
 			"curveIndex": 0,
-			"excludeBoneNames": []
+			"excludeBoneNames": ["face_brow_Rt_joint0","face_eyeLidsUp_Rt_joint1","face_eyeLidsUp_Rt_joint2","face_eyeLids_Rt_joint1","face_eyeLids_Rt_joint2"]
 		},
 		{
 			"boneName": "face_brow_Lf_joint5",
@@ -297,7 +297,7 @@
 				"w": 1.5
 			},
 			"curveIndex": 0,
-			"excludeBoneNames": []
+			"excludeBoneNames":["face_brow_Lf_joint0","face_eyeLidsUp_Lf_joint2","face_eyeLidsUp_Lf_joint1","face_eyeLids_Lf_joint2","face_eyeLids_Lf_joint1"]
 		},
 		{
 			"boneName": "face_brow_Rt_joint5",
@@ -309,7 +309,7 @@
 				"w": 1.5
 			},
 			"curveIndex": 0,
-			"excludeBoneNames": []
+			"excludeBoneNames": ["face_brow_Rt_joint0","face_eyeLidsUp_Rt_joint1","face_eyeLidsUp_Rt_joint2","face_eyeLids_Rt_joint1","face_eyeLids_Rt_joint2"]
 		},
 		{
 			"boneName": "face_eye_Lf_joint0",
@@ -345,7 +345,7 @@
 				"w": 1.5
 			},
 			"curveIndex": 0,
-			"excludeBoneNames": []
+			"excludeBoneNames": ["face_eye_Lf_joint0","face_brow_Lf_joint0","face_brow_Lf_joint1","face_brow_Lf_joint2","face_brow_Lf_joint3","face_brow_Lf_joint4","face_brow_Lf_joint5"]
 		},
 		{
 			"boneName": "face_eyeLids_Rt_joint1",
@@ -357,7 +357,7 @@
 				"w": 1.5
 			},
 			"curveIndex": 0,
-			"excludeBoneNames": []
+			"excludeBoneNames": ["face_eye_Rt_joint0","face_brow_Rt_joint0","face_brow_Rt_joint1","face_brow_Rt_joint2","face_brow_Rt_joint3","face_brow_Rt_joint4","face_brow_Rt_joint5"]
 		},
 		{
 			"boneName": "face_eyeLidsUp_Lf_joint1",
@@ -369,7 +369,7 @@
 				"w": 1.5
 			},
 			"curveIndex": 0,
-			"excludeBoneNames": []
+			"excludeBoneNames": ["face_eye_Lf_joint0","face_brow_Lf_joint0","face_brow_Lf_joint1","face_brow_Lf_joint2","face_brow_Lf_joint3","face_brow_Lf_joint4","face_brow_Lf_joint5"]
 		},
 		{
 			"boneName": "face_eyeLidsUp_Rt_joint1",
@@ -381,7 +381,7 @@
 				"w": 1.5
 			},
 			"curveIndex": 0,
-			"excludeBoneNames": []
+			"excludeBoneNames": ["face_eye_Rt_joint0","face_brow_Rt_joint0","face_brow_Rt_joint1","face_brow_Rt_joint2","face_brow_Rt_joint3","face_brow_Rt_joint4","face_brow_Rt_joint5"]
 		},
 		{
 			"boneName": "face_eyeLidsdown_Lf_joint1",
@@ -393,7 +393,7 @@
 				"w": 1.5
 			},
 			"curveIndex": 0,
-			"excludeBoneNames": []
+			"excludeBoneNames": ["face_eyeLidsUp_Lf_joint1","face_eyeLidsUp_Lf_joint2","face_eye_Lf_joint0"]
 		},
 		{
 			"boneName": "face_eyeLidsdown_Rt_joint1",
@@ -405,7 +405,7 @@
 				"w": 1.5
 			},
 			"curveIndex": 0,
-			"excludeBoneNames": []
+			"excludeBoneNames": ["face_eye_Lf_joint0"]
 		},
 		{
 			"boneName": "face_eyeLids_Lf_joint2",
@@ -417,7 +417,7 @@
 				"w": 1.5
 			},
 			"curveIndex": 0,
-			"excludeBoneNames": []
+			"excludeBoneNames": ["face_eye_Lf_joint0"]
 		},
 		{
 			"boneName": "face_eyeLids_Rt_joint2",
@@ -429,7 +429,7 @@
 				"w": 1.5
 			},
 			"curveIndex": 0,
-			"excludeBoneNames": []
+			"excludeBoneNames": ["face_eye_Rt_joint0","face_brow_Rt_joint0","face_brow_Rt_joint1","face_brow_Rt_joint2","face_brow_Rt_joint3","face_brow_Rt_joint4","face_brow_Rt_joint5"]
 		},
 		{
 			"boneName": "face_nose_joint0",
@@ -489,7 +489,7 @@
 				"w": 1.5
 			},
 			"curveIndex": 0,
-			"excludeBoneNames": []
+			"excludeBoneNames":  ["face_nose_joint0"]
 		},
 		{
 			"boneName": "face_nose_joint2",
@@ -501,7 +501,7 @@
 				"w": 1.5
 			},
 			"curveIndex": 0,
-			"excludeBoneNames": []
+			"excludeBoneNames": ["face_nose_joint0"]
 		},
 		{
 			"boneName": "face_nosewing_Lf_joint1",
@@ -513,7 +513,7 @@
 				"w": 1.5
 			},
 			"curveIndex": 0,
-			"excludeBoneNames": []
+			"excludeBoneNames":  ["face_nose_joint0"]
 		},
 		{
 			"boneName": "face_nosewing_Rt_joint1",
@@ -525,7 +525,7 @@
 				"w": 1.5
 			},
 			"curveIndex": 0,
-			"excludeBoneNames": []
+			"excludeBoneNames": ["face_nose_joint0"]
 		},
 		{
 			"boneName": "face_nosewing_Lf_joint003",
@@ -537,7 +537,7 @@
 				"w": 1.5
 			},
 			"curveIndex": 0,
-			"excludeBoneNames": []
+			"excludeBoneNames":  ["face_nose_joint0"]
 		},
 		{
 			"boneName": "face_nosewing_Rt_joint003",
@@ -549,7 +549,7 @@
 				"w": 1.5
 			},
 			"curveIndex": 0,
-			"excludeBoneNames": []
+			"excludeBoneNames":  ["face_nose_joint0"]
 		},
 		{
 			"boneName": "face_mouthLip_joint0",
@@ -573,7 +573,7 @@
 				"w": 1.5
 			},
 			"curveIndex": 0,
-			"excludeBoneNames": []
+			"excludeBoneNames": ["face_mouthLip_dn_joint0","face_mouthLip_Lf_joint7","face_mouthLip_dn_joint2","face_mouthLip_Rt_joint7","face_mouthLip_dn_joint1","face_mouthLip_Lf_joint6","face_mouthLip_Rt_joint6"]
 		},
 		{
 			"boneName": "face_mouthLip_Rt_joint2",
@@ -585,7 +585,7 @@
 				"w": 1.5
 			},
 			"curveIndex": 0,
-			"excludeBoneNames": []
+			"excludeBoneNames": ["face_mouthLip_dn_joint0","face_mouthLip_Lf_joint7","face_mouthLip_dn_joint2","face_mouthLip_Rt_joint7","face_mouthLip_dn_joint1","face_mouthLip_Lf_joint6","face_mouthLip_Rt_joint6"]
 		},
 		{
 			"boneName": "face_mouthLip_up_joint0",
@@ -597,7 +597,7 @@
 				"w": 1.5
 			},
 			"curveIndex": 0,
-			"excludeBoneNames": []
+			"excludeBoneNames": ["face_mouthLip_dn_joint0","face_mouthLip_Lf_joint7","face_mouthLip_dn_joint2","face_mouthLip_Rt_joint7","face_mouthLip_dn_joint1","face_mouthLip_Lf_joint6","face_mouthLip_Rt_joint6"]
 		},
 		{
 			"boneName": "face_mouthLip_Lf_joint6",
@@ -609,7 +609,7 @@
 				"w": 1.5
 			},
 			"curveIndex": 0,
-			"excludeBoneNames": []
+			"excludeBoneNames": ["face_mouthLip_up_joint0","face_mouthLip_up_joint2","face_mouthLip_Lf_joint5","face_mouthLip_Rt_joint5","face_mouthLip_up_joint1","face_mouthLip_Lf_joint4","face_mouthLip_Rt_joint4","face_mouthLip_Rt_joint2","face_mouthLip_Lf_joint2","face_Philtrum_joint0"]
 		},
 		{
 			"boneName": "face_mouthLip_Rt_joint6",
@@ -621,7 +621,7 @@
 				"w": 1.5
 			},
 			"curveIndex": 0,
-			"excludeBoneNames": []
+			"excludeBoneNames": ["face_mouthLip_up_joint0","face_mouthLip_up_joint2","face_mouthLip_Lf_joint5","face_mouthLip_Rt_joint5","face_mouthLip_up_joint1","face_mouthLip_Lf_joint4","face_mouthLip_Rt_joint4","face_mouthLip_Rt_joint2","face_mouthLip_Lf_joint2","face_Philtrum_joint0"]
 		},
 		{
 			"boneName": "face_mouthLip_dn_joint0",
@@ -633,7 +633,7 @@
 				"w": 1.5
 			},
 			"curveIndex": 0,
-			"excludeBoneNames": []
+			"excludeBoneNames": ["face_mouthLip_up_joint0","face_mouthLip_up_joint2","face_mouthLip_Lf_joint5","face_mouthLip_Rt_joint5","face_mouthLip_up_joint1","face_mouthLip_Lf_joint4","face_mouthLip_Rt_joint4","face_mouthLip_Rt_joint2","face_mouthLip_Lf_joint2","face_Philtrum_joint0"]
 		},
 		{
 			"boneName": "face_Philtrum_joint0",
