@@ -20,8 +20,8 @@ public class FreeView : MonoBehaviour
     public float humanHigh = 0;
 
     public float Distance = 830f;  	//观察距离  
-    private float MaxDistance = 1500;
-    private float MinDistance = 600f;  //鼠标缩放距离最值
+    private float MaxDistance = 2500;
+    private float MinDistance = 400f;  //鼠标缩放距离最值
     public float ZoomSpeed = 100f;  //鼠标缩放速率 
 
 
@@ -55,44 +55,125 @@ public class FreeView : MonoBehaviour
 
     private Vector2 mPos;  //当前手势  
 
+    // 添加摄像机视角控制
 
+    
+
+    public Button ChangeAngleButton;
+    private Vector3  TargetBonesPosition;
+    private int anglenumber = 1;
+
+
+    public Toggle HeadEditButton, FaceEditButton, EyeBrowEditButton, EyeEditButton, NoseEditButton, MouthEditButton;
+
+    private Vector3 Headposition;
+
+   
 
     void Awake()
     {
         _inst = this;
+        ChangeAngleButton.onClick.AddListener(changeAngeleClick);
+        HeadEditButton.onValueChanged.AddListener((bool b) => { MatchTargetToBones(b, HeadEditButton); });
+        FaceEditButton.onValueChanged.AddListener((bool b) => { MatchTargetToBones(b, FaceEditButton); });
+        EyeBrowEditButton.onValueChanged.AddListener((bool b) => { MatchTargetToBones(b, EyeBrowEditButton); });
+        EyeEditButton.onValueChanged.AddListener((bool b) => { MatchTargetToBones(b, EyeEditButton); });
+        NoseEditButton.onValueChanged.AddListener((bool b) => { MatchTargetToBones(b, NoseEditButton); });
+        MouthEditButton.onValueChanged.AddListener((bool b) => { MatchTargetToBones(b, MouthEditButton); });
 
     }
 
-    public void FrontView() {
+   
+
+    private void changeAngeleClick() {
+        Debug.Log(AppRoot.MainRole._bones.Count);
 
 
-        stageRotation = Quaternion.Euler(0, 0 , 0);
+        if (anglenumber == 1) {
+            mY = 0;
+            stageRotation = Quaternion.Euler(0, mY, 0);
+            anglenumber += 1;
+        }
+        else if (anglenumber == 2){
+            mY = -45f;
+            stageRotation = Quaternion.Euler(0, mY, 0);
+            anglenumber += 1;
+        }       
+        else 
+        {
+            mY = -90f;
+            stageRotation = Quaternion.Euler(0, mY, 0);
+            anglenumber = 1;
+        }
 
 
+        stage.gameObject.transform.rotation = stageRotation;
+        Debug.Log(anglenumber);
     }
+
+
+    private void MatchTargetToBones(bool b,Toggle EditToggle) {
+
+       // ModelDataManager.Instance.LookAtBone("head_M_scale", ref Headposition);
+       // Debug.Log(Headposition);
+
+        if (EditToggle == HeadEditButton) {
+            if (b) {
+                TargetBonesPosition =  new Vector3(0, 0, 80f);
+                Distance = 830f;
+            } else { }
+        }
+        else if (EditToggle == FaceEditButton)
+        {
+            if (b) {
+                TargetBonesPosition = new Vector3(0, 0, 80f);
+                Distance = 700f;
+            } else { }
+        }
+        else if (EditToggle == EyeBrowEditButton)
+        {
+            if (b)
+            {
+                Distance = 600f;
+                TargetBonesPosition = new Vector3(0, 10, 80f);
+               
+            } else { }
+        }
+        else if (EditToggle == EyeEditButton)
+        {
+            if (b) {
+                Distance = 600f;
+                TargetBonesPosition = new Vector3(0, 0, 80f);
+            } else { }
+        }
+        else if (EditToggle == NoseEditButton)
+        {
+            if (b)
+            {
+                Distance = 600f;
+                TargetBonesPosition = new Vector3(0, -10, 80f);
+            } else { }
+        }
+        else if (EditToggle == MouthEditButton)
+        {
+            if (b) {
+                Distance = 600f;
+                TargetBonesPosition = new Vector3(0, -25, 80f);
+            } else { }
+        }
+
        
-
-    public void ThirtyDegree() {
-
-
-        stageRotation = Quaternion.Euler(0, 30, 0);
-
-    }
-
-    public void FortyFiveDegree() {
-
-
-        stageRotation = Quaternion.Euler(0, 45, 0);
+        targetobject.transform.localPosition = TargetBonesPosition;
 
     }
 
 
-    public void NinetyDegree() {
 
 
-        stageRotation = Quaternion.Euler(0, 90, 0);
 
-    }
+
+
+
 
 
 
@@ -144,9 +225,9 @@ public class FreeView : MonoBehaviour
         Target = targetobject.transform;
 
         mX = transform.eulerAngles.x;
-        mY = transform.eulerAngles.y;  //初始化旋转角度  
-                                       //Vector3 mPosition =  new Vector3(-0.0F, 0.9F, -Distance-1F) + Target.position; 
-                                       //transform.position = mPosition;
+        // mY = transform.eulerAngles.y;  //初始化旋转角度  
+        mY = 0;                           //Vector3 mPosition =  new Vector3(-0.0F, 0.9F, -Distance-1F) + Target.position; 
+                                                                //transform.position = mPosition;
 
         mRotation = Quaternion.Euler(mX, 180, 0);
 
@@ -187,13 +268,13 @@ public class FreeView : MonoBehaviour
             {
                 // Debug.Log("当前没有触摸在UI上");
 
-                mX += Input.GetAxis("Mouse Y") * SpeedX * 0.1F;
-                mY += Input.GetAxis("Mouse X") * SpeedY * 0.1F;  //获取鼠标输入 
+                mX -= Input.GetAxis("Mouse Y") * SpeedX * 0.1F;
+                mY -= Input.GetAxis("Mouse X") * SpeedY * 0.1F;  //获取鼠标输入 
 
                 mX = ClampAngle(mX, MinLimitY, MaxLimitY);      //范围限制  
 
                 mRotation = Quaternion.Euler(mX, 180, 0);   //计算旋转  
-                stageRotation = Quaternion.Euler(0, 180 + mY, 0);
+                stageRotation = Quaternion.Euler(0, mY, 0);
 
 
 
@@ -255,7 +336,7 @@ public class FreeView : MonoBehaviour
     Input.multiTouchEnabled=true;  //允许多点触控  
 
 	mX=Target.eulerAngles.x;  	//初始化旋转  
-	mY=Target.eulerAngles.y;
+	mY=0;
 
 
 
@@ -294,7 +375,7 @@ public class FreeView : MonoBehaviour
                 else
                 {    
     
-                    mX += Input.GetAxis("Mouse Y") * SpeedX * 0.03F;
+                    mX -= Input.GetAxis("Mouse Y") * SpeedX * 0.03F;
                     mY -= Input.GetAxis("Mouse X") * SpeedY * 0.03F;
                     mX = ClampAngle(mX, MinLimitY, MaxLimitY);
     

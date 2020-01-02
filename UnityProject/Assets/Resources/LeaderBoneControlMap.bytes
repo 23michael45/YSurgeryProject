@@ -160,24 +160,7 @@
       "leaderBoneName": "face_eyeLids_Lf_joint2",
       "leaderBoneSymName": "face_eyeLids_Rt_joint2",
       "sliderNames": [ "EyetailItem_x", "EyetailItem_y", "EyetailItem_z" ]
-    },
-
-    {
-      "ToggleName": "EyebagSwitch",
-      "ToggleTextureName": "EditPartToggle/04eye/darkeye",
-      "AreaTextureName": "FaceAreaPNG/04eye/Eyebag",
-      "leaderBoneName": "null",
-      "leaderBoneSymName": "null",
-      "sliderNames": [ "null", "null", "null" ]
-    },
-    {
-      "ToggleName": "DoublefoldEyelidsSwitch",
-      "ToggleTextureName": "EditPartToggle/04eye/doubleeye",
-      "AreaTextureName": "FaceAreaPNG/04eye/DoublefoldEyelids",
-      "leaderBoneName": "null",
-      "leaderBoneSymName": "null",
-      "sliderNames": [ "null", "null", "null" ]
-    },
+    },    
 
     {
       "ToggleName": "NoseZeroSwitch",

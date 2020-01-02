@@ -6,7 +6,7 @@
 				"x": 5.0,
 				"y": 5.0,
 				"z": 8.0,
-				"w": 1.5
+				"w": 1.1
 			},
 			"curveIndex": 0,
 			"excludeBoneNames": []
@@ -18,7 +18,7 @@
 				"x": 5.0,
 				"y": 5.0,
 				"z": 8.0,
-				"w": 1.5
+				"w": 1.1
 			},
 			"curveIndex": 0,
 			"excludeBoneNames": []
@@ -30,7 +30,7 @@
 				"x": 5.0,
 				"y": 5.0,
 				"z": 8.0,
-				"w": 1.5
+				"w": 1.1
 			},
 			"curveIndex": 0,
 			"excludeBoneNames": []
@@ -42,7 +42,7 @@
 				"x": 5.0,
 				"y": 5.0,
 				"z": 8.0,
-				"w": 1.5
+				"w": 1.1
 			},
 			"curveIndex": 0,
 			"excludeBoneNames": []
@@ -54,7 +54,7 @@
 				"x": 5.0,
 				"y": 5.0,
 				"z": 8.0,
-				"w": 1.5
+				"w": 1.1
 			},
 			"curveIndex": 0,
 			"excludeBoneNames": []
@@ -66,7 +66,7 @@
 				"x": 5.0,
 				"y": 5.0,
 				"z": 8.0,
-				"w": 1.5
+				"w": 1.1
 			},
 			"curveIndex": 0,
 			"excludeBoneNames": []
@@ -78,7 +78,7 @@
 				"x": 5.0,
 				"y": 5.0,
 				"z": 8.0,
-				"w": 1.5
+				"w": 1.1
 			},
 			"curveIndex": 0,
 			"excludeBoneNames": []
@@ -90,7 +90,7 @@
 				"x": 5.0,
 				"y": 5.0,
 				"z": 8.0,
-				"w": 1.5
+				"w": 1.1
 			},
 			"curveIndex": 0,
 			"excludeBoneNames": []
@@ -102,7 +102,7 @@
 				"x": 1.0,
 				"y": 3.0,
 				"z": 5.0,
-				"w": 1.5
+				"w": 1.1
 			},
 			"curveIndex": 0,
 			"excludeBoneNames": []
@@ -114,7 +114,7 @@
 				"x": 1.0,
 				"y": 3.0,
 				"z": 5.0,
-				"w": 1.5
+				"w": 1.1
 			},
 			"curveIndex": 0,
 			"excludeBoneNames": []
@@ -126,7 +126,7 @@
 				"x": 3.0,
 				"y": 3.0,
 				"z": 8.0,
-				"w": 1.5
+				"w": 1.1
 			},
 			"curveIndex": 0,
 			"excludeBoneNames": []
@@ -138,7 +138,7 @@
 				"x": 3.0,
 				"y": 3.0,
 				"z": 8.0,
-				"w": 1.5
+				"w": 1.1
 			},
 			"curveIndex": 0,
 			"excludeBoneNames": []
@@ -150,7 +150,7 @@
 				"x": 5.0,
 				"y": 5.0,
 				"z": 8.0,
-				"w": 1.5
+				"w": 1.1
 			},
 			"curveIndex": 0,
 			"excludeBoneNames": []
@@ -162,7 +162,7 @@
 				"x": 5.0,
 				"y": 5.0,
 				"z": 8.0,
-				"w": 1.5
+				"w": 1.1
 			},
 			"curveIndex": 0,
 			"excludeBoneNames": []
@@ -174,7 +174,7 @@
 				"x": 4.0,
 				"y": 4.0,
 				"z": 6.0,
-				"w": 1.5
+				"w": 1.1
 			},
 			"curveIndex": 0,
 			"excludeBoneNames": []
@@ -186,7 +186,7 @@
 				"x": 4.0,
 				"y": 4.0,
 				"z": 6.0,
-				"w": 1.5
+				"w": 1.1
 			},
 			"curveIndex": 0,
 			"excludeBoneNames": []
@@ -198,7 +198,7 @@
 				"x": 3.0,
 				"y": 5.0,
 				"z": 8.0,
-				"w": 1.5
+				"w": 1.1
 			},
 			"curveIndex": 0,
 			"excludeBoneNames": []
@@ -210,7 +210,7 @@
 				"x": 3.0,
 				"y": 5.0,
 				"z": 8.0,
-				"w": 1.5
+				"w": 1.1
 			},
 			"curveIndex": 0,
 			"excludeBoneNames": []
@@ -222,7 +222,7 @@
 				"x": 5.0,
 				"y": 5.0,
 				"z": 6.0,
-				"w": 1.5
+				"w": 1.1
 			},
 			"curveIndex": 0,
 			"excludeBoneNames": ["face_eyeLids_Lf_joint2","face_eyeLidsUp_Lf_joint2","face_eyeLidsUp_Lf_joint1","face_eyeLids_Lf_joint1","face_eyeLidsdown_Lf_joint1","face_eyeLidsdown_Lf_joint2","face_eye_Lf_joint0"]
@@ -234,7 +234,7 @@
 				"x": 5.0,
 				"y": 5.0,
 				"z": 6.0,
-				"w": 1.5
+				"w": 1.1
 			},
 			"curveIndex": 0,
 			"excludeBoneNames": ["face_eyeLids_Rt_joint1","face_eyeLidsUp_Rt_joint1","face_eyeLidsUp_Rt_joint2","face_eyeLids_Rt_joint2","face_eyeLidsdown_Rt_joint2","face_eyeLidsdown_Rt_joint1","face_eye_Rt_joint0"]
@@ -246,7 +246,7 @@
 				"x": 5.0,
 				"y": 5.0,
 				"z": 6.0,
-				"w": 1.5
+				"w": 1.1
 			},
 			"curveIndex": 0,
 			"excludeBoneNames": ["face_brow_Lf_joint0","face_eyeLidsUp_Lf_joint2","face_eyeLidsUp_Lf_joint1","face_eyeLids_Lf_joint2","face_eyeLids_Lf_joint1"]
@@ -258,7 +258,7 @@
 				"x": 5.0,
 				"y": 5.0,
 				"z": 6.0,
-				"w": 1.5
+				"w": 1.1
 			},
 			"curveIndex": 0,
 			"excludeBoneNames": ["face_brow_Rt_joint0","face_eyeLidsUp_Rt_joint1","face_eyeLidsUp_Rt_joint2","face_eyeLids_Rt_joint1","face_eyeLids_Rt_joint2"]
@@ -270,7 +270,7 @@
 				"x": 3.0,
 				"y": 5.0,
 				"z": 6.0,
-				"w": 1.5
+				"w": 1.1
 			},
 			"curveIndex": 0,
 			"excludeBoneNames": ["face_brow_Lf_joint0","face_eyeLidsUp_Lf_joint2","face_eyeLidsUp_Lf_joint1","face_eyeLids_Lf_joint2","face_eyeLids_Lf_joint1"]
@@ -282,7 +282,7 @@
 				"x": 3.0,
 				"y": 5.0,
 				"z": 6.0,
-				"w": 1.5
+				"w": 1.1
 			},
 			"curveIndex": 0,
 			"excludeBoneNames": ["face_brow_Rt_joint0","face_eyeLidsUp_Rt_joint1","face_eyeLidsUp_Rt_joint2","face_eyeLids_Rt_joint1","face_eyeLids_Rt_joint2"]
@@ -294,7 +294,7 @@
 				"x": 5.0,
 				"y": 7.0,
 				"z": 6.0,
-				"w": 1.5
+				"w": 1.1
 			},
 			"curveIndex": 0,
 			"excludeBoneNames":["face_brow_Lf_joint0","face_eyeLidsUp_Lf_joint2","face_eyeLidsUp_Lf_joint1","face_eyeLids_Lf_joint2","face_eyeLids_Lf_joint1"]
@@ -306,7 +306,7 @@
 				"x": 5.0,
 				"y": 7.0,
 				"z": 6.0,
-				"w": 1.5
+				"w": 1.1
 			},
 			"curveIndex": 0,
 			"excludeBoneNames": ["face_brow_Rt_joint0","face_eyeLidsUp_Rt_joint1","face_eyeLidsUp_Rt_joint2","face_eyeLids_Rt_joint1","face_eyeLids_Rt_joint2"]
@@ -318,7 +318,7 @@
 				"x": 5.0,
 				"y": 5.0,
 				"z": 6.0,
-				"w": 1.5
+				"w": 1.1
 			},
 			"curveIndex": 0,
 			"excludeBoneNames": []
@@ -330,7 +330,7 @@
 				"x": 5.0,
 				"y": 5.0,
 				"z": 6.0,
-				"w": 1.5
+				"w": 1.1
 			},
 			"curveIndex": 0,
 			"excludeBoneNames": []
@@ -339,10 +339,10 @@
 			"boneName": "face_eyeLids_Lf_joint1",
 			"range": 10,
 			"offsetScale": {
-				"x": 5.0,
-				"y": 5.0,
-				"z": 6.0,
-				"w": 1.5
+				"x": 3.0,
+				"y": 3.0,
+				"z": 5.0,
+				"w": 1.1
 			},
 			"curveIndex": 0,
 			"excludeBoneNames": ["face_eye_Lf_joint0","face_brow_Lf_joint0","face_brow_Lf_joint1","face_brow_Lf_joint2","face_brow_Lf_joint3","face_brow_Lf_joint4","face_brow_Lf_joint5"]
@@ -351,10 +351,10 @@
 			"boneName": "face_eyeLids_Rt_joint1",
 			"range": 10,
 			"offsetScale": {
-				"x": 5.0,
-				"y": 5.0,
-				"z": 6.0,
-				"w": 1.5
+				"x": 3.0,
+				"y": 3.0,
+				"z": 5.0,
+				"w": 1.1
 			},
 			"curveIndex": 0,
 			"excludeBoneNames": ["face_eye_Rt_joint0","face_brow_Rt_joint0","face_brow_Rt_joint1","face_brow_Rt_joint2","face_brow_Rt_joint3","face_brow_Rt_joint4","face_brow_Rt_joint5"]
@@ -366,10 +366,10 @@
 				"x": 2.0,
 				"y": 3.0,
 				"z": 5.0,
-				"w": 1.5
+				"w": 1.1
 			},
 			"curveIndex": 0,
-			"excludeBoneNames": ["face_eye_Lf_joint0","face_brow_Lf_joint0","face_brow_Lf_joint1","face_brow_Lf_joint2","face_brow_Lf_joint3","face_brow_Lf_joint4","face_brow_Lf_joint5"]
+			"excludeBoneNames": ["face_eye_Lf_joint0","face_brow_Lf_joint0","face_brow_Lf_joint1","face_brow_Lf_joint2","face_brow_Lf_joint3","face_brow_Lf_joint4","face_brow_Lf_joint5","face_eyeLidsdown_Lf_joint1","face_eyeLidsdown_Lf_joint2"]
 		},
 		{
 			"boneName": "face_eyeLidsUp_Rt_joint1",
@@ -378,10 +378,10 @@
 				"x": 2.0,
 				"y": 3.0,
 				"z": 5.0,
-				"w": 1.5
+				"w": 1.1
 			},
 			"curveIndex": 0,
-			"excludeBoneNames": ["face_eye_Rt_joint0","face_brow_Rt_joint0","face_brow_Rt_joint1","face_brow_Rt_joint2","face_brow_Rt_joint3","face_brow_Rt_joint4","face_brow_Rt_joint5"]
+			"excludeBoneNames": ["face_eye_Rt_joint0","face_brow_Rt_joint0","face_brow_Rt_joint1","face_brow_Rt_joint2","face_brow_Rt_joint3","face_brow_Rt_joint4","face_brow_Rt_joint5","face_eyeLidsdown_Rt_joint1","face_eyeLidsdown_Rt_joint2"]
 		},
 		{
 			"boneName": "face_eyeLidsdown_Lf_joint1",
@@ -390,7 +390,7 @@
 				"x": 2.0,
 				"y": 3.0,
 				"z": 5.0,
-				"w": 1.5
+				"w": 1.1
 			},
 			"curveIndex": 0,
 			"excludeBoneNames": ["face_eyeLidsUp_Lf_joint1","face_eyeLidsUp_Lf_joint2","face_eye_Lf_joint0"]
@@ -402,10 +402,10 @@
 				"x": 2.0,
 				"y": 3.0,
 				"z": 5.0,
-				"w": 1.5
+				"w": 1.1
 			},
 			"curveIndex": 0,
-			"excludeBoneNames": ["face_eye_Lf_joint0"]
+			"excludeBoneNames": ["face_eyeLidsUp_Rt_joint1","face_eyeLidsUp_Rt_joint2","face_eye_Rt_joint0"]
 		},
 		{
 			"boneName": "face_eyeLids_Lf_joint2",
@@ -414,10 +414,10 @@
 				"x": 3.0,
 				"y": 3.0,
 				"z": 6.0,
-				"w": 1.5
+				"w": 1.1
 			},
 			"curveIndex": 0,
-			"excludeBoneNames": ["face_eye_Lf_joint0"]
+			"excludeBoneNames": ["face_eye_Lf_joint0","face_brow_Lf_joint0","face_brow_Lf_joint1","face_brow_Lf_joint2","face_brow_Lf_joint3","face_brow_Lf_joint4","face_brow_Lf_joint5"]
 		},
 		{
 			"boneName": "face_eyeLids_Rt_joint2",
@@ -426,7 +426,7 @@
 				"x": 3.0,
 				"y": 3.0,
 				"z": 6.0,
-				"w": 1.5
+				"w": 1.1
 			},
 			"curveIndex": 0,
 			"excludeBoneNames": ["face_eye_Rt_joint0","face_brow_Rt_joint0","face_brow_Rt_joint1","face_brow_Rt_joint2","face_brow_Rt_joint3","face_brow_Rt_joint4","face_brow_Rt_joint5"]
@@ -438,7 +438,7 @@
 				"x": 1.0,
 				"y": 5.0,
 				"z": 6.0,
-				"w": 1.5
+				"w": 1.1
 			},
 			"curveIndex": 0,
 			"excludeBoneNames": []
@@ -450,7 +450,7 @@
 				"x": 2.0,
 				"y": 3.0,
 				"z": 5.0,
-				"w": 1.5
+				"w": 1.1
 			},
 			"curveIndex": 0,
 			"excludeBoneNames": []
@@ -462,7 +462,7 @@
 				"x": 2.0,
 				"y": 3.0,
 				"z": 5.0,
-				"w": 1.5
+				"w": 1.1
 			},
 			"curveIndex": 0,
 			"excludeBoneNames": []
@@ -474,7 +474,7 @@
 				"x": 1.0,
 				"y": 5.0,
 				"z": 6.0,
-				"w": 1.5
+				"w": 1.1
 			},
 			"curveIndex": 0,
 			"excludeBoneNames": []
@@ -486,7 +486,7 @@
 				"x": 1.0,
 				"y": 5.0,
 				"z": 6.0,
-				"w": 1.5
+				"w": 1.1
 			},
 			"curveIndex": 0,
 			"excludeBoneNames":  ["face_nose_joint0"]
@@ -498,7 +498,7 @@
 				"x": 1.0,
 				"y": 3.0,
 				"z": 6.0,
-				"w": 1.5
+				"w": 1.1
 			},
 			"curveIndex": 0,
 			"excludeBoneNames": ["face_nose_joint0"]
@@ -510,7 +510,7 @@
 				"x": 5.0,
 				"y": 5.0,
 				"z": 6.0,
-				"w": 1.5
+				"w": 1.1
 			},
 			"curveIndex": 0,
 			"excludeBoneNames":  ["face_nose_joint0"]
@@ -522,7 +522,7 @@
 				"x": 5.0,
 				"y": 5.0,
 				"z": 6.0,
-				"w": 1.5
+				"w": 1.1
 			},
 			"curveIndex": 0,
 			"excludeBoneNames": ["face_nose_joint0"]
@@ -534,7 +534,7 @@
 				"x": 5.0,
 				"y": 5.0,
 				"z": 6.0,
-				"w": 1.5
+				"w": 1.1
 			},
 			"curveIndex": 0,
 			"excludeBoneNames":  ["face_nose_joint0"]
@@ -546,7 +546,7 @@
 				"x": 5.0,
 				"y": 5.0,
 				"z": 6.0,
-				"w": 1.5
+				"w": 1.1
 			},
 			"curveIndex": 0,
 			"excludeBoneNames":  ["face_nose_joint0"]
@@ -558,7 +558,7 @@
 				"x": 1.0,
 				"y": 5.0,
 				"z": 6.0,
-				"w": 1.5
+				"w": 1.1
 			},
 			"curveIndex": 0,
 			"excludeBoneNames": []
@@ -570,10 +570,10 @@
 				"x": 5.0,
 				"y": 5.0,
 				"z": 6.0,
-				"w": 1.5
+				"w": 1.1
 			},
 			"curveIndex": 0,
-			"excludeBoneNames": ["face_mouthLip_dn_joint0","face_mouthLip_Lf_joint7","face_mouthLip_dn_joint2","face_mouthLip_Rt_joint7","face_mouthLip_dn_joint1","face_mouthLip_Lf_joint6","face_mouthLip_Rt_joint6"]
+			"excludeBoneNames": ["face_mouthLip_dn_joint0","face_mouthLip_Lf_joint7","face_mouthLip_dn_joint2","face_mouthLip_Rt_joint7","face_mouthLip_dn_joint1","face_mouthLip_Lf_joint6","face_mouthLip_Rt_joint6","face_mouthLip_Rt_joint5","face_mouthLip_Lf_joint5"]
 		},
 		{
 			"boneName": "face_mouthLip_Rt_joint2",
@@ -582,10 +582,10 @@
 				"x": 5.0,
 				"y": 5.0,
 				"z": 6.0,
-				"w": 1.5
+				"w": 1.1
 			},
 			"curveIndex": 0,
-			"excludeBoneNames": ["face_mouthLip_dn_joint0","face_mouthLip_Lf_joint7","face_mouthLip_dn_joint2","face_mouthLip_Rt_joint7","face_mouthLip_dn_joint1","face_mouthLip_Lf_joint6","face_mouthLip_Rt_joint6"]
+			"excludeBoneNames": ["face_mouthLip_dn_joint0","face_mouthLip_Lf_joint7","face_mouthLip_dn_joint2","face_mouthLip_Rt_joint7","face_mouthLip_dn_joint1","face_mouthLip_Lf_joint6","face_mouthLip_Rt_joint6","face_mouthLip_Rt_joint5","face_mouthLip_Lf_joint5"]
 		},
 		{
 			"boneName": "face_mouthLip_up_joint0",
@@ -594,7 +594,7 @@
 				"x": 1.0,
 				"y": 3.0,
 				"z": 3.0,
-				"w": 1.5
+				"w": 1.1
 			},
 			"curveIndex": 0,
 			"excludeBoneNames": ["face_mouthLip_dn_joint0","face_mouthLip_Lf_joint7","face_mouthLip_dn_joint2","face_mouthLip_Rt_joint7","face_mouthLip_dn_joint1","face_mouthLip_Lf_joint6","face_mouthLip_Rt_joint6"]
@@ -606,10 +606,10 @@
 				"x": 5.0,
 				"y": 5.0,
 				"z": 6.0,
-				"w": 1.5
+				"w": 1.1
 			},
 			"curveIndex": 0,
-			"excludeBoneNames": ["face_mouthLip_up_joint0","face_mouthLip_up_joint2","face_mouthLip_Lf_joint5","face_mouthLip_Rt_joint5","face_mouthLip_up_joint1","face_mouthLip_Lf_joint4","face_mouthLip_Rt_joint4","face_mouthLip_Rt_joint2","face_mouthLip_Lf_joint2","face_Philtrum_joint0"]
+			"excludeBoneNames": ["face_mouthLip_up_joint0","face_mouthLip_up_joint2","face_mouthLip_Lf_joint5","face_mouthLip_Rt_joint5","face_mouthLip_up_joint1","face_mouthLip_Lf_joint4","face_mouthLip_Rt_joint4","face_mouthLip_Rt_joint2","face_mouthLip_Lf_joint2","face_Philtrum_joint0","face_mouthLip_Rt_joint7","face_mouthLip_Lf_joint7","face_mouthLip_dn_joint2"]
 		},
 		{
 			"boneName": "face_mouthLip_Rt_joint6",
@@ -618,10 +618,10 @@
 				"x": 5.0,
 				"y": 5.0,
 				"z": 6.0,
-				"w": 1.5
+				"w": 1.1
 			},
 			"curveIndex": 0,
-			"excludeBoneNames": ["face_mouthLip_up_joint0","face_mouthLip_up_joint2","face_mouthLip_Lf_joint5","face_mouthLip_Rt_joint5","face_mouthLip_up_joint1","face_mouthLip_Lf_joint4","face_mouthLip_Rt_joint4","face_mouthLip_Rt_joint2","face_mouthLip_Lf_joint2","face_Philtrum_joint0"]
+			"excludeBoneNames": ["face_mouthLip_up_joint0","face_mouthLip_up_joint2","face_mouthLip_Lf_joint5","face_mouthLip_Rt_joint5","face_mouthLip_up_joint1","face_mouthLip_Lf_joint4","face_mouthLip_Rt_joint4","face_mouthLip_Rt_joint2","face_mouthLip_Lf_joint2","face_Philtrum_joint0","face_mouthLip_Rt_joint7","face_mouthLip_Lf_joint7","face_mouthLip_dn_joint2"]
 		},
 		{
 			"boneName": "face_mouthLip_dn_joint0",
@@ -630,7 +630,7 @@
 				"x": 1.0,
 				"y": 3.0,
 				"z": 3.0,
-				"w": 1.5
+				"w": 1.1
 			},
 			"curveIndex": 0,
 			"excludeBoneNames": ["face_mouthLip_up_joint0","face_mouthLip_up_joint2","face_mouthLip_Lf_joint5","face_mouthLip_Rt_joint5","face_mouthLip_up_joint1","face_mouthLip_Lf_joint4","face_mouthLip_Rt_joint4","face_mouthLip_Rt_joint2","face_mouthLip_Lf_joint2","face_Philtrum_joint0"]
@@ -642,7 +642,7 @@
 				"x": 1.0,
 				"y": 2.0,
 				"z": 3.0,
-				"w": 1.5
+				"w": 1.1
 			},
 			"curveIndex": 0,
 			"excludeBoneNames": []
@@ -654,7 +654,7 @@
 				"x": 3.0,
 				"y": 3.0,
 				"z": 5.0,
-				"w": 1.5
+				"w": 1.1
 			},
 			"curveIndex": 0,
 			"excludeBoneNames": []
@@ -666,7 +666,7 @@
 				"x": 3.0,
 				"y": 3.0,
 				"z": 5.0,
-				"w": 1.5
+				"w": 1.1
 			},
 			"curveIndex": 0,
 			"excludeBoneNames": []

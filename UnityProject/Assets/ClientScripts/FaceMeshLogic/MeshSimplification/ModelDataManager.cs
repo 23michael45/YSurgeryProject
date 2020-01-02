@@ -262,6 +262,7 @@ public class MeanInitData
         public Vector3 localPosition;
         public Quaternion localRotation;
         public Vector3 localScale;
+        public Vector3 Position;
     }
     public List<VertexData> Vertices = new List<VertexData>();
     public Dictionary<string, BoneData> Bones = new Dictionary<string, BoneData>();
@@ -442,7 +443,7 @@ public class ModelDataManager : MonoBehaviour
 
 
         Vector3[] vertices = mSkinnedMeshRenderer.sharedMesh.vertices;
-        foreach(Vector3 vertex in vertices)
+        foreach (Vector3 vertex in vertices)
         {
             MeanInitData.VertexData vd = new MeanInitData.VertexData();
             vd.localPosition = vertex;
@@ -457,10 +458,17 @@ public class ModelDataManager : MonoBehaviour
             bd.localPosition = t.localPosition;
             bd.localRotation = t.localRotation;
             bd.localScale = t.localScale;
-
+            bd.Position = t.position;
             mMeanInitData.Bones[t.name] = bd;
         }
     }
+
+   public  void LookAtBone(string boneName, ref Vector3 BonePostion) {
+       
+        BonePostion = mMeanInitData.Bones[boneName].Position;
+    }
+
+
     public void ResetBoneInitData()
     {
         Mesh mesh = mSkinnedMeshRenderer.sharedMesh;
