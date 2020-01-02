@@ -63,20 +63,16 @@ public class DeformLeaderBoneManager : MonoBehaviour
     void Awake()
     {
         Instance = this;
-
-        DeformLeaderBoneManagerSetup setup = new DeformLeaderBoneManagerSetup();
-        DeformLeaderBoneManagerSetup.LeaderBoneData lbd = new DeformLeaderBoneManagerSetup.LeaderBoneData();
-        setup.leaderBones.Add(lbd);
-        string jstr = JsonUtility.ToJson(setup);
-        File.WriteAllText(Application.dataPath + "/../temp.json", jstr);
-    }
-
-    private void Start()
-    {
         if (mRootBone == null)
         {
             mRootBone = transform;
         }
+
+    }
+
+    private void Start()
+    {
+
         if (mInitFromFile)
         {
             InitFromResource();
