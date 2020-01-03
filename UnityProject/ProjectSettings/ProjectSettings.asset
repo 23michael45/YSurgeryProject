@@ -711,7 +711,7 @@ PlayerSettings:
   webGLLinkerTarget: 1
   webGLThreadsSupport: 0
   scriptingDefineSymbols:
-    7: AS_NATIVE_PROJECT
+    7: AS_NATIVE_PROJECT_
   platformArchitecture: {}
   scriptingBackend:
     Android: 1
