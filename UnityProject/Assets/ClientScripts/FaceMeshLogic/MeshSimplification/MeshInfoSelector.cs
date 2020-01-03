@@ -51,7 +51,6 @@ public class MeshInfoSelector : MonoBehaviour
 
     public void PickVertex(Ray ray)
     {
-
         RaycastHit hit;
         if (!Physics.Raycast(ray, out hit))
             return;
@@ -147,7 +146,7 @@ public class MeshInfoSelector : MonoBehaviour
         mSelectVertex = localPos;
 
         Gizmos.color = Color.cyan;
-        Gizmos.DrawSphere(transform.TransformPoint(localPos), 5);
+        Gizmos.DrawSphere(transform.TransformPoint(localPos), 1.5f);
 
 
 

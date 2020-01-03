@@ -21,6 +21,8 @@ public class ModelDataManagerEditor : Editor
     string mSaveDeformFilePath = "../Model/obama53149_deform.json";
     string mLoadDeformFilePath = "../Model/obama53149_deform.json";
 
+    bool mGender = false;
+
     public override void OnInspectorGUI()
     {
         base.OnInspectorGUI();
@@ -34,12 +36,15 @@ public class ModelDataManagerEditor : Editor
         EditorGUILayout.LabelField("Save LD json File Path");
         mSaveRoleJsonFilePath = EditorGUILayout.TextField(mSaveRoleJsonFilePath);
 
+        EditorGUILayout.LabelField("Is Male or Female");
+        mGender = EditorGUILayout.Toggle(mGender);
+
 
         if (GUILayout.Button("CalculateLowPolyFace", EditorStyles.miniButtonRight))
         {
             byte[] objData = File.ReadAllBytes(Path.Combine(Application.dataPath, mHDObjFilePath));
 
-            string json = parentObj.CalculateLowPolyFace(objData,0,180,75,null);
+            string json = parentObj.CalculateLowPolyFace(objData, mGender?0:1, 180,75,null);
 
             File.WriteAllText(Path.Combine(Application.dataPath, mSaveRoleJsonFilePath), json);
         }
