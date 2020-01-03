@@ -32,10 +32,7 @@ public enum MakeupPart
 
 public class ChangPart : MonoBehaviour
 {
-
-
-    Role mainRole;
-
+    
 
     //public ClothDef GetPartDef(ClothPart part, int id)
     //{

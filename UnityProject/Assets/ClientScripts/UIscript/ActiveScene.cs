@@ -52,7 +52,7 @@ public class ActiveScene : MonoSingleton<ActiveScene>
 #if AS_NATIVE_PROJECT
         
         Edit_UI.SetActive(false);
-        Edit_UI.GetComponent<FouseFacePart>().NoneAreaTexture();
+        DeformUI.Instance.NoneAreaTexture();
         
 
 #else

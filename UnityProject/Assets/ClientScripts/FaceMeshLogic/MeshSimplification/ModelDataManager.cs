@@ -839,9 +839,7 @@ public class ModelDataManager : MonoBehaviour
 
         }
         mSkinnedMeshRenderer.enabled = true;
-
-        Role role = mLowGeometryTemplate.GetComponent<Role>();
-        LoadManager.Instance.newUser(role);
+        
 
         FitCalculationJson(roleJsonData.retJsonData, roleJsonData.gender, roleJsonData.weight, roleJsonData.height);
 
@@ -918,6 +916,17 @@ public class ModelDataManager : MonoBehaviour
         SetTemplateXDirection(true);
         SetTemplateXDirection(false);
         return false;
+    }
+
+
+
+    public void ChangeFaceArea(string TexturePath)
+    {
+        Texture2D texture = Resources.Load(TexturePath) as Texture2D;
+
+        Material Facematerial = mSkinnedMeshRenderer.material;
+        Facematerial.SetTexture("_AreaTex", texture);
+        
     }
 
 }

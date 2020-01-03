@@ -256,9 +256,7 @@ public class DeformUI : MonoBehaviour
 
 
     Stack<Snapshot> undoStatck = new Stack<Snapshot>();
-
-    [NonSerialized]
-    FaceAreaTextureChange faceAreaTextureChange;
+    
     [NonSerialized]
     public LeaderBoneControlMap mLeaderBoneControlMap;
 
@@ -273,7 +271,6 @@ public class DeformUI : MonoBehaviour
 
     private void Awake()
     {
-        faceAreaTextureChange = new FaceAreaTextureChange();
         Debug.Log("DeformUI Awake");
         Instance = this;
         gameObject.SetActive(false);
@@ -353,7 +350,7 @@ public class DeformUI : MonoBehaviour
     public void NoneAreaTexture()
     {
         string TexturePath = "FaceAreaPNG/noneTex";
-        faceAreaTextureChange.ChangeFaceArea(TexturePath);
+        ModelDataManager.Instance.ChangeFaceArea(TexturePath);
         mDelayFaceNoMaskTexCoroutine = null;
     }
 
@@ -552,7 +549,7 @@ public class DeformUI : MonoBehaviour
         {
             currentDetailToggleName = pair.ToggleName;
 
-            faceAreaTextureChange.ChangeFaceArea(pair.AreaTextureName);
+            ModelDataManager.Instance.ChangeFaceArea(pair.AreaTextureName);
 
 
             //左右对称，所以设置一次slider值即可

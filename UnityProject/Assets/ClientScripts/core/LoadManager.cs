@@ -19,7 +19,6 @@ public class LoadManager : MonoSingleton<LoadManager>
    
     private bool _sussface;
     private  Text loadtext;
-    public Role cur_role;
 
     public SendMessage sendMessage;
 
@@ -133,7 +132,6 @@ public class LoadManager : MonoSingleton<LoadManager>
             else
             {
                 
-                LoadEditableRoleInfo(modeldata); //加载可编辑模型信息
             }
 
         } catch {
@@ -145,23 +143,7 @@ public class LoadManager : MonoSingleton<LoadManager>
         //newUser();//最终不需要此
     }
 
-
-    public void newUser(Role newRole) {
-        ///初始化可编辑模型信息。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。
-        AppRoot.MainUser = new User();
-        AppRoot.MainUser.Init();
-        
-        if (newRole)
-        {
-            AppRoot.MainRole = newRole;
-            Debug.Log(AppRoot.MainRole);
-            AppRoot.MainRole.Init();
-            ReadJsonTable();
-
-        }
-
-
-    }
+    
 
 
 
@@ -178,41 +160,7 @@ public class LoadManager : MonoSingleton<LoadManager>
 
 
 
-
-
-
-
-    public void LoadEditableRoleInfo(User_Model modeldata)
-    {
-
-        //AppRoot.MainUser = new User();
-        //AppRoot.MainUser.Init();
-        //AppRoot.MainDeform = new Deform();
-
-
-        try
-        {
-            AppRoot.MainUser.currentModel = modeldata;//加载总模型信息
-            AppRoot.MainUser.currentModel.role = modeldata.role;//加载基础脸信息（包括基础骨骼位置和点位置）
-            AppRoot.MainUser.currentModel.deform = modeldata.deform;// 加载已经编辑信息
-            AppRoot.MainUser.currentModel.Ornament = modeldata.Ornament;// 加载全身基础模型
-
-            //加载预制模型。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。
-
-            int gender = AppRoot.MainUser.currentModel.role.gender;
-            loadmainRole(gender);//分性别加载基础人体模型
-
-        } catch {
-
-            Debug.Log("user赋值出错");
-           
-        }
-
-
-       
-
-    }
-
+    
 
 
 
@@ -230,29 +178,7 @@ public class LoadManager : MonoSingleton<LoadManager>
 
     }
 
-
-
-
-
-
-    public void loadmainRole(int sex)//加载基础人体模型
-    {
-
-        if (sex == 0)
-        {
-
-            AppRoot.MainRole = cur_role;
-
-        }
-        else {
-
-            AppRoot.MainRole = cur_role;
-        }
-
-        AppRoot.MainRole.Init();
-    }
-
-
+    
 
 
 

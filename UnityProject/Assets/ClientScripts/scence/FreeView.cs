@@ -86,7 +86,6 @@ public class FreeView : MonoBehaviour
    
 
     private void changeAngeleClick() {
-        Debug.Log(AppRoot.MainRole._bones.Count);
 
 
         if (anglenumber == 1) {
