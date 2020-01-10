@@ -511,8 +511,8 @@ public class ModelDataManager : MonoBehaviour
         {
             GameObject.Destroy(orgHighModel.gameObject);
         }
-        mLowGeometryTemplate.transform.Find("Object001").gameObject.SetActive(false);
-        mLowGeometryTemplate.transform.Find("teeth").gameObject.SetActive(false);
+        //mLowGeometryTemplate.transform.Find("Object001").gameObject.SetActive(false);
+       // mLowGeometryTemplate.transform.Find("teeth").gameObject.SetActive(false);
 
         mSkinnedMeshRenderer = mLowGeometryTemplate.transform.Find("head").GetComponent<SkinnedMeshRenderer>();
         mSkinnedMeshRenderer.enabled = false;

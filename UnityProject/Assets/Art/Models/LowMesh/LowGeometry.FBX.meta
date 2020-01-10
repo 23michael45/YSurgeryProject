@@ -270,6 +270,9 @@ ModelImporter:
     100528: head
     100530: FaceRegion
     100532: noseholeRegion
+    100534: hair
+    100536: kuzi
+    100538: Shirt
     400000: Ankle_L_scaleM
     400002: Ankle_R_scaleM
     400004: Arm_L_scale01
@@ -537,6 +540,9 @@ ModelImporter:
     400528: head
     400530: FaceRegion
     400532: noseholeRegion
+    400534: hair
+    400536: kuzi
+    400538: Shirt
     2100000: wuman_body_lambert2
     2100002: 02 - Default
     2100004: 03 - Default
@@ -577,6 +583,9 @@ ModelImporter:
     4300016: head
     4300018: FaceRegion
     4300020: noseholeRegion
+    4300022: kuzi
+    4300024: Shirt
+    4300026: hair
     7400000: Take 001
     9500000: //RootNode
     13700000: head001
@@ -586,6 +595,9 @@ ModelImporter:
     13700008: women_nail
     13700010: head
     13700012: teeth
+    13700014: hair
+    13700016: kuzi
+    13700018: Shirt
   externalObjects:
   - first:
       type: UnityEngine:Material
