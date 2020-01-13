@@ -19,25 +19,30 @@ public class SwitchPostion : MonoBehaviour
     private float distane;
     private float step=10f;
     private float screenret;
-
-
+    float downpos0 = 33;
     private void Start()
     {
-        screenret = UnityEngine.Screen.height / 1450f;
+        screenret = 750f / 1450f;
 
-        Editpos0 = EditFaceSwitch.transform.position;
-        
-        Makeup_pos0 = MakeupSwitch.transform.position;
-        Cloth_pos0 = ClothsSwitch.transform.position;
-        Ornament_pos0 = OrnamentsSwitch.transform.position;
-        Act_pos0 = ActSwitch.transform.position;
-       
-        var  rect_main  = EditFaceSwitch.transform.GetComponent<RectTransform>();
-        distane = rect_main.sizeDelta.y * (1 + (step / 66f)) * screenret;
+        //Editpos0 = EditFaceSwitch.transform.GetComponent<RectTransform>().position;       
+        //Makeup_pos0 = MakeupSwitch.transform.GetComponent<RectTransform>().position;
+        //Cloth_pos0 = ClothsSwitch.transform.GetComponent<RectTransform>().position;
+        //Ornament_pos0 = OrnamentsSwitch.transform.GetComponent<RectTransform>().position;
+        //Act_pos0 = ActSwitch.transform.GetComponent<RectTransform>().position;
 
-        //Debug.Log(Editpos0);
-        //Debug.Log(screenret);
-        //Debug.Log(distane);
+        Editpos0 = new Vector3(88, -300, 0);
+        Makeup_pos0 = new Vector3(88, -792, 0);
+        Cloth_pos0 = new Vector3(88, -862, 0);
+        Ornament_pos0 = new Vector3(88, -932, 0);
+        Act_pos0 = new Vector3(88, -1002, 0);
+
+       // var rect_main  = EditFaceSwitch.transform.GetComponent<RectTransform>();
+        // distane = rect_main.sizeDelta.y * (1 + (step / 66f)) * screenret;
+
+        distane = 66f;
+        Debug.Log(Editpos0);
+        Debug.Log(screenret);
+        Debug.Log(distane);
 
 
     }
@@ -52,10 +57,15 @@ public class SwitchPostion : MonoBehaviour
         if (EditFaceSwitch.isOn)
         {
 
-            MakeupSwitch.transform.position = Makeup_pos0;
-            ClothsSwitch.transform.position = Cloth_pos0;
-            OrnamentsSwitch.transform.position = Ornament_pos0;
-            ActSwitch.transform.position = Act_pos0;
+            MakeupSwitch.transform.GetComponent<RectTransform>().position = Makeup_pos0;
+            ClothsSwitch.transform.GetComponent<RectTransform>().position = Cloth_pos0;
+            OrnamentsSwitch.transform.GetComponent<RectTransform>().position = Ornament_pos0;
+            ActSwitch.transform.GetComponent<RectTransform>().position = Act_pos0;
+
+
+
+
+         
         }
 
         else
@@ -76,14 +86,19 @@ public class SwitchPostion : MonoBehaviour
       
                 if (MakeupSwitch.isOn)
         {
-         MakeupSwitch.transform.position = Editpos0- new Vector3(0, distane,0);
+            MakeupSwitch.transform.GetComponent<RectTransform>().position = Editpos0- new Vector3(0, distane,0);
 
-           float  downpos0 =  MakeupArea.transform.GetComponent<RectTransform>().sizeDelta.y * screenret; 
+            MakeupArea.transform.GetComponent<RectTransform>().position =  Editpos0 - new Vector3(0, 2*distane+ downpos0/2, 0);
+            ClothsSwitch.transform.GetComponent<RectTransform>().position = Editpos0 - new Vector3(0,3 * distane + downpos0, 0);
+            OrnamentsSwitch.transform.GetComponent<RectTransform>().position = Editpos0 - new Vector3(0, downpos0 + 4*distane, 0);
+            ActSwitch.transform.GetComponent<RectTransform>().position = Editpos0 - new Vector3(0, downpos0 + 5*distane, 0);
 
-            MakeupArea.transform.position=  Editpos0 - new Vector3(0, 2*distane+ downpos0/2, 0);
-            ClothsSwitch.transform.position = Editpos0 - new Vector3(0, 2 * distane + downpos0+  distane, 0);
-            OrnamentsSwitch.transform.position = Editpos0 - new Vector3(0, distane + downpos0 + 3*distane, 0);
-            ActSwitch.transform.position = Editpos0 - new Vector3(0, distane + downpos0 + 4*distane, 0);
+            Debug.Log(MakeupSwitch.transform.GetComponent<RectTransform>().position);
+            Debug.Log(MakeupArea.transform.GetComponent<RectTransform>().position);
+            Debug.Log(ClothsSwitch.transform.GetComponent<RectTransform>().position);
+
+
+
 
         }
 
@@ -104,13 +119,13 @@ public class SwitchPostion : MonoBehaviour
        if (ClothsSwitch.isOn)
         {
 
-            MakeupSwitch.transform.position = Editpos0 - new Vector3(0, distane, 0);
-            ClothsSwitch.transform.position = Editpos0 - new Vector3(0,2*distane, 0);
+            MakeupSwitch.transform.GetComponent<RectTransform>().position = Editpos0 - new Vector3(0, distane, 0);
+            ClothsSwitch.transform.GetComponent<RectTransform>().position = Editpos0 - new Vector3(0,2*distane, 0);
 
-            float downpos0 = ClothsArea.transform.GetComponent<RectTransform>().sizeDelta.y * screenret;
-            ClothsArea.transform.position = Editpos0 - new Vector3(0,3 * distane + downpos0 / 2, 0);
-            OrnamentsSwitch.transform.position = Editpos0 - new Vector3(0,3* distane + downpos0 + distane, 0);
-            ActSwitch.transform.position = Editpos0 - new Vector3(0,3* distane + downpos0 + 2* distane, 0);
+          
+            ClothsArea.transform.GetComponent<RectTransform>().position = Editpos0 - new Vector3(0,3 * distane + downpos0 / 2, 0);
+            OrnamentsSwitch.transform.GetComponent<RectTransform>().position = Editpos0 - new Vector3(0,3* distane + downpos0 + distane, 0);
+            ActSwitch.transform.GetComponent<RectTransform>().position = Editpos0 - new Vector3(0,3* distane + downpos0 + 2* distane, 0);
 
 
         }
@@ -131,15 +146,15 @@ public class SwitchPostion : MonoBehaviour
 
         if (OrnamentsSwitch.isOn)
         {
-            MakeupSwitch.transform.position = Editpos0 - new Vector3(0, distane, 0);
-            ClothsSwitch.transform.position = Editpos0 - new Vector3(0, 2 * distane, 0);
-            OrnamentsSwitch.transform.position = Editpos0 - new Vector3(0, 3 * distane, 0);
+            MakeupSwitch.transform.GetComponent<RectTransform>().position = Editpos0 - new Vector3(0, distane, 0);
+            ClothsSwitch.transform.GetComponent<RectTransform>().position = Editpos0 - new Vector3(0, 2 * distane, 0);
+            OrnamentsSwitch.transform.GetComponent<RectTransform>().position = Editpos0 - new Vector3(0, 3 * distane, 0);
 
-            float downpos0 = OrnamentsArea.transform.GetComponent<RectTransform>().sizeDelta.y * screenret;
-            OrnamentsArea.transform.position = Editpos0 - new Vector3(0,4 * distane + downpos0 / 2, 0);
+         
+            OrnamentsArea.transform.GetComponent<RectTransform>().position = Editpos0 - new Vector3(0,4 * distane + downpos0 / 2, 0);
 
 
-            ActSwitch.transform.position = Editpos0 - new Vector3(0, 4 * distane + downpos0 +  distane, 0);
+            ActSwitch.transform.GetComponent<RectTransform>().position = Editpos0 - new Vector3(0, 4 * distane + downpos0 +  distane, 0);
 
         }
 
@@ -161,13 +176,13 @@ public class SwitchPostion : MonoBehaviour
 
         if (ActSwitch.isOn)
         {
-            MakeupSwitch.transform.position = Editpos0 - new Vector3(0, distane, 0);
-            ClothsSwitch.transform.position = Editpos0 - new Vector3(0, 2 * distane, 0);
-            OrnamentsSwitch.transform.position = Editpos0 - new Vector3(0, 3 * distane, 0);
-            ActSwitch.transform.position = Editpos0 - new Vector3(0,4 * distane, 0);
+            MakeupSwitch.transform.GetComponent<RectTransform>().position = Editpos0 - new Vector3(0, distane, 0);
+            ClothsSwitch.transform.GetComponent<RectTransform>().position = Editpos0 - new Vector3(0, 2 * distane, 0);
+            OrnamentsSwitch.transform.GetComponent<RectTransform>().position = Editpos0 - new Vector3(0, 3 * distane, 0);
+            ActSwitch.transform.GetComponent<RectTransform>().position = Editpos0 - new Vector3(0,4 * distane, 0);
 
-            float downpos0 = ActArea.transform.GetComponent<RectTransform>().sizeDelta.y * screenret;
-            ActArea.transform.position = Editpos0 - new Vector3(0,5 * distane + downpos0 / 2, 0);
+           
+            ActArea.transform.GetComponent<RectTransform>().position = Editpos0 - new Vector3(0,5 * distane + downpos0 / 2, 0);
 
 
         }
