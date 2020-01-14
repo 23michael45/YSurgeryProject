@@ -362,7 +362,8 @@ public class ModelDataManager : MonoBehaviour
     public AssetReference mTempalteModelRef;
 #endif
     public Texture2D mBoneWeightMask;
-    GameObject mLowGeometryTemplate;
+    [NonSerialized]
+    public GameObject mLowGeometryTemplate;
     string correspondingHDLDIndicesJson;
     string boneIndexMapJson;
 

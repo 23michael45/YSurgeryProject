@@ -50,6 +50,8 @@ public class DeformLeaderBoneManager : MonoBehaviour
     public List<DeformLeaderBone> mLeaderBones = new List<DeformLeaderBone>();
     [NonSerialized]
     public List<DeformCommonBone> mCommonBones = new List<DeformCommonBone>();
+    [NonSerialized]
+    public Dictionary<string ,Transform> mBoneNameMap = new Dictionary<string,Transform>();
 
 
     [NonSerialized]
@@ -187,6 +189,8 @@ public class DeformLeaderBoneManager : MonoBehaviour
         Transform[] bones = mRootBone.GetComponentsInChildren<Transform>();
         foreach (Transform bone in bones)
         {
+            mBoneNameMap[bone.name] = bone;
+     
             if (bone == mRootBone)
             {
                 continue;

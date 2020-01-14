@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6062379547848838753}
   - component: {fileID: 6062379547848838752}
   - component: {fileID: 6062379547848838751}
+  - component: {fileID: 6902289315417401031}
   m_Layer: 0
   m_Name: ModelDataManager
   m_TagString: Untagged
@@ -74,3 +75,15 @@ MonoBehaviour:
     m_SubObjectName: 
   mBoneWeightMask: {fileID: 0}
   mDebugMeshFilter: {fileID: 0}
+--- !u!114 &6902289315417401031
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6062379547848838749}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2383a0093aa27ae43b30d75a7dac59ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

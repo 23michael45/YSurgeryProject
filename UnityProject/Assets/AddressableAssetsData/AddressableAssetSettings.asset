@@ -23,6 +23,7 @@ MonoBehaviour:
   m_overridePlayerVersion: 
   m_GroupAssets:
   - {fileID: 11400000, guid: ab25335a3c6192c429109c6b859a3701, type: 2}
+  - {fileID: 11400000, guid: 1610959c995022f498f8eb2f5c33479d, type: 2}
   m_BuildSettings:
     m_CompileScriptsInVirtualMode: 0
     m_CleanupStreamingAssetsAfterBuilds: 1
@@ -94,6 +95,7 @@ MonoBehaviour:
     - default
     - example
     - template
+    - hair
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: 4dfc58214bc70274bad5468fff8c2f47, type: 2}

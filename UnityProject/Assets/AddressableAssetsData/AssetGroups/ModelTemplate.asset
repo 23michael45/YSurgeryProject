@@ -18,7 +18,7 @@ MonoBehaviour:
   m_GUID: 1347f2d1b9dd11443824db6998decc14
   m_SerializeEntries:
   - m_GUID: c02dc366ec5bf774b8d67e6320bea0d1
-    m_Address: Assets/Art/Prefabs/LowGeometryTemplate.prefab
+    m_Address: LowGeometryTemplate
     m_ReadOnly: 0
     m_SerializedLabels:
     - template
