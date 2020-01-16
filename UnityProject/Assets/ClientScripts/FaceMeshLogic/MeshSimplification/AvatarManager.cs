@@ -1,8 +1,38 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
+
+[Serializable]
+public class AvatarConfig
+{
+    [Serializable]
+    public class AvatarItem
+    {
+        [SerializeField]
+        public string icon;
+        [SerializeField]
+        public string model;
+    }
+    [SerializeField]
+    public List<AvatarItem> list = new List<AvatarItem>();
+
+    public void Save()
+    {
+        string jstr = JsonUtility.ToJson(this);
+        File.WriteAllText(Application.dataPath + "/../avatarConfig.bytes",jstr);
+    }
+    public static AvatarConfig Load(string jstr)
+    {
+        AvatarConfig config = JsonUtility.FromJson<AvatarConfig>(jstr);
+        return config;
+    }
+
+}
+
 
 public class AvatarManager : MonoBehaviour
 {
@@ -25,6 +55,15 @@ public class AvatarManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        AvatarConfig config = new AvatarConfig();
+        AvatarConfig.AvatarItem item = new AvatarConfig.AvatarItem();
+        item.icon = "1";
+        item.model = "m1";
+        config.list.Add(item);
+        config.Save();
+
+
+
     }
 
     public void StartLoad(AVATARPART part,string id)
