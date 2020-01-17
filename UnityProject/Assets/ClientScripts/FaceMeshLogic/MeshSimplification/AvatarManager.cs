@@ -39,9 +39,29 @@ public class AvatarManager : MonoBehaviour
 
     public enum AVATARPART
     {
-        AP_HAIR,
-        AP_TOP,
-        AP_BOTTOM,
+
+        Makeup_Eyebrow,
+        Makeup_Eyeshadow,
+        Makeup_Eyelash,
+        Makeup_Pupil,
+        Makeup_Foundation,
+        Makeup_Shadow,
+        Makeup_Lip,
+        Makeup_Tattoo,
+
+        Cloth_Upper,
+        Cloth_Down,
+        Cloth_Suit,
+        Cloth_Outter,
+        Cloth_Underwear,
+        Cloth_Shoes,
+        Cloth_Ornaments,
+
+        Ornaments_HAIR,
+        Ornaments_Glass,
+        Ornaments_Hats,
+        Ornaments_Jewellery,        
+        
     }
 
 
