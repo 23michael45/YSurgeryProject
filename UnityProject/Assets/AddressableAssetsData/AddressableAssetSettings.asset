@@ -23,10 +23,15 @@ MonoBehaviour:
   m_overridePlayerVersion: 
   m_GroupAssets:
   - {fileID: 11400000, guid: ab25335a3c6192c429109c6b859a3701, type: 2}
-  - {fileID: 11400000, guid: 1610959c995022f498f8eb2f5c33479d, type: 2}
   - {fileID: 11400000, guid: 99679ba5722302e47ab92c29b084b40a, type: 2}
-  - {fileID: 11400000, guid: 399273fcbe68176439da09e1ee8c23ba, type: 2}
   - {fileID: 11400000, guid: 96c539130374dba4da7038cf96c248c5, type: 2}
+  - {fileID: 11400000, guid: 399273fcbe68176439da09e1ee8c23ba, type: 2}
+  - {fileID: 11400000, guid: 44126c4d9b98b1445a96a010cf9d9f2a, type: 2}
+  - {fileID: 11400000, guid: 8abbb702a939f0b47a689ddc88a4acf2, type: 2}
+  - {fileID: 11400000, guid: d03921a0d6aee4244800959265ea5bed, type: 2}
+  - {fileID: 11400000, guid: 8edcda6aed7376f479f74306ee208569, type: 2}
+  - {fileID: 11400000, guid: 1610959c995022f498f8eb2f5c33479d, type: 2}
+  - {fileID: 11400000, guid: 8750d5f1eb0b19d48b6dc425312407b1, type: 2}
   m_BuildSettings:
     m_CompileScriptsInVirtualMode: 0
     m_CleanupStreamingAssetsAfterBuilds: 1
@@ -98,9 +103,11 @@ MonoBehaviour:
     - default
     - example
     - template
-    - hair
     - icon
     - config
+    - Cloth
+    - Ornaments
+    - MakeUp
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: 4dfc58214bc70274bad5468fff8c2f47, type: 2}

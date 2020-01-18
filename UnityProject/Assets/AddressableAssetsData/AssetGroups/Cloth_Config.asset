@@ -1,0 +1,74 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Cloth_Config
+  m_EditorClassIdentifier: 
+  m_GroupName: Cloth_Config
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 2546300f60bb6dc45b637a25a30b1b57
+  m_SerializeEntries:
+  - m_GUID: 1e46c08d507b7a745ad4f6c309866103
+    m_Address: Cloth_Shoes_Config
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - config
+    m_mainAssetType: UnityEngine.TextAsset, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  - m_GUID: 219bb271754fa7b42ab8b35175378306
+    m_Address: Cloth_Down_Config
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - config
+    m_mainAssetType: UnityEngine.TextAsset, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  - m_GUID: 88349c0df6d03be4394569efa433e49b
+    m_Address: Cloth_Upper_Config
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - config
+    m_mainAssetType: UnityEngine.TextAsset, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  - m_GUID: 8a2fab2a6f92c68408bb26da89ccbaef
+    m_Address: Cloth_Underwear_Config
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - config
+    m_mainAssetType: UnityEngine.TextAsset, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  - m_GUID: 971a15873f8498241ad9eda9844275ed
+    m_Address: Cloth_Outter_Config
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - config
+    m_mainAssetType: UnityEngine.TextAsset, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  - m_GUID: 9c36657c1df3ff64fbc19d50e6d675ee
+    m_Address: Cloth_Ornaments_Config
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - config
+    m_mainAssetType: UnityEngine.TextAsset, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  - m_GUID: d5032ef66104d6043bec3827bdc040c0
+    m_Address: Cloth_Suit_Config
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - config
+    m_mainAssetType: UnityEngine.TextAsset, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: d00d0109c0ab0f249b9ecb2dc6fe9966, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 8e49829200a50e44e893ed9e0c98316a, type: 2}
+    - {fileID: 11400000, guid: 75f0ba8784d67124d9d90b00c42cbbcf, type: 2}

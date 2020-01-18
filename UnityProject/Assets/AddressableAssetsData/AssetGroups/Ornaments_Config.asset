@@ -1,0 +1,53 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Ornaments_Config
+  m_EditorClassIdentifier: 
+  m_GroupName: Ornaments_Config
+  m_Data:
+    m_SerializedData: []
+  m_GUID: e106705681af5184a8c3f6c1086d6090
+  m_SerializeEntries:
+  - m_GUID: 01085a3a6a7214b4eb6f02296b603f6f
+    m_Address: Ornaments_HAIR_Config
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - config
+    m_mainAssetType: UnityEngine.TextAsset, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  - m_GUID: 678f53e29a93c5849acf4bcae0516f60
+    m_Address: Ornaments_Hats_Config
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - config
+    m_mainAssetType: UnityEngine.TextAsset, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  - m_GUID: 72f8f9d064fa6a84e8bd141b4c3511ba
+    m_Address: Ornaments_Jewellery_Config
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - config
+    m_mainAssetType: UnityEngine.TextAsset, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  - m_GUID: c7c83086883bf8f4e9c5a5a279282e0f
+    m_Address: Ornaments_Glass_Config
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - config
+    m_mainAssetType: UnityEngine.TextAsset, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: d00d0109c0ab0f249b9ecb2dc6fe9966, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 5b891e6171eea0949995505f47585ba9, type: 2}
+    - {fileID: 11400000, guid: 6908f9b64fe632a4da12c58f422f9814, type: 2}
