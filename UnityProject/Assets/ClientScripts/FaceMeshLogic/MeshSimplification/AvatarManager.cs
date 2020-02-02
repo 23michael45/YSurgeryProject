@@ -91,9 +91,9 @@ public class AvatarManager : MonoBehaviour
         StartCoroutine(Load(part, id));
     }
 
-    IEnumerator Load(AVATARPART part,string id)
+    IEnumerator Load(AVATARPART part, string id)
     {
-        while(bLoading)
+        while (bLoading)
         {
             yield return 0;
         }
@@ -109,47 +109,44 @@ public class AvatarManager : MonoBehaviour
             mPartDic[part] = null;
         }
 
-        while (!opGo.IsDone)
+        while (!opGo.IsDone || mTempGo == null)
         {
             yield return 0;
 
         }
 
-        if(mTempGo)
+        SkinnedMeshRenderer smr = mTempGo.GetComponentInChildren<SkinnedMeshRenderer>();
+
+        GameObject oldGo = mPartDic[part];
+        mPartDic[part] = mTempGo;
+
+        if (oldGo != null)
         {
-
-            SkinnedMeshRenderer smr = mTempGo.GetComponentInChildren<SkinnedMeshRenderer>();
-
-            GameObject oldGo = mPartDic[part];
-            mPartDic[part] = mTempGo;
-
-            if (oldGo != null)
+            var oldSMR = oldGo.GetComponentInChildren<SkinnedMeshRenderer>();
+            smr.bones = oldSMR.bones;
+            GameObject.Destroy(oldGo);
+        }
+        else
+        {
+            int boneNum = smr.bones.Length;
+            Transform[] newBones = new Transform[boneNum];
+            for (int i = 0; i < boneNum; i++)
             {
-                var oldSMR = oldGo.GetComponentInChildren<SkinnedMeshRenderer>();
-                smr.bones = oldSMR.bones;
-                GameObject.Destroy(oldGo);
-            }
-            else
-            {
-                int boneNum = smr.bones.Length;
-                Transform[] newBones = new Transform[boneNum];
-                for(int i = 0; i < boneNum; i++)
+                Transform bone = smr.bones[i];
+                if (DeformLeaderBoneManager.Instance.mBoneNameMap.ContainsKey(bone.name))
                 {
-                    Transform bone = smr.bones[i];
-                    if(DeformLeaderBoneManager.Instance.mBoneNameMap.ContainsKey(bone.name))
-                    {
-                        newBones[i] = DeformLeaderBoneManager.Instance.mBoneNameMap[bone.name];
-                    }
-                    else
-                    {
-                        Debug.LogError("Load Avatar Bone not Found:" + bone.name);
-                    }
+                    newBones[i] = DeformLeaderBoneManager.Instance.mBoneNameMap[bone.name];
                 }
-                smr.bones = newBones;
-
+                else
+                {
+                    Debug.LogError("Load Avatar Bone not Found:" + bone.name);
+                }
             }
+            smr.bones = newBones;
 
         }
+
+        mTempGo = null;
         bLoading = false;
     }
 

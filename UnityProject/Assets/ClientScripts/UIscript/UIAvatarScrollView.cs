@@ -32,7 +32,7 @@ public class UIAvatarScrollView : MonoBehaviour
             gonew.transform.localScale = Vector3.one;
 
            UIAvatarItem item = gonew.GetComponent<UIAvatarItem>();
-            item.SetItemData(itemConfig);
+            item.SetItemData(itemConfig,mPart);
 
         }
     }

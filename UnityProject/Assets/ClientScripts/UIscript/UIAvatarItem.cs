@@ -13,11 +13,11 @@ public class UIAvatarItem : MonoBehaviour
     AvatarManager.AVATARPART mPart;
     string mModelAddress;
 
-    public void SetItemData(AvatarConfig.AvatarItem config)
+    public void SetItemData(AvatarConfig.AvatarItem config, AvatarManager.AVATARPART part)
     {
         mIconAddress = config.icon;
         mModelAddress = config.model;
-
+        mPart = part;
     }
 
     private void Awake()

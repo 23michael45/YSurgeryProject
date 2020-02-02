@@ -133,5 +133,9 @@ public class ModelDataManagerEditor : Editor
         {
             parentObj.ResetBoneInitData();
         }
+        if (GUILayout.Button("Test Animation Default", EditorStyles.miniButtonRight))
+        {
+            parentObj.PlayAnimation("Default");
+        }
     }
 }

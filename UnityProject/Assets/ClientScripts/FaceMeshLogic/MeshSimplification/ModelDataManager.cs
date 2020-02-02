@@ -368,6 +368,7 @@ public class ModelDataManager : MonoBehaviour
     string boneIndexMapJson;
 
     SkinnedMeshRenderer mSkinnedMeshRenderer;
+    Animator mAnimator;
     Transform mReferenceTransform;
     public MeshFilter mDebugMeshFilter;
 
@@ -506,6 +507,7 @@ public class ModelDataManager : MonoBehaviour
     {
         mLowGeometryTemplate = GameObject.Instantiate(obj.Result);
 
+        mAnimator = mLowGeometryTemplate.GetComponent<Animator>();
 
         Transform orgHighModel = mLowGeometryTemplate.transform.Find("BaselFaceModel2017");
         if (orgHighModel)
@@ -930,4 +932,9 @@ public class ModelDataManager : MonoBehaviour
         
     }
 
+
+    public void PlayAnimation(string animationName)
+    {
+        mAnimator.Play(animationName);
+    }
 }
