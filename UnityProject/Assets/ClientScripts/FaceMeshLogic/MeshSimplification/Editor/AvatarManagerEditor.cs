@@ -26,7 +26,7 @@ public class AvatarManagerEditor : Editor
 
         if (GUILayout.Button("Load", EditorStyles.miniButtonRight))
         {
-            AvatarManager.Instance.StartLoad(part, avatarID);
+            AvatarManager.Instance.StartLoadAvatar(part, avatarID);
         }
         
     }

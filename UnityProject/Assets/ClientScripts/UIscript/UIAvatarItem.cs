@@ -48,6 +48,6 @@ public class UIAvatarItem : MonoBehaviour
 
     void OnClick()
     {
-        AvatarManager.Instance.StartLoad(mPart,mModelAddress);
+        AvatarManager.Instance.StartLoadAvatar(mPart,mModelAddress);
     }
 }

@@ -32,7 +32,32 @@ public class AvatarConfig
     }
 
 }
+[Serializable]
+public class ActionConfig
+{
+    [Serializable]
+    public class ActionItem
+    {
+        [SerializeField]
+        public string icon;
+        [SerializeField]
+        public string overridecontroller;
+    }
+    [SerializeField]
+    public List<ActionItem> list = new List<ActionItem>();
 
+    public void Save()
+    {
+        string jstr = JsonUtility.ToJson(this);
+        File.WriteAllText(Application.dataPath + "/../actionConfig.bytes", jstr);
+    }
+    public static ActionConfig Load(string jstr)
+    {
+        ActionConfig config = JsonUtility.FromJson<ActionConfig>(jstr);
+        return config;
+    }
+
+}
 
 public class AvatarManager : MonoBehaviour
 {
@@ -86,11 +111,16 @@ public class AvatarManager : MonoBehaviour
 
     }
 
-    public void StartLoad(AVATARPART part,string id)
+    public void StartLoadAvatar(AVATARPART part,string id)
     {
         StartCoroutine(Load(part, id));
     }
-
+    public void PlayAction(AnimatorOverrideController overrideController)
+    {
+        Animator animator = ModelDataManager.Instance.mLowGeometryTemplate.GetComponent<Animator>();
+        animator.runtimeAnimatorController = overrideController;
+        animator.Play("Default");
+    }
     IEnumerator Load(AVATARPART part, string id)
     {
         while (bLoading)

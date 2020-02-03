@@ -32,6 +32,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8edcda6aed7376f479f74306ee208569, type: 2}
   - {fileID: 11400000, guid: 1610959c995022f498f8eb2f5c33479d, type: 2}
   - {fileID: 11400000, guid: 8750d5f1eb0b19d48b6dc425312407b1, type: 2}
+  - {fileID: 11400000, guid: b8bc35c6aeb96a84aa3cbf8cc4e8b713, type: 2}
   m_BuildSettings:
     m_CompileScriptsInVirtualMode: 0
     m_CleanupStreamingAssetsAfterBuilds: 1
@@ -108,6 +109,7 @@ MonoBehaviour:
     - Cloth
     - Ornaments
     - MakeUp
+    - Animation
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: 4dfc58214bc70274bad5468fff8c2f47, type: 2}

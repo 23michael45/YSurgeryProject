@@ -1,0 +1,12 @@
+{
+  "list": [
+    {
+      "icon": "niuziku001",
+      "overridecontroller": "Jump"
+    },
+    {
+      "icon": "niuziku001",
+      "overridecontroller": "Idle"
+    }
+  ]
+}
