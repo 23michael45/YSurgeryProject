@@ -11,11 +11,12 @@ public class ViewUI : MonoBehaviour
     public Button EditButton;
     public Button BoardButton;
     public Button CreatButton;
+    public Button ReportButton;
 
     public GameObject Edit_UI;
     public GameObject View_UI;
     public GameObject EnterButtonUI;
-
+    public GameObject ReportItem;
 
     public Button okbutton;
 
@@ -55,6 +56,7 @@ public class ViewUI : MonoBehaviour
         BoardButton.onClick.AddListener(BoardButton_CLK);
         EditButton.onClick.AddListener(EditButton_clk);
         CreatButton.onClick.AddListener(CreatButton_CLK);
+        ReportButton.onClick.AddListener(ReportButton_ClK);
 
         SendMessage = new SendMessage();
 
@@ -101,5 +103,11 @@ public class ViewUI : MonoBehaviour
 
 
     }
+    public void ReportButton_ClK() {
+
+        ReportItem.SetActive(true);
+    }
+
+
 
 }
