@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 170076734}
-  m_IndirectSpecularColor: {r: 0.45065928, g: 0.50062454, b: 0.5749507, a: 1}
+  m_IndirectSpecularColor: {r: 0.4506591, g: 0.5006243, b: 0.57495004, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -22675,7 +22675,7 @@ RectTransform:
   m_Children:
   - {fileID: 956431920}
   m_Father: {fileID: 534537737}
-  m_RootOrder: 1
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
@@ -29343,7 +29343,7 @@ RectTransform:
   m_Children:
   - {fileID: 601049604}
   m_Father: {fileID: 534537737}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -30947,9 +30947,11 @@ MonoBehaviour:
   EditButton: {fileID: 1699760718}
   BoardButton: {fileID: 657149210}
   CreatButton: {fileID: 341635105}
+  ReportButton: {fileID: 1097265946}
   Edit_UI: {fileID: 2070412545}
   View_UI: {fileID: 458867829}
   EnterButtonUI: {fileID: 1926600398}
+  ReportItem: {fileID: 0}
   okbutton: {fileID: 1222056168}
   SendMessage: {fileID: 0}
   readTable: {fileID: 0}
@@ -36493,6 +36495,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
+  - {fileID: 1969876739}
+  - {fileID: 1097265945}
   - {fileID: 440384309}
   - {fileID: 341635104}
   - {fileID: 1699760717}
@@ -36500,8 +36504,6 @@ RectTransform:
   - {fileID: 1419720519}
   - {fileID: 1926600399}
   - {fileID: 953658440}
-  - {fileID: 1097265945}
-  - {fileID: 1969876739}
   m_Father: {fileID: 458867830}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -46533,7 +46535,7 @@ RectTransform:
   m_Children:
   - {fileID: 1880402158}
   m_Father: {fileID: 534537737}
-  m_RootOrder: 3
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
@@ -65054,7 +65056,7 @@ RectTransform:
   m_Children:
   - {fileID: 537726051}
   m_Father: {fileID: 534537737}
-  m_RootOrder: 6
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
@@ -74758,7 +74760,7 @@ RectTransform:
   m_Children:
   - {fileID: 443648628}
   m_Father: {fileID: 534537737}
-  m_RootOrder: 7
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
@@ -83071,7 +83073,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0, y: -0.000061035156}
+  m_AnchoredPosition: {x: 0, y: -0.000061035156}
   m_SizeDelta: {x: 360, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1222350587
@@ -96852,7 +96854,7 @@ RectTransform:
   - {fileID: 679072843}
   - {fileID: 813209849}
   m_Father: {fileID: 534537737}
-  m_RootOrder: 4
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -114693,7 +114695,7 @@ RectTransform:
   m_Children:
   - {fileID: 1939718379}
   m_Father: {fileID: 534537737}
-  m_RootOrder: 2
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
@@ -128500,7 +128502,7 @@ RectTransform:
   - {fileID: 234220579}
   - {fileID: 1292325144}
   m_Father: {fileID: 534537737}
-  m_RootOrder: 5
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -131314,7 +131316,7 @@ GameObject:
   - component: {fileID: 1969876741}
   - component: {fileID: 1969876740}
   m_Layer: 5
-  m_Name: ReportImage
+  m_Name: ReportItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -131334,7 +131336,7 @@ RectTransform:
   - {fileID: 1390625884}
   - {fileID: 41724804}
   m_Father: {fileID: 534537737}
-  m_RootOrder: 8
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
