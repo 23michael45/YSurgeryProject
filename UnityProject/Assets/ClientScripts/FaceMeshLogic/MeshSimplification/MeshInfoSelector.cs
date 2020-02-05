@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 [RequireComponent(typeof(MeshFilter))]
 [RequireComponent(typeof(MeshRenderer))]
 [RequireComponent(typeof(MeshCollider))]
@@ -9,6 +10,9 @@ public class MeshInfoSelector : MonoBehaviour
     public int mSelectIndex;
     public Vector3 mSelectVertex;
     public Vector2 mSelectUV;
+
+    public bool bDrawDebugPoints = false;
+    public List<Vector3> mDrawPoints = new List<Vector3>();
 
 
     public int mTri0, mTri1, mTri2;
@@ -149,6 +153,15 @@ public class MeshInfoSelector : MonoBehaviour
         Gizmos.DrawSphere(transform.TransformPoint(localPos), 1.5f);
 
 
+        if(bDrawDebugPoints)
+        {
+            foreach(Vector3 v in mDrawPoints)
+            {
 
+
+                Gizmos.color = Color.green;
+                Gizmos.DrawSphere(transform.TransformPoint(v), 1.5f);
+            }
+        }
     }
 }

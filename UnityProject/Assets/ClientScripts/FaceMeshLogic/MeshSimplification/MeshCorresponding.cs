@@ -14,6 +14,8 @@ public class MeshCorresponding : MonoBehaviour
     public Transform mDuplicateContainer;
     public GameObject mPointPrefab;
 
+    public MeshInfoSelector mDebugSelector;
+
     public class SaveData
     {
         [SerializeField]
@@ -30,6 +32,11 @@ public class MeshCorresponding : MonoBehaviour
         Dictionary<int, Vector3> regionVertexDict = new Dictionary<int, Vector3>();
         Dictionary<Vector3, int> regionVertexDictReverse = new Dictionary<Vector3,int>();
 
+        if(mDebugSelector)
+        {
+            mDebugSelector.mDrawPoints.Clear();
+        }
+
         for (int j = 0; j < mRegionMesh.vertexCount; j++)
         {
             Vector3 vertexRegion = mRegionMesh.vertices[j];
@@ -39,6 +46,7 @@ public class MeshCorresponding : MonoBehaviour
             if (regionVertexDict.ContainsValue(vertexRegion) && regionVertexDictReverse.ContainsKey(vertexRegion))
             {
                 Debug.LogError(string.Format("Region Mesh Vertex Duplicate : {0} {1}", j, regionVertexDictReverse[vertexRegion]));
+                mDebugSelector.mDrawPoints.Add(vertexRegion);
             }
             else
             {
