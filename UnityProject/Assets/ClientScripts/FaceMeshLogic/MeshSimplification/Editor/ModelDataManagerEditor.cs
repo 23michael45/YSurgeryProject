@@ -21,6 +21,8 @@ public class ModelDataManagerEditor : Editor
     string mSaveDeformFilePath = "../Model/obama53149_deform.json";
     string mLoadDeformFilePath = "../Model/obama53149_deform.json";
 
+
+    string mBakeMeshPath = "../Model/bakeMesh.obj";
     bool mGender = false;
 
     public override void OnInspectorGUI()
@@ -136,6 +138,15 @@ public class ModelDataManagerEditor : Editor
         if (GUILayout.Button("Test Animation Default", EditorStyles.miniButtonRight))
         {
             parentObj.PlayAnimation("Default");
+        }
+
+
+        EditorGUILayout.LabelField("Bake Skinned Mesh Path");
+        mBakeMeshPath = EditorGUILayout.TextField(mBakeMeshPath);
+        if (GUILayout.Button("Test Bake Mesh", EditorStyles.miniButtonRight))
+        {
+            string bakePath = Path.Combine(Application.dataPath, mBakeMeshPath);
+            parentObj.BakeSkinnedMesh(bakePath, "");
         }
     }
 }

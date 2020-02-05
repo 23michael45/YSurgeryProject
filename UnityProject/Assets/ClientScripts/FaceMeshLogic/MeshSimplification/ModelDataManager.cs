@@ -937,4 +937,15 @@ public class ModelDataManager : MonoBehaviour
     {
         mAnimator.Play(animationName);
     }
+
+
+    public bool BakeSkinnedMesh(string objPath, string texPath)
+    {
+        Mesh mesh = new Mesh();
+        mSkinnedMeshRenderer.BakeMesh(mesh);
+        RuntimeObjExporter.MeshToFile(mesh, objPath);
+
+
+        return true;
+    }
 }
