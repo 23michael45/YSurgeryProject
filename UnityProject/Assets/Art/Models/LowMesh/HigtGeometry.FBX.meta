@@ -539,6 +539,7 @@ ModelImporter:
     2100010: m_finger
     2100012: M-body
     2100014: m_arm
+    2100016: 'Material #1'
     2300000: //RootNode
     2300002: BaselFaceModel2017
     2300004: Object001
