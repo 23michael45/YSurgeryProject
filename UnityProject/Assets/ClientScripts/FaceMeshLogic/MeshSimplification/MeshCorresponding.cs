@@ -54,8 +54,25 @@ public class MeshCorresponding : MonoBehaviour
                 regionVertexDictReverse[vertexRegion] = j;
 
             }
-            
+
+            List<int> indexList = new List<int>();
+
             int index = Array.IndexOf(targetVertices, vertexRegion);
+            while(index != -1)
+            {
+                indexList.Add(index);
+                index = Array.IndexOf(targetVertices, vertexRegion,index+1);
+            }
+
+            if(indexList.Count > 1)
+            {
+                string s = "";
+                foreach(int idx in indexList)
+                {
+                    s += idx.ToString() + "  ";
+                }
+                Debug.LogError(string.Format("There are more than 2 point use same position in Target Full Low Mesh: {0}", s));
+            }
 
             if(index == -1)
             {
