@@ -275,6 +275,7 @@ ModelImporter:
     100538: Shirt
     100540: Object002
     100542: Rectangle001
+    100544: head_org001
     400000: Ankle_L_scaleM
     400002: Ankle_R_scaleM
     400004: Arm_L_scale01
@@ -547,6 +548,7 @@ ModelImporter:
     400538: Shirt
     400540: Object002
     400542: Rectangle001
+    400544: head_org001
     2100000: wuman_body_lambert2
     2100002: 02 - Default
     2100004: 03 - Default
@@ -593,6 +595,7 @@ ModelImporter:
     4300024: Shirt
     4300026: hair
     4300028: Object002
+    4300030: head_org001
     7400000: Idle
     7400002: Jump
     9500000: //RootNode
@@ -606,6 +609,7 @@ ModelImporter:
     13700014: hair
     13700016: kuzi
     13700018: Shirt
+    13700020: head_org001
   externalObjects:
   - first:
       type: UnityEngine:Material
