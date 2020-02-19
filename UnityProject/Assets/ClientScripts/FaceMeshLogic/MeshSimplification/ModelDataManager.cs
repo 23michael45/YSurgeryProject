@@ -4,6 +4,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
 using Dummiesman;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -945,6 +946,23 @@ public class ModelDataManager : MonoBehaviour
         mSkinnedMeshRenderer.BakeMesh(mesh);
         RuntimeObjExporter.MeshToFile(mesh, objPath);
 
+        string json = ShareManager.Instance.ToJson(mesh, mCurrentHeadTexture);
+        File.WriteAllText(objPath, json);
+
+
+        string inputJson = File.ReadAllText(objPath);
+
+        ShareJson shareJson = JsonUtility.FromJson<ShareJson>(inputJson);
+
+
+        Stream stream = new MemoryStream(Convert.FromBase64String(shareJson.headMeshObj));
+        GameObject deformedMeshObject = new OBJLoader().Load(stream);
+
+        
+        MeshFilter defromedMeshFilter = deformedMeshObject.GetComponentInChildren<MeshFilter>();
+        Mesh loadMesh = Instantiate(defromedMeshFilter.sharedMesh);
+
+        Debug.Log("Load Mesh Json:" + loadMesh.vertices.Length);
 
         return true;
     }
