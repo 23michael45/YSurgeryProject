@@ -940,30 +940,20 @@ public class ModelDataManager : MonoBehaviour
     }
 
 
-    public bool BakeSkinnedMesh(string objPath, string texPath)
+    public void BakeSkinnedMesh(out Mesh headMesh, out Texture2D headTexture, out Mesh bodyMesh, out Texture2D bodyTexture, out List<Mesh> avatarMeshes, out List<Texture2D> avatarTextures)
     {
-        Mesh mesh = new Mesh();
-        mSkinnedMeshRenderer.BakeMesh(mesh);
-        RuntimeObjExporter.MeshToFile(mesh, objPath);
+        headMesh = new Mesh();
+        mSkinnedMeshRenderer.BakeMesh(headMesh);
 
-        string json = ShareManager.Instance.ToJson(mesh, mCurrentHeadTexture);
-        File.WriteAllText(objPath, json);
+        headTexture = mCurrentHeadTexture;
 
+        GameObject bodygo = mLowGeometryTemplate.transform.Find("body").gameObject;
+        bodyMesh = bodygo.GetComponent<MeshFilter>().sharedMesh;
+        bodyTexture = bodygo.GetComponent<Renderer>().sharedMaterial.GetTexture("_MainTex") as Texture2D;
 
-        string inputJson = File.ReadAllText(objPath);
+        avatarMeshes = null;
+        avatarTextures = null;
 
-        ShareJson shareJson = JsonUtility.FromJson<ShareJson>(inputJson);
-
-
-        Stream stream = new MemoryStream(Convert.FromBase64String(shareJson.headMeshObj));
-        GameObject deformedMeshObject = new OBJLoader().Load(stream);
-
-        
-        MeshFilter defromedMeshFilter = deformedMeshObject.GetComponentInChildren<MeshFilter>();
-        Mesh loadMesh = Instantiate(defromedMeshFilter.sharedMesh);
-
-        Debug.Log("Load Mesh Json:" + loadMesh.vertices.Length);
-
-        return true;
     }
+
 }

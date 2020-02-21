@@ -146,7 +146,7 @@ public class ModelDataManagerEditor : Editor
         if (GUILayout.Button("Test Bake Mesh", EditorStyles.miniButtonRight))
         {
             string bakePath = Path.Combine(Application.dataPath, mBakeMeshPath);
-            parentObj.BakeSkinnedMesh(bakePath, "");
+            //parentObj.BakeSkinnedMesh();
         }
     }
 }
