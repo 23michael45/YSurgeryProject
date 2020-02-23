@@ -939,7 +939,7 @@ public class ModelDataManager : MonoBehaviour
         mAnimator.Play(animationName);
     }
 
-
+    
     public void BakeSkinnedMesh(out Mesh headMesh, out Texture2D headTexture, out Mesh bodyMesh, out Texture2D bodyTexture, out List<Mesh> avatarMeshes, out List<Texture2D> avatarTextures)
     {
         headMesh = new Mesh();
@@ -947,10 +947,15 @@ public class ModelDataManager : MonoBehaviour
 
         headTexture = mCurrentHeadTexture;
 
-        GameObject bodygo = mLowGeometryTemplate.transform.Find("body").gameObject;
-        bodyMesh = bodygo.GetComponent<MeshFilter>().sharedMesh;
-        bodyTexture = bodygo.GetComponent<Renderer>().sharedMaterial.GetTexture("_MainTex") as Texture2D;
+        GameObject bodygo = GetBody(mCurrentRoleJson.gender);
 
+
+        bodyMesh = new Mesh();
+
+        bodygo.GetComponent<SkinnedMeshRenderer>().BakeMesh(bodyMesh);
+
+        Texture rawBodyTexture = bodygo.GetComponent<Renderer>().sharedMaterial.GetTexture("_MainTex");
+        bodyTexture = rawBodyTexture.ToTexture2D();
         avatarMeshes = null;
         avatarTextures = null;
 

@@ -25,7 +25,25 @@ public class ShareJson
     [SerializeField]
     public List<string> avatorMeshTextureList; //base64 string ,convert to byte array,is a jpg file
 }
-
+public static class TextureExt
+{
+    public static Texture2D ToTexture2D(this Texture self)
+    {
+        var sw = self.width;
+        var sh = self.height;
+        var format = TextureFormat.RGBA32;
+        var result = new Texture2D(sw, sh, format, false);
+        var currentRT = RenderTexture.active;
+        var rt = new RenderTexture(sw, sh, 32);
+        Graphics.Blit(self, rt);
+        RenderTexture.active = rt;
+        var source = new Rect(0, 0, rt.width, rt.height);
+        result.ReadPixels(source, 0, 0);
+        result.Apply();
+        RenderTexture.active = currentRT;
+        return result;
+    }
+}
 public class ShareManager : MonoBehaviour
 {
     public static ShareManager Instance;
@@ -106,8 +124,9 @@ public class ShareManager : MonoBehaviour
 
 
         List<IMultipartFormSection> formData = new List<IMultipartFormSection>();
-        formData.Add(new MultipartFormDataSection(string.Format("type={0}",99)));
-        formData.Add(new MultipartFormFileSection(jsonData, "file"));
+        formData.Add(new MultipartFormDataSection("type","99"));
+        //formData.Add(new MultipartFormFileSection("file",Encoding.ASCII.GetBytes(jsonData)));
+        formData.Add(new MultipartFormFileSection("file", jsonData));
         UnityWebRequest request = UnityWebRequest.Post(serverURL, formData);
 
         yield return request.SendWebRequest();
@@ -126,7 +145,7 @@ public class ShareManager : MonoBehaviour
         }
         else
         {
-            string shareAddress = request.GetResponseHeader("address");
+            string shareAddress = request.downloadHandler.text;
             Debug.Log(shareAddress);
         }
     }
