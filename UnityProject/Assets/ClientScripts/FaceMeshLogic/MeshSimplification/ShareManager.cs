@@ -125,8 +125,12 @@ public class ShareManager : MonoBehaviour
 
         List<IMultipartFormSection> formData = new List<IMultipartFormSection>();
         formData.Add(new MultipartFormDataSection("type","99"));
-        //formData.Add(new MultipartFormFileSection("file",Encoding.ASCII.GetBytes(jsonData)));
-        formData.Add(new MultipartFormFileSection("file", jsonData));
+        //formData.Add(new MultipartFormFileSection("file", Encoding.ASCII.GetBytes(jsonData)));
+
+        string boundary = "----" + DateTime.Now.Ticks.ToString("x");
+        string contentType = string.Format("multipart/form-data; boundary={0}", boundary);
+        formData.Add(new MultipartFormFileSection("file", Encoding.ASCII.GetBytes(jsonData), "file",contentType));
+
         UnityWebRequest request = UnityWebRequest.Post(serverURL, formData);
 
         yield return request.SendWebRequest();

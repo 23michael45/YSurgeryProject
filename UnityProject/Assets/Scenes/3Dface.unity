@@ -64411,7 +64411,6 @@ GameObject:
   m_Component:
   - component: {fileID: 962099564}
   - component: {fileID: 962099566}
-  - component: {fileID: 962099565}
   m_Layer: 5
   m_Name: ViewUICamera
   m_TagString: Untagged
@@ -64433,14 +64432,6 @@ Transform:
   m_Father: {fileID: 458867830}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!81 &962099565
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 962099563}
-  m_Enabled: 0
 --- !u!20 &962099566
 Camera:
   m_ObjectHideFlags: 0
@@ -91306,7 +91297,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1356804278}
   - component: {fileID: 1356804277}
-  - component: {fileID: 1356804276}
   m_Layer: 5
   m_Name: EditUICamera
   m_TagString: Untagged
@@ -91314,14 +91304,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &1356804276
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1356804275}
-  m_Enabled: 1
 --- !u!20 &1356804277
 Camera:
   m_ObjectHideFlags: 0
