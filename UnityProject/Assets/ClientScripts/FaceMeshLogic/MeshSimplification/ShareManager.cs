@@ -8,22 +8,32 @@ using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
 
-[SerializeField]
+
+[Serializable]
+public class ShareTextureItem
+{
+    [SerializeField]
+    public string name;    //name of the texture
+    [SerializeField]
+    public string textureJpg;//base64 string ,convert to byte array,is a jpg file
+
+}
+
+[Serializable]
+public class ShareMeshItem
+{
+    public string name; //name of the mesh object
+    [SerializeField]
+    public string meshObj;//raw obj string , parse is directly use obj file parser
+    [SerializeField]
+    public List<ShareTextureItem> textures = new List<ShareTextureItem>();
+
+}
+[Serializable]
 public class ShareJson
 {
     [SerializeField]
-    public string headMeshObj;//raw obj string , parse is directly use obj file parser
-    [SerializeField]
-    public string headTextureJpg;//base64 string ,convert to byte array,is a jpg file
-
-    [SerializeField]
-    public string bodyMeshObj;//raw obj string , parse is directly use obj file parser
-    [SerializeField]
-    public string bodyTextureJpg;//base64 string ,convert to byte array,is a jpg file
-    [SerializeField]
-    public List<string> avatorMeshObjList; //raw obj string , parse is directly use obj file parser 
-    [SerializeField]
-    public List<string> avatorMeshTextureList; //base64 string ,convert to byte array,is a jpg file
+    public List<ShareMeshItem> meshes = new List<ShareMeshItem>();
 }
 public static class TextureExt
 {
@@ -65,38 +75,46 @@ public class ShareManager : MonoBehaviour
     {
         StartCoroutine(Upload());
     }
+
+    void AddMeshObject(string name,Mesh mesh, Material[] materials, Texture2D[] textures,ref ShareJson jsonObject)
+    {
+        ShareMeshItem item = new ShareMeshItem();
+
+        item.name = name;
+        item.meshObj = RuntimeObjExporter.MeshToString(name, mesh, materials);
+
+        if (materials.Length == textures.Length)
+        {
+            for (int i = 0; i < textures.Length; i++)
+            {
+                ShareTextureItem texItem = new ShareTextureItem();
+                texItem.name = materials[i].name;
+                byte[] textureJpgData = textures[i].EncodeToJPG();
+                texItem.textureJpg = Convert.ToBase64String(textureJpgData);
+
+                item.textures.Add(texItem);
+            }
+        }
+        jsonObject.meshes.Add(item);
+    }
     
-    public string ToJson(Mesh headMesh,Texture2D headTexture,Mesh bodyMesh,Texture2D bodyTexture,List<Mesh> avatarMeshes,List<Texture2D> avatarTextures)
+    public string ToJson(Mesh headMesh,Material[] headMats,Texture2D[] headTexture,Mesh bodyMesh,Material[] bodyMats,Texture2D[] bodyTexture,List<Mesh> avatarMeshes,List<Material[]> avatarMats , List<Texture2D[]> avatarTextures)
     {
         ShareJson shareJson = new ShareJson();
         if (headMesh != null && headTexture != null)
         {
-            shareJson.headMeshObj = RuntimeObjExporter.MeshToString("headMesh", headMesh, null);
-
-            byte[] headTextureJpgData = headTexture.EncodeToJPG();
-            shareJson.headTextureJpg = Convert.ToBase64String(headTextureJpgData);
-
+            AddMeshObject("head", headMesh, headMats, headTexture, ref shareJson);
         }
-        
         if (bodyMesh != null && bodyTexture != null)
         {
-            shareJson.bodyMeshObj = RuntimeObjExporter.MeshToString("bodyMesh", bodyMesh, null);
-
-            byte[] bodyTextureJpgData = bodyTexture.EncodeToJPG();
-            shareJson.bodyTextureJpg = Convert.ToBase64String(bodyTextureJpgData);
+            AddMeshObject("body", bodyMesh, bodyMats, bodyTexture, ref shareJson);
         }
 
         if (avatarMeshes != null && avatarTextures != null && avatarMeshes.Count == avatarTextures.Count)
         {
-            shareJson.avatorMeshObjList = new List<string>();
-            shareJson.avatorMeshTextureList = new List<string>();
             for (int i = 0; i < avatarMeshes.Count;i++)
             {
-                shareJson.avatorMeshObjList.Add(RuntimeObjExporter.MeshToString(string.Format("avatar_{0}",i), avatarMeshes[i], null));
-
-                byte[] textureJpgData = avatarTextures[i].EncodeToJPG();
-                shareJson.avatorMeshTextureList.Add(Convert.ToBase64String(textureJpgData));
-
+                AddMeshObject(avatarMeshes[i].name, avatarMeshes[i], avatarMats[i], avatarTextures[i],ref shareJson);
             }
         }
 
@@ -109,16 +127,21 @@ public class ShareManager : MonoBehaviour
     IEnumerator Upload()
     {
         Mesh headMesh;
-        Texture2D headTexture;
+        Material[] headMat;
+        Texture2D[] headTexture;
         Mesh bodyMesh;
-        Texture2D bodyTexture;
+        Material[] bodyMat;
+        Texture2D[] bodyTexture;
         List<Mesh> avatarMeshes;
-        List<Texture2D> avatarTextures;
+        List<Material[]> avatarMats;
+        List<Texture2D[]> avatarTextures;
 
-        ModelDataManager.Instance.BakeSkinnedMesh(out headMesh, out headTexture, out bodyMesh, out bodyTexture, out avatarMeshes, out avatarTextures);
-        string jsonData = ShareManager.Instance.ToJson(headMesh, headTexture, bodyMesh, bodyTexture, avatarMeshes, avatarTextures);
+        ModelDataManager.Instance.BakeSkinnedMesh(out headMesh,out headMat, out headTexture, out bodyMesh,out bodyMat, out bodyTexture, out avatarMeshes,out avatarMats, out avatarTextures);
 
 
+        string jsonData = ShareManager.Instance.ToJson(headMesh, headMat,headTexture, bodyMesh, bodyMat,bodyTexture, avatarMeshes, avatarMats,avatarTextures);
+
+        File.WriteAllText("d:/t.obj", jsonData);
 
         string serverURL = "https://m.yujishishi.com/fac/com/upCommImg";
 
@@ -159,7 +182,7 @@ public class ShareManager : MonoBehaviour
         ShareJson shareJson = JsonUtility.FromJson<ShareJson>(inputJson);
 
 
-        Stream stream = new MemoryStream(Convert.FromBase64String(shareJson.headMeshObj));
+        Stream stream = new MemoryStream(Convert.FromBase64String(shareJson.meshes[0].meshObj));
         GameObject deformedMeshObject = new OBJLoader().Load(stream);
 
 
