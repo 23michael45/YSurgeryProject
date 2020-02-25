@@ -20,9 +20,9 @@ public class FreeView : MonoBehaviour
     public float humanHigh = 0;
 
     public float Distance = 830f;  	//观察距离  
-    private float MaxDistance = 2500;
+    private float MaxDistance = 5000;
     private float MinDistance = 400f;  //鼠标缩放距离最值
-    public float ZoomSpeed = 100f;  //鼠标缩放速率 
+    public float ZoomSpeed = 200f;  //鼠标缩放速率 
 
 
     private float SpeedX = 10;
@@ -66,6 +66,9 @@ public class FreeView : MonoBehaviour
 
     public Toggle HeadEditButton, FaceEditButton, EyeBrowEditButton, EyeEditButton, NoseEditButton, MouthEditButton;
 
+    public Toggle EditToggle, MakeupToggle, ClothToggle, OrnamentsToggle, ActionToggle;
+
+
     private Vector3 Headposition;
 
    
@@ -80,6 +83,13 @@ public class FreeView : MonoBehaviour
         EyeEditButton.onValueChanged.AddListener((bool b) => { MatchTargetToBones(b, EyeEditButton); });
         NoseEditButton.onValueChanged.AddListener((bool b) => { MatchTargetToBones(b, NoseEditButton); });
         MouthEditButton.onValueChanged.AddListener((bool b) => { MatchTargetToBones(b, MouthEditButton); });
+
+        EditToggle.onValueChanged.AddListener((bool b) => { OnCameraHeadBtnClk(b); });
+        MakeupToggle.onValueChanged.AddListener((bool b) => { OnCameraHeadBtnClk(b); });
+        
+        ClothToggle.onValueChanged.AddListener((bool b) => { OnCamraAllBtnClk(b); });
+        OrnamentsToggle.onValueChanged.AddListener((bool b) => { OnCamraAllBtnClk(b); });
+        ActionToggle.onValueChanged.AddListener((bool b) => { OnCamraAllBtnClk(b); });
 
     }
 
@@ -170,21 +180,16 @@ public class FreeView : MonoBehaviour
 
 
 
-
-
-
-
-
-
-    public void OnCameraHeadBtnClk()
+    public void OnCameraHeadBtnClk(bool b)
     {
-
-        CameraSlider.value = humanHigh;
-        Distance = 700f;
-        ZoomSpeed = 100f;
-        MinDistance = 400f;
-        MaxDistance = 5000F;
-        Vector3 mPosition = mRotation * new Vector3(0.0F, 0F, -Distance) + Target.position;  //重新计算位置 
+        if (b) {
+            CameraSlider.value = 0;
+            Distance = 700f;
+            ZoomSpeed = 100f;
+            MinDistance = 400f;
+            MaxDistance = 5000F;
+            Vector3 mPosition = mRotation * new Vector3(0.0F, 0F, -Distance) + Target.position;  //重新计算位置 
+        }
     }
 
 
@@ -199,14 +204,16 @@ public class FreeView : MonoBehaviour
         MaxDistance = 6000F;
     }
 
-    public void OnCamraAllBtnClk()
+    public void OnCamraAllBtnClk(bool b)
     {
-
-        CameraSlider.value = humanHigh - 850f;
-        Distance = 6000;
-        ZoomSpeed = 160F;
-        MinDistance = 900F;
-        MaxDistance = 7000f;
+        if (b)
+        {
+            CameraSlider.value = -700f;
+            Distance = 5000;
+            ZoomSpeed = 400F;
+            MinDistance = 1000F;
+            MaxDistance = 6000f;
+        }
     }
 
 

@@ -188,7 +188,7 @@ public class LoadManager : MonoSingleton<LoadManager>
         GameObject stage = GameObject.Find("Stage");
         stage.transform.rotation = Quaternion.Euler(0, 0, 0);
         stage.transform.position = new Vector3(0, 0, 0);
-        Camera.main.GetComponent<FreeView>().OnCameraHeadBtnClk();
+        Camera.main.GetComponent<FreeView>().OnCameraHeadBtnClk(true);
 
         try
         {

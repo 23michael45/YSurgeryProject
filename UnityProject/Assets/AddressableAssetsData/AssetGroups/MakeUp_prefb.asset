@@ -18,49 +18,49 @@ MonoBehaviour:
   m_GUID: b555f0abbd99bcf4082762ab5700eb5f
   m_SerializeEntries:
   - m_GUID: 39de148b923278940b577a7c2e35c8cd
-    m_Address: eyelash0001
+    m_Address: GO_eyelash0001
     m_ReadOnly: 0
     m_SerializedLabels:
     - MakeUp
     m_mainAssetType: UnityEngine.Texture2D, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   - m_GUID: 3f711a3355a88c64f8efa7839243ee8e
-    m_Address: shadow0001
+    m_Address: GO_shadow0001
     m_ReadOnly: 0
     m_SerializedLabels:
     - MakeUp
     m_mainAssetType: UnityEngine.Texture2D, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   - m_GUID: 439fd83cc2c42174580677752e4f57c9
-    m_Address: eyebrow0001
+    m_Address: GO_eyebrow0001
     m_ReadOnly: 0
     m_SerializedLabels:
     - MakeUp
     m_mainAssetType: UnityEngine.Texture2D, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   - m_GUID: 7d2c7637b9a7342418a93a69aff31edc
-    m_Address: foundation0001
+    m_Address: GO_foundation0001
     m_ReadOnly: 0
     m_SerializedLabels:
     - MakeUp
     m_mainAssetType: UnityEngine.Texture2D, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   - m_GUID: 7e5104f3aee9bdc45a9c9881faf5984e
-    m_Address: pupil0001
+    m_Address: GO_pupil0001
     m_ReadOnly: 0
     m_SerializedLabels:
     - MakeUp
     m_mainAssetType: UnityEngine.Texture2D, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   - m_GUID: 914da103021bbe047b0e118e16df5b04
-    m_Address: eyeshadow0001
+    m_Address: GO_eyeshadow0001
     m_ReadOnly: 0
     m_SerializedLabels:
     - MakeUp
     m_mainAssetType: UnityEngine.Texture2D, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   - m_GUID: fd39c6bc94e0db94cb875fceb799538f
-    m_Address: lips0001
+    m_Address: GO_lips0001
     m_ReadOnly: 0
     m_SerializedLabels:
     - MakeUp

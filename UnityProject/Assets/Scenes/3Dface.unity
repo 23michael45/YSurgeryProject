@@ -35942,8 +35942,8 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.01
-  far clip plane: 4000
-  field of view: 25
+  far clip plane: 6500
+  field of view: 26.991467
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -35994,7 +35994,7 @@ MonoBehaviour:
   Target_z: 80
   humanHigh: 0
   Distance: 800
-  ZoomSpeed: 100
+  ZoomSpeed: 200
   isNeedDamping: 0
   Damping: 10
   ChangeAngleButton: {fileID: 1097069750}
@@ -36004,6 +36004,11 @@ MonoBehaviour:
   EyeEditButton: {fileID: 1370599674}
   NoseEditButton: {fileID: 1937821828}
   MouthEditButton: {fileID: 1894880849}
+  EditToggle: {fileID: 1537282919}
+  MakeupToggle: {fileID: 239490673}
+  ClothToggle: {fileID: 499557554}
+  OrnamentsToggle: {fileID: 440568636}
+  ActionToggle: {fileID: 138691298}
 --- !u!1 &535180950
 GameObject:
   m_ObjectHideFlags: 0
@@ -122773,7 +122778,7 @@ MonoBehaviour:
   m_FillRect: {fileID: 1801072776}
   m_HandleRect: {fileID: 489958508}
   m_Direction: 3
-  m_MinValue: -200
+  m_MinValue: -800
   m_MaxValue: 200
   m_WholeNumbers: 0
   m_Value: 0
