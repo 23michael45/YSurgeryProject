@@ -1,12 +1,8 @@
 {
     "list": [
-        {
-            "icon": "hair001", 
-            "model": "Hair001"
-        },
-		{
-            "icon": "hair002", 
-            "model": "Hair002"
-        }
+      {
+        "icon": "shadow0001",
+        "model": "shadow0001"
+      }
     ]
 }

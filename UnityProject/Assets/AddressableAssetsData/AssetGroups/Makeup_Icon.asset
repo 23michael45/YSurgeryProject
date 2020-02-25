@@ -16,7 +16,56 @@ MonoBehaviour:
   m_Data:
     m_SerializedData: []
   m_GUID: bd31beb47a0e944468ae25f308f0c234
-  m_SerializeEntries: []
+  m_SerializeEntries:
+  - m_GUID: 323286924c25feb43bc7a44a6bc4c5ab
+    m_Address: eyeshadow0001
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - icon
+    m_mainAssetType: UnityEngine.Texture2D, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  - m_GUID: 6163720ecb5e3a64182e83df17e27e1e
+    m_Address: eyelash0001
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - icon
+    m_mainAssetType: UnityEngine.Texture2D, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  - m_GUID: 9094ec0bcb918b345b1774947e93697c
+    m_Address: eyebrow0001
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - icon
+    m_mainAssetType: UnityEngine.Texture2D, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  - m_GUID: b36b3245c68976b41ada89ab3c9f6b8b
+    m_Address: lip0001
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - icon
+    m_mainAssetType: UnityEngine.Texture2D, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  - m_GUID: c45efe5f440c1f441957460b38d61e54
+    m_Address: shadow0001
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - icon
+    m_mainAssetType: UnityEngine.Texture2D, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  - m_GUID: d9dc62c8ad0ea8045bced38ec818b21a
+    m_Address: foundation0001
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - icon
+    m_mainAssetType: UnityEngine.Texture2D, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  - m_GUID: ea80581994aa11146b71e86c8569c735
+    m_Address: pupil0001
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - icon
+    m_mainAssetType: UnityEngine.Texture2D, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: d00d0109c0ab0f249b9ecb2dc6fe9966, type: 2}
   m_SchemaSet:

@@ -4,6 +4,7 @@
     Properties
     {
         _MainTex ("_MainTex", 2D) = "white" {}
+		_BaseTex("_BaseTex", 2D) = "white" {}
 		_Hair ("_Hair", 2D) = "white" {}
 		_Foundation("_Foundation", 2D) = "white" {}
 		_EyeBrow ("_EyeBrow", 2D) = "white" {}
@@ -14,7 +15,8 @@
 		_FaceTatoo ("_FaceTatoo", 2D) = "white" {}	
 
 		_AreaTex ("_AreaTex", 2D) = "white" {}
-		
+		_NoseHoleMask("_NoseHoleMask", 2D) = "white" {}
+
     }
     SubShader
     {
@@ -48,6 +50,7 @@
             };
 
             sampler2D _MainTex;
+
 			sampler2D _Hair;
 
 			sampler2D _Foundation;
@@ -56,10 +59,12 @@
 			sampler2D _Pupil;	
 			sampler2D _Lip;
 			sampler2D _Shadow;
-			sampler2D _FaceTatoo;
-			
-			
+			sampler2D _FaceTatoo;					
+
 			sampler2D _AreaTex;
+
+			sampler2D _NoseHoleMask;
+			sampler2D _BaseTex;
 			
             float4 _MainTex_ST;
 
@@ -100,6 +105,9 @@
 				fixed4 FaceTatoo = tex2D(_FaceTatoo, i.uv);
 
 
+				fixed4 NoseHoleMask = tex2D(_NoseHoleMask, i.uv);
+				fixed4 BaseTex = tex2D(_BaseTex, i.uv);
+
 				fixed4 Mix_Hair = lerp(Main, Hair, Hair.a);
 				fixed4 Mix_Foundation = lerp(Mix_Hair, Foundation, Foundation.a);
 				fixed4 Mix_EyeBrow = lerp(Mix_Foundation, EyeBrow, EyeBrow.a);
@@ -111,22 +119,27 @@
 
 			    fixed4 Mix_all = Mix_FaceTatoo;
 				fixed4 Area = tex2D(_AreaTex, i.uv);		
+							   
 
-				fixed4 col = lerp(Mix_all, Area, Area.a/3);
+
+				fixed4 Mix_final = lerp(Mix_all, Area, Area.a/2);
+
+				fixed4 col = lerp(Mix_final, BaseTex, NoseHoleMask);
+
 				
-				fixed v = i.uv2.y;
-				fixed mv = (1 - v);
-				col = col * (1 - v) + fixed4(v, v, v, 1);
-				//point in face and point is nose hole
-				if (i.uv2.y == 0.0)
-				{
-					//col = fixed4(1, 0, 0, 1);
-				}
-				else
-				{
-					col = col * mv;
+				//fixed v = i.uv2.y;
+				//fixed mv = (1 - v);
+				//col = col * (1 - v) + fixed4(v, v, v, 1);
+				////point in face and point is nose hole
+				//if (i.uv2.y == 0.0)
+				//{
+				//	//col = fixed4(1, 0, 0, 1);
+				//}
+				//else
+				//{
+				//	col = col * mv;
 
-				}
+				//}
 
                 // apply fog
                 //UNITY_APPLY_FOG(i.fogCoord, col);
