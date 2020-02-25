@@ -123,7 +123,7 @@ public class ListenerAdapter : AndroidJavaProxy
 
     bool onBakeSkinnedMesh(string objPath,string texPath)
     {
-        return ModelDataManager.Instance.BakeSkinnedMesh(objPath,texPath);
+        return false;
     }
 
 

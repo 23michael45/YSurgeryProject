@@ -939,31 +939,95 @@ public class ModelDataManager : MonoBehaviour
         mAnimator.Play(animationName);
     }
 
-
-    public bool BakeSkinnedMesh(string objPath, string texPath)
+    
+    public void BakeSkinnedMesh(out Mesh headMesh, out Material[] headMat,out Texture2D[] headTexture, out Mesh bodyMesh, out Material[] bodyMat,out Texture2D[] bodyTexture, out List<Mesh> avatarMeshes,out List<Material[]> avatarMats, out List<Texture2D[]> avatarTextures)
     {
-        Mesh mesh = new Mesh();
-        mSkinnedMeshRenderer.BakeMesh(mesh);
-        RuntimeObjExporter.MeshToFile(mesh, objPath);
 
-        string json = ShareManager.Instance.ToJson(mesh, mCurrentHeadTexture);
-        File.WriteAllText(objPath, json);
+        //head mesh
+        headMesh = new Mesh();
+        mSkinnedMeshRenderer.BakeMesh(headMesh);
+
+        Vector3[] headVertices = new Vector3[headMesh.vertices.Length];
+        for(int i = 0; i< headVertices.Length;i++)
+        {
+            Vector3 wpos = mSkinnedMeshRenderer.transform.localToWorldMatrix * headMesh.vertices[i];
+            headVertices[i] = wpos;
+        }
+        headMesh.vertices = headVertices;
+
+        headMat = mSkinnedMeshRenderer.materials;
+        headTexture = new Texture2D[1];
+        headTexture[0] = mCurrentHeadTexture;
 
 
-        string inputJson = File.ReadAllText(objPath);
 
-        ShareJson shareJson = JsonUtility.FromJson<ShareJson>(inputJson);
+        //body mesh
 
+        GameObject bodygo = GetBody(mCurrentRoleJson.gender);
+        bodyMesh = new Mesh();
 
-        Stream stream = new MemoryStream(Convert.FromBase64String(shareJson.headMeshObj));
-        GameObject deformedMeshObject = new OBJLoader().Load(stream);
+        bodygo.GetComponent<SkinnedMeshRenderer>().BakeMesh(bodyMesh);
 
+        Vector3[] bodyVertices = new Vector3[bodyMesh.vertices.Length];
+        for (int i = 0; i < bodyVertices.Length; i++)
+        {
+            Vector3 wpos = bodygo.transform.localToWorldMatrix * bodyMesh.vertices[i];
+            bodyVertices[i] = wpos;
+        }
+        bodyMesh.vertices = bodyVertices;
+
+        bodyMat = bodygo.GetComponent<SkinnedMeshRenderer>().materials;
         
-        MeshFilter defromedMeshFilter = deformedMeshObject.GetComponentInChildren<MeshFilter>();
-        Mesh loadMesh = Instantiate(defromedMeshFilter.sharedMesh);
+        bodyTexture = new Texture2D[bodyMat.Length];
+        for(int i = 0;i< bodyTexture.Length;i++)
+        {
 
-        Debug.Log("Load Mesh Json:" + loadMesh.vertices.Length);
+            Texture rawBodyTexture = bodyMat[i].GetTexture("_MainTex");
+            bodyTexture[i] = rawBodyTexture.ToTexture2D();
 
-        return true;
+        }
+
+
+
+        //avater mesh
+
+        List<GameObject> avatars = new List<GameObject>();
+
+        avatarMeshes = new List<Mesh>();
+        avatarMats = new List<Material[]>();
+        avatarTextures = new List<Texture2D[]>();
+
+        for (int i = 0; i < avatars.Count;i++ )
+        {
+            GameObject avatargo = avatars[i];
+            Mesh avatarMesh = new Mesh();
+            avatargo.GetComponent<SkinnedMeshRenderer>().BakeMesh(avatarMesh);
+
+            Vector3[] avatarVertices = new Vector3[avatarMesh.vertices.Length];
+            for (int j = 0; j < avatarVertices.Length; j++)
+            {
+                Vector3 wpos = avatargo.transform.localToWorldMatrix * avatarMesh.vertices[j];
+                avatarVertices[j] = wpos;
+            }
+            avatarMesh.vertices = avatarVertices;
+
+            Material[] avatarMat = bodygo.GetComponent<SkinnedMeshRenderer>().materials;
+
+            Texture2D[] avatarTexture = new Texture2D[avatarMat.Length];
+            for (int j = 0; j < avatarTexture.Length; j++)
+            {
+
+                Texture rawTexture = avatarMat[j].GetTexture("_MainTex");
+                avatarTexture[i] = rawTexture.ToTexture2D();
+
+            }
+
+            avatarMeshes.Add(avatarMesh);
+            avatarMats.Add(avatarMat);
+            avatarTextures.Add(avatarTexture);
+
+        }
+
     }
+
 }
