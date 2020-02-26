@@ -277,6 +277,10 @@ ModelImporter:
     100542: Rectangle001
     100544: head_org001
     100546: female_body
+    100548: man_arm
+    100550: Object003
+    100552: Object004
+    100554: women_arm
     400000: Ankle_L_scaleM
     400002: Ankle_R_scaleM
     400004: Arm_L_scale01
@@ -551,6 +555,10 @@ ModelImporter:
     400542: Rectangle001
     400544: head_org001
     400546: female_body
+    400548: man_arm
+    400550: Object003
+    400552: Object004
+    400554: women_arm
     2100000: wuman_body_lambert2
     2100002: 02 - Default
     2100004: 03 - Default
@@ -576,12 +584,16 @@ ModelImporter:
     2300006: FaceRegion
     2300008: noseholeRegion
     2300010: Object002
+    2300012: Object003
+    2300014: Object004
     3300000: BaselFaceModel2017
     3300002: teeth
     3300004: Object001
     3300006: FaceRegion
     3300008: noseholeRegion
     3300010: Object002
+    3300012: Object003
+    3300014: Object004
     4300000: women_nail
     4300002: women_body
     4300004: teeth
@@ -599,6 +611,10 @@ ModelImporter:
     4300028: Object002
     4300030: head_org001
     4300032: female_body
+    4300034: Object003
+    4300036: Object004
+    4300038: women_arm
+    4300040: man_arm
     7400000: Idle
     7400002: Jump
     9500000: //RootNode
@@ -614,6 +630,8 @@ ModelImporter:
     13700018: Shirt
     13700020: head_org001
     13700022: female_body
+    13700024: man_arm
+    13700026: women_arm
   externalObjects:
   - first:
       type: UnityEngine:Material

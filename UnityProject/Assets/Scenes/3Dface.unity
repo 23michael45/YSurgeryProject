@@ -138561,19 +138561,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2147146420}
   m_CullTransparentMesh: 0
---- !u!1001 &5736471001738025329
+--- !u!1001 &7294881113734322971
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1023759048500815266, guid: c02dc366ec5bf774b8d67e6320bea0d1,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1755353387701694611, guid: c02dc366ec5bf774b8d67e6320bea0d1,
         type: 3}
       propertyPath: m_Name
       value: LowGeometry
       objectReference: {fileID: 0}
-    - target: {fileID: 1755353387701694611, guid: c02dc366ec5bf774b8d67e6320bea0d1,
+    - target: {fileID: 3026622371992623114, guid: c02dc366ec5bf774b8d67e6320bea0d1,
         type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -138631,6 +138636,11 @@ PrefabInstance:
     - target: {fileID: 6753399333247984917, guid: c02dc366ec5bf774b8d67e6320bea0d1,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9002482153347314483, guid: c02dc366ec5bf774b8d67e6320bea0d1,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
