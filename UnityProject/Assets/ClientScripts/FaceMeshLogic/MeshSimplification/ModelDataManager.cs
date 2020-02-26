@@ -368,7 +368,7 @@ public class ModelDataManager : MonoBehaviour
     string correspondingHDLDIndicesJson;
     string boneIndexMapJson;
 
-    SkinnedMeshRenderer mSkinnedMeshRenderer;
+    SkinnedMeshRenderer mHeadSkinnedMeshRenderer;
     Animator mAnimator;
     Transform mReferenceTransform;
     public MeshFilter mDebugMeshFilter;
@@ -397,7 +397,22 @@ public class ModelDataManager : MonoBehaviour
 
 
     }
+    GameObject GetArm(int gender)
+    {
+        string bodyName = "";
+        if (gender == 0)
+        {
 
+            bodyName = "man_arm";
+        }
+        else
+        {
+            bodyName = "women_arm";
+
+        }
+
+        return mLowGeometryTemplate.transform.Find(bodyName).gameObject;
+    }
     GameObject GetBody(int gender)
     {
         string bodyName = "";
@@ -429,13 +444,31 @@ public class ModelDataManager : MonoBehaviour
         return mLowGeometryTemplate.transform.Find(goName).gameObject;
     }
 
+    void SetGender(int gender)
+    {
+        for(int i = 0; i<2;i++)
+        {
+            if(i == gender)
+            {
+
+                GetBody(i).SetActive(true);
+                GetNail(i).SetActive(true);
+                GetNail(i).SetActive(true);
+            }
+            else
+            {
+                GetBody(i).SetActive(false);
+                GetNail(i).SetActive(false);
+                GetNail(i).SetActive(false);
+            }
+        }
+    }
 
     void CloneMaterial(SkinnedMeshRenderer smr)
     {
         for (int i = 0; i < smr.materials.Length; i++)
         {
             smr.materials[i] = new Material(smr.materials[i]);
-
         }
     }
 
@@ -445,7 +478,7 @@ public class ModelDataManager : MonoBehaviour
         mMeanInitData = new MeanInitData();
 
 
-        Vector3[] vertices = mSkinnedMeshRenderer.sharedMesh.vertices;
+        Vector3[] vertices = mHeadSkinnedMeshRenderer.sharedMesh.vertices;
         foreach (Vector3 vertex in vertices)
         {
             MeanInitData.VertexData vd = new MeanInitData.VertexData();
@@ -474,13 +507,13 @@ public class ModelDataManager : MonoBehaviour
 
     public void ResetBoneInitData()
     {
-        Mesh mesh = mSkinnedMeshRenderer.sharedMesh;
+        Mesh mesh = mHeadSkinnedMeshRenderer.sharedMesh;
         Vector3[] vertices = new Vector3[mesh.vertices.Length];
         for(int i = 0; i< vertices.Length;i++)
         {
             vertices[i] = mMeanInitData.Vertices[i].localPosition;
         }
-        mSkinnedMeshRenderer.sharedMesh.vertices = vertices;
+        mHeadSkinnedMeshRenderer.sharedMesh.vertices = vertices;
 
 
         Transform[] srcBones = mReferenceTransform.GetComponentsInChildren<Transform>();
@@ -493,11 +526,11 @@ public class ModelDataManager : MonoBehaviour
             t.localScale = bd.localScale;
         }
 
-        var bones = mSkinnedMeshRenderer.bones;
+        var bones = mHeadSkinnedMeshRenderer.bones;
         Matrix4x4[] bindposes = new Matrix4x4[mesh.bindposes.Length];
         for (int i = 0; i < bones.Length; i++)
         {
-            bindposes[i] = bones[i].worldToLocalMatrix * mSkinnedMeshRenderer.localToWorldMatrix;
+            bindposes[i] = bones[i].worldToLocalMatrix * mHeadSkinnedMeshRenderer.localToWorldMatrix;
         }
         mesh.bindposes = bindposes;
 
@@ -518,16 +551,16 @@ public class ModelDataManager : MonoBehaviour
         //mLowGeometryTemplate.transform.Find("Object001").gameObject.SetActive(false);
        // mLowGeometryTemplate.transform.Find("teeth").gameObject.SetActive(false);
 
-        mSkinnedMeshRenderer = mLowGeometryTemplate.transform.Find("head").GetComponent<SkinnedMeshRenderer>();
-        mSkinnedMeshRenderer.enabled = false;
-        GetBody(0).SetActive(false);
-        GetNail(0).SetActive(false);
-        GetBody(1).SetActive(false);
-        GetNail(1).SetActive(false);
+        mHeadSkinnedMeshRenderer = mLowGeometryTemplate.transform.Find("head").GetComponent<SkinnedMeshRenderer>();
+        mHeadSkinnedMeshRenderer.enabled = false;
+
+        //hide all man and woman
+        SetGender(-1);
+
         mReferenceTransform = mLowGeometryTemplate.transform.Find("Reference");
 
 
-        CloneMaterial(mSkinnedMeshRenderer);
+        CloneMaterial(mHeadSkinnedMeshRenderer);
         CloneMaterial(GetBody(0).GetComponent<SkinnedMeshRenderer>());
         CloneMaterial(GetBody(1).GetComponent<SkinnedMeshRenderer>());
 
@@ -540,7 +573,7 @@ public class ModelDataManager : MonoBehaviour
         string json = "";
         if (skinned)
         {
-            json = RoleJson.Save(mSkinnedMeshRenderer.sharedMesh, mSkinnedMeshRenderer.bones, 0, 1.78f, 75f, null);
+            json = RoleJson.Save(mHeadSkinnedMeshRenderer.sharedMesh, mHeadSkinnedMeshRenderer.bones, 0, 1.78f, 75f, null);
 
         }
         else
@@ -549,21 +582,21 @@ public class ModelDataManager : MonoBehaviour
 
         }
         var roleJson = RoleJson.Load(json);
-        roleJson.Load(ref mSkinnedMeshRenderer, ref mDebugMeshFilter);
+        roleJson.Load(ref mHeadSkinnedMeshRenderer, ref mDebugMeshFilter);
     }
     public void RebindBone()
     {
 
-        Mesh mesh = Instantiate(mSkinnedMeshRenderer.sharedMesh);
+        Mesh mesh = Instantiate(mHeadSkinnedMeshRenderer.sharedMesh);
 
         var bindposes = mesh.bindposes;
-        for (int i = 0; i < mSkinnedMeshRenderer.bones.Length; i++)
+        for (int i = 0; i < mHeadSkinnedMeshRenderer.bones.Length; i++)
         {
-            bindposes[i] = mSkinnedMeshRenderer.bones[i].worldToLocalMatrix * mSkinnedMeshRenderer.transform.localToWorldMatrix;
+            bindposes[i] = mHeadSkinnedMeshRenderer.bones[i].worldToLocalMatrix * mHeadSkinnedMeshRenderer.transform.localToWorldMatrix;
         }
         mesh.bindposes = bindposes;
 
-        mSkinnedMeshRenderer.sharedMesh = mesh;
+        mHeadSkinnedMeshRenderer.sharedMesh = mesh;
 
     }
 
@@ -686,7 +719,7 @@ public class ModelDataManager : MonoBehaviour
         Debug.Log("CalculateLowPolyFace Start");
 
         mLowGeometryTemplate.name = "LoadedAssetTemplateModel";
-        Transform skinTransform = mSkinnedMeshRenderer.transform;
+        Transform skinTransform = mHeadSkinnedMeshRenderer.transform;
 
 
         Stream stream = new MemoryStream(hdObjData);
@@ -708,7 +741,7 @@ public class ModelDataManager : MonoBehaviour
         Debug.Log("CalculateLowPolyFace CalculateDeformedMesh");
 
 
-        sf.CalculateDeformedMesh(correspondingHDLDIndicesJson, hdDeformedMesh, defromedMeshFilter.transform, mSkinnedMeshRenderer.sharedMesh, skinTransform, out vertices, out uvs, out uv2Type, out indices);
+        sf.CalculateDeformedMesh(correspondingHDLDIndicesJson, hdDeformedMesh, defromedMeshFilter.transform, mHeadSkinnedMeshRenderer.sharedMesh, skinTransform, out vertices, out uvs, out uv2Type, out indices);
 
 
 
@@ -717,7 +750,7 @@ public class ModelDataManager : MonoBehaviour
         Transform newRootBoneTransform;
 
         Debug.Log("CalculateLowPolyFace CloneBoneHierarchy");
-        CloneBoneHierarchy(mReferenceTransform, mSkinnedMeshRenderer.rootBone, mSkinnedMeshRenderer.bones, out newBones, out newParentBoneTransform, out newRootBoneTransform);
+        CloneBoneHierarchy(mReferenceTransform, mHeadSkinnedMeshRenderer.rootBone, mHeadSkinnedMeshRenderer.bones, out newBones, out newParentBoneTransform, out newRootBoneTransform);
 
 
 
@@ -725,7 +758,7 @@ public class ModelDataManager : MonoBehaviour
         BoneWeight[] weights;
 
         Debug.Log("CalculateLowPolyFace RebindBones");
-        sf.RebindBones(boneIndexMapJson, hdDeformedMesh, mSkinnedMeshRenderer.transform, newBones, newParentBoneTransform, out bindposes);
+        sf.RebindBones(boneIndexMapJson, hdDeformedMesh, mHeadSkinnedMeshRenderer.transform, newBones, newParentBoneTransform, out bindposes);
 
 
 
@@ -733,7 +766,7 @@ public class ModelDataManager : MonoBehaviour
 
 
         Vector3[] finalVertices;
-        sf.CalculateFinalWeighTexture(correspondingHDLDIndicesJson, mBoneWeightMask, vertices, uvs, mSkinnedMeshRenderer.sharedMesh.vertices, out finalVertices);
+        sf.CalculateFinalWeighTexture(correspondingHDLDIndicesJson, mBoneWeightMask, vertices, uvs, mHeadSkinnedMeshRenderer.sharedMesh.vertices, out finalVertices);
 
 
 
@@ -749,7 +782,7 @@ public class ModelDataManager : MonoBehaviour
         lowDeformedSkinMesh.triangles = indices;
 
         lowDeformedSkinMesh.bindposes = bindposes;
-        lowDeformedSkinMesh.boneWeights = mSkinnedMeshRenderer.sharedMesh.boneWeights;
+        lowDeformedSkinMesh.boneWeights = mHeadSkinnedMeshRenderer.sharedMesh.boneWeights;
 
 
 
@@ -819,30 +852,16 @@ public class ModelDataManager : MonoBehaviour
         Debug.Log("Start LoadLowPolyFace");
         if (tex != null)
         {
-            mSkinnedMeshRenderer.sharedMaterial.SetTexture("_MainTex", tex);
+            mHeadSkinnedMeshRenderer.sharedMaterial.SetTexture("_MainTex", tex);
 
         }
         Debug.Log("Start RoleJson Load");
-        roleJsonData.Load(ref mSkinnedMeshRenderer, ref mDebugMeshFilter);
+        roleJsonData.Load(ref mHeadSkinnedMeshRenderer, ref mDebugMeshFilter);
 
 
         //to do select model body by gender,height ,weight
-        if (roleJsonData.gender == 0)
-        {
-            GetBody(0).SetActive(true);
-            GetNail(0).SetActive(true);
-            GetBody(1).SetActive(false);
-            GetNail(1).SetActive(false);
-        }
-        else
-        {
-            GetBody(0).SetActive(false);
-            GetNail(0).SetActive(false);
-            GetBody(1).SetActive(true);
-            GetNail(1).SetActive(true);
-
-        }
-        mSkinnedMeshRenderer.enabled = true;
+        SetGender(roleJsonData.gender);
+        mHeadSkinnedMeshRenderer.enabled = true;
         
 
         FitCalculationJson(roleJsonData.retJsonData, roleJsonData.gender, roleJsonData.weight, roleJsonData.height);
@@ -892,7 +911,7 @@ public class ModelDataManager : MonoBehaviour
 
     public string SaveDeform()
     {
-        string deformJson = DeformJson.Save(mSkinnedMeshRenderer);
+        string deformJson = DeformJson.Save(mHeadSkinnedMeshRenderer);
         DeformLeaderBoneManager.Instance.ResetBindPose();
 
         return deformJson;
@@ -900,7 +919,7 @@ public class ModelDataManager : MonoBehaviour
 
     public bool LoadDeform(string deformJson)
     {
-        DeformJson deform = DeformJson.Load(deformJson, ref mSkinnedMeshRenderer);
+        DeformJson deform = DeformJson.Load(deformJson, ref mHeadSkinnedMeshRenderer);
         mCurrentDeformJson = deform;
 
         DeformLeaderBoneManager.Instance.ResetBindPose();
@@ -928,7 +947,7 @@ public class ModelDataManager : MonoBehaviour
     {
         Texture2D texture = Resources.Load(TexturePath) as Texture2D;
 
-        Material Facematerial = mSkinnedMeshRenderer.material;
+        Material Facematerial = mHeadSkinnedMeshRenderer.material;
         Facematerial.SetTexture("_AreaTex", texture);
         
     }
@@ -939,95 +958,31 @@ public class ModelDataManager : MonoBehaviour
         mAnimator.Play(animationName);
     }
 
-    
-    public void BakeSkinnedMesh(out Mesh headMesh, out Material[] headMat,out Texture2D[] headTexture, out Mesh bodyMesh, out Material[] bodyMat,out Texture2D[] bodyTexture, out List<Mesh> avatarMeshes,out List<Material[]> avatarMats, out List<Texture2D[]> avatarTextures)
+
+
+
+    public List<SkinnedMeshRenderer> GetAllSkinnedMeshRenderer()
     {
+        List<SkinnedMeshRenderer> list = new List<SkinnedMeshRenderer>();
+        list.Add(mHeadSkinnedMeshRenderer);
+        list.Add(GetBody(mCurrentRoleJson.gender).GetComponent<SkinnedMeshRenderer>());
+        list.Add(GetArm(mCurrentRoleJson.gender).GetComponent<SkinnedMeshRenderer>());
+        list.Add(GetNail(mCurrentRoleJson.gender).GetComponent<SkinnedMeshRenderer>());
 
-        //head mesh
-        headMesh = new Mesh();
-        mSkinnedMeshRenderer.BakeMesh(headMesh);
-
-        Vector3[] headVertices = new Vector3[headMesh.vertices.Length];
-        for(int i = 0; i< headVertices.Length;i++)
-        {
-            Vector3 wpos = mSkinnedMeshRenderer.transform.localToWorldMatrix * headMesh.vertices[i];
-            headVertices[i] = wpos;
-        }
-        headMesh.vertices = headVertices;
-
-        headMat = mSkinnedMeshRenderer.materials;
-        headTexture = new Texture2D[1];
-        headTexture[0] = mCurrentHeadTexture;
-
-
-
-        //body mesh
-
-        GameObject bodygo = GetBody(mCurrentRoleJson.gender);
-        bodyMesh = new Mesh();
-
-        bodygo.GetComponent<SkinnedMeshRenderer>().BakeMesh(bodyMesh);
-
-        Vector3[] bodyVertices = new Vector3[bodyMesh.vertices.Length];
-        for (int i = 0; i < bodyVertices.Length; i++)
-        {
-            Vector3 wpos = bodygo.transform.localToWorldMatrix * bodyMesh.vertices[i];
-            bodyVertices[i] = wpos;
-        }
-        bodyMesh.vertices = bodyVertices;
-
-        bodyMat = bodygo.GetComponent<SkinnedMeshRenderer>().materials;
-        
-        bodyTexture = new Texture2D[bodyMat.Length];
-        for(int i = 0;i< bodyTexture.Length;i++)
-        {
-
-            Texture rawBodyTexture = bodyMat[i].GetTexture("_MainTex");
-            bodyTexture[i] = rawBodyTexture.ToTexture2D();
-
-        }
-
-
-
-        //avater mesh
 
         List<GameObject> avatars = new List<GameObject>();
-
-        avatarMeshes = new List<Mesh>();
-        avatarMats = new List<Material[]>();
-        avatarTextures = new List<Texture2D[]>();
-
-        for (int i = 0; i < avatars.Count;i++ )
+        for (int i = 0; i < avatars.Count; i++)
         {
-            GameObject avatargo = avatars[i];
-            Mesh avatarMesh = new Mesh();
-            avatargo.GetComponent<SkinnedMeshRenderer>().BakeMesh(avatarMesh);
-
-            Vector3[] avatarVertices = new Vector3[avatarMesh.vertices.Length];
-            for (int j = 0; j < avatarVertices.Length; j++)
-            {
-                Vector3 wpos = avatargo.transform.localToWorldMatrix * avatarMesh.vertices[j];
-                avatarVertices[j] = wpos;
-            }
-            avatarMesh.vertices = avatarVertices;
-
-            Material[] avatarMat = bodygo.GetComponent<SkinnedMeshRenderer>().materials;
-
-            Texture2D[] avatarTexture = new Texture2D[avatarMat.Length];
-            for (int j = 0; j < avatarTexture.Length; j++)
-            {
-
-                Texture rawTexture = avatarMat[j].GetTexture("_MainTex");
-                avatarTexture[i] = rawTexture.ToTexture2D();
-
-            }
-
-            avatarMeshes.Add(avatarMesh);
-            avatarMats.Add(avatarMat);
-            avatarTextures.Add(avatarTexture);
-
+            list.Add(avatars[i].GetComponent<SkinnedMeshRenderer>());
         }
-
+        return list;
+        
     }
 
+
+
+    public void Makeup(string memberName, Texture tex)
+    {
+        ModelDataManager.Instance.mHeadSkinnedMeshRenderer.material.SetTexture(memberName, tex);
+    }
 }

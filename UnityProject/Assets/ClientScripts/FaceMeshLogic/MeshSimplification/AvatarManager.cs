@@ -58,7 +58,34 @@ public class ActionConfig
     }
 
 }
+[Serializable]
+public class MakeupConfig
+{
+    [Serializable]
+    public class MakeupItem
+    {
+        [SerializeField]
+        public string icon;
+        [SerializeField]
+        public string materialmember;
+        [SerializeField]
+        public string texturename;
+    }
+    [SerializeField]
+    public List<MakeupItem> list = new List<MakeupItem>();
 
+    public void Save()
+    {
+        string jstr = JsonUtility.ToJson(this);
+        File.WriteAllText(Application.dataPath + "/../makeupConfig.bytes", jstr);
+    }
+    public static MakeupConfig Load(string jstr)
+    {
+        MakeupConfig config = JsonUtility.FromJson<MakeupConfig>(jstr);
+        return config;
+    }
+
+}
 public class AvatarManager : MonoBehaviour
 {
 

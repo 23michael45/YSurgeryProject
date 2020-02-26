@@ -2,7 +2,8 @@
     "list": [
       {
         "icon": "Icon_eyebrow0001",
-        "model": "GO_eyebrow0001"
+        "materialmember": "_EyeBrow",
+        "texturename": "GO_eyebrow0001"
       }
     ]
 }
