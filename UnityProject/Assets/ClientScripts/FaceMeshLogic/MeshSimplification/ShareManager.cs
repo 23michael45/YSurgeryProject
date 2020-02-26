@@ -122,7 +122,7 @@ public class ShareManager : MonoBehaviour
         ShareMeshItem item = new ShareMeshItem();
 
         item.name = smr.name;
-        item.meshObj = RuntimeObjExporter.MeshToString(name, mesh, materials);
+        item.meshObj = RuntimeObjExporter.MeshToString(name, mesh, null);
 
         if (materials.Length == textures.Length)
         {
