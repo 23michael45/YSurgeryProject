@@ -223,7 +223,7 @@ public class AvatarManager : MonoBehaviour
         foreach (var pair in mPartDic)
         {
             GameObject go = pair.Value;
-            SkinnedMeshRenderer smr = go.GetComponent<SkinnedMeshRenderer>();
+            SkinnedMeshRenderer smr = go.GetComponentInChildren<SkinnedMeshRenderer>();
             if (smr != null)
             {
                 list.Add(smr);
