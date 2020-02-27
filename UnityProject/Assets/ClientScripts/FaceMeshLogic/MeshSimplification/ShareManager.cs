@@ -61,21 +61,68 @@ public static class TextureExt
         }
     }
 }
+[Serializable]
+public class JsonRet
+{
+    [Serializable]
+    public class JsonRetImage
+    {
+        public int id;
+        public int coid;
+        public int type;
+        public int rid;
+        public int seqno;
+        public string url;
+        public string fileName;
+        public string param;
+        public string param1;
+        public string lastUrlTm;
+        public bool allowOne;
+    }
+    public int ret;
+    public JsonRetImage img;
+    public string retMsg;
+    public List<int> info;
+
+    
+}
+
 public class ShareManager : MonoBehaviour
 {
     public static ShareManager Instance;
 
     public Button mShareBtn;
 
+    public RawImage m_QRCodeImage;
+    public RawImage m_HumanImage;
+    public Vector2Int mQRSize;
+
+    public Camera mMainCamera;
+    public RenderTextureSaver mShareCameraSaver;
+
+    QRCodeTool mQRCodeTool;
+
+    public GameObject mFinalWindow;
+    public RawImage mFinalImage;
+    public Button mCloseFinalWindowBtn;
+
+
     private void Awake()
     {
         Instance = this;
 
         mShareBtn.onClick.AddListener(OnShareBtn);
+        mQRCodeTool = new QRCodeTool();
+
+        mShareCameraSaver.gameObject.SetActive(false);
+        mFinalWindow.SetActive(false);
+
+        mCloseFinalWindowBtn.onClick.AddListener(OnCloseFinalWindow);
     }
     private void OnDestroy()
     {
         mShareBtn.onClick.RemoveListener(OnShareBtn);
+        mCloseFinalWindowBtn.onClick.RemoveListener(OnCloseFinalWindow);
 
     }
     void OnShareBtn()
@@ -193,8 +240,34 @@ public class ShareManager : MonoBehaviour
         }
         else
         {
-            string shareAddress = request.downloadHandler.text;
-            Debug.Log(shareAddress);
+            string retJson = request.downloadHandler.text;
+
+            JsonRet ret = JsonUtility.FromJson<JsonRet>(retJson);
+
+
+            string shareUrl = string.Format("https://m.yujishishi.com/pages/share/index.html?id={0}", ret.img.id);
+            m_QRCodeImage.texture = mQRCodeTool.NormalEncodeQRCode(shareUrl, mQRSize);
+            Debug.Log(shareUrl);
+
+
+            int oldMask = mMainCamera.cullingMask;
+            string[] mask = { "Default" };
+            mMainCamera.cullingMask = LayerMask.GetMask(mask);
+
+            var humanSaver = mMainCamera.GetComponent<RenderTextureSaver>();
+            yield return humanSaver.TakePhoto();
+            mMainCamera.cullingMask = oldMask;
+
+            m_HumanImage.texture = humanSaver.GetTexture();
+
+
+            mShareCameraSaver.gameObject.SetActive(true);
+            yield return mShareCameraSaver.TakePhoto();
+
+            mFinalImage.texture = mShareCameraSaver.GetTexture();
+            mShareCameraSaver.gameObject.SetActive(false);
+
+            mFinalWindow.SetActive(true);
         }
     }
 
@@ -212,6 +285,9 @@ public class ShareManager : MonoBehaviour
 
         Debug.Log("Load Mesh Json:" + loadMesh.vertices.Length);
     }
-
+    void OnCloseFinalWindow()
+    {
+        mFinalWindow.SetActive(false);
+    }
 
 }

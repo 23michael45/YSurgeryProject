@@ -453,13 +453,13 @@ public class ModelDataManager : MonoBehaviour
 
                 GetBody(i).SetActive(true);
                 GetNail(i).SetActive(true);
-                GetNail(i).SetActive(true);
+                GetArm(i).SetActive(true);
             }
             else
             {
                 GetBody(i).SetActive(false);
                 GetNail(i).SetActive(false);
-                GetNail(i).SetActive(false);
+                GetArm(i).SetActive(false);
             }
         }
     }
