@@ -1,4 +1,4 @@
-{
+ {
   "pairList": [
 
     {
@@ -22,9 +22,9 @@
     {
       "ToggleName": "MasseterMuscleSwitch",
       "ToggleTextureName": "EditPartToggle/01shape/downcheek",
-      "AreaTextureName": "FaceAreaPNG/01Shape/Chin",
-      "leaderBoneName":"face_chin_Lf_joint03",
-      "leaderBoneSymName":"face_chin_Rt_joint03",
+      "AreaTextureName": "FaceAreaPNG/01Shape/Downcheek",
+      "leaderBoneName": "face_chin_Lf_joint03",
+      "leaderBoneSymName": "face_chin_Rt_joint03",
       "sliderNames": [ "MasseterMuscleItem_x", "MasseterMuscleItem_y", "MasseterMuscleItem_z" ]
     },
 
@@ -40,7 +40,7 @@
     {
       "ToggleName": "TopHeadSwitch",
       "ToggleTextureName": "EditPartToggle/01shape/tophead",
-      "AreaTextureName": "FaceAreaPNG/noneTex",
+      "AreaTextureName": "FaceAreaPNG/01Shape/Tophead",
       "leaderBoneName": "face_temple_Lf_joint004",
       "leaderBoneSymName": "face_temple_Rt_joint004",
       "sliderNames": [ "TopheadItem_x", "TopheadItem_y", "TopheadItem_z" ]
