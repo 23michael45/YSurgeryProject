@@ -217,4 +217,18 @@ public class AvatarManager : MonoBehaviour
         mTempGo.transform.localPosition = Vector3.zero;
     }
 
+    public List<SkinnedMeshRenderer> GetAllSkinnedMeshRenderer()
+    {
+        List<SkinnedMeshRenderer> list = new List<SkinnedMeshRenderer>();
+        foreach (var pair in mPartDic)
+        {
+            GameObject go = pair.Value;
+            SkinnedMeshRenderer smr = go.GetComponent<SkinnedMeshRenderer>();
+            if (smr != null)
+            {
+                list.Add(smr);
+            }
+        }
+        return list;
+    }
 }

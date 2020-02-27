@@ -970,11 +970,11 @@ public class ModelDataManager : MonoBehaviour
         list.Add(GetNail(mCurrentRoleJson.gender).GetComponent<SkinnedMeshRenderer>());
 
 
-        List<GameObject> avatars = new List<GameObject>();
-        for (int i = 0; i < avatars.Count; i++)
-        {
-            list.Add(avatars[i].GetComponent<SkinnedMeshRenderer>());
-        }
+        //List<GameObject> avatars = new List<GameObject>();
+        //for (int i = 0; i < avatars.Count; i++)
+        //{
+        //    list.Add(avatars[i].GetComponent<SkinnedMeshRenderer>());
+        //}
         return list;
         
     }

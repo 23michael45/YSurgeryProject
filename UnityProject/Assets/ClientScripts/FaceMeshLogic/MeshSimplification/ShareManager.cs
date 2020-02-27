@@ -206,8 +206,12 @@ public class ShareManager : MonoBehaviour
     
     IEnumerator Upload()
     {
+        List<SkinnedMeshRenderer> list = new List<SkinnedMeshRenderer>();
+        list.AddRange(ModelDataManager.Instance.GetAllSkinnedMeshRenderer());
+        list.AddRange(AvatarManager.Instance.GetAllSkinnedMeshRenderer());
 
-        string jsonData = ShareManager.Instance.ToJson(ModelDataManager.Instance.GetAllSkinnedMeshRenderer());
+
+        string jsonData = ShareManager.Instance.ToJson(list);
 
         //File.WriteAllText("d:/t.obj", jsonData);
 
