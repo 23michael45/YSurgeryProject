@@ -2,7 +2,8 @@
     "list": [
       {
         "icon": "Icon_pupil0001",
-        "model": "GO_pupil0001"
+        "materialmember": "_Pupil",
+        "texturename": "GO_pupil0001"
       }
     ]
 }

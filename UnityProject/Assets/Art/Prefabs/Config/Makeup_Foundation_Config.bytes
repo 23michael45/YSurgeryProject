@@ -2,7 +2,8 @@
     "list": [
       {
         "icon": "Icon_foundation0001",
-        "model": "GO_foundation0001"
+        "materialmember": "_Foundation",
+        "texturename": "GO_foundation0001"
       }
     ]
 }

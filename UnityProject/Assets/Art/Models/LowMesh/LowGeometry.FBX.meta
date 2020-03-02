@@ -281,6 +281,7 @@ ModelImporter:
     100550: Object003
     100552: Object004
     100554: women_arm
+    100556: nosehole
     400000: Ankle_L_scaleM
     400002: Ankle_R_scaleM
     400004: Arm_L_scale01
@@ -559,6 +560,7 @@ ModelImporter:
     400550: Object003
     400552: Object004
     400554: women_arm
+    400556: nosehole
     2100000: wuman_body_lambert2
     2100002: 02 - Default
     2100004: 03 - Default
@@ -586,6 +588,7 @@ ModelImporter:
     2300010: Object002
     2300012: Object003
     2300014: Object004
+    2300016: nosehole
     3300000: BaselFaceModel2017
     3300002: teeth
     3300004: Object001
@@ -594,6 +597,7 @@ ModelImporter:
     3300010: Object002
     3300012: Object003
     3300014: Object004
+    3300016: nosehole
     4300000: women_nail
     4300002: women_body
     4300004: teeth
@@ -615,6 +619,7 @@ ModelImporter:
     4300036: Object004
     4300038: women_arm
     4300040: man_arm
+    4300042: nosehole
     7400000: Idle
     7400002: Jump
     9500000: //RootNode

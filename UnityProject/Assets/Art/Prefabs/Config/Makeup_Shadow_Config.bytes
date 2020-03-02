@@ -2,7 +2,8 @@
     "list": [
       {
         "icon": "Icon_shadow0001",
-        "model": "GO_shadow0001"
+        "materialmember": "_Shadow",
+        "texturename": "GO_shadow0001"
       }
     ]
 }

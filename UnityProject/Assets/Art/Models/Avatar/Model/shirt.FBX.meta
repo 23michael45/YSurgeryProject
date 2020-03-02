@@ -260,6 +260,7 @@ ModelImporter:
     100508: Waist_upper_ScaleM
     100510: Wrist_L_M
     100512: Wrist_R_M
+    100514: default
     400000: Ankle_L_scaleM
     400002: Ankle_R_scaleM
     400004: Arm_L_scale01
@@ -517,11 +518,16 @@ ModelImporter:
     400508: Waist_upper_ScaleM
     400510: Wrist_L_M
     400512: Wrist_R_M
+    400514: default
     2100000: 'Material #3'
+    2100002: default
+    2100004: 'Material #43'
     4300000: Shirt
+    4300002: default
     7400000: Take 001
     9500000: //RootNode
     13700000: Shirt
+    13700002: default
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -574,7 +580,7 @@ ModelImporter:
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
     useFileScale: 0
-    previousCalculatedGlobalScale: 0.001
+    previousCalculatedGlobalScale: 1
     hasPreviousCalculatedGlobalScale: 1
   tangentSpace:
     normalSmoothAngle: 60

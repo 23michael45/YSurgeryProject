@@ -2,7 +2,8 @@
     "list": [
       {
         "icon": "Icon_eyeshadow0001",
-        "model": "GO_eyeshadow0001"
+        "materialmember": "_EyeShadow",
+        "texturename": "GO_eyeshadow0001"
       }
     ]
 }
