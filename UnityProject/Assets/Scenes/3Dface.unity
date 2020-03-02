@@ -8089,7 +8089,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 41.299988, y: 369}
+  m_AnchoredPosition: {x: 41.299927, y: 369}
   m_SizeDelta: {x: 21.26001, y: 138.56006}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &121897655
@@ -69229,12 +69229,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1034060527}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 63993e1bd9c74554db3d5b01114cf5fd, type: 3}
+  m_Script: {fileID: 11500000, guid: 674a71a2d2410d442970a8cf5b90de50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   mConfigAddress: Makeup_Shadow_Config
-  mPart: 5
-  mItemPrefab: {fileID: 3921004772590492245, guid: 0d75f83c02945704ca31d4c8f6cdc4da,
+  mItemPrefab: {fileID: 3921004772590492245, guid: 1bd20f12ce7ffad41a9804842d487ac4,
     type: 3}
   mContent: {fileID: 572779709}
 --- !u!114 &1034060530
@@ -100419,12 +100418,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1503631829}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 63993e1bd9c74554db3d5b01114cf5fd, type: 3}
+  m_Script: {fileID: 11500000, guid: 674a71a2d2410d442970a8cf5b90de50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   mConfigAddress: Makeup_Lip_Config
-  mPart: 6
-  mItemPrefab: {fileID: 3921004772590492245, guid: 0d75f83c02945704ca31d4c8f6cdc4da,
+  mItemPrefab: {fileID: 3921004772590492245, guid: 1bd20f12ce7ffad41a9804842d487ac4,
     type: 3}
   mContent: {fileID: 1379801625}
 --- !u!114 &1503631832
@@ -100978,12 +100976,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1510995880}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 63993e1bd9c74554db3d5b01114cf5fd, type: 3}
+  m_Script: {fileID: 11500000, guid: 674a71a2d2410d442970a8cf5b90de50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   mConfigAddress: Makeup_Foundation_Config
-  mPart: 4
-  mItemPrefab: {fileID: 3921004772590492245, guid: 0d75f83c02945704ca31d4c8f6cdc4da,
+  mItemPrefab: {fileID: 3921004772590492245, guid: 1bd20f12ce7ffad41a9804842d487ac4,
     type: 3}
   mContent: {fileID: 1990545678}
 --- !u!114 &1510995883
@@ -103565,12 +103562,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1553088285}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 63993e1bd9c74554db3d5b01114cf5fd, type: 3}
+  m_Script: {fileID: 11500000, guid: 674a71a2d2410d442970a8cf5b90de50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   mConfigAddress: Makeup_Tattoo_Config
-  mPart: 7
-  mItemPrefab: {fileID: 3921004772590492245, guid: 0d75f83c02945704ca31d4c8f6cdc4da,
+  mItemPrefab: {fileID: 3921004772590492245, guid: 1bd20f12ce7ffad41a9804842d487ac4,
     type: 3}
   mContent: {fileID: 1469393781}
 --- !u!114 &1553088288
@@ -111275,12 +111271,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1675359629}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 63993e1bd9c74554db3d5b01114cf5fd, type: 3}
+  m_Script: {fileID: 11500000, guid: 674a71a2d2410d442970a8cf5b90de50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   mConfigAddress: Makeup_Pupil_Config
-  mPart: 3
-  mItemPrefab: {fileID: 3921004772590492245, guid: 0d75f83c02945704ca31d4c8f6cdc4da,
+  mItemPrefab: {fileID: 3921004772590492245, guid: 1bd20f12ce7ffad41a9804842d487ac4,
     type: 3}
   mContent: {fileID: 1369484293}
 --- !u!114 &1675359632
@@ -128794,12 +128789,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1955712271}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 63993e1bd9c74554db3d5b01114cf5fd, type: 3}
+  m_Script: {fileID: 11500000, guid: 674a71a2d2410d442970a8cf5b90de50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   mConfigAddress: Makeup_Eyeshadow_Config
-  mPart: 1
-  mItemPrefab: {fileID: 3921004772590492245, guid: 0d75f83c02945704ca31d4c8f6cdc4da,
+  mItemPrefab: {fileID: 3921004772590492245, guid: 1bd20f12ce7ffad41a9804842d487ac4,
     type: 3}
   mContent: {fileID: 1979194543}
 --- !u!114 &1955712274
@@ -133762,12 +133756,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2039679694}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 63993e1bd9c74554db3d5b01114cf5fd, type: 3}
+  m_Script: {fileID: 11500000, guid: 674a71a2d2410d442970a8cf5b90de50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   mConfigAddress: Makeup_Eyelash_Config
-  mPart: 2
-  mItemPrefab: {fileID: 3921004772590492245, guid: 0d75f83c02945704ca31d4c8f6cdc4da,
+  mItemPrefab: {fileID: 3921004772590492245, guid: 1bd20f12ce7ffad41a9804842d487ac4,
     type: 3}
   mContent: {fileID: 316528621}
 --- !u!114 &2039679697

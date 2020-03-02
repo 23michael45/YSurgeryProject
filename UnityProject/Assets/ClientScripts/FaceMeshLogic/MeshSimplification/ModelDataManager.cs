@@ -398,6 +398,16 @@ public class ModelDataManager : MonoBehaviour
 
 
     }
+    //Guo puls Gameobject head
+
+    GameObject GetHead(int gender) {
+        string headName = "";
+
+        headName = "head";
+        return mLowGeometryTemplate.transform.Find(headName).gameObject;
+    }
+
+
     GameObject GetArm(int gender)
     {
         string bodyName = "";
@@ -907,7 +917,7 @@ public class ModelDataManager : MonoBehaviour
             
             FitHSV(GetBody(gender).GetComponent<SkinnedMeshRenderer>(), hsvoffset);
             FitHSV(GetArm(gender).GetComponent<SkinnedMeshRenderer>(), hsvoffset);
-            
+            FitHSV(GetHead(gender).GetComponent<SkinnedMeshRenderer>(), hsvoffset);
 
             return true;
         }
