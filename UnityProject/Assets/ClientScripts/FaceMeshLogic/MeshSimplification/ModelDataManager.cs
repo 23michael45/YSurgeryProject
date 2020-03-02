@@ -363,6 +363,7 @@ public class ModelDataManager : MonoBehaviour
     public AssetReference mTempalteModelRef;
 #endif
     public Texture2D mBoneWeightMask;
+    public AnimationCurve mSkinColorCurve;
     [NonSerialized]
     public GameObject mLowGeometryTemplate;
     string correspondingHDLDIndicesJson;
@@ -878,6 +879,23 @@ public class ModelDataManager : MonoBehaviour
         mCurrentDeformJson = null;
         return true;
     }
+    
+    void FitHSV(SkinnedMeshRenderer smr,Vector3 hsvoffset)
+    {
+        for (int i = 0; i < smr.materials.Length; i++)
+        {
+            var mat = smr.materials[i];
+
+            float hue = hsvoffset.x * 2;
+            float sat = hsvoffset.y / 255;
+            float val = hsvoffset.z / 255;
+
+            mat.SetInt("_Hue", (int)hue);
+            mat.SetFloat("_Saturation", sat);
+            mat.SetFloat("_Value", val);
+
+        }
+    }
 
     public bool FitCalculationJson(CalculateResultDataJson jsonData, int gender, float weight, float height)
     {
@@ -886,23 +904,10 @@ public class ModelDataManager : MonoBehaviour
 
 
             Vector3 hsvoffset = new Vector3(jsonData.info.calcRet.hsv_offset.h, jsonData.info.calcRet.hsv_offset.s, jsonData.info.calcRet.hsv_offset.v);
-
-            var smr = GetBody(gender).GetComponent<SkinnedMeshRenderer>();
-
-            for (int i = 0; i < smr.materials.Length; i++)
-            {
-                var mat = smr.materials[i];
-
-                float hue = hsvoffset.x * 2;
-                float sat = hsvoffset.y / 255;
-                float val = hsvoffset.z / 255;
-
-                mat.SetInt("_Hue", (int)hue);
-                mat.SetFloat("_Saturation", sat);
-                mat.SetFloat("_Value", val);
-
-            }
-
+            
+            FitHSV(GetBody(gender).GetComponent<SkinnedMeshRenderer>(), hsvoffset);
+            FitHSV(GetArm(gender).GetComponent<SkinnedMeshRenderer>(), hsvoffset);
+            
 
             return true;
         }
