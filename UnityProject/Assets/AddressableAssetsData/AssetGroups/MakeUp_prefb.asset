@@ -17,6 +17,20 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: b555f0abbd99bcf4082762ab5700eb5f
   m_SerializeEntries:
+  - m_GUID: 19161c100a3b0c041a013f756742c1ff
+    m_Address: GO_noneTex
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - MakeUp
+    m_mainAssetType: UnityEngine.Texture2D, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  - m_GUID: 303dc9338203980499bb485d7641f3be
+    m_Address: GO_Tatoo0003
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - MakeUp
+    m_mainAssetType: UnityEngine.Texture2D, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
   - m_GUID: 39de148b923278940b577a7c2e35c8cd
     m_Address: GO_eyelash0001
     m_ReadOnly: 0
@@ -26,6 +40,13 @@ MonoBehaviour:
       Culture=neutral, PublicKeyToken=null
   - m_GUID: 3f711a3355a88c64f8efa7839243ee8e
     m_Address: GO_shadow0001
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - MakeUp
+    m_mainAssetType: UnityEngine.Texture2D, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  - m_GUID: 413e293dee89e7a4e8bd928fc151ae4b
+    m_Address: GO_DoubleEye0001
     m_ReadOnly: 0
     m_SerializedLabels:
     - MakeUp
@@ -54,6 +75,20 @@ MonoBehaviour:
       Culture=neutral, PublicKeyToken=null
   - m_GUID: 914da103021bbe047b0e118e16df5b04
     m_Address: GO_eyeshadow0001
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - MakeUp
+    m_mainAssetType: UnityEngine.Texture2D, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  - m_GUID: 9d3c469bdd9e308419ec53c24a04c073
+    m_Address: GO_Tatoo0002
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - MakeUp
+    m_mainAssetType: UnityEngine.Texture2D, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  - m_GUID: a7f10c23462ba464dba925617ef55050
+    m_Address: GO_Tatoo0001
     m_ReadOnly: 0
     m_SerializedLabels:
     - MakeUp

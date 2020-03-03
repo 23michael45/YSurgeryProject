@@ -1,9 +1,15 @@
 {
-    "list": [
-      {
-        "icon": "Icon_eyebrow0001",
-        "materialmember": "_EyeBrow",
-        "texturename": "GO_eyebrow0001"
-      }
-    ]
+  "list": [
+    {
+      "icon": "Icon_cancle",
+      "materialmember": "_EyeBrow",
+      "texturename": "GO_noneTex"
+    },
+
+    {
+      "icon": "Icon_eyebrow0001",
+      "materialmember": "_EyeBrow",
+      "texturename": "GO_eyebrow0001"
+    }
+  ]
 }

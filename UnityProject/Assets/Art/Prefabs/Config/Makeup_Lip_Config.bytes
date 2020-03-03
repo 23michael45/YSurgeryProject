@@ -1,9 +1,14 @@
 {
-    "list": [
-      {
-        "icon": "Icon_lip0001",
-        "materialmember": "_Lip",
-        "texturename": "GO_lips0001"
-      }
-    ]
+  "list": [
+    {
+      "icon": "Icon_cancle",
+      "materialmember": "_Lip",
+      "texturename": "GO_noneTex"
+    },
+    {
+      "icon": "Icon_lip0001",
+      "materialmember": "_Lip",
+      "texturename": "GO_lips0001"
+    }
+  ]
 }

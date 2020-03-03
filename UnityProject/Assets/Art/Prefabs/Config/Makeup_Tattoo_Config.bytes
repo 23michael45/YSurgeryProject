@@ -1,8 +1,24 @@
 {
-    "list": [
-      {
-        "icon": "Icon_lip0001",
-        "model": "GO_lip0001"
-      }
-    ]
+  "list": [
+    {
+      "icon": "Icon_cancle",
+      "materialmember": "_FaceTatoo",
+      "texturename": "GO_noneTex"
+    },
+    {
+      "icon": "Icon_Tatoo0001",
+      "materialmember": "_FaceTatoo",
+      "texturename": "GO_Tatoo0001"
+    },
+    {
+      "icon": "Icon_Tatoo0002",
+      "materialmember": "_FaceTatoo",
+      "texturename": "GO_Tatoo0002"
+    },
+    {
+      "icon": "Icon_Tatoo0003",
+      "materialmember": "_FaceTatoo",
+      "texturename": "GO_Tatoo0003"
+    }
+  ]
 }

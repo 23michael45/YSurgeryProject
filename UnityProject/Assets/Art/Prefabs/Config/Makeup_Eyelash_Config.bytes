@@ -1,9 +1,14 @@
 {
-    "list": [
-      {
-        "icon": "Icon_eyelash0001",
-        "materialmember": "_FaceTatoo",
-        "texturename": "GO_eyelash0001"
-      }
-    ]
+  "list": [
+    {
+      "icon": "Icon_cancle",
+      "materialmember": "_Eyelash",
+      "texturename": "GO_noneTex"
+    },
+    {
+      "icon": "Icon_eyelash0001",
+      "materialmember": "_Eyelash",
+      "texturename": "GO_eyelash0001"
+    }
+  ]
 }

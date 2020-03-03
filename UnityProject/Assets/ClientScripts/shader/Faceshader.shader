@@ -8,11 +8,15 @@
 		_Hair ("_Hair", 2D) = "white" {}
 		_Foundation("_Foundation", 2D) = "white" {}
 		_EyeBrow ("_EyeBrow", 2D) = "white" {}
+		_Eyelash("_Eyelash", 2D) = "white" {}
 		_EyeShadow ("_EyeShadow", 2D) = "white" {}		
 		_Pupil ("_Pupil", 2D) = "white" {}		
 		_Shadow ("_Shadow", 2D) = "white" {}
 		_Lip ("_Lip", 2D) = "white" {}
 		_FaceTatoo ("_FaceTatoo", 2D) = "white" {}	
+
+		_DoubleEye("_DoubleEye", 2D) = "white" {}
+
 
 		_AreaTex ("_AreaTex", 2D) = "white" {}
 		_NoseHoleMask("_NoseHoleMask", 2D) = "white" {}
@@ -59,13 +63,16 @@
 
 			sampler2D _Foundation;
 			sampler2D _EyeBrow;
-			sampler2D _EyeShadow;			
+			sampler2D _EyeShadow;
+			sampler2D _Eyelash;
 			sampler2D _Pupil;	
 			sampler2D _Lip;
 			sampler2D _Shadow;
 			sampler2D _FaceTatoo;					
 
 			sampler2D _AreaTex;
+
+			sampler2D _DoubleEye;
 
 			sampler2D _NoseHoleMask;
 			sampler2D _BaseTex;
@@ -182,16 +189,24 @@
 				fixed4 Lip = tex2D(_Lip, i.uv);
 				fixed4 Shadow = tex2D(_Shadow, i.uv);
 				fixed4 FaceTatoo = tex2D(_FaceTatoo, i.uv);
+				fixed4 Eyelash = tex2D(_Eyelash, i.uv);
 
+				fixed4 DoubleEye = tex2D(_DoubleEye, i.uv);
+				
 
 				fixed4 NoseHoleMask = tex2D(_NoseHoleMask, i.uv);
 				fixed4 BaseTex = tex2D(_BaseTex, i.uv);
 
-				fixed4 Mix_Hair = lerp(Main, Hair, Hair.a);
+
+				fixed4 Mix_DoubleEye = lerp(Main, DoubleEye, DoubleEye.a);
+
+				fixed4 Mix_Hair = lerp(Mix_DoubleEye, Hair, Hair.a);
+
 				fixed4 Mix_Foundation = lerp(Mix_Hair, Foundation, Foundation.a);
 				fixed4 Mix_EyeBrow = lerp(Mix_Foundation, EyeBrow, EyeBrow.a);
 				fixed4 Mix_EyeShadow = lerp(Mix_EyeBrow, EyeShadow, EyeShadow.a);
-				fixed4 Mix_Pupil = lerp(Mix_EyeShadow, Pupil, Pupil.a);
+				fixed4 Mix_Eyelash = lerp(Mix_EyeShadow, Eyelash, Eyelash.a);				
+				fixed4 Mix_Pupil = lerp(Mix_Eyelash, Pupil, Pupil.a);
 				fixed4 Mix_Lip = lerp(Mix_Pupil, Lip, Lip.a);
 				fixed4 Mix_Shadow = lerp(Mix_Lip, Shadow, Shadow.a);
 				fixed4 Mix_FaceTatoo = lerp(Mix_Shadow, FaceTatoo, FaceTatoo.a);

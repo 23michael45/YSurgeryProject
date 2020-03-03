@@ -1,9 +1,14 @@
 {
-    "list": [
-      {
-        "icon": "Icon_pupil0001",
-        "materialmember": "_Pupil",
-        "texturename": "GO_pupil0001"
-      }
-    ]
+  "list": [
+    {
+      "icon": "Icon_cancle",
+      "materialmember": "_Pupil",
+      "texturename": "GO_noneTex"
+    },
+    {
+      "icon": "Icon_pupil0001",
+      "materialmember": "_Pupil",
+      "texturename": "GO_pupil0001"
+    }
+  ]
 }

@@ -17,6 +17,13 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: caee3863e0d8dbe40a99c3d452f34e9c
   m_SerializeEntries:
+  - m_GUID: 004f9e7046488cb4093d7484edb033a0
+    m_Address: Makeup_DoubleEye_Config
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - config
+    m_mainAssetType: UnityEngine.TextAsset, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
   - m_GUID: 00ccdfc43f9ee584b95769b7c88fd8f5
     m_Address: Makeup_Eyebrow_Config
     m_ReadOnly: 0

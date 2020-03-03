@@ -1,0 +1,14 @@
+{
+  "list": [
+    {
+      "icon": "Icon_cancle",
+      "materialmember": "_DoubleEye",
+      "texturename": "GO_noneTex"
+    },
+    {
+      "icon": "Icon_DoubleEye0001",
+      "materialmember": "_DoubleEye",
+      "texturename": "GO_DoubleEye0001"
+    }
+  ]
+}

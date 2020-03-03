@@ -1,9 +1,14 @@
 {
-    "list": [
-      {
-        "icon": "Icon_eyeshadow0001",
-        "materialmember": "_EyeShadow",
-        "texturename": "GO_eyeshadow0001"
-      }
-    ]
+  "list": [
+    {
+      "icon": "Icon_cancle",
+      "materialmember": "_EyeShadow",
+      "texturename": "GO_noneTex"
+    },
+    {
+      "icon": "Icon_eyeshadow0001",
+      "materialmember": "_EyeShadow",
+      "texturename": "GO_eyeshadow0001"
+    }
+  ]
 }
