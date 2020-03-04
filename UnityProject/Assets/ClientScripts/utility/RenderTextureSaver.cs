@@ -10,7 +10,7 @@ public class RenderTextureSaver : MonoBehaviour
     RenderTexture _RenderTexture;
     Camera _Camera;
 
-
+    public bool _UseScreenSize = true;
     public int _Width = 1024;
     public int _Height = 1024;
 
@@ -19,8 +19,19 @@ public class RenderTextureSaver : MonoBehaviour
     void Awake()
     {
         _Camera = GetComponent<Camera>();
-        _RenderTexture = new RenderTexture(_Width,_Height, 32, RenderTextureFormat.ARGB32);
-        _RenderTexture.Create();
+        if (_UseScreenSize == false)
+        {
+
+            _RenderTexture = new RenderTexture(_Width, _Height, 32, RenderTextureFormat.ARGB32);
+            _RenderTexture.Create();
+        }
+        else
+        {
+            _RenderTexture = new RenderTexture(Screen.width, Screen.height, 32, RenderTextureFormat.ARGB32);
+            _RenderTexture.Create();
+
+        }
+
 
     }
 
@@ -29,7 +40,7 @@ public class RenderTextureSaver : MonoBehaviour
     {
     }
 
-    public IEnumerator TakePhoto()
+    public IEnumerator TakePhoto(TextureFormat format)
     {
         _Camera.targetTexture = _RenderTexture;
 
@@ -41,7 +52,7 @@ public class RenderTextureSaver : MonoBehaviour
 
 
         RenderTexture.active = _RenderTexture;
-        _Texture = new Texture2D(_RenderTexture.width, _RenderTexture.height, TextureFormat.RGBA32, false);
+        _Texture = new Texture2D(_RenderTexture.width, _RenderTexture.height, format, false);
         _Texture.ReadPixels(new Rect(0, 0, _RenderTexture.width, _RenderTexture.height), 0, 0);
         _Texture.Apply();
         RenderTexture.active = null;

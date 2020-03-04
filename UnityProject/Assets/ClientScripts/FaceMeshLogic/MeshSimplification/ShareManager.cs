@@ -15,10 +15,10 @@ public class ShareTextureItem
     [SerializeField]
     public string name;    //name of the texture
     [SerializeField]
-    public string textureJpg;//base64 string ,convert to byte array,is a jpg file
+    public string textureJpgRGB;//base64 string ,convert to byte array,is a jpg file
 
     [SerializeField]
-    public string texturePng;//base64 string ,convert to byte array,is a png file
+    public string textureJpgAlpha;//base64 string ,convert to byte array,is a jpg 1 channel file
 
 }
 
@@ -104,9 +104,7 @@ public class ShareManager : MonoBehaviour
     public RenderTextureSaver mShareCameraSaver;
 
     QRCodeTool mQRCodeTool;
-
-    public GameObject mFinalWindow;
-    public RawImage mFinalImage;
+    
     public Button mCloseFinalWindowBtn;
 
 
@@ -118,7 +116,6 @@ public class ShareManager : MonoBehaviour
         mQRCodeTool = new QRCodeTool();
 
         mShareCameraSaver.gameObject.SetActive(false);
-        mFinalWindow.SetActive(false);
 
         mCloseFinalWindowBtn.onClick.AddListener(OnCloseFinalWindow);
     }
@@ -160,6 +157,38 @@ public class ShareManager : MonoBehaviour
         }
     }
 
+    private void TransferAlpha(Texture2D tex, /*out Texture2D rgb,*/out Texture2D alpha)
+    {
+        //rgb = new Texture2D(tex.width, tex.height, TextureFormat.RGB24, false);
+        alpha = new Texture2D(tex.width, tex.height, TextureFormat.RGB24, false);
+        
+        for (int i = 0; i < tex.width; i++)
+        {
+            for (int j = 0; j < tex.height; j++)
+            {
+                // Read out pixel value at that location in both textures
+                Color pixel = tex.GetPixel(i, j);
+                //Color rgbpixel = rgb.GetPixel(i, j);
+
+                //rgbpixel.r = pixel.a;
+                //rgbpixel.g = pixel.a;
+                //rgbpixel.b = pixel.a;
+                //rgb.SetPixel(i, j, rgbpixel);
+
+
+                Color alphapixel = alpha.GetPixel(i, j);
+                alphapixel.r = pixel.a;
+                alphapixel.g = pixel.a;
+                alphapixel.b = pixel.a;
+                alphapixel.a = pixel.a;
+                alpha.SetPixel(i, j, alphapixel);
+
+            }
+        }
+        //rgb.Apply();
+        alpha.Apply();
+    }
+
     void AddMeshObject(SkinnedMeshRenderer smr,ref ShareJson jsonObject)
     {
         Mesh mesh;
@@ -182,18 +211,26 @@ public class ShareManager : MonoBehaviour
                 texItem.name = materials[i].name;
                 if(textures[i] != null)
                 {
-                    if(smr.name.Contains("head") || smr.name.Contains("body") || smr.name.Contains("arm"))
+                    if(textures[i].format == TextureFormat.RGB24)
                     {
-                        byte[] textureJpgData = textures[i].EncodeToJPG();
-                        texItem.textureJpg = Convert.ToBase64String(textureJpgData);
+                        texItem.textureJpgRGB = Convert.ToBase64String(textures[i].EncodeToJPG());
 
+                        Debug.Log(string.Format("RGB24: {0} {1} ", smr.name, texItem.textureJpgRGB.Length));
                     }
-                    else
+                    else if (textures[i].format == TextureFormat.RGBA32)
                     {
+                        Texture2D rgb, alpha;
+                        TransferAlpha(textures[i],/* out rgb,*/ out alpha);
+                        
+                        texItem.textureJpgRGB = Convert.ToBase64String(textures[i].EncodeToJPG());
+                        texItem.textureJpgAlpha = Convert.ToBase64String(alpha.EncodeToJPG());
 
-                        byte[] texturePngData = textures[i].EncodeToPNG();
-                        texItem.texturePng = Convert.ToBase64String(texturePngData);
+                        //File.WriteAllBytes("d:/" + smr.name + ".jpg", textures[i].EncodeToJPG());
+                        //File.WriteAllBytes("d:/" + smr.name + ".png", textures[i].EncodeToPNG());
+                        //File.WriteAllBytes("d:/" + smr.name + "_a.jpg", alpha.EncodeToJPG());
+                        
 
+                        //Debug.Log(string.Format("RGBA32: {0} {1} {2}", smr.name, texItem.textureJpgRGB.Length, texItem.textureJpgAlpha.Length));
                     }
 
 
@@ -221,6 +258,33 @@ public class ShareManager : MonoBehaviour
     
     IEnumerator Upload()
     {
+
+
+        mShareCameraSaver.gameObject.SetActive(true);
+
+
+        int oldMask = mMainCamera.cullingMask;
+        string[] mask = { "Default" };
+        mMainCamera.cullingMask = LayerMask.GetMask(mask);
+
+        var humanSaver = mMainCamera.GetComponent<RenderTextureSaver>();
+        yield return humanSaver.TakePhoto(TextureFormat.RGB24);
+        mMainCamera.cullingMask = oldMask;
+
+        m_HumanImage.texture = humanSaver.GetTexture();
+
+
+
+        m_QRCodeImage.texture = null;
+
+
+        yield return new WaitForEndOfFrame();
+
+
+        yield return new WaitForEndOfFrame();
+
+        //-----------------------------------------------------------------------------------------------------------
+        //below is  generate qrcode;
         List<SkinnedMeshRenderer> list = new List<SkinnedMeshRenderer>();
         list.AddRange(ModelDataManager.Instance.GetAllSkinnedMeshRenderer());
         list.AddRange(AvatarManager.Instance.GetAllSkinnedMeshRenderer());
@@ -228,7 +292,7 @@ public class ShareManager : MonoBehaviour
 
         string jsonData = ShareManager.Instance.ToJson(list);
 
-        //File.WriteAllText("d:/t.obj", jsonData);
+        File.WriteAllText("d:/test.json", jsonData);
 
         string serverURL = "https://m.yujishishi.com/fac/com/upCommImg";
 
@@ -269,25 +333,15 @@ public class ShareManager : MonoBehaviour
             Debug.Log(shareUrl);
 
 
-            int oldMask = mMainCamera.cullingMask;
-            string[] mask = { "Default" };
-            mMainCamera.cullingMask = LayerMask.GetMask(mask);
 
-            var humanSaver = mMainCamera.GetComponent<RenderTextureSaver>();
-            yield return humanSaver.TakePhoto();
-            mMainCamera.cullingMask = oldMask;
-
-            m_HumanImage.texture = humanSaver.GetTexture();
-
-
-            mShareCameraSaver.gameObject.SetActive(true);
-            yield return mShareCameraSaver.TakePhoto();
-
-            mFinalImage.texture = mShareCameraSaver.GetTexture();
-            mShareCameraSaver.gameObject.SetActive(false);
-
-            mFinalWindow.SetActive(true);
         }
+
+
+
+        //----------------------------------------------------------
+        //if use a share final texture
+        //yield return mShareCameraSaver.TakePhoto(TextureFormat.RGB24);
+        //Texture2D final = mShareCameraSaver.GetTexture();
     }
 
     void ReadShareTest(string inputJson)
@@ -306,7 +360,7 @@ public class ShareManager : MonoBehaviour
     }
     void OnCloseFinalWindow()
     {
-        mFinalWindow.SetActive(false);
+        mShareCameraSaver.gameObject.SetActive(false);
     }
 
 }
