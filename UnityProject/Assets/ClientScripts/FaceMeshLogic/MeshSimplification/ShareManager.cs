@@ -292,7 +292,7 @@ public class ShareManager : MonoBehaviour
 
         string jsonData = ShareManager.Instance.ToJson(list);
 
-        File.WriteAllText("d:/test.json", jsonData);
+        //File.WriteAllText("d:/test.json", jsonData);
 
         string serverURL = "https://m.yujishishi.com/fac/com/upCommImg";
 
