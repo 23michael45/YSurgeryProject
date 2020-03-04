@@ -17,6 +17,9 @@ public class ShareTextureItem
     [SerializeField]
     public string textureJpg;//base64 string ,convert to byte array,is a jpg file
 
+    [SerializeField]
+    public string texturePng;//base64 string ,convert to byte array,is a png file
+
 }
 
 [Serializable]
@@ -179,8 +182,20 @@ public class ShareManager : MonoBehaviour
                 texItem.name = materials[i].name;
                 if(textures[i] != null)
                 {
-                    byte[] textureJpgData = textures[i].EncodeToJPG();
-                    texItem.textureJpg = Convert.ToBase64String(textureJpgData);
+                    if(smr.name.Contains("head") || smr.name.Contains("body") || smr.name.Contains("arm"))
+                    {
+                        byte[] textureJpgData = textures[i].EncodeToJPG();
+                        texItem.textureJpg = Convert.ToBase64String(textureJpgData);
+
+                    }
+                    else
+                    {
+
+                        byte[] texturePngData = textures[i].EncodeToPNG();
+                        texItem.texturePng = Convert.ToBase64String(texturePngData);
+
+                    }
+
 
                 }
 
