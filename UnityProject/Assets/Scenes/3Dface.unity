@@ -10417,6 +10417,10 @@ MonoBehaviour:
               h: 0
               s: 0
               v: 0
+            rgb_offset:
+              r: 0
+              g: 0
+              b: 0
           TextureFile: 
       vertices: []
       uv: []

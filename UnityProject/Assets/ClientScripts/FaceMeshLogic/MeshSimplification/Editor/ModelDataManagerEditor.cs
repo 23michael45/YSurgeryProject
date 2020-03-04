@@ -8,18 +8,9 @@ using UnityEngine;
 public class ModelDataManagerEditor : Editor
 {
 
-    string mPhotoName = "obama53149";
-
-    string mHDObjFilePath = "../Model/obama53149.obj";
-    string mSaveRoleJsonFilePath = "../Model/obama53149_role.json";
+    string mPhotoMainName = "obama";
 
 
-    string mLoadRoleJsonFilePath = "../Model/obama53149_role.json";
-    string mTextureFilePath = "../Model/obama53149Texture.jpg";
-
-
-    string mSaveDeformFilePath = "../Model/obama53149_deform.json";
-    string mLoadDeformFilePath = "../Model/obama53149_deform.json";
 
 
     string mBakeMeshPath = "../Model/bakeMesh.obj";
@@ -31,12 +22,20 @@ public class ModelDataManagerEditor : Editor
         ModelDataManager parentObj = (ModelDataManager)target;
 
 
+        mPhotoMainName = EditorGUILayout.TextField(mPhotoMainName);
+        string mHDObjFilePath = string.Format("../Model/{0}53149.obj",mPhotoMainName);
+        string mSaveRoleJsonFilePath = string.Format("../Model/{0}53149_role.json", mPhotoMainName);
+        string mLoadRoleJsonFilePath = string.Format("../Model/{0}53149_role.json", mPhotoMainName);
+        string mTextureFilePath = string.Format("../Model/{0}53149Texture.jpg", mPhotoMainName);
+        string mSaveDeformFilePath = string.Format("../Model/{0}53149_deform.json", mPhotoMainName);
+        string mLoadDeformFilePath = string.Format("../Model/{0}53149_deform.json", mPhotoMainName);
+
         EditorGUILayout.Separator();
 
         EditorGUILayout.LabelField("Load HD obj File Path");
-        mHDObjFilePath = EditorGUILayout.TextField(mHDObjFilePath);
+        EditorGUILayout.LabelField(mHDObjFilePath);
         EditorGUILayout.LabelField("Save LD json File Path");
-        mSaveRoleJsonFilePath = EditorGUILayout.TextField(mSaveRoleJsonFilePath);
+        EditorGUILayout.LabelField(mSaveRoleJsonFilePath);
 
         EditorGUILayout.LabelField("Is Male or Female");
         mGender = EditorGUILayout.Toggle(mGender);
@@ -58,9 +57,9 @@ public class ModelDataManagerEditor : Editor
 
 
         EditorGUILayout.LabelField("Load LD json File Path");
-        mLoadRoleJsonFilePath = EditorGUILayout.TextField(mLoadRoleJsonFilePath);
+        EditorGUILayout.LabelField(mLoadRoleJsonFilePath);
         EditorGUILayout.LabelField("Load Texture File Path");
-        mTextureFilePath = EditorGUILayout.TextField(mTextureFilePath);
+        EditorGUILayout.LabelField(mTextureFilePath);
         if (GUILayout.Button("LoadLowPolyFace", EditorStyles.miniButtonRight))
         {
             string roleJsonPath = Path.Combine(Application.dataPath, mLoadRoleJsonFilePath);
@@ -86,7 +85,7 @@ public class ModelDataManagerEditor : Editor
 
 
         EditorGUILayout.LabelField("Save Deform File Path");
-        mSaveDeformFilePath = EditorGUILayout.TextField(mSaveDeformFilePath);
+        EditorGUILayout.LabelField(mSaveDeformFilePath);
         if (GUILayout.Button("Save Deform", EditorStyles.miniButtonRight))
         {
             string deformJsonPath = Path.Combine(Application.dataPath, mSaveDeformFilePath);
@@ -98,7 +97,7 @@ public class ModelDataManagerEditor : Editor
         }
 
         EditorGUILayout.LabelField("Load Deform File Path");
-        mLoadDeformFilePath = EditorGUILayout.TextField(mLoadDeformFilePath);
+        EditorGUILayout.LabelField(mLoadDeformFilePath);
         if (GUILayout.Button("Load Deform", EditorStyles.miniButtonRight))
         {
             string deformJsonPath = Path.Combine(Application.dataPath, mLoadDeformFilePath);

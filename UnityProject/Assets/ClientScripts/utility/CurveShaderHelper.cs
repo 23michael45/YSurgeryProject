@@ -2,15 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[ExecuteInEditMode]
 public class CurveShaderHelper : MonoBehaviour
 {
     public AnimationCurve mCurve;
 
     private void Start()
     {
+    }
+    private void Update()
+    {
+
         DebugCurve(mCurve);
     }
-    
     void DebugCurve(AnimationCurve anim)
     {
         Debug.Log("Evaluate Unity: " + anim.Evaluate(0.1f) + ", " + anim.Evaluate(0.2f) + ", " + anim.Evaluate(0.3f) + ", " + anim.Evaluate(0.4f) + ", " + anim.Evaluate(0.5f) + ", " + anim.Evaluate(0.6f) + ", " + anim.Evaluate(0.76f) + ", " + anim.Evaluate(0.88f) + ", " + anim.Evaluate(0.98f));

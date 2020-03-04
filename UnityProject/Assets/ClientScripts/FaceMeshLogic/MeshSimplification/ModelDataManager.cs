@@ -31,7 +31,16 @@ public class CalculateResultDataJson
             public float v;
 
         }
+        [Serializable]
+        public class JRGBOffset
+        {
+            public float r;
+            public float g;
+            public float b;
+
+        }
         public JHSVOffset hsv_offset;
+        public JRGBOffset rgb_offset;
 
     }
 
@@ -906,6 +915,23 @@ public class ModelDataManager : MonoBehaviour
 
         }
     }
+    void FitRGB(SkinnedMeshRenderer smr, Vector3 rgboffset)
+    {
+        for (int i = 0; i < smr.materials.Length; i++)
+        {
+            var mat = smr.materials[i];
+
+            float r = rgboffset.x / 255;
+            float g = rgboffset.y / 255;
+            float b = rgboffset.z / 255;
+
+            mat.SetFloat("_R", r);
+            mat.SetFloat("_G", g);
+            mat.SetFloat("_B", b);
+
+        }
+    }
+
 
     public bool FitCalculationJson(CalculateResultDataJson jsonData, int gender, float weight, float height)
     {
@@ -913,12 +939,18 @@ public class ModelDataManager : MonoBehaviour
         {
 
 
-            Vector3 hsvoffset = new Vector3(jsonData.info.calcRet.hsv_offset.h, jsonData.info.calcRet.hsv_offset.s, jsonData.info.calcRet.hsv_offset.v);
-            
-            FitHSV(GetBody(gender).GetComponent<SkinnedMeshRenderer>(), hsvoffset);
-            FitHSV(GetArm(gender).GetComponent<SkinnedMeshRenderer>(), hsvoffset);
-            FitHSV(GetHead(gender).GetComponent<SkinnedMeshRenderer>(), hsvoffset);
+            //Vector3 hsvoffset = new Vector3(jsonData.info.calcRet.hsv_offset.h, jsonData.info.calcRet.hsv_offset.s, jsonData.info.calcRet.hsv_offset.v);
 
+            //FitHSV(GetBody(gender).GetComponent<SkinnedMeshRenderer>(), hsvoffset);
+            //FitHSV(GetArm(gender).GetComponent<SkinnedMeshRenderer>(), hsvoffset);
+            //FitHSV(GetHead(gender).GetComponent<SkinnedMeshRenderer>(), hsvoffset);
+
+
+            Vector3 rgboffset = new Vector3(jsonData.info.calcRet.rgb_offset.r, jsonData.info.calcRet.rgb_offset.g, jsonData.info.calcRet.rgb_offset.b);
+
+            FitRGB(GetBody(gender).GetComponent<SkinnedMeshRenderer>(), rgboffset);
+            FitRGB(GetArm(gender).GetComponent<SkinnedMeshRenderer>(), rgboffset);
+            FitRGB(GetHead(gender).GetComponent<SkinnedMeshRenderer>(), rgboffset);
             return true;
         }
         return false;
