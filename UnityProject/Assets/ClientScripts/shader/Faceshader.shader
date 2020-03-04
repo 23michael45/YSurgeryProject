@@ -212,11 +212,13 @@
 				fixed4 Mix_FaceTatoo = lerp(Mix_Shadow, FaceTatoo, FaceTatoo.a);
 
 			    fixed4 Mix_all = Mix_FaceTatoo;
-				fixed4 Area = tex2D(_AreaTex, i.uv);		
+
+
+				fixed4 Area = tex2D(_AreaTex, i.uv);	
 							   
 
 
-				fixed4 Mix_final = lerp(Mix_all, Area, Area.a/2);
+				
 
 
 				float3 colorHSV;
@@ -229,9 +231,14 @@
 
 				BaseTex.xyz = HSVConvertToRGB(colorHSV.xyz);
 
-				fixed4 col = lerp( BaseTex,Mix_final, NoseHoleMask);
+
 
 				
+
+				fixed4 Mix_final = lerp( BaseTex, Mix_all, NoseHoleMask);
+
+				fixed4 col = lerp(Mix_final, Area, Area.a / 2);
+
 				//fixed v = i.uv2.y;
 				//fixed mv = (1 - v);
 				//col = col * (1 - v) + fixed4(v, v, v, 1);
