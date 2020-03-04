@@ -21,9 +21,17 @@
 		_AreaTex ("_AreaTex", 2D) = "white" {}
 		_NoseHoleMask("_NoseHoleMask", 2D) = "white" {}
 
-		_Hue("Hue",Range(0,359)) = 0
+
+		_R("R",Range(-1.0,1.0)) = 0
+		_G("G", Range(-1.0,1.0)) = 0.0
+		_B("B", Range(-1.0,1.0)) = 0.0
+					   
+
+
+
+		/*_Hue("Hue",Range(0,359)) = 0
 		_Saturation("Saturation", Range(-1.0,1.0)) = 0.0
-		_Value("Value", Range(-1.0,1.0)) = 0.0
+		_Value("Value", Range(-1.0,1.0)) = 0.0*/
 
     }
     SubShader
@@ -81,9 +89,35 @@
 
 
 
-			uniform	half _Hue;
-			uniform	half _Saturation;
-			uniform half _Value;
+			uniform	half _R;
+			uniform	half _G;
+			uniform half _B;
+
+			//uniform	half _Hue;
+			//uniform	half _Saturation;
+			//uniform half _Value;
+
+
+
+			float curve(float t)
+			{
+				float p1x = 0;
+				float p1y = 0;
+				float tp1 = 3.95;
+				float p2x = 1;
+				float p2y = 0;
+				float tp2 = -3.95;
+
+
+				float a = (p1x * tp1 + p1x * tp2 - p2x * tp1 - p2x * tp2 - 2 * p1y + 2 * p2y) / (p1x * p1x * p1x - p2x * p2x * p2x + 3 * p1x * p2x * p2x - 3 * p1x * p1x * p2x);
+				float b = ((-p1x * p1x * tp1 - 2 * p1x * p1x * tp2 + 2 * p2x * p2x * tp1 + p2x * p2x * tp2 - p1x * p2x * tp1 + p1x * p2x * tp2 + 3 * p1x * p1y - 3 * p1x * p2y + 3 * p1y * p2x - 3 * p2x * p2y) / (p1x * p1x * p1x - p2x * p2x * p2x + 3 * p1x * p2x * p2x - 3 * p1x * p1x * p2x));
+				float c = ((p1x * p1x * p1x * tp2 - p2x * p2x * p2x * tp1 - p1x * p2x * p2x * tp1 - 2 * p1x * p2x * p2x * tp2 + 2 * p1x * p1x * p2x * tp1 + p1x * p1x * p2x * tp2 - 6 * p1x * p1y * p2x + 6 * p1x * p2x * p2y) / (p1x * p1x * p1x - p2x * p2x * p2x + 3 * p1x * p2x * p2x - 3 * p1x * p1x * p2x));
+				float d = ((p1x * p2x * p2x * p2x * tp1 - p1x * p1x * p2x * p2x * tp1 + p1x * p1x * p2x * p2x * tp2 - p1x * p1x * p1x * p2x * tp2 - p1y * p2x * p2x * p2x + p1x * p1x * p1x * p2y + 3 * p1x * p1y * p2x * p2x - 3 * p1x * p1x * p2x * p2y) / (p1x * p1x * p1x - p2x * p2x * p2x + 3 * p1x * p2x * p2x - 3 * p1x * p1x * p2x));
+
+				return a * t * t * t + b * t * t + c * t + d;
+			}
+
+
 
 
 
@@ -195,7 +229,7 @@
 				
 
 				fixed4 NoseHoleMask = tex2D(_NoseHoleMask, i.uv);
-				fixed4 BaseTex = tex2D(_BaseTex, i.uv);
+				
 
 
 				fixed4 Mix_DoubleEye = lerp(Main, DoubleEye, DoubleEye.a);
@@ -216,23 +250,25 @@
 
 				fixed4 Area = tex2D(_AreaTex, i.uv);	
 							   
+							   				
+
+				//取消hsv调色
+				//float3 colorHSV;
+				//colorHSV.xyz = RGBConvertToHSV(BaseTex.xyz);   //转换为HSV
+				//colorHSV.x += _Hue; //调整偏移Hue值
+				//colorHSV.x = colorHSV.x % 359;    //超过360的值从0开始
+
+				//colorHSV.y += _Saturation;  //调整饱和度
+				//colorHSV.z += _Value;
+
+				//BaseTex.xyz = HSVConvertToRGB(colorHSV.xyz);
 
 
-				
+				fixed4 BaseTex = tex2D(_BaseTex, i.uv);
 
-
-				float3 colorHSV;
-				colorHSV.xyz = RGBConvertToHSV(BaseTex.xyz);   //转换为HSV
-				colorHSV.x += _Hue; //调整偏移Hue值
-				colorHSV.x = colorHSV.x % 359;    //超过360的值从0开始
-
-				colorHSV.y += _Saturation;  //调整饱和度
-				colorHSV.z += _Value;
-
-				BaseTex.xyz = HSVConvertToRGB(colorHSV.xyz);
-
-
-
+				BaseTex.x += _R * curve(BaseTex.x);
+				BaseTex.y += _G * curve(BaseTex.y);
+				BaseTex.z += _B * curve(BaseTex.z);
 				
 
 				fixed4 Mix_final = lerp( BaseTex, Mix_all, NoseHoleMask);

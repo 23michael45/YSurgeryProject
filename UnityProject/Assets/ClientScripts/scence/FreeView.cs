@@ -250,8 +250,8 @@ public class FreeView : MonoBehaviour
     public void Chposition()
     {
         float positionnew = CameraSlider.value;
-        float target_x = targetobject.gameObject.transform.position.x;
-        targetobject.gameObject.transform.position = new Vector3(target_x, positionnew, Target_z);
+        float target_x = targetobject.gameObject.transform.localPosition.x;
+        targetobject.gameObject.transform.localPosition = new Vector3(target_x, positionnew, Target_z);
         //  print(positionnew);
     }
 
