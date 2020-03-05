@@ -228,14 +228,14 @@ public class ShareManager : MonoBehaviour
                         yield return mRenderTextureCamera.TakePhoto(TextureFormat.RGB24, materials[i]);
 
                         texItem.textureJpgRGB = Convert.ToBase64String(mRenderTextureCamera.GetTexture().EncodeToJPG());
-                        File.WriteAllBytes("d:/" + smr.name + ".jpg", mRenderTextureCamera.GetTexture().EncodeToJPG());
+                        //File.WriteAllBytes("d:/" + smr.name + ".jpg", mRenderTextureCamera.GetTexture().EncodeToJPG());
 
 
                         yield return mRenderTextureCamera.TakePhoto(TextureFormat.RGB24, materials[i],true);
 
 
                         texItem.textureJpgAlpha = Convert.ToBase64String(mRenderTextureCamera.GetTexture().EncodeToJPG());
-                        File.WriteAllBytes("d:/" + smr.name + "_a.jpg", mRenderTextureCamera.GetTexture().EncodeToJPG());
+                        //File.WriteAllBytes("d:/" + smr.name + "_a.jpg", mRenderTextureCamera.GetTexture().EncodeToJPG());
 
 
                         //Debug.Log(string.Format("RGBA32: {0} {1} {2}", smr.name, texItem.textureJpgRGB.Length, texItem.textureJpgAlpha.Length));
@@ -295,7 +295,7 @@ public class ShareManager : MonoBehaviour
 
         yield return ShareManager.Instance.ToJson(list);
 
-        //File.WriteAllText("d:/test.json", jsonData);
+        //File.WriteAllText("d:/test.json", mJsonString);
 
         string serverURL = "https://m.yujishishi.com/fac/com/upCommImg";
 
