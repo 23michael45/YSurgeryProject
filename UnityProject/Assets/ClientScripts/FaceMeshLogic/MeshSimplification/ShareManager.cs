@@ -102,11 +102,14 @@ public class ShareManager : MonoBehaviour
 
     public Camera mMainCamera;
     public RenderTextureSaver mShareCameraSaver;
+    public RenderTextureCamera mRenderTextureCamera;
 
     QRCodeTool mQRCodeTool;
     
     public Button mCloseFinalWindowBtn;
 
+    string mJsonString;
+    ShareJson mJsonData;
 
     private void Awake()
     {
@@ -157,7 +160,7 @@ public class ShareManager : MonoBehaviour
         }
     }
 
-    private void TransferAlpha(Texture2D tex, /*out Texture2D rgb,*/out Texture2D alpha)
+    void TransferAlpha(Texture2D tex, /*out Texture2D rgb,*/out Texture2D alpha)
     {
         //rgb = new Texture2D(tex.width, tex.height, TextureFormat.RGB24, false);
         alpha = new Texture2D(tex.width, tex.height, TextureFormat.RGB24, false);
@@ -189,7 +192,7 @@ public class ShareManager : MonoBehaviour
         alpha.Apply();
     }
 
-    void AddMeshObject(SkinnedMeshRenderer smr,ref ShareJson jsonObject)
+    IEnumerator AddMeshObject(SkinnedMeshRenderer smr)
     {
         Mesh mesh;
         Material[] materials;
@@ -220,15 +223,20 @@ public class ShareManager : MonoBehaviour
                     else if (textures[i].format == TextureFormat.RGBA32)
                     {
                         Texture2D rgb, alpha;
-                        TransferAlpha(textures[i],/* out rgb,*/ out alpha);
-                        
-                        texItem.textureJpgRGB = Convert.ToBase64String(textures[i].EncodeToJPG());
-                        texItem.textureJpgAlpha = Convert.ToBase64String(alpha.EncodeToJPG());
+                        //TransferAlpha(textures[i],/* out rgb,*/ out alpha);
 
-                        //File.WriteAllBytes("d:/" + smr.name + ".jpg", textures[i].EncodeToJPG());
-                        //File.WriteAllBytes("d:/" + smr.name + ".png", textures[i].EncodeToPNG());
-                        //File.WriteAllBytes("d:/" + smr.name + "_a.jpg", alpha.EncodeToJPG());
-                        
+                        yield return mRenderTextureCamera.TakePhoto(TextureFormat.RGB24, materials[i]);
+
+                        texItem.textureJpgRGB = Convert.ToBase64String(mRenderTextureCamera.GetTexture().EncodeToJPG());
+                        //File.WriteAllBytes("d:/" + smr.name + ".jpg", mRenderTextureCamera.GetTexture().EncodeToJPG());
+
+
+                        yield return mRenderTextureCamera.TakePhoto(TextureFormat.RGB24, materials[i],true);
+
+
+                        texItem.textureJpgAlpha = Convert.ToBase64String(mRenderTextureCamera.GetTexture().EncodeToJPG());
+                        //File.WriteAllBytes("d:/" + smr.name + "_a.jpg", mRenderTextureCamera.GetTexture().EncodeToJPG());
+
 
                         //Debug.Log(string.Format("RGBA32: {0} {1} {2}", smr.name, texItem.textureJpgRGB.Length, texItem.textureJpgAlpha.Length));
                     }
@@ -239,20 +247,18 @@ public class ShareManager : MonoBehaviour
                 item.textures.Add(texItem);
             }
         }
-        jsonObject.meshes.Add(item);
+        mJsonData.meshes.Add(item);
     }
     
-    public string ToJson(List<SkinnedMeshRenderer> list)
+    IEnumerator ToJson(List<SkinnedMeshRenderer> list)
     {
-        ShareJson shareJson = new ShareJson();
-
-        foreach(var smr in list)
+        mJsonData = new ShareJson();
+        foreach (var smr in list)
         {
-            AddMeshObject(smr, ref shareJson);
+            yield return AddMeshObject(smr);
         }
-        
-        string json = JsonUtility.ToJson(shareJson);
-        return json;
+
+        mJsonString = JsonUtility.ToJson(mJsonData);
     }
 
     
@@ -271,10 +277,7 @@ public class ShareManager : MonoBehaviour
         yield return humanSaver.TakePhoto(TextureFormat.RGB24);
         mMainCamera.cullingMask = oldMask;
 
-        m_HumanImage.texture = humanSaver.GetTexture();
-
-
-
+        m_HumanImage.texture = null;
         m_QRCodeImage.texture = null;
 
 
@@ -290,9 +293,9 @@ public class ShareManager : MonoBehaviour
         list.AddRange(AvatarManager.Instance.GetAllSkinnedMeshRenderer());
 
 
-        string jsonData = ShareManager.Instance.ToJson(list);
+        yield return ShareManager.Instance.ToJson(list);
 
-        //File.WriteAllText("d:/test.json", jsonData);
+        //File.WriteAllText("d:/test.json", mJsonString);
 
         string serverURL = "https://m.yujishishi.com/fac/com/upCommImg";
 
@@ -303,7 +306,7 @@ public class ShareManager : MonoBehaviour
 
         string boundary = "----" + DateTime.Now.Ticks.ToString("x");
         string contentType = string.Format("multipart/form-data; boundary={0}", boundary);
-        formData.Add(new MultipartFormFileSection("file", Encoding.ASCII.GetBytes(jsonData), "file",contentType));
+        formData.Add(new MultipartFormFileSection("file", Encoding.ASCII.GetBytes(mJsonString), "file",contentType));
 
         UnityWebRequest request = UnityWebRequest.Post(serverURL, formData);
 
@@ -336,6 +339,7 @@ public class ShareManager : MonoBehaviour
 
         }
 
+        m_HumanImage.texture = humanSaver.GetTexture();
 
 
         //----------------------------------------------------------
