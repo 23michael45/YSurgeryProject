@@ -8116,7 +8116,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63582f3292b79ec43ac56094a7313141, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mRootBone: {fileID: 0}
+  mRootBone: {fileID: 1174783524447737061}
   mInitFromFile: 1
 --- !u!1 &8513348998091441470
 GameObject:

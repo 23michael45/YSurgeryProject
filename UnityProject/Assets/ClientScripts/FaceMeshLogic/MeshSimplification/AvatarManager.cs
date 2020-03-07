@@ -148,6 +148,13 @@ public class AvatarManager : MonoBehaviour
         animator.runtimeAnimatorController = overrideController;
         animator.Play("Default");
     }
+    public void ClearAction()
+    {
+        Animator animator = ModelDataManager.Instance.mLowGeometryTemplate.GetComponent<Animator>();
+        animator.runtimeAnimatorController = null;
+
+    }
+
     IEnumerator Load(AVATARPART part, string id)
     {
         while (bLoading)

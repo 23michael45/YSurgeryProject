@@ -324,7 +324,8 @@ public class DeformLeaderBoneManager : MonoBehaviour
         for(int i = 0; i< bones.Length;i++)
         {
             Transform bone = bones[i];
-            mRoleJsonBoneInitPositionMap[bone.name] = bone.position;
+            //mRoleJsonBoneInitPositionMap[bone.name] = bone.position;
+            mRoleJsonBoneInitPositionMap[bone.name] = bone.localPosition;
             mRoleJsonBoneMap[bone.name] = bone;
         }
         
@@ -346,7 +347,8 @@ public class DeformLeaderBoneManager : MonoBehaviour
     }
     public void SetLeaderBonePosition(string bonename,Vector3 offset)
     {
-        mRoleJsonBoneMap[bonename].position = RootLocalToWorld(mRoleJsonBoneInitPositionMap[bonename] + offset);
+        //mRoleJsonBoneMap[bonename].position = RootLocalToWorld(mRoleJsonBoneInitPositionMap[bonename] + offset);
+        mRoleJsonBoneMap[bonename].localPosition = mRoleJsonBoneInitPositionMap[bonename] + offset;
     }
     public Vector3 GetLeaderBonePositonOffset(string bonename)
     {
@@ -357,8 +359,8 @@ public class DeformLeaderBoneManager : MonoBehaviour
         }
         else
         {
-            Vector3 offset = WorldToRootLocal(mRoleJsonBoneMap[bonename].position) - mRoleJsonBoneInitPositionMap[bonename];
-            
+            //Vector3 offset = WorldToRootLocal(mRoleJsonBoneMap[bonename].position) - mRoleJsonBoneInitPositionMap[bonename];
+            Vector3 offset = mRoleJsonBoneMap[bonename].localPosition - mRoleJsonBoneInitPositionMap[bonename];
             return offset;
 
         }
@@ -474,7 +476,8 @@ public class DeformLeaderBoneManager : MonoBehaviour
         foreach (DeformLeaderBone lb in mLeaderBones)
         {
             Snapshot.BoneData bd = new Snapshot.BoneData();
-            bd.curPos = WorldToRootLocal(lb.transform.position);
+            //bd.curPos = WorldToRootLocal(lb.transform.position);
+            bd.curPos = lb.transform.localPosition;
             bd.defaultPos = lb.mDefaultPosition;
             bd.curScale = lb.transform.localScale;
             bd.editing = lb.bEditing;
@@ -484,7 +487,8 @@ public class DeformLeaderBoneManager : MonoBehaviour
         foreach (DeformCommonBone cb in mCommonBones)
         {
             Snapshot.BoneData bd = new Snapshot.BoneData();
-            bd.curPos = WorldToRootLocal(cb.transform.position);
+            //bd.curPos = WorldToRootLocal(cb.transform.position);
+            bd.curPos = cb.transform.localPosition;
             bd.defaultPos = cb.mDefaultPosition;
             bd.editing = false;
 

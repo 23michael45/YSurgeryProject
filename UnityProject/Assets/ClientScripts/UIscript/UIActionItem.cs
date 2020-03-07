@@ -8,7 +8,7 @@ public class UIActionItem : MonoBehaviour
 {
     Button mButton;
     RawImage mIconImage;
-    AnimatorOverrideController mOcerrideController;
+    AnimatorOverrideController mOverrideController;
 
     string mIconAddress;
     string mOverrideControllerAddress;
@@ -48,7 +48,7 @@ public class UIActionItem : MonoBehaviour
     }
     void OnLoadControllerDone(AsyncOperationHandle<AnimatorOverrideController> obj)
     {
-        mOcerrideController = obj.Result;
+        mOverrideController = obj.Result;
         bControllerLoaded = true;
     }
     private void OnDestroy()
@@ -61,7 +61,7 @@ public class UIActionItem : MonoBehaviour
     {
         if (bTextureLoaded && bControllerLoaded)
         {
-            AvatarManager.Instance.PlayAction(mOcerrideController);
+            AvatarManager.Instance.PlayAction(mOverrideController);
         }
     }
 }

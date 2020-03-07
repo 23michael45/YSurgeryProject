@@ -31,6 +31,13 @@ MonoBehaviour:
     - Animation
     m_mainAssetType: UnityEngine.AnimatorOverrideController, UnityEngine.AnimationModule,
       Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  - m_GUID: a20bb8fa765eba544b966501d8197ea9
+    m_Address: Empty
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Animation
+    m_mainAssetType: UnityEngine.AnimatorOverrideController, UnityEngine.AnimationModule,
+      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
   - m_GUID: e6cd28b4955ebeb408409ac19dd062a1
     m_Address: Jump
     m_ReadOnly: 0

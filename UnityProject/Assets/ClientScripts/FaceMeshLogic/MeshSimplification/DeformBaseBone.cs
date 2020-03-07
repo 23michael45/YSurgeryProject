@@ -27,13 +27,14 @@ public class DeformBaseBone : MonoBehaviour
 
             float weight = lb.mCurve.Evaluate(portion);
 
-            offsetPos += (DeformLeaderBoneManager.Instance.WorldToRootLocal(lb.transform.position) - lb.mDefaultPosition) * weight;
+            //offsetPos += (DeformLeaderBoneManager.Instance.WorldToRootLocal(lb.transform.position) - lb.mDefaultPosition) * weight;
+            offsetPos += (lb.transform.localPosition - lb.mDefaultPosition) * weight;
         }
         try
         {
-            transform.position = DeformLeaderBoneManager.Instance.RootLocalToWorld(mDefaultPosition + offsetPos);
-
-        }
+            //transform.position = DeformLeaderBoneManager.Instance.RootLocalToWorld(mDefaultPosition + offsetPos);
+            transform.localPosition = mDefaultPosition + offsetPos;
+        } 
         catch
         {
             Debug.LogError("CalculatePosition error:" + gameObject.name);
@@ -44,14 +45,23 @@ public class DeformBaseBone : MonoBehaviour
 
     protected virtual void Update()
     {
-        Calculate();
+        if(gameObject.name.Contains("face"))
+        {
+
+            Calculate();
+        }
+        else
+        {
+
+        }
     }
 
 
     public void ResetDefaultPosition()
     {
 
-        mDefaultPosition = DeformLeaderBoneManager.Instance.WorldToRootLocal(transform.position);
+        //mDefaultPosition = DeformLeaderBoneManager.Instance.WorldToRootLocal(transform.position);
+        mDefaultPosition = transform.localPosition;
     }
 
 

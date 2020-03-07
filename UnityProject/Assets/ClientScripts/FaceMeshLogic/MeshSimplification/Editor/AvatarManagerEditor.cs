@@ -10,6 +10,10 @@ public class AvatarManagerEditor : Editor
     string avatarID;
     AvatarManager.AVATARPART part;
 
+
+    AnimatorOverrideController mActionController;
+    AnimatorOverrideController mEmptyController;
+
     public override void OnInspectorGUI()
     {
         base.OnInspectorGUI();
@@ -28,6 +32,19 @@ public class AvatarManagerEditor : Editor
         {
             AvatarManager.Instance.StartLoadAvatar(part, avatarID);
         }
-        
+
+
+         
+        mActionController = EditorGUILayout.ObjectField("Action Controller", mActionController,typeof(AnimatorOverrideController),false) as AnimatorOverrideController;
+
+        if (GUILayout.Button("PlayAction", EditorStyles.miniButtonRight))
+        {
+            AvatarManager.Instance.PlayAction(mActionController);
+        }
+        mEmptyController = EditorGUILayout.ObjectField("Empty Controller", mEmptyController, typeof(AnimatorOverrideController), false) as AnimatorOverrideController;
+        if (GUILayout.Button("ClearAction", EditorStyles.miniButtonRight))
+        {
+            AvatarManager.Instance.ClearAction();
+        }
     }
 }
