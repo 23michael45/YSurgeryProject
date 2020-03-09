@@ -1,11 +1,11 @@
 {
   "list": [
     {
-      "icon": "niuziku001",
+      "icon": "Icon_Idle",
       "overridecontroller": "Jump"
     },
     {
-      "icon": "niuziku001",
+      "icon": "Icon_Idle",
       "overridecontroller": "Idle"
     }
   ]
