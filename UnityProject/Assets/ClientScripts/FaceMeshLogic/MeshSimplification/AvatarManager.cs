@@ -61,6 +61,7 @@ public class ActionConfig
 [Serializable]
 public class MakeupConfig
 {
+
     [Serializable]
     public class MakeupItem
     {
@@ -71,6 +72,7 @@ public class MakeupConfig
         [SerializeField]
         public string texturename;
     }
+
     [SerializeField]
     public List<MakeupItem> list = new List<MakeupItem>();
 
@@ -86,6 +88,40 @@ public class MakeupConfig
     }
 
 }
+
+
+//化妆调色
+[Serializable]
+public class MakeupColorConfig
+{
+
+    [Serializable]
+    public class MakeupColorItem
+    {        
+        [SerializeField]
+        public string materialmember;
+        [SerializeField]
+        public string HSV;
+    }
+
+    [SerializeField]
+    public List<MakeupColorItem> list = new List<MakeupColorItem>();
+
+    public void Save()
+    {
+        string jstr = JsonUtility.ToJson(this);
+        File.WriteAllText(Application.dataPath + "/../makeupColorConfig.bytes", jstr);
+    }
+    public static MakeupColorConfig Load(string jstr)
+    {
+        MakeupColorConfig config = JsonUtility.FromJson<MakeupColorConfig>(jstr);
+        return config;
+    }
+
+}
+
+
+
 public class AvatarManager : MonoBehaviour
 {
 

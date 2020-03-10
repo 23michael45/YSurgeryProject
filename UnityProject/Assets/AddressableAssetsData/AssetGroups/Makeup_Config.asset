@@ -31,8 +31,22 @@ MonoBehaviour:
     - config
     m_mainAssetType: UnityEngine.TextAsset, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  - m_GUID: 0df15079d8282f3498348ad307aadcbf
+    m_Address: Makeup_Shadow_ColorConfig
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - config
+    m_mainAssetType: UnityEngine.TextAsset, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
   - m_GUID: 24811c489b396f44587e8e843db5d54e
     m_Address: Makeup_Pupil_Config
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - config
+    m_mainAssetType: UnityEngine.TextAsset, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  - m_GUID: 2cd7c4d56f3c45e4081bdd65cb4f8b88
+    m_Address: Makeup_Pupil_ColorConfig
     m_ReadOnly: 0
     m_SerializedLabels:
     - config
@@ -47,6 +61,13 @@ MonoBehaviour:
       Culture=neutral, PublicKeyToken=null
   - m_GUID: 2f4635404e4eb6f4fa08b470aa12fb67
     m_Address: Makeup_Tattoo_Config
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - config
+    m_mainAssetType: UnityEngine.TextAsset, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  - m_GUID: 391a8ef426009bd4db1bd5c5390b3df0
+    m_Address: Makeup_Foundation_ColorConfig
     m_ReadOnly: 0
     m_SerializedLabels:
     - config
@@ -73,8 +94,50 @@ MonoBehaviour:
     - config
     m_mainAssetType: UnityEngine.TextAsset, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  - m_GUID: 7b14f5baaf4982a42b97bc261607be15
+    m_Address: Makeup_Tattoo_ColorConfig
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - config
+    m_mainAssetType: UnityEngine.TextAsset, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  - m_GUID: 84255e26d3a1fe045a667a635dfc76e7
+    m_Address: Makeup_Lip_ColorConfig
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - config
+    m_mainAssetType: UnityEngine.TextAsset, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  - m_GUID: 8cbe077a16ee0b442a165aeaa7ba9a47
+    m_Address: Makeup_Eyebrow_ColorConfig
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - config
+    m_mainAssetType: UnityEngine.TextAsset, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
   - m_GUID: 906e8f0bb006c864d99e49ef6b37f2f7
     m_Address: Makeup_Eyelash_Config
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - config
+    m_mainAssetType: UnityEngine.TextAsset, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  - m_GUID: dc15f69475590ad43a14d79dd806f282
+    m_Address: Makeup_Eyeshadow_ColorConfig
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - config
+    m_mainAssetType: UnityEngine.TextAsset, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  - m_GUID: e9ca1d8f45fef3a4bad14cceabdb7c4c
+    m_Address: Makeup_DoubleEye_ColorConfig
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - config
+    m_mainAssetType: UnityEngine.TextAsset, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  - m_GUID: fe89dd8a5f5ab2046bfc16eb181dccb4
+    m_Address: Makeup_Eyelash_ColorConfig
     m_ReadOnly: 0
     m_SerializedLabels:
     - config

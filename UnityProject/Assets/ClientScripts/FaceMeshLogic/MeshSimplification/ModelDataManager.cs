@@ -1032,4 +1032,18 @@ public class ModelDataManager : MonoBehaviour
     {
         ModelDataManager.Instance.mHeadSkinnedMeshRenderer.material.SetTexture(memberName, tex);
     }
+
+
+
+    public void MakeupColor(string memberName, Vector3 color) {
+
+        string _H = memberName + "_H";
+        string _S = memberName + "_S";
+        string _V = memberName + "_V";        
+
+        ModelDataManager.Instance.mHeadSkinnedMeshRenderer.material.SetFloat(_H, color.x);
+        ModelDataManager.Instance.mHeadSkinnedMeshRenderer.material.SetFloat(_S, color.y);
+        ModelDataManager.Instance.mHeadSkinnedMeshRenderer.material.SetFloat(_V, color.z);
+    }
+
 }

@@ -31,6 +31,13 @@ MonoBehaviour:
     - Animation
     m_mainAssetType: UnityEngine.AnimatorOverrideController, UnityEngine.AnimationModule,
       Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  - m_GUID: 90893349dfafe1a4fb58c5c55c967740
+    m_Address: Icon_Idle
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - icon
+    m_mainAssetType: UnityEngine.Texture2D, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
   - m_GUID: e6cd28b4955ebeb408409ac19dd062a1
     m_Address: Jump
     m_ReadOnly: 0

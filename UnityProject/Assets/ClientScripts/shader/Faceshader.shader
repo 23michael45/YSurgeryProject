@@ -6,32 +6,61 @@
         _MainTex ("_MainTex", 2D) = "white" {}
 		_BaseTex("_BaseTex", 2D) = "white" {}
 		_Hair ("_Hair", 2D) = "white" {}
+
 		_Foundation("_Foundation", 2D) = "white" {}
+		_Foundation_H("Foundation_H",Range(0,359)) = 0
+		_Foundation_S("Foundation_S", Range(0,1.0)) = 0.25
+		_Foundation_V("Foundation_S", Range(-1.0,1.0)) = 0
+
 		_EyeBrow ("_EyeBrow", 2D) = "white" {}
+		_EyeBrow_H("_EyeBrow_H",Range(0,359)) = 0
+		_EyeBrow_S("_EyeBrow_S", Range(0,1.0)) = 0.1
+		_EyeBrow_V("Foundation_S", Range(-1.0,1.0)) = 0
+
 		_Eyelash("_Eyelash", 2D) = "white" {}
-		_EyeShadow ("_EyeShadow", 2D) = "white" {}		
-		_Pupil ("_Pupil", 2D) = "white" {}		
+		_Eyelash_H("_Eyelash_H",Range(0,359)) = 0
+		_Eyelash_S("_Eyelash_S", Range(0,1.0)) = 0.1
+		_Eyelash_V("Foundation_S", Range(-1.0,1.0)) = 0
+
+		_EyeShadow ("_EyeShadow", 2D) = "white" {}	
+		_EyeShadow_H("_EyeShadow_H",Range(0,359)) = 0
+		_EyeShadow_S("_EyeShadow_S", Range(0,1.0)) = 0.5
+		_EyeShadow_V("Foundation_S", Range(-1.0,1.0)) = 0
+
+		_Pupil ("_Pupil", 2D) = "white" {}	
+		_Pupil_H("_Pupil_H",Range(0,359)) = 0
+		_Pupil_S("_Pupil_S", Range(0,1.0)) = 0.5
+		_Pupil_V("Foundation_S", Range(-1.0,1.0)) = 0
+
 		_Shadow ("_Shadow", 2D) = "white" {}
+		_Shadow_H("_Shadow_H",Range(0,359)) = 0
+		_Shadow_S("_Shadow_S", Range(0,1.0)) = 0.5
+		_Shadow_V("Foundation_S", Range(-1.0,1.0)) = 0
+
 		_Lip ("_Lip", 2D) = "white" {}
+		_Lip_H("_Lip_H",Range(0,359)) = 0
+		_Lip_S("_Lip_S", Range(0,1.0)) = 0.6
+		_Lip_V("Foundation_S", Range(-1.0,1.0)) = 0
+
 		_FaceTatoo ("_FaceTatoo", 2D) = "white" {}	
+		_FaceTatoo_H("_FaceTatoo_H",Range(0,359)) = 0
+		_FaceTatoo_S("_FaceTatoo_S", Range(0,1.0)) = 0.5
+		_FaceTatoo_V("Foundation_S", Range(-1.0,1.0)) = 0
 
 		_DoubleEye("_DoubleEye", 2D) = "white" {}
-
 
 		_AreaTex ("_AreaTex", 2D) = "white" {}
 		_NoseHoleMask("_NoseHoleMask", 2D) = "white" {}
 
 
-		_R("R",Range(-1.0,1.0)) = 0
+		_R("R",Range(-1.0,1.0)) = 0.0
 		_G("G", Range(-1.0,1.0)) = 0.0
 		_B("B", Range(-1.0,1.0)) = 0.0
 					   
 
-
-
-		/*_Hue("Hue",Range(0,359)) = 0
-		_Saturation("Saturation", Range(-1.0,1.0)) = 0.0
-		_Value("Value", Range(-1.0,1.0)) = 0.0*/
+		/*_H("H",Range(0,359)) = 0
+		_S("S", Range(-1.0,1.0)) = 0.0
+		_V("V", Range(-1.0,1.0)) = 0.0*/
 
     }
     SubShader
@@ -42,6 +71,7 @@
         Pass
         {
             CGPROGRAM
+			#include "Assets/ClientScripts/shader/Aub_Blends.cginc"
             #pragma vertex vert
             #pragma fragment frag
             // make fog work
@@ -70,13 +100,45 @@
 			sampler2D _Hair;
 
 			sampler2D _Foundation;
+			uniform	half _Foundation_H;
+			uniform	half _Foundation_S;			
+			uniform	half _Foundation_V;
+
 			sampler2D _EyeBrow;
+			uniform	half _EyeBrow_H	;
+			uniform	half _EyeBrow_S	;
+			uniform	half _EyeBrow_V;
+
 			sampler2D _EyeShadow;
+			uniform	half _EyeShadow_H  ;
+			uniform	half _EyeShadow_S  ;
+			uniform	half _EyeShadow_V;
+
 			sampler2D _Eyelash;
+			uniform	half _Eyelash_H;
+			uniform	half _Eyelash_S;
+			uniform	half _Eyelash_V;
+
 			sampler2D _Pupil;	
+			uniform	half _Pupil_H;
+			uniform	half _Pupil_S;
+			uniform	half _Pupil_V;
+
 			sampler2D _Lip;
+			uniform	half _Lip_H;
+			uniform	half _Lip_S;
+			uniform	half _Lip_V;
+						
+
 			sampler2D _Shadow;
+			uniform	half _Shadow_H;
+			uniform	half _Shadow_S;
+			uniform	half _Shadow_V;
+
 			sampler2D _FaceTatoo;					
+			uniform	half _FaceTatoo_H;
+			uniform	half _FaceTatoo_S;
+			uniform	half _FaceTatoo_V;
 
 			sampler2D _AreaTex;
 
@@ -86,6 +148,8 @@
 			sampler2D _BaseTex;
 			
             float4 _MainTex_ST;
+
+
 
 
 
@@ -116,6 +180,12 @@
 
 				return a * t * t * t + b * t * t + c * t + d;
 			}
+
+
+
+
+			
+
 
 
 
@@ -187,6 +257,17 @@
 				return float3(R, G, B);
 			}
 
+			fixed4 ColorBlend(fixed4 base, uniform half h, uniform half s, uniform half v) {
+
+				float3 baseHSV;
+				baseHSV.xyz = RGBConvertToHSV(base.xyz);   //转换为HSV
+				baseHSV.x = h; //调整偏移Hue值
+				baseHSV.y = s;    //超过360的值从0开始	
+				baseHSV.z += v;
+
+				base.xyz = HSVConvertToRGB(baseHSV.xyz);
+				return base;
+			}
 
             v2f vert (appdata v)
             {
@@ -217,6 +298,7 @@
 
 
 				fixed4 Foundation = tex2D(_Foundation, i.uv);
+
 				fixed4 EyeBrow	= tex2D(_EyeBrow , i.uv);
 				fixed4 EyeShadow = tex2D(_EyeShadow, i.uv);				
 				fixed4 Pupil = tex2D(_Pupil, i.uv);		
@@ -236,13 +318,40 @@
 
 				fixed4 Mix_Hair = lerp(Mix_DoubleEye, Hair, Hair.a);
 
+				//fixed4 Foundation_Blend = Screen(Mix_Hair, Foundation);
+
+				//Foundation hsv
+				//float3 FoundationHSV;
+				//FoundationHSV.xyz = RGBConvertToHSV(Foundation.xyz);   //转换为HSV
+				//FoundationHSV.x = _Foundation_H; //调整偏移Hue值
+				//FoundationHSV.y = _Foundation_S;    //超过360的值从0开始	
+				//Foundation.xyz = HSVConvertToRGB(FoundationHSV.xyz);
+				
+				Foundation = ColorBlend(Foundation, _Foundation_H, _Foundation_S, _Foundation_V);
 				fixed4 Mix_Foundation = lerp(Mix_Hair, Foundation, Foundation.a);
-				fixed4 Mix_EyeBrow = lerp(Mix_Foundation, EyeBrow, EyeBrow.a);
+
+				EyeBrow = ColorBlend(EyeBrow, _EyeBrow_H, _EyeBrow_S, _EyeBrow_V);
+				fixed4 EyeBrow_Blend = Multiply(EyeBrow, Mix_Foundation);
+				fixed4 Mix_EyeBrow = lerp(Mix_Foundation, EyeBrow_Blend, EyeBrow.a);
+
+				EyeShadow = ColorBlend(EyeShadow, _EyeShadow_H, _EyeShadow_S, _EyeShadow_V);
 				fixed4 Mix_EyeShadow = lerp(Mix_EyeBrow, EyeShadow, EyeShadow.a);
-				fixed4 Mix_Eyelash = lerp(Mix_EyeShadow, Eyelash, Eyelash.a);				
+
+				Eyelash = ColorBlend(Eyelash, _Eyelash_H, _Eyelash_S, _Eyelash_V);
+				fixed4 Mix_Eyelash = lerp(Mix_EyeShadow, Eyelash, Eyelash.a);	
+
+				Pupil = ColorBlend(Pupil, _Pupil_H, _Pupil_S, _Pupil_V);
 				fixed4 Mix_Pupil = lerp(Mix_Eyelash, Pupil, Pupil.a);
+
+				
+				Lip = ColorBlend(Lip, _Lip_H, _Lip_S, _Lip_V);
 				fixed4 Mix_Lip = lerp(Mix_Pupil, Lip, Lip.a);
-				fixed4 Mix_Shadow = lerp(Mix_Lip, Shadow, Shadow.a);
+
+				Shadow = ColorBlend(Shadow, _Shadow_H, _Shadow_S, _Shadow_V);
+				fixed4 Shadow_Blend = Multiply(Shadow, Mix_Lip);
+				fixed4 Mix_Shadow = lerp(Mix_Lip, Shadow_Blend, Shadow.a);
+
+				FaceTatoo = ColorBlend(FaceTatoo, _FaceTatoo_H, _FaceTatoo_S, _FaceTatoo_V);
 				fixed4 Mix_FaceTatoo = lerp(Mix_Shadow, FaceTatoo, FaceTatoo.a);
 
 			    fixed4 Mix_all = Mix_FaceTatoo;
@@ -252,16 +361,7 @@
 							   
 							   				
 
-				//取消hsv调色
-				//float3 colorHSV;
-				//colorHSV.xyz = RGBConvertToHSV(BaseTex.xyz);   //转换为HSV
-				//colorHSV.x += _Hue; //调整偏移Hue值
-				//colorHSV.x = colorHSV.x % 359;    //超过360的值从0开始
-
-				//colorHSV.y += _Saturation;  //调整饱和度
-				//colorHSV.z += _Value;
-
-				//BaseTex.xyz = HSVConvertToRGB(colorHSV.xyz);
+				
 
 
 				fixed4 BaseTex = tex2D(_BaseTex, i.uv);
@@ -274,6 +374,8 @@
 				fixed4 Mix_final = lerp( BaseTex, Mix_all, NoseHoleMask);
 
 				fixed4 col = lerp(Mix_final, Area, Area.a / 2);
+				//fixed4 col = EyeBrow_Blend;
+
 
 				//fixed v = i.uv2.y;
 				//fixed mv = (1 - v);

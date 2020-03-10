@@ -1,0 +1,15 @@
+{
+  "list": [
+    {
+
+      "materialmember": "_EyeBrow",
+      "HSV": "(0,0.1,0)"
+    },
+
+    {
+
+      "materialmember": "_EyeBrow",      
+      "HSV": "(0,0.2,0)"
+    }
+  ]
+}

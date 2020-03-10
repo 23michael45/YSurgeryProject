@@ -1,0 +1,12 @@
+{
+  "list": [
+    {
+      "materialmember": "_DoubleEye",
+      "HSV": "(0,0.1,0)"
+    },
+    {
+      "materialmember": "_DoubleEye",
+      "HSV": "(0,0.2,0)"
+    }
+  ]
+}
