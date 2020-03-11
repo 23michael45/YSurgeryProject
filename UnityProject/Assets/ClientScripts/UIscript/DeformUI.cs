@@ -394,6 +394,12 @@ public class DeformUI : MonoBehaviour
                 offsetR = DeformLeaderBoneManager.Instance.GetLeaderBonePositonOffset(pair.leaderBoneSymName);
             }
 
+            offsetL = DeformLeaderBoneManager.Instance.BoneToWorldTransformVector(pair.leaderBoneName,offsetL);
+            offsetL = DeformLeaderBoneManager.Instance.WorldToBodyRootTransformVector(offsetL);
+
+
+            offsetR = DeformLeaderBoneManager.Instance.BoneToWorldTransformVector(pair.leaderBoneSymName,offsetR);
+            offsetR = DeformLeaderBoneManager.Instance.WorldToBodyRootTransformVector(offsetR);
 
             if (item.name.EndsWith("_x"))
             {
@@ -418,6 +424,14 @@ public class DeformUI : MonoBehaviour
                 offsetR.z = val * scale;
 
             }
+
+            offsetL = DeformLeaderBoneManager.Instance.BodyRootToWorldTransformVector(offsetL);
+            offsetL = DeformLeaderBoneManager.Instance.WorldToBoneTransformVector(pair.leaderBoneName, offsetL);
+
+            offsetR = DeformLeaderBoneManager.Instance.BodyRootToWorldTransformVector(offsetR);
+            offsetR = DeformLeaderBoneManager.Instance.WorldToBoneTransformVector(pair.leaderBoneSymName, offsetR);
+
+
 
             DeformLeaderBoneManager.Instance.SetLeaderBonePosition(pair.leaderBoneName, offsetL);
 
@@ -571,6 +585,7 @@ public class DeformUI : MonoBehaviour
 
     void OnReset()
     {
+        AvatarManager.Instance.ClearAction();
         ModelDataManager.Instance.ResetRole();
         undoStatck.Clear();
         UndoBtn.interactable = false;

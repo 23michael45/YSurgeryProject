@@ -42,7 +42,8 @@ public class Snapshot
 public class DeformLeaderBoneManager : MonoBehaviour
 {
     public static DeformLeaderBoneManager Instance;
-    public Transform mRootBone;
+    public Transform mHeadRootBone;
+    public Transform mBodyRootBone;
 
     public bool mInitFromFile = false;
     
@@ -65,9 +66,9 @@ public class DeformLeaderBoneManager : MonoBehaviour
     void Awake()
     {
         Instance = this;
-        if (mRootBone == null)
+        if (mHeadRootBone == null)
         {
-            mRootBone = transform;
+            mHeadRootBone = transform;
         }
 
     }
@@ -122,10 +123,10 @@ public class DeformLeaderBoneManager : MonoBehaviour
         mCommonBones.Clear();
         mLeaderBoneDic.Clear();
 
-        Transform[] bones = mRootBone.GetComponentsInChildren<Transform>();
+        Transform[] bones = mHeadRootBone.GetComponentsInChildren<Transform>();
         foreach (Transform bone in bones)
         {
-            if (bone == mRootBone)
+            if (bone == mHeadRootBone)
             {
                 continue;
             }
@@ -186,12 +187,13 @@ public class DeformLeaderBoneManager : MonoBehaviour
 
 
 
-        Transform[] bones = mRootBone.GetComponentsInChildren<Transform>();
+        //这里用全身的，不光用头部用，用于替换服务全身骨骼
+        Transform[] bones = mBodyRootBone.GetComponentsInChildren<Transform>();
         foreach (Transform bone in bones)
         {
             mBoneNameMap[bone.name] = bone;
      
-            if (bone == mRootBone)
+            if (bone == mHeadRootBone)
             {
                 continue;
             }
@@ -319,8 +321,8 @@ public class DeformLeaderBoneManager : MonoBehaviour
 
         mRoleJsonBoneInitPositionMap.Clear();
         mRoleJsonBoneMap.Clear();
-
-        Transform[] bones = mRootBone.GetComponentsInChildren<Transform>(true);
+        
+        Transform[] bones = mHeadRootBone.GetComponentsInChildren<Transform>(true);
         for(int i = 0; i< bones.Length;i++)
         {
             Transform bone = bones[i];
@@ -503,7 +505,8 @@ public class DeformLeaderBoneManager : MonoBehaviour
         foreach (DeformLeaderBone lb in mLeaderBones)
         {
             var bd = snapshot.map[lb.name];
-            lb.transform.position = RootLocalToWorld(bd.curPos);
+            //lb.transform.position = RootLocalToWorld(bd.curPos);
+            lb.transform.localPosition = bd.curPos;
             lb.mDefaultPosition = bd.defaultPos;
             lb.transform.localScale = bd.curScale;
             lb.bEditing = bd.editing;
@@ -512,7 +515,8 @@ public class DeformLeaderBoneManager : MonoBehaviour
         foreach (DeformCommonBone cb in mCommonBones)
         {
             var bd = snapshot.map[cb.name];
-            cb.transform.position = RootLocalToWorld(bd.curPos);
+            //cb.transform.position = RootLocalToWorld(bd.curPos);
+            cb.transform.localPosition = bd.curPos;
             cb.mDefaultPosition = bd.defaultPos;
         }
 
@@ -522,12 +526,30 @@ public class DeformLeaderBoneManager : MonoBehaviour
     public Vector3 WorldToRootLocal(Vector3 world)
     {
         // return world;
-        return mRootBone.parent.parent.worldToLocalMatrix * world;
+        return mHeadRootBone.parent.parent.worldToLocalMatrix * world;
     }
     public Vector3 RootLocalToWorld(Vector3 local)
     {
         // return local;
-        return mRootBone.parent.parent.localToWorldMatrix * local;
+        return mHeadRootBone.parent.parent.localToWorldMatrix * local;
 
+    }
+
+    public Vector3 BodyRootToWorldTransformVector(Vector3 vec)
+    {
+        return mBodyRootBone.TransformVector(vec);
+    }
+    public Vector3 WorldToBodyRootTransformVector(Vector3 vec)
+    {
+        return mBodyRootBone.InverseTransformVector(vec);
+    }
+
+    public Vector3 WorldToBoneTransformVector(string bonename, Vector3 vec)
+    {
+        return mRoleJsonBoneMap[bonename].parent.TransformVector(vec);
+    }
+    public Vector3 BoneToWorldTransformVector(string bonename, Vector3 vec)
+    {
+        return mRoleJsonBoneMap[bonename].parent.InverseTransformVector(vec);
     }
 }

@@ -182,7 +182,7 @@ public class AvatarManager : MonoBehaviour
     {
         Animator animator = ModelDataManager.Instance.mLowGeometryTemplate.GetComponent<Animator>();
         animator.runtimeAnimatorController = overrideController;
-        animator.Play("Default");
+        animator.Play("Act");
     }
     public void ClearAction()
     {
