@@ -10,9 +10,7 @@ public class UIMakeupColorItem : MonoBehaviour
     RawImage mIconImage;
     Vector3 HSV;
     MakeupColorConfig.MakeupColorItem mConfig;
-
-    bool bTextureLoaded = false;
-    bool bControllerLoaded = false;
+    
 
     public void SetItemData(MakeupColorConfig.MakeupColorItem config)
     {
@@ -27,32 +25,13 @@ public class UIMakeupColorItem : MonoBehaviour
     
     void Start()
     {
-
-        var opIcon = Addressables.LoadAssetAsync<string>(mConfig.HSV);
-        opIcon.Completed += OnLoadIconDone;
-
-
-        var opHSV = Addressables.LoadAssetAsync<string>(mConfig.HSV);
-        opHSV.Completed += OnLoadHSVDone;
+        Vector3 rgb = HSVConvertToRGB(mConfig.HSV);
+        Color IconColor = new Color(rgb.x, rgb.y, rgb.z, 1);
+        mIconImage.color = IconColor;
 
         mButton.onClick.AddListener(OnClick);
     }
-
-    void OnLoadIconDone(AsyncOperationHandle<string> obj)
-    {
-        Vector3 v3 = Parse(obj.Result);
-        Vector3 rgb = HSVConvertToRGB(v3);
-        Color IconColor = new Color(rgb.x, rgb.y, rgb.z, 1); 
-        mIconImage.color  = IconColor;
-        bTextureLoaded = true;
-    }
-    void OnLoadHSVDone(AsyncOperationHandle<string> obj)
-    {
-        Vector3 v3 = Parse(obj.Result);
-        Vector3 rgb = HSVConvertToRGB(v3);
-        HSV = v3;
-        bControllerLoaded = true;
-    }
+    
     private void OnDestroy()
     {
         mButton.onClick.RemoveListener(OnClick);
@@ -61,10 +40,7 @@ public class UIMakeupColorItem : MonoBehaviour
 
     void OnClick()
     {
-        if (bTextureLoaded && bControllerLoaded)
-        {
-            ModelDataManager.Instance.MakeupColor(mConfig.materialmember, HSV);
-        }
+        ModelDataManager.Instance.MakeupColor(mConfig.materialmember, mConfig.HSV);
     }
 
 

@@ -97,11 +97,13 @@ public class MakeupColorConfig
 
     [Serializable]
     public class MakeupColorItem
-    {        
+    {
+        [SerializeField]
+        public string icon;
         [SerializeField]
         public string materialmember;
         [SerializeField]
-        public string HSV;
+        public Vector3 HSV;
     }
 
     [SerializeField]

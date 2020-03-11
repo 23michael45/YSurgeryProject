@@ -8,7 +8,7 @@ using UnityEngine.UI;
 [RequireComponent(typeof(ScrollRect))]
 [RequireComponent(typeof(Image))]
 [RequireComponent(typeof(Mask))]
-public class UIMakeupColorScroll : MonoBehaviour
+public class UIMakeupColorScrollView : MonoBehaviour
 {
     public string mConfigAddress;
     public GameObject mItemPrefab;
