@@ -480,7 +480,7 @@ public class DeformLeaderBoneManager : MonoBehaviour
             Snapshot.BoneData bd = new Snapshot.BoneData();
             //bd.curPos = WorldToRootLocal(lb.transform.position);
             bd.curPos = lb.transform.localPosition;
-            bd.defaultPos = lb.mDefaultPosition;
+            bd.defaultPos = lb.mDefaultPositionToHead;
             bd.curScale = lb.transform.localScale;
             bd.editing = lb.bEditing;
 
@@ -491,7 +491,7 @@ public class DeformLeaderBoneManager : MonoBehaviour
             Snapshot.BoneData bd = new Snapshot.BoneData();
             //bd.curPos = WorldToRootLocal(cb.transform.position);
             bd.curPos = cb.transform.localPosition;
-            bd.defaultPos = cb.mDefaultPosition;
+            bd.defaultPos = cb.mDefaultPositionToHead;
             bd.editing = false;
 
             ss.map[cb.name] = bd;
@@ -507,7 +507,7 @@ public class DeformLeaderBoneManager : MonoBehaviour
             var bd = snapshot.map[lb.name];
             //lb.transform.position = RootLocalToWorld(bd.curPos);
             lb.transform.localPosition = bd.curPos;
-            lb.mDefaultPosition = bd.defaultPos;
+            lb.mDefaultPositionToHead = bd.defaultPos;
             lb.transform.localScale = bd.curScale;
             lb.bEditing = bd.editing;
             
@@ -517,7 +517,7 @@ public class DeformLeaderBoneManager : MonoBehaviour
             var bd = snapshot.map[cb.name];
             //cb.transform.position = RootLocalToWorld(bd.curPos);
             cb.transform.localPosition = bd.curPos;
-            cb.mDefaultPosition = bd.defaultPos;
+            cb.mDefaultPositionToHead = bd.defaultPos;
         }
 
     }
@@ -542,6 +542,15 @@ public class DeformLeaderBoneManager : MonoBehaviour
     public Vector3 WorldToBodyRootTransformVector(Vector3 vec)
     {
         return mBodyRootBone.InverseTransformVector(vec);
+    }
+
+    public Vector3 HeadRootToWorldTransformPoint(Vector3 pt)
+    {
+        return mHeadRootBone.TransformPoint(pt);
+    }
+    public Vector3 WorldToHeadRootTransformPoint(Vector3 pt)
+    {
+        return mHeadRootBone.InverseTransformPoint(pt);
     }
 
     public Vector3 WorldToBoneTransformVector(string bonename, Vector3 vec)

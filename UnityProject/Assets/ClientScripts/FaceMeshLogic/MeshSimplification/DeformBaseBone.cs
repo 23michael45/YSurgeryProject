@@ -6,7 +6,7 @@ using UnityEngine;
 public class DeformBaseBone : MonoBehaviour
 {
     [NonSerialized]
-    public Vector3 mDefaultPosition;
+    public Vector3 mDefaultPositionToHead;
 
     public List<DeformLeaderBone> mPositionFromLeaderBones = new List<DeformLeaderBone>();
 
@@ -21,19 +21,19 @@ public class DeformBaseBone : MonoBehaviour
 
         foreach (DeformLeaderBone lb in mPositionFromLeaderBones)
         {
-            float dist = Vector3.Distance(lb.mDefaultPosition, mDefaultPosition);
+            float dist = Vector3.Distance(lb.mDefaultPositionToHead, mDefaultPositionToHead);
 
             float portion = dist / lb.mRange;
 
             float weight = lb.mCurve.Evaluate(portion);
 
             //offsetPos += (DeformLeaderBoneManager.Instance.WorldToRootLocal(lb.transform.position) - lb.mDefaultPosition) * weight;
-            offsetPos += (lb.transform.localPosition - lb.mDefaultPosition) * weight;
+            offsetPos += (DeformLeaderBoneManager.Instance.WorldToHeadRootTransformPoint(lb.transform.position) - lb.mDefaultPositionToHead) * weight;
         }
         try
         {
             //transform.position = DeformLeaderBoneManager.Instance.RootLocalToWorld(mDefaultPosition + offsetPos);
-            transform.localPosition = mDefaultPosition + offsetPos;
+            transform.position = DeformLeaderBoneManager.Instance.HeadRootToWorldTransformPoint(mDefaultPositionToHead + offsetPos);
         } 
         catch
         {
@@ -61,7 +61,7 @@ public class DeformBaseBone : MonoBehaviour
     {
 
         //mDefaultPosition = DeformLeaderBoneManager.Instance.WorldToRootLocal(transform.position);
-        mDefaultPosition = transform.localPosition;
+        mDefaultPositionToHead = DeformLeaderBoneManager.Instance.WorldToHeadRootTransformPoint(transform.position);
     }
 
 

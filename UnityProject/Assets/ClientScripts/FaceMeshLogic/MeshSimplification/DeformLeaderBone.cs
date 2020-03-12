@@ -55,21 +55,23 @@ public class DeformLeaderBone : DeformBaseBone
             if(lb.bEditing == true)
             {
 
-                float dist = Vector3.Distance(lb.mDefaultPosition, mDefaultPosition);
+                float dist = Vector3.Distance(lb.mDefaultPositionToHead, mDefaultPositionToHead);
 
                 float portion = dist / lb.mRange;
 
                 float weight = lb.mCurve.Evaluate(portion);
 
                 //offsetPos += (DeformLeaderBoneManager.Instance.WorldToRootLocal(lb.transform.position) - lb.mDefaultPosition) * weight;
-                offsetPos += (lb.transform.localPosition - lb.mDefaultPosition) * weight;
+                offsetPos += (DeformLeaderBoneManager.Instance.WorldToHeadRootTransformPoint(lb.transform.position) - lb.mDefaultPositionToHead) * weight;
+
+                Debug.Log(offsetPos);
             }
         }
         try
         {
 
             //transform.position = DeformLeaderBoneManager.Instance.RootLocalToWorld(mDefaultPosition + offsetPos);
-            transform.localPosition = mDefaultPosition + offsetPos;
+            transform.position = DeformLeaderBoneManager.Instance.HeadRootToWorldTransformPoint(mDefaultPositionToHead + offsetPos);
 
         }
         catch

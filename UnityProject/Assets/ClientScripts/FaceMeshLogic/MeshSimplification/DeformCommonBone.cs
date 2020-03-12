@@ -13,6 +13,6 @@ public class DeformCommonBone : DeformBaseBone
 
     public void PrintDebug()
     {
-        Debug.Log(string.Format("DeformCommonBone : {0}  {1}  {2}", gameObject.name, transform.position, mDefaultPosition));
+        Debug.Log(string.Format("DeformCommonBone : {0}  {1}  {2}", gameObject.name, transform.position, mDefaultPositionToHead));
     }
 }
